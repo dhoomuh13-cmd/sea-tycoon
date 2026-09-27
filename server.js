@@ -19,7 +19,8 @@ app.post('/api/chat-ai', async (req, res) => {
         let { message } = req.body;
         if (!message) return res.status(400).json({ success: false, message: 'Pesan tidak boleh kosong!' });
 
-        const apiResponse = await axios.get(`https://api.ikyyxd.my.id/ai/gpt-5-mini?question=${encodeURIComponent(message)}`, {
+        // Menggunakan kembali endpoint unliai yang respons teksnya lebih stabil
+        const apiResponse = await axios.get(`https://api.ikyyxd.my.id/ai/unliai?teks=${encodeURIComponent(message)}`, {
             headers: {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
             }
@@ -27,11 +28,11 @@ app.post('/api/chat-ai', async (req, res) => {
 
         const resultData = apiResponse.data;
 
-        // Cek jika result ada dan tidak kosong, jika kosong tampilkan pesan fallback dari server
-        if (resultData && resultData.result && resultData.result.trim() !== "") {
-            return res.json({ success: true, reply: resultData.result });
+        if (resultData && resultData.status && resultData.result) {
+            const aiReply = resultData.result.response || resultData.result || "Maaf, AI sedang tidak merespons.";
+            return res.json({ success: true, reply: aiReply });
         } else {
-            return res.json({ success: true, reply: "Halo! Pesan kamu diterima, tapi API AI sedang mengembalikan respons kosong. Coba tanyakan hal lain." });
+            return res.json({ success: true, reply: "Maaf, AI sedang sibuk atau mengalami gangguan." });
         }
 
     } catch (error) {
