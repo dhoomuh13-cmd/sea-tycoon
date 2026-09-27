@@ -153,12 +153,12 @@
         .page-container.active { display: flex; }
 
         /* Auth Card */
-        .auth-card, .downloader-card, .form-card {
+        .auth-card, .downloader-card, .form-card, .chat-card {
             background: var(--card-bg); padding: 24px; border-radius: 20px; border: 1px solid var(--border-color);
             box-shadow: 0 10px 25px rgba(0,0,0,0.3); text-align: left; width: 100%; max-width: 450px; margin: auto;
         }
-        .auth-card h2, .downloader-card h2, .form-card h2 { font-size: 20px; margin-bottom: 8px; color: var(--text-color); text-align: center; }
-        .auth-card p, .downloader-card p, .form-card p { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; text-align: center; }
+        .auth-card h2, .downloader-card h2, .form-card h2, .chat-card h2 { font-size: 20px; margin-bottom: 8px; color: var(--text-color); text-align: center; }
+        .auth-card p, .downloader-card p, .form-card p, .chat-card p { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; text-align: center; }
         
         .input-group { position: relative; margin-bottom: 14px; width: 100%; }
         .input-group label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; }
@@ -252,7 +252,7 @@
             <div class="app-title" id="page-title">Sea Tycoon</div>
         </div>
         <div class="top-right">
-            <!-- Tombol Kotak Masuk Baru di Pojok Kanan Atas sebelah Settings -->
+            <!-- Tombol Kotak Masuk di Pojok Kanan Atas sebelah Settings -->
             <button class="top-icon-btn" onclick="toggleInboxModal()" title="Kotak Masuk">
                 📥
                 <div class="badge-dot" id="inbox-badge-dot"></div>
@@ -323,7 +323,7 @@
 
                 <div id="form-otp-inputs" style="display:none;">
                     <div class="input-group">
-                        <label>Kode Verifikasi (Cek Folder Spam/Gmail)</label>
+                        <label>Kode Verifikasi</label>
                         <input type="text" id="input-otp" placeholder="Masukkan 4 digit kode...">
                     </div>
                 </div>
@@ -350,6 +350,18 @@
                 <p>Unduh video TikTok tanpa watermark dengan mudah.</p>
                 <input type="text" id="tiktok-url" placeholder="Tempel link video TikTok di sini..." style="width:100%; padding:12px; border-radius:12px; background:var(--bg-main); border:1px solid var(--border-color); color:var(--text-color); margin-bottom:15px; outline:none;">
                 <button class="action-btn" onclick="showBubble('Fitur download sedang diproses...')">Download</button>
+            </div>
+        </div>
+
+        <!-- Halaman Chat AI Assistant -->
+        <div id="page-chat-ai" class="page-container">
+            <div class="chat-card">
+                <h2>Chat AI Assistant 🤖</h2>
+                <p>Tanya apa saja atau ngobrol dengan AI Assistant.</p>
+                <div class="input-group">
+                    <textarea id="ai-prompt" rows="4" placeholder="Ketik pesan atau pertanyaan ke AI..."></textarea>
+                </div>
+                <button class="action-btn" onclick="showBubble('AI Assistant sedang merespons...')">Kirim Pesan ke AI</button>
             </div>
         </div>
 
@@ -481,9 +493,10 @@
         </div>
     </div>
 
-    <!-- Bottom Nav -->
+    <!-- Bottom Nav (Lengkap dengan Chat AI di Navigasi Bawah) -->
     <div class="bottom-nav" id="bottom-nav">
         <a class="nav-item active" id="nav-beranda" onclick="switchTab(this, 'Beranda')">🏠<span>Beranda</span></a>
+        <a class="nav-item" id="nav-chat-ai" onclick="switchTab(this, 'ChatAI')">🤖<span>Chat AI</span></a>
         <a class="nav-item" id="nav-tiktok" onclick="switchTab(this, 'TikTok')">🎵<span>TikTok</span></a>
         <a class="nav-item" id="nav-profile" onclick="switchTab(this, 'Profile')">👤<span>Profile</span></a>
     </div>
@@ -491,8 +504,6 @@
     <script>
         let authState = 'login'; 
         let currentUser = null;
-        let tempRegisterData = null;
-        let generatedOtpCode = null;
 
         window.onload = function() {
             const savedUser = localStorage.getItem('sea_tycoon_user');
@@ -513,7 +524,7 @@
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
                 osc.type = 'sine';
-                osc.frequency.setValueAtTime(1200, audioCtx.currentTime); // Nada tinggi khas "ting"
+                osc.frequency.setValueAtTime(1200, audioCtx.currentTime);
                 osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.15);
                 gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
                 gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
@@ -522,7 +533,7 @@
                 osc.start();
                 osc.stop(audioCtx.currentTime + 0.3);
             } catch (e) {
-                console.log('Audio Context tidak diizinkan browser sebelum interaksi.');
+                console.log('Audio Context dibatasi browser.');
             }
         }
 
@@ -712,6 +723,12 @@
                 topLeftBtn.innerText = '☰';
                 bottomNav.classList.remove('hidden');
                 setActiveNav('Beranda');
+            } else if (menu === 'chat-ai') {
+                document.getElementById('page-chat-ai').classList.add('active');
+                title.innerText = 'Chat AI Assistant';
+                topLeftBtn.innerText = '✕';
+                bottomNav.classList.remove('hidden');
+                setActiveNav('ChatAI');
             } else if (menu === 'tiktok') {
                 document.getElementById('page-tiktok').classList.add('active');
                 title.innerText = 'TikTok Downloader';
@@ -729,7 +746,6 @@
                 title.innerText = 'Notif User (Owner)';
                 topLeftBtn.innerText = '✕';
                 bottomNav.classList.remove('hidden');
-                renderOwnerRequests();
             } else if (menu === 'add-lagu') {
                 if (currentUser.role !== 'Owner') { showBubble('Akses ditolak! Khusus Owner.'); return; }
                 document.getElementById('page-add-lagu').classList.add('active');
@@ -759,6 +775,7 @@
 
         function switchTab(element, name) {
             if (name === 'Beranda') openMenu('home');
+            else if (name === 'ChatAI') openMenu('chat-ai');
             else if (name === 'TikTok') openMenu('tiktok');
             else if (name === 'Profile') openMenu('profile');
         }
@@ -766,13 +783,14 @@
         function setActiveNav(name) {
             document.querySelectorAll('.bottom-nav .nav-item').forEach(i => i.classList.remove('active'));
             if(name === 'Beranda') document.getElementById('nav-beranda').classList.add('active');
+            else if(name === 'ChatAI') document.getElementById('nav-chat-ai').classList.add('active');
             else if(name === 'TikTok') document.getElementById('nav-tiktok').classList.add('active');
             else if(name === 'Profile') document.getElementById('nav-profile').classList.add('active');
         }
 
         function showBubble(message) {
             if(document.getElementById('sidebar').classList.contains('open')) toggleSidebar();
-            playTingSound(); // Mainkan suara ting otomatis
+            playTingSound();
             document.getElementById('bubble-text').innerText = message;
             document.getElementById('bubble-modal').classList.add('active');
         }
@@ -781,7 +799,6 @@
             document.getElementById('bubble-modal').classList.remove('active');
         }
 
-        // --- FITUR REQ & KOTAK MASUK (DENGAN SUPPORT FOTO & BALASAN OWNER) ---
         function submitUserRequest() {
             const message = document.getElementById('req-message').value.trim();
             const fileInput = document.getElementById('req-image');
@@ -859,7 +876,6 @@
             document.getElementById('inbox-badge-dot').style.display = hasUnreadReply ? 'block' : 'none';
         }
 
-        // --- PANEL OWNER: NOTIF USER ---
         function renderOwnerRequests() {
             const wrapper = document.getElementById('owner-requests-wrapper');
             let requests = JSON.parse(localStorage.getItem('sea_tycoon_requests') || '[]');
@@ -910,7 +926,6 @@
             }
         }
 
-        // --- PENGELOLAAN LAGU ---
         function saveNewSong() {
             const title = document.getElementById('input-song-title').value.trim();
             const artist = document.getElementById('input-song-artist').value.trim();
@@ -925,7 +940,7 @@
             songs.push({ title, artist: artist || 'Owner', url, id: Date.now() });
             localStorage.setItem('sea_tycoon_songs', JSON.stringify(songs));
 
-            showBubble('Lagu baru berhasil ditambahkan dan dipublikasikan ke Tempat Lagu! 🎶✨');
+            showBubble('Lagu baru berhasil ditambahkan dan dipublikasikan! 🎶✨');
             document.getElementById('input-song-title').value = '';
             document.getElementById('input-song-url').value = '';
             openMenu('tempat-lagu');
@@ -972,7 +987,7 @@
                     btn.innerText = '⏸';
                     status.innerText = 'Memutar...';
                 }).catch(e => {
-                    showBubble('Gagal memutar audio. Pastikan URL file valid/dapat diakses! ⚠️');
+                    showBubble('Gagal memutar audio. Pastikan URL valid! ⚠️');
                 });
             } else {
                 audio.pause();
