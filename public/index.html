@@ -597,7 +597,7 @@
     <!-- Marquee Banner & Info Update Shortcut Bar -->
     <div class="header-banner-container" id="main-header-banner" style="display: none;">
         <div class="marquee-wrapper">
-            <span class="marquee-text">📢 Selamat datang di Sea Tycoon! Cek saluran Info Update terbaru untuk mengetahui pengumuman penting hari ini ✨</span>
+            <span class="marquee-text">📢 SELAMAT DATANG DI SEA TYCOON KALIAN BISA MENCOBA FITUR PREMIUM DARI KAMI DAN MENDAPATKAN UPDATE SETIAP HARI ✨</span>
         </div>
         <button class="info-update-shortcut-btn" onclick="openInfoUpdateWithLoader()">
             📢 Info Update
@@ -689,15 +689,15 @@
                 
                 <div class="home-action-buttons">
                     <button class="home-big-btn" onclick="openInfoUpdateWithLoader()">
-                        <span></span>
+                        <span>📢</span>
                         Info Update
                     </button>
                     <button class="home-big-btn" onclick="openMenu('lihat-kenangan')">
-                        <span></span>
+                        <span>📸</span>
                         Kenangan
                     </button>
                     <button class="home-big-btn" onclick="openMenu('lihat-cerita')">
-                        <span></span>
+                        <span>📖</span>
                         Cerita
                     </button>
                 </div>
@@ -964,9 +964,9 @@
 
     <!-- Bottom Nav -->
     <div class="bottom-nav" id="bottom-nav">
-        <a class="nav-item active" id="nav-beranda" onclick="switchTab('Beranda')">🏠<span>Beranda</span></a>
-        <a class="nav-item" id="nav-tiktok" onclick="switchTab('TikTok')">🎵<span>TikTok</span></a>
-        <a class="nav-item" id="nav-profile" onclick="switchTab('Profile')">👤<span>Profile</span></a>
+        <a class="nav-item active" id="nav-beranda" onclick="switchTab('Beranda')"><span>Beranda</span></a>
+        <a class="nav-item" id="nav-tiktok" onclick="switchTab('TikTok')"><span>TikTok</span></a>
+        <a class="nav-item" id="nav-profile" onclick="switchTab('Profile')"><span>Profile</span></a>
     </div>
 
     <script>
@@ -1374,7 +1374,7 @@
                 let globalInbox = JSON.parse(localStorage.getItem('sea_tycoon_global_inbox') || '[]');
                 globalInbox.push({
                     id: newUpdateId,
-                    title: `📢 Info Update Baru: ${judul}`,
+                    title: `Info Update Baru: ${judul}`,
                     message: isi,
                     time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
                     unread: true
