@@ -136,15 +136,15 @@
         .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 999; backdrop-filter: blur(4px); transition: 0.3s; }
         .overlay.active { display: block; }
 
-        /* Main Content & Smooth Premium Page Animation */
+        /* Main Content & Enhanced Premium Page Animation (Efek Loading / Transisi Halus) */
         .main-content { flex: 1; width: 100%; display: flex; flex-direction: column; overflow: hidden; position: relative; }
         .page-container { 
             display: none; width: 100%; height: 100%; padding: 20px; overflow-y: auto; 
             flex-direction: column; align-items: center; text-align: center; 
-            opacity: 0; transform: scale(0.97) translateY(12px); 
-            transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0; transform: translateY(18px) scale(0.96); 
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .page-container.active { display: flex; opacity: 1; transform: scale(1) translateY(0); }
+        .page-container.active { display: flex; opacity: 1; transform: translateY(0) scale(1); }
 
         .auth-card, .downloader-card, .form-card {
             background: var(--card-bg); padding: 24px; border-radius: 22px; border: 1px solid var(--border-color);
@@ -266,19 +266,27 @@
         }
         .channel-img-wrapper:hover img { transform: scale(1.04); }
 
-        /* Delete Button for Kenangan/Cerita */
+        /* Improved Modern Delete Button for Kenangan/Cerita */
         .delete-post-btn {
-            background: rgba(239, 68, 68, 0.15);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            color: #ef4444;
-            padding: 4px 10px;
-            border-radius: 10px;
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.35);
+            color: #f87171;
+            padding: 5px 12px;
+            border-radius: 8px;
             font-size: 11px;
             font-weight: 700;
             cursor: pointer;
-            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease;
         }
-        .delete-post-btn:hover { background: #ef4444; color: #fff; }
+        .delete-post-btn:hover {
+            background: #ef4444;
+            color: #ffffff;
+            border-color: #ef4444;
+            transform: translateY(-1px);
+        }
 
         /* Reactions Box */
         .reactions-wrapper {
@@ -467,7 +475,7 @@
                 <h2>Selamat Datang, <span id="welcome-username" style="color: #38bdf8;">User</span>!</h2>
                 <p style="color: var(--text-muted); margin-top: 8px; max-width: 330px; font-size: 13px;">Gunakan menu di bawah atau tombol pilihan cepat di bawah ini untuk masuk ke saluran kenangan & cerita.</p>
                 
-                <!-- Dua Tombol Utama Sesuai Lingkaran Merah -->
+                <!-- Dua Tombol Utama -->
                 <div class="home-action-buttons">
                     <button class="home-big-btn" onclick="openMenu('lihat-kenangan')">
                         <span>&#9632;</span>
@@ -665,7 +673,7 @@
         <img id="lightbox-img" class="lightbox-content" src="">
     </div>
 
-    <!-- Bottom Nav (Auto Hide di Saluran) -->
+    <!-- Bottom Nav -->
     <div class="bottom-nav" id="bottom-nav">
         <a class="nav-item active" id="nav-beranda" onclick="switchTab('Beranda')">&#8962;<span>Beranda</span></a>
         <a class="nav-item" id="nav-tiktok" onclick="switchTab('TikTok')">&#9835;<span>TikTok</span></a>
@@ -857,7 +865,6 @@
             const title = document.getElementById('page-title');
             const topLeftBtn = document.getElementById('top-left-btn');
 
-            // Auto Hide Bottom Nav untuk Halaman Saluran (Kenangan & Cerita)
             if (menu === 'lihat-kenangan' || menu === 'lihat-cerita') {
                 bottomNav.classList.add('hidden');
             } else {
@@ -956,7 +963,7 @@
             document.getElementById('lightbox-modal').classList.remove('active');
         }
 
-        // --- KENANGAN SYSTEM (MULTI FOTO + HAPUS) ---
+        // --- KENANGAN SYSTEM ---
         function submitKenangan() {
             const judul = document.getElementById('kenangan-judul').value.trim();
             const isi = document.getElementById('kenangan-isi').value.trim();
@@ -1052,7 +1059,7 @@
                             <span>Dari : <b>@${item.from}</b></span>
                             <div style="display: flex; align-items: center; gap: 8px;">
                                 <span>${item.time}</span>
-                                ${canDelete ? `<button class="delete-post-btn" onclick="deleteKenangan('${item.id}')">Hapus</button>` : ''}
+                                ${canDelete ? `<button class="delete-post-btn" onclick="deleteKenangan('${item.id}')">🗑️ Hapus</button>` : ''}
                             </div>
                         </div>
                         <div class="channel-title">Judul : ${item.judul}</div>
@@ -1097,7 +1104,7 @@
             renderKenanganFeed();
         }
 
-        // --- CERITA SYSTEM (TANPA JUDUL + HAPUS) ---
+        // --- CERITA SYSTEM ---
         function submitCerita() {
             const isi = document.getElementById('cerita-isi').value.trim();
             if (!isi) {
@@ -1151,7 +1158,7 @@
                             <span>Dari : <b>@${item.from}</b></span>
                             <div style="display: flex; align-items: center; gap: 8px;">
                                 <span>${item.time}</span>
-                                ${canDelete ? `<button class="delete-post-btn" onclick="deleteCerita('${item.id}')">Hapus</button>` : ''}
+                                ${canDelete ? `<button class="delete-post-btn" onclick="deleteCerita('${item.id}')">🗑️ Hapus</button>` : ''}
                             </div>
                         </div>
                         <div class="channel-body-text">${item.cerita}</div>
@@ -1376,5 +1383,4 @@
             document.getElementById(`audio-${id}`).volume = val;
         }
     </script>
-</body>
 </html>
