@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sea Tycoon</title>
     <style>
-        /* Variabel Tema Default (Gelap Elegan) */
         :root {
             --bg-main: #0b0f19;
             --bg-topbar: rgba(15, 23, 42, 0.95);
@@ -19,7 +18,6 @@
             --bottom-nav-bg: #1e293b;
         }
 
-        /* Tema Gelap Pekat (Dark) */
         body.theme-gelap {
             --bg-main: #000000;
             --bg-topbar: rgba(10, 10, 10, 0.95);
@@ -33,7 +31,6 @@
             --bottom-nav-bg: #121212;
         }
 
-        /* Tema Galaxy */
         body.theme-galaxy {
             --bg-main: #13001e;
             --bg-topbar: rgba(26, 0, 43, 0.95);
@@ -47,7 +44,6 @@
             --bottom-nav-bg: #2e1065;
         }
 
-        /* Tema Biru (Ocean) */
         body.theme-biru {
             --bg-main: #02203c;
             --bg-topbar: rgba(3, 37, 65, 0.95);
@@ -61,7 +57,6 @@
             --bottom-nav-bg: #03346e;
         }
 
-        /* Tema Putih (Light) */
         body.theme-putih {
             --bg-main: #f1f5f9;
             --bg-topbar: rgba(255, 255, 255, 0.95);
@@ -105,14 +100,8 @@
             flex-shrink: 0;
             z-index: 100;
         }
-        .top-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .menu-btn {
-            background: none; border: none; color: var(--text-color); font-size: 22px; cursor: pointer; display: flex; align-items: center; justify-content: center;
-        }
+        .top-left { display: flex; align-items: center; gap: 15px; }
+        .menu-btn { background: none; border: none; color: var(--text-color); font-size: 22px; cursor: pointer; }
         .app-title { font-size: 18px; font-weight: 600; }
 
         .settings-btn {
@@ -154,15 +143,15 @@
         }
 
         .page-container {
-            display: none; max-width: 600px; margin: auto; width: 100%; padding: 30px 20px;
-            overflow-y: auto; height: 100%; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+            display: none; width: 100%; height: 100%; padding: 20px;
+            overflow-y: auto; flex-direction: column; align-items: center; justify-content: center; text-align: center;
         }
         .page-container.active { display: flex; }
 
-        /* Auth Screen (Login/Register Card) */
+        /* Auth Screen */
         .auth-card {
             background: var(--card-bg); padding: 30px 24px; border-radius: 24px; border: 1px solid var(--border-color);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4); width: 100%; max-width: 420px; text-align: left;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4); width: 100%; max-width: 400px; text-align: left; margin: auto;
         }
         .auth-card h2 { font-size: 22px; font-weight: 700; margin-bottom: 6px; color: var(--text-color); text-align: center; }
         .auth-card p { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; text-align: center; }
@@ -196,7 +185,7 @@
         /* Downloader Section */
         .downloader-card {
             background: var(--card-bg); padding: 24px; border-radius: 20px; border: 1px solid var(--border-color);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3); text-align: center; width: 100%;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3); text-align: center; width: 100%; max-width: 450px; margin: auto;
         }
         .downloader-card h2 { font-size: 20px; margin-bottom: 8px; color: var(--text-color); }
         .downloader-card p { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
@@ -208,13 +197,11 @@
             width: 100%; padding: 14px; background: var(--accent-gradient); border: none; border-radius: 14px;
             color: #0f172a; font-weight: bold; font-size: 15px; cursor: pointer; transition: 0.2s;
         }
-        #result-box { display: none; margin-top: 20px; background: var(--bg-main); padding: 15px; border-radius: 14px; border: 1px solid var(--border-color); text-align: left; }
-        #result-box video { width: 100%; border-radius: 8px; margin-top: 10px; }
 
-        /* Chat AI Room Section */
+        /* Chat AI Room Section (Diperbaiki agar tidak tertutup navbar) */
         .chat-section {
-            display: flex; flex-direction: column; height: calc(100vh - 120px); width: 100%; max-width: 600px;
-            margin: 0 auto; background: var(--bg-main); padding: 10px 16px; position: absolute; top: 0; left: 0; right: 0;
+            display: flex; flex-direction: column; width: 100%; max-width: 600px;
+            height: 100%; margin: 0 auto; background: var(--bg-main); padding: 10px 16px 80px 16px;
         }
         .chat-box { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; padding: 10px 0; }
         .chat-message { max-width: 85%; padding: 14px 18px; border-radius: 16px; font-size: 15px; line-height: 1.6; word-wrap: break-word; }
@@ -223,15 +210,15 @@
         
         .chat-input-area {
             display: flex; gap: 12px; background: var(--card-bg); padding: 12px 14px; border-radius: 20px;
-            border: 1.5px solid var(--border-color); margin-bottom: 25px; align-items: center;
+            border: 1.5px solid var(--border-color); margin-top: 10px; align-items: center; flex-shrink: 0;
         }
         .chat-input-area input { flex: 1; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 14px; padding: 14px 16px; color: var(--text-color); font-size: 15px; outline: none; }
-        .send-btn { background: var(--accent-gradient); border: none; color: #0f172a; padding: 0 22px; height: 48px; border-radius: 14px; font-weight: bold; cursor: pointer; }
+        .send-btn { background: var(--accent-gradient); border: none; color: #0f172a; padding: 0 22px; height: 48px; border-radius: 14px; font-weight: bold; cursor: pointer; flex-shrink: 0; }
 
         /* Profile Card */
         .profile-card {
             background: var(--card-bg); padding: 30px; border-radius: 20px; border: 1px solid var(--border-color);
-            width: 100%; max-width: 400px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            width: 100%; max-width: 400px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.3); margin: auto;
         }
         .profile-avatar { width: 80px; height: 80px; border-radius: 50%; background: var(--accent-gradient); margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 32px; color: #0f172a; font-weight: bold; }
         .profile-info { margin-bottom: 20px; text-align: left; background: var(--bg-main); padding: 15px; border-radius: 12px; border: 1px solid var(--border-color); }
@@ -290,7 +277,7 @@
 
     <div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
 
-    <!-- Sidebar -->
+    <!-- Sidebar (Lengkap semua fitur kembali) -->
     <div id="sidebar" class="sidebar">
         <div class="sidebar-header">
             <span>Menu Utama</span>
@@ -309,12 +296,20 @@
         <div class="menu-category">Fitur Fun</div>
         <div class="sidebar-item" onclick="showBubble('Fitur Susun Kata sedang dalam tahap pengembangan. Segera hadir! 🧩')">🧩 Susun Kata</div>
         <div class="sidebar-item" onclick="showBubble('Fitur Info Gempa sedang dalam tahap pengembangan. Segera hadir! 🌍')">🌍 Info Gempa</div>
+        <div class="sidebar-item" onclick="showBubble('Fitur Spotify Song sedang dalam tahap pengembangan. Segera hadir! 🎧')">🎧 Spotify Song</div>
+        <div class="sidebar-item" onclick="showBubble('Fitur Tebak Kata sedang dalam tahap pengembangan. Segera hadir! 💡')">💡 Tebak Kata</div>
+
+        <div class="menu-category">Eksplorasi</div>
+        <div class="sidebar-item" onclick="showBubble('Fitur Tempat Lagu sedang dalam tahap pengembangan. Mohon ditunggu ya! 🎵')">🎵 Tempat Lagu</div>
+        <div class="sidebar-item" onclick="showBubble('Fitur Tempat Bermain sedang dalam tahap pengembangan. Mohon ditunggu ya! 🎮')">🎮 Tempat Bermain</div>
+        <div class="sidebar-item" onclick="showBubble('Fitur Tempat Cerita sedang dalam tahap pengembangan. Mohon ditunggu ya! 📖')">📖 Tempat Cerita</div>
+        <div class="sidebar-item" onclick="showBubble('Fitur Tempat Kenangan sedang dalam tahap pengembangan. Mohon ditunggu ya! 📸')">📸 Tempat Kenangan</div>
     </div>
 
     <!-- Main Content -->
     <div class="main-content" id="content-area">
         
-        <!-- Halaman Auth (Login / Register) -->
+        <!-- Halaman Auth -->
         <div id="page-auth" class="page-container">
             <div class="auth-card" id="auth-card-box">
                 <h2 id="auth-title">Selamat Datang! 🚀</h2>
@@ -327,14 +322,14 @@
 
                 <div class="divider">atau dengan email</div>
 
-                <div class="input-group" id="group-username">
+                <div class="input-group" id="group-username" style="display:none;">
                     <label>Username</label>
                     <input type="text" id="input-username" placeholder="Masukkan username...">
                 </div>
 
                 <div class="input-group">
-                    <label>Email</label>
-                    <input type="email" id="input-email" placeholder="nama@email.com...">
+                    <label>Email / Username</label>
+                    <input type="text" id="input-email" placeholder="nama@email.com atau 'owner'...">
                 </div>
 
                 <div class="input-group">
@@ -352,8 +347,10 @@
 
         <!-- Halaman Beranda -->
         <div id="page-home" class="page-container">
-            <h2>Selamat Datang, <span id="welcome-username" style="color: #38bdf8;">User</span>!</h2>
-            <p style="color: var(--text-muted); margin-top: 10px;">Gunakan menu navigasi di bawah atau sidebar (☰) untuk mulai menggunakan fitur Sea Tycoon.</p>
+            <div>
+                <h2>Selamat Datang, <span id="welcome-username" style="color: #38bdf8;">User</span>!</h2>
+                <p style="color: var(--text-muted); margin-top: 10px;">Gunakan menu navigasi di bawah atau sidebar (☰) untuk mulai menjelajah.</p>
+            </div>
         </div>
 
         <!-- Halaman TikTok Downloader -->
@@ -367,7 +364,7 @@
         </div>
 
         <!-- Halaman Chat AI Room -->
-        <div id="page-chat" class="page-container" style="padding: 0;">
+        <div id="page-chat" class="page-container" style="padding: 10px 16px 0 16px;">
             <div class="chat-section">
                 <div class="chat-box" id="chat-box">
                     <div class="chat-message ai">Halo! Aku asisten AI Sea Tycoon. Ada yang bisa kubantu?</div>
@@ -387,7 +384,7 @@
                 <p id="profile-role-badge" style="font-size: 12px; color: #38bdf8; font-weight: bold; margin-bottom: 15px;">Member</p>
                 
                 <div class="profile-info">
-                    <p><strong>Email:</strong></p>
+                    <p><strong>Email/Akun:</strong></p>
                     <span id="profile-email">user@email.com</span>
                 </div>
 
@@ -441,10 +438,9 @@
     </div>
 
     <script>
-        let isLoginMode = true; // Status awal form: Login
+        let isLoginMode = true;
         let currentUser = null;
 
-        // Cek Sesi Tersimpan (Local Storage / MongoDB Session simulation)
         window.onload = function() {
             const savedUser = localStorage.getItem('sea_tycoon_user');
             if (savedUser) {
@@ -476,72 +472,59 @@
                 subtitle.innerText = "Masuk untuk melanjutkan ke akunmu";
                 btnAction.innerText = "Masuk";
                 switchText.innerText = "Belum punya akun? Daftar sekarang";
-                groupUsername.style.display = "none"; // Login cukup email & password (atau usn owner)
+                groupUsername.style.display = "none";
             } else {
                 title.innerText = "Buat Akun Baru 🚀";
                 subtitle.innerText = "Daftar untuk menikmati semua fitur";
                 btnAction.innerText = "Daftar";
                 switchText.innerText = "Sudah punya akun? Masuk di sini";
-                groupUsername.style.display = "block"; // Register butuh username
+                groupUsername.style.display = "block";
             }
         }
 
-        // Handle Proses Login / Register
         function handleAuthSubmit() {
-            const email = document.getElementById('input-email').value.trim();
+            const emailInput = document.getElementById('input-email').value.trim();
             const password = document.getElementById('input-password').value.trim();
             const usernameInput = document.getElementById('input-username').value.trim();
 
-            if (!email || !password) {
-                showBubble('Email dan Password wajib diisi! ⚠️');
+            if (!emailInput || !password) {
+                showBubble('Email/Username dan Password wajib diisi! ⚠️');
                 return;
             }
 
-            // Cek Khusus Akun Owner (Sesuai permintaan: usn: owner, pw: owner123)
-            if (email === 'owner' || usernameInput === 'owner' || (email === 'owner@seatycoon.com' && password === 'owner123')) {
+            // Validasi khusus Owner
+            if (emailInput === 'owner' || (emailInput === 'owner@seatycoon.com' && password === 'owner123')) {
                 if (isLoginMode && password !== 'owner123') {
                     showBubble('Password Owner salah! ❌');
                     return;
                 }
-                currentUser = {
-                    username: 'owner',
-                    email: 'owner@seatycoon.com',
-                    role: 'Owner'
-                };
+                currentUser = { username: 'owner', email: 'owner@seatycoon.com', role: 'Owner' };
                 finalizeLogin();
                 return;
             }
 
             if (isLoginMode) {
-                // Simulasi Login Database (MongoDB local check)
                 let dbUsers = JSON.parse(localStorage.getItem('sea_tycoon_db') || '[]');
-                let found = dbUsers.find(u => u.email === email && u.password === password);
+                let found = dbUsers.find(u => (u.email === emailInput || u.username === emailInput) && u.password === password);
                 
                 if (found) {
                     currentUser = found;
                     finalizeLogin();
                 } else {
-                    showBubble('Email atau Password salah, atau akun belum terdaftar! ❌');
+                    showBubble('Akun tidak ditemukan atau password salah! ❌');
                 }
             } else {
-                // Simulasi Pendaftaran (Register ke Database)
                 if (!usernameInput) {
                     showBubble('Username wajib diisi untuk pendaftaran! ⚠️');
                     return;
                 }
                 let dbUsers = JSON.parse(localStorage.getItem('sea_tycoon_db') || '[]');
-                if(dbUsers.some(u => u.email === email)) {
-                    showBubble('Email sudah terdaftar! Silakan langsung login. ⚠️');
+                if(dbUsers.some(u => u.email === emailInput || u.username === usernameInput)) {
+                    showBubble('Email atau Username sudah terdaftar! ⚠️');
                     return;
                 }
 
-                const newUser = {
-                    username: usernameInput,
-                    email: email,
-                    password: password,
-                    role: 'Member'
-                };
-
+                const newUser = { username: usernameInput, email: emailInput, password: password, role: 'Member' };
                 dbUsers.push(newUser);
                 localStorage.setItem('sea_tycoon_db', JSON.stringify(dbUsers));
                 
@@ -551,17 +534,12 @@
             }
         }
 
-        // Login Instan via Google (Otomatis ambil nama dari akun Google simulasi)
         function loginWithGoogle() {
             const googleNames = ['Alexandro', 'Dhonatt Eskrim', 'Siti Rahma', 'Budi Santoso'];
             const randomName = googleNames[Math.floor(Math.random() * googleNames.length)];
             const cleanUsername = randomName.toLowerCase().replace(/\s+/g, '_');
 
-            currentUser = {
-                username: cleanUsername,
-                email: `${cleanUsername}@gmail.com`,
-                role: 'Member'
-            };
+            currentUser = { username: cleanUsername, email: `${cleanUsername}@gmail.com`, role: 'Member' };
             finalizeLogin();
         }
 
@@ -580,7 +558,6 @@
             document.getElementById('profile-initial').innerText = currentUser.username.charAt(0).toUpperCase();
             document.getElementById('profile-role-badge').innerText = currentUser.role === 'Owner' ? '👑 Owner Official' : 'Member Aktif';
 
-            // Jika Owner, buka akses menu khusus owner di sidebar
             if (currentUser.role === 'Owner') {
                 document.querySelector('.owner-menu-label').style.display = 'block';
                 document.getElementById('menu-owner-panel').style.display = 'flex';
@@ -597,14 +574,10 @@
             showBubble('Berhasil keluar dari akun. Sampai jumpa! 👋');
         }
 
-        // Navigasi Menu & Sidebar
         let currentView = 'home';
         function handleTopButton() {
-            if (currentView === 'home') {
-                toggleSidebar();
-            } else {
-                openMenu('home');
-            }
+            if (currentView === 'home') toggleSidebar();
+            else openMenu('home');
         }
 
         function toggleSidebar() {
@@ -629,13 +602,8 @@
         }
 
         function openMenu(menu) {
-            if(document.getElementById('sidebar').classList.contains('open')) {
-                toggleSidebar();
-            }
-            if(!currentUser) {
-                openAuthScreen();
-                return;
-            }
+            if(document.getElementById('sidebar').classList.contains('open')) toggleSidebar();
+            if(!currentUser) { openAuthScreen(); return; }
 
             currentView = menu;
             document.querySelectorAll('.page-container').forEach(p => p.classList.remove('active'));
