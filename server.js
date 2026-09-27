@@ -19,8 +19,8 @@ app.post('/api/chat-ai', async (req, res) => {
         let { message } = req.body;
         if (!message) return res.status(400).json({ success: false, message: 'Pesan tidak boleh kosong!' });
 
-        // Memanggil API AI ikyyxd
-        const apiResponse = await axios.get(`https://api.ikyyxd.my.id/ai/unliai?teks=${encodeURIComponent(message)}`, {
+        // Memanggil API ChatGPT ikyyxd yang baru
+        const apiResponse = await axios.get(`https://api.ikyyxd.my.id/ai/gpt-5-mini?question=${encodeURIComponent(message)}`, {
             headers: {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
             }
@@ -28,9 +28,9 @@ app.post('/api/chat-ai', async (req, res) => {
 
         const resultData = apiResponse.data;
 
-        if (resultData && resultData.status && resultData.result) {
-            // Sesuai dokumentasi, balasan teks ada di result.response
-            const aiReply = resultData.result.response || "Maaf, AI sedang tidak merespons.";
+        if (resultData && resultData.status) {
+            // Sesuai dokumentasi baru, balasan teks ada di result
+            const aiReply = resultData.result || "Maaf, AI sedang tidak merespons.";
             return res.json({ success: true, reply: aiReply });
         } else {
             return res.status(400).json({ success: false, message: 'Gagal mendapatkan respons dari AI.' });
