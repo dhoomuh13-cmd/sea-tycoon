@@ -38,21 +38,20 @@
         }
         .app-title { font-size: 18px; font-weight: 600; }
 
-        /* Sidebar (Bisa Dislide/Scroll & Estetik) */
+        /* Sidebar (Dapat di-slide/scroll ke bawah & memiliki efek gradasi) */
         .sidebar {
             position: fixed; top: 0; left: -280px; width: 280px; height: 100%;
             background: linear-gradient(180deg, #111827 0%, #0b0f19 100%);
             box-shadow: 5px 0 25px rgba(0,0,0,0.5);
             transition: left 0.3s ease-in-out; z-index: 1000; padding: 20px;
             display: flex; flex-direction: column; border-right: 1px solid #1f2937;
-            overflow-y: auto; /* Memungkinkan sidebar di-slide/scroll ke bawah */
+            overflow-y: auto;
         }
         .sidebar.open { left: 0; }
         .sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 18px; font-weight: bold; color: #38bdf8; flex-shrink: 0; }
         .close-btn { background: none; border: none; color: #9ca3af; font-size: 22px; cursor: pointer; }
         .menu-category { font-size: 12px; text-transform: uppercase; color: #38bdf8; margin: 15px 0 8px; font-weight: 700; letter-spacing: 1px; flex-shrink: 0; }
         
-        /* Tombol Sidebar dengan Efek Gradasi dan Rounded Bulat */
         .sidebar-item { 
             padding: 12px 16px; 
             color: #f8fafc; 
@@ -90,39 +89,22 @@
             position: relative;
         }
 
-        /* Beranda Menu Buttons Grid */
+        /* Halaman Beranda (Bersih tanpa tombol menu berjejer) */
         .home-container {
             max-width: 600px;
             margin: auto;
             width: 100%;
-            padding: 20px;
+            padding: 30px 20px;
             text-align: center;
             overflow-y: auto;
             height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
-        .home-container h2 { font-size: 24px; font-weight: 700; margin-bottom: 8px; color: #f8fafc; }
-        .home-container p { font-size: 14px; color: #94a3b8; margin-bottom: 30px; }
-        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; width: 100%; padding-bottom: 30px; }
-        
-        .menu-card-btn {
-            background: linear-gradient(145deg, #1e293b, #0f172a);
-            border: 1.5px solid #1e3a8a;
-            padding: 24px 16px; 
-            border-radius: 20px; /* Membuat tombol berbentuk bulat/melengkung halus */
-            color: #f8fafc; 
-            font-size: 15px; 
-            font-weight: 700;
-            cursor: pointer; 
-            transition: all 0.25s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3), inset 0 0 10px rgba(56, 189, 248, 0.05);
-            display: flex; flex-direction: column; align-items: center; gap: 10px;
-        }
-        .menu-card-btn:hover { 
-            background: linear-gradient(145deg, #1e3a8a, #1e293b); 
-            border-color: #38bdf8; 
-            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.25), inset 0 0 15px rgba(56, 189, 248, 0.2);
-            transform: translateY(-3px); 
-        }
+        .home-container h2 { font-size: 26px; font-weight: 700; margin-bottom: 10px; color: #f8fafc; }
+        .home-container p { font-size: 14px; color: #94a3b8; line-height: 1.6; max-width: 400px; }
 
         /* Downloader Section */
         .downloader-section { display: none; max-width: 600px; margin: auto; width: 100%; padding: 20px; overflow-y: auto; height: 100%; }
@@ -297,36 +279,10 @@
     <!-- Main Content -->
     <div class="main-content" id="content-area">
         
-        <!-- Halaman Beranda (Default) -->
+        <!-- Halaman Beranda (Bersih tanpa tombol-tombol menu) -->
         <div id="page-home" class="home-container">
             <h2>Selamat Datang di Sea Tycoon</h2>
-            <p>Silakan pilih menu menarik di bawah ini:</p>
-            <div class="menu-grid">
-                <button class="menu-card-btn" onclick="openMenu('tiktok')">
-                    🎵 <br>TikTok Downloader
-                </button>
-                <button class="menu-card-btn" onclick="openMenu('chat-ai')">
-                    🤖 <br>Chat AI Assistant
-                </button>
-                <button class="menu-card-btn" onclick="showBubble('Fitur Susun Kata sedang dalam proses pembuatan. Segera hadir! 🧩')">
-                    🧩 <br>Susun Kata
-                </button>
-                <button class="menu-card-btn" onclick="showBubble('Fitur Info Gempa sedang dalam proses pembuatan. Segera hadir! 🌍')">
-                    🌍 <br>Info Gempa
-                </button>
-                <button class="menu-card-btn" onclick="showBubble('Fitur Spotify Song sedang dalam proses pembuatan. Segera hadir! 🎧')">
-                    🎧 <br>Spotify Song
-                </button>
-                <button class="menu-card-btn" onclick="showBubble('Fitur Tebak Kata sedang dalam proses pembuatan. Segera hadir! 💡')">
-                    💡 <br>Tebak Kata
-                </button>
-                <button class="menu-card-btn" onclick="showBubble('Fitur Tempat Cerita sedang dalam proses pembuatan. Mohon bersabar ya! 📖')">
-                    📖 <br>Tempat Cerita
-                </button>
-                <button class="menu-card-btn" onclick="showBubble('Fitur Tempat Kenangan sedang dalam proses pembuatan. Mohon bersabar ya! 📸')">
-                    📸 <br>Tempat Kenangan
-                </button>
-            </div>
+            <p>Silakan gunakan tombol menu di pojok kiri atas (☰) untuk menjelajahi berbagai fitur menarik yang tersedia.</p>
         </div>
 
         <!-- Halaman TikTok Downloader -->
@@ -417,7 +373,7 @@
             chatPage.style.display = 'none';
 
             if (menu === 'home') {
-                homePage.style.display = 'block';
+                homePage.style.display = 'flex';
                 title.innerText = 'Sea Tycoon';
                 bottomNav.classList.remove('hidden');
                 topLeftBtn.innerText = '☰';
