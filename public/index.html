@@ -91,7 +91,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 20px;
+            padding: 0 16px;
             background: var(--bg-topbar);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-color);
@@ -101,16 +101,21 @@
             z-index: 100;
         }
         .top-left { display: flex; align-items: center; gap: 15px; }
+        .top-right { display: flex; align-items: center; gap: 10px; }
         .menu-btn { background: none; border: none; color: var(--text-color); font-size: 22px; cursor: pointer; }
         .app-title { font-size: 18px; font-weight: 600; }
 
-        .settings-btn {
-            width: 40px; height: 40px; border-radius: 50%; background: var(--accent-gradient);
-            border: none; color: #0f172a; font-size: 18px; display: flex; align-items: center;
-            justify-content: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        .top-icon-btn {
+            width: 38px; height: 38px; border-radius: 50%; background: var(--card-bg);
+            border: 1px solid var(--border-color); color: var(--text-color); font-size: 16px; display: flex; align-items: center;
+            justify-content: center; cursor: pointer; position: relative;
             transition: transform 0.2s ease, filter 0.2s ease;
         }
-        .settings-btn:hover { transform: scale(1.1) rotate(45deg); filter: brightness(1.15); }
+        .top-icon-btn:hover { transform: scale(1.08); filter: brightness(1.15); }
+        .badge-dot {
+            position: absolute; top: 4px; right: 4px; width: 10px; height: 10px;
+            background: #ef4444; border-radius: 50%; border: 2px solid var(--bg-main); display: none;
+        }
 
         /* Sidebar */
         .sidebar {
@@ -141,119 +146,88 @@
         .main-content {
             flex: 1; width: 100%; display: flex; flex-direction: column; overflow: hidden; position: relative;
         }
-
         .page-container {
             display: none; width: 100%; height: 100%; padding: 20px;
             overflow-y: auto; flex-direction: column; align-items: center; text-align: center;
         }
         .page-container.active { display: flex; }
 
-        /* Auth Screen */
-        .auth-card {
-            background: var(--card-bg); padding: 30px 24px; border-radius: 24px; border: 1px solid var(--border-color);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4); width: 100%; max-width: 400px; text-align: left; margin: auto;
+        /* Auth Card */
+        .auth-card, .downloader-card, .form-card {
+            background: var(--card-bg); padding: 24px; border-radius: 20px; border: 1px solid var(--border-color);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3); text-align: left; width: 100%; max-width: 450px; margin: auto;
         }
-        .auth-card h2 { font-size: 22px; font-weight: 700; margin-bottom: 6px; color: var(--text-color); text-align: center; }
-        .auth-card p { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; text-align: center; }
+        .auth-card h2, .downloader-card h2, .form-card h2 { font-size: 20px; margin-bottom: 8px; color: var(--text-color); text-align: center; }
+        .auth-card p, .downloader-card p, .form-card p { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; text-align: center; }
         
         .input-group { position: relative; margin-bottom: 14px; width: 100%; }
         .input-group label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; }
-        .input-group input {
+        .input-group input, .input-group textarea {
             width: 100%; padding: 12px 16px; background: var(--bg-main); border: 1px solid var(--border-color);
-            border-radius: 12px; color: var(--text-color); font-size: 14px; outline: none;
+            border-radius: 12px; color: var(--text-color); font-size: 14px; outline: none; resize: none;
         }
-        .auth-submit-btn {
-            width: 100%; padding: 14px; background: var(--accent-gradient); border: none; border-radius: 12px;
+        .action-btn {
+            width: 100%; padding: 14px; background: var(--accent-gradient); border: none; border-radius: 14px;
             color: #0f172a; font-weight: bold; font-size: 15px; cursor: pointer; transition: 0.2s; margin-top: 10px;
         }
-        .auth-submit-btn:hover { filter: brightness(1.1); }
-        
+        .action-btn:hover { filter: brightness(1.1); }
         .auth-switch { text-align: center; margin-top: 16px; font-size: 13px; color: var(--text-muted); }
         .auth-switch span { color: #38bdf8; font-weight: 600; cursor: pointer; }
         .forgot-password-link { text-align: right; margin-top: -6px; margin-bottom: 14px; font-size: 12px; color: #38bdf8; cursor: pointer; font-weight: 600; display: block; }
 
-        /* Downloader Section */
-        .downloader-card, .form-card {
-            background: var(--card-bg); padding: 24px; border-radius: 20px; border: 1px solid var(--border-color);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3); text-align: left; width: 100%; max-width: 450px; margin: auto;
-        }
-        .downloader-card h2, .form-card h2 { font-size: 20px; margin-bottom: 8px; color: var(--text-color); text-align: center; }
-        .downloader-card p, .form-card p { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; text-align: center; }
-        .form-card input {
-            width: 100%; padding: 12px 16px; background: var(--bg-main); border: 1px solid var(--border-color);
-            border-radius: 12px; color: var(--text-color); font-size: 14px; outline: none; margin-bottom: 14px;
-        }
-        .action-btn {
-            width: 100%; padding: 14px; background: var(--accent-gradient); border: none; border-radius: 14px;
-            color: #0f172a; font-weight: bold; font-size: 15px; cursor: pointer; transition: 0.2s;
-        }
-        .action-btn:hover { filter: brightness(1.1); }
-
         /* Tempat Lagu Styling */
-        .song-list-container {
-            width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 15px; margin: 0 auto; padding-bottom: 80px;
-        }
-        .song-card {
-            background: var(--card-bg); border: 1px solid var(--border-color); padding: 18px; border-radius: 18px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3); text-align: left; display: flex; flex-direction: column; gap: 12px;
-        }
+        .song-list-container { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 15px; margin: 0 auto; padding-bottom: 80px; }
+        .song-card { background: var(--card-bg); border: 1px solid var(--border-color); padding: 18px; border-radius: 18px; box-shadow: 0 8px 20px rgba(0,0,0,0.3); text-align: left; display: flex; flex-direction: column; gap: 12px; }
         .song-info h3 { font-size: 16px; color: var(--text-color); margin-bottom: 4px; }
         .song-info span { font-size: 12px; color: var(--text-muted); }
         .song-player-controls { display: flex; align-items: center; gap: 12px; width: 100%; }
-        .play-song-btn {
-            background: var(--accent-gradient); border: none; color: #0f172a; width: 40px; height: 40px; border-radius: 50%;
-            font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-        }
+        .play-song-btn { background: var(--accent-gradient); border: none; color: #0f172a; width: 40px; height: 40px; border-radius: 50%; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .volume-control { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-muted); margin-left: auto; }
         .volume-control input[type=range] { width: 80px; accent-color: #38bdf8; cursor: pointer; }
 
-        /* Chat AI Room Section */
-        .chat-section {
-            display: flex; flex-direction: column; width: 100%; max-width: 600px;
-            height: 100%; margin: 0 auto; background: var(--bg-main); padding: 10px 16px 80px 16px; position: relative;
+        /* Kotak Masuk & Notif User Modals (Bulat Berjejer ke Bawah) */
+        .inbox-modal, .owner-notif-modal, .settings-modal, .bubble-modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(4px);
         }
-        .chat-box { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; padding: 10px 0; }
-        .chat-message { max-width: 85%; padding: 14px 18px; border-radius: 16px; font-size: 15px; line-height: 1.6; word-wrap: break-word; text-align: left; }
-        .chat-message.user { background: #0ea5e9; color: #ffffff; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 500; }
-        .chat-message.ai { background: var(--card-bg); color: var(--text-color); align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid var(--border-color); }
+        .inbox-modal.active, .owner-notif-modal.active, .settings-modal.active, .bubble-modal.active { display: flex; }
         
-        .chat-input-area {
-            position: fixed; bottom: 20px; left: 16px; right: 16px; max-width: 568px; margin: 0 auto;
-            display: flex; gap: 8px; background: #121824; padding: 6px 6px 6px 16px; border-radius: 35px;
-            border: 1px solid var(--border-color); align-items: center; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); z-index: 100;
+        .modal-box {
+            background: var(--card-bg); border: 1px solid var(--border-color); padding: 24px; border-radius: 24px;
+            max-width: 420px; width: 92%; max-height: 85vh; overflow-y: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            display: flex; flex-direction: column; gap: 16px; text-align: left;
         }
-        .chat-input-area input { flex: 1; background: transparent; border: none; color: var(--text-color); font-size: 14px; outline: none; }
-        .send-btn { background: #0ea5e9; border: none; color: #ffffff; padding: 0 20px; height: 38px; border-radius: 20px; font-weight: 600; font-size: 14px; cursor: pointer; flex-shrink: 0; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 18px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+        
+        /* List Kotak Masuk Bulat Berjejer ke Bawah */
+        .inbox-list { display: flex; flex-direction: column; gap: 12px; }
+        .inbox-item-bubble {
+            display: flex; align-items: flex-start; gap: 12px; background: var(--bg-main); border: 1px solid var(--border-color);
+            padding: 14px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .inbox-avatar-circle {
+            width: 42px; height: 42px; border-radius: 50%; background: var(--accent-gradient); color: #0f172a;
+            font-weight: bold; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;
+        }
+        .inbox-content-box { flex: 1; display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
+        .inbox-content-box b { color: var(--text-color); font-size: 14px; }
+        .inbox-content-box span { color: var(--text-muted); font-size: 11px; }
+        .inbox-img-preview { margin-top: 6px; max-width: 100%; max-height: 120px; border-radius: 8px; object-fit: cover; border: 1px solid var(--border-color); }
+        .reply-box-owner { margin-top: 8px; background: rgba(56, 189, 248, 0.1); border-left: 3px solid #38bdf8; padding: 6px 10px; border-radius: 4px; font-size: 12px; }
 
         /* Profile Card */
-        .profile-card {
-            background: var(--card-bg); padding: 30px; border-radius: 20px; border: 1px solid var(--border-color);
-            width: 100%; max-width: 400px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.3); margin: auto;
-        }
+        .profile-card { background: var(--card-bg); padding: 30px; border-radius: 20px; border: 1px solid var(--border-color); width: 100%; max-width: 400px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.3); margin: auto; }
         .profile-avatar { width: 80px; height: 80px; border-radius: 50%; background: var(--accent-gradient); margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 32px; color: #0f172a; font-weight: bold; }
         .profile-info { margin-bottom: 20px; text-align: left; background: var(--bg-main); padding: 15px; border-radius: 12px; border: 1px solid var(--border-color); }
         .profile-info p { font-size: 14px; margin-bottom: 8px; color: var(--text-color); }
         .profile-info span { color: var(--text-muted); font-size: 12px; display: block; }
         .logout-btn { background: #ef4444; color: white; border: none; padding: 12px; width: 100%; border-radius: 12px; font-weight: bold; cursor: pointer; }
 
-        /* Settings Modal & Bubble */
-        .settings-modal, .bubble-modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(4px);
-        }
-        .settings-modal.active, .bubble-modal.active { display: flex; }
-        .settings-content, .bubble-content {
-            background: var(--card-bg); border: 1px solid var(--border-color); padding: 24px; border-radius: 24px;
-            max-width: 360px; width: 90%; box-shadow: 0 20px 40px rgba(0,0,0,0.5); display: flex; flex-direction: column; gap: 20px; text-align: center;
-        }
-        .settings-header { display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 18px; }
+        /* Setting Options */
         .setting-group { display: flex; flex-direction: column; gap: 8px; text-align: left; }
         .setting-label { font-size: 13px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
         .setting-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-        .theme-btn, .notif-btn {
-            padding: 10px; border-radius: 12px; border: 1px solid var(--border-color);
-            background: var(--bg-main); color: var(--text-color); font-size: 13px; font-weight: 600; cursor: pointer;
-        }
+        .theme-btn, .notif-btn { padding: 10px; border-radius: 12px; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-color); font-size: 13px; font-weight: 600; cursor: pointer; }
         .theme-btn.active, .notif-btn.active { background: var(--accent-gradient); color: #0f172a; border-color: transparent; }
         .bubble-btn { background: var(--accent-gradient); color: #0f172a; border: none; padding: 10px 24px; border-radius: 12px; font-weight: bold; cursor: pointer; }
 
@@ -271,12 +245,20 @@
 </head>
 <body class="theme-default">
 
+    <!-- Top Bar -->
     <div class="top-bar">
         <div class="top-left">
             <button class="menu-btn" id="top-left-btn" onclick="handleTopButton()">☰</button>
             <div class="app-title" id="page-title">Sea Tycoon</div>
         </div>
-        <button class="settings-btn" onclick="toggleSettingsModal()" title="Pengaturan">⚙️</button>
+        <div class="top-right">
+            <!-- Tombol Kotak Masuk Baru di Pojok Kanan Atas sebelah Settings -->
+            <button class="top-icon-btn" onclick="toggleInboxModal()" title="Kotak Masuk">
+                📥
+                <div class="badge-dot" id="inbox-badge-dot"></div>
+            </button>
+            <button class="top-icon-btn" onclick="toggleSettingsModal()" title="Pengaturan">⚙️</button>
+        </div>
     </div>
 
     <div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
@@ -292,10 +274,12 @@
         <div class="sidebar-item" onclick="openMenu('home')">🏠 Beranda</div>
         <div class="sidebar-item" onclick="openMenu('tiktok')">🎵 TikTok Downloader</div>
         <div class="sidebar-item" onclick="openMenu('chat-ai')">🤖 Chat AI Assistant</div>
+        <div class="sidebar-item" onclick="openMenu('req-fitur')">💡 Req Fitur/Lagu</div>
 
-        <!-- Menu Khusus Owner (Hanya Muncul di Akun Owner) -->
+        <!-- Menu Khusus Owner -->
         <div class="menu-category owner-menu-label" style="display:none;">Panel Owner</div>
         <div class="sidebar-item owner-menu" id="menu-owner-panel" onclick="showBubble('Selamat datang di Panel Kontrol Eksklusif Owner! 👑')">👑 Kontrol Panel Owner</div>
+        <div class="sidebar-item owner-menu" id="menu-notif-user" onclick="openMenu('owner-notif-user')">🔔 Notif User</div>
         <div class="sidebar-item owner-menu" id="menu-add-lagu" onclick="openMenu('add-lagu')">🎶 Add Lagu</div>
         <div class="sidebar-item owner-menu" id="menu-add-kenangan" onclick="openMenu('add-kenangan')">📸 Add Kenangan</div>
 
@@ -317,7 +301,7 @@
         
         <!-- Halaman Auth -->
         <div id="page-auth" class="page-container">
-            <div class="auth-card" id="auth-card-box">
+            <div class="auth-card">
                 <h2 id="auth-title">Selamat Datang! 🚀</h2>
                 <p id="auth-subtitle">Masuk dengan email pribadi & password</p>
                 
@@ -326,17 +310,14 @@
                         <label>Username</label>
                         <input type="text" id="input-username" placeholder="Buat username unik...">
                     </div>
-
                     <div class="input-group">
                         <label>Email Pribadi</label>
                         <input type="email" id="input-email" placeholder="nama@email.com atau 'owner'...">
                     </div>
-
                     <div class="input-group" id="group-password">
                         <label>Password</label>
                         <input type="password" id="input-password" placeholder="Minimal 6 karakter...">
                     </div>
-                    
                     <span id="forgot-pw-trigger" class="forgot-password-link" onclick="showForgotPasswordView()">Lupa Password?</span>
                 </div>
 
@@ -347,15 +328,7 @@
                     </div>
                 </div>
 
-                <div id="form-reset-inputs" style="display:none;">
-                    <div class="input-group">
-                        <label>Password Baru</label>
-                        <input type="password" id="input-new-password" placeholder="Masukkan password baru...">
-                    </div>
-                </div>
-
                 <button class="auth-submit-btn" id="auth-btn-action" onclick="handleAuthSubmit()">Masuk</button>
-
                 <div class="auth-switch" id="auth-switch-container">
                     <span id="auth-switch-text" onclick="toggleAuthMode()">Belum punya akun? Daftar sekarang</span>
                 </div>
@@ -380,39 +353,53 @@
             </div>
         </div>
 
-        <!-- Halaman Chat AI Room -->
-        <div id="page-chat" class="page-container" style="padding: 0;">
-            <div class="chat-section">
-                <div class="chat-box" id="chat-box">
-                    <div class="chat-message ai">Halo! Aku asisten AI Sea Tycoon. Ada yang bisa kubantu hari ini?</div>
+        <!-- Halaman Req Fitur / Lagu -->
+        <div id="page-req-fitur" class="page-container">
+            <div class="form-card">
+                <h2>Req Fitur / Lagu 💡</h2>
+                <p>Kirimkan request fitur baru, lagu favorit, atau laporkan kendala/error sistem.</p>
+                
+                <div class="input-group">
+                    <label>Pesan / Detail Request</label>
+                    <textarea id="req-message" rows="4" placeholder="Tuliskan detail request lagu atau kendala error..."></textarea>
                 </div>
-                <div class="chat-input-area">
-                    <input type="text" id="chat-input" placeholder="Tulis pesan atau pertanyaan ke AI..." onkeypress="if(event.key==='Enter')sendChatMessage()">
-                    <button class="send-btn" onclick="sendChatMessage()">Kirim</button>
+
+                <div class="input-group">
+                    <label>Lampirkan Foto (Opsional)</label>
+                    <input type="file" id="req-image" accept="image/*" style="padding: 8px;">
                 </div>
+
+                <button class="action-btn" onclick="submitUserRequest()">Kirim Request ke Owner</button>
             </div>
         </div>
 
-        <!-- Halaman Add Lagu (Khusus Owner) -->
+        <!-- Halaman Panel Owner: Notif User -->
+        <div id="page-owner-notif-user" class="page-container">
+            <div style="width: 100%; max-width: 550px; margin-bottom: 20px; text-align: left;">
+                <h2 style="font-size: 20px; color: var(--text-color);">Notif User & Request 🔔</h2>
+                <p style="font-size: 13px; color: var(--text-muted);">Daftar seluruh request fitur dan laporan error dari user.</p>
+            </div>
+            <div id="owner-requests-wrapper" style="width: 100%; max-width: 550px; display: flex; flex-direction: column; gap: 15px; padding-bottom: 80px;">
+                <!-- Dirender secara dinamis -->
+            </div>
+        </div>
+
+        <!-- Halaman Add Lagu -->
         <div id="page-add-lagu" class="page-container">
             <div class="form-card">
                 <h2>Add Lagu Baru 🎶</h2>
                 <p>Tambahkan lagu baru yang akan tampil di Tempat Lagu.</p>
-                
                 <label style="font-size: 12px; font-weight: bold; color: var(--text-muted);">Judul Lagu</label>
-                <input type="text" id="input-song-title" placeholder="Contoh: Lagu Kenangan Kita...">
-                
+                <input type="text" id="input-song-title" placeholder="Contoh: Lagu Kenangan Kita..." style="width:100%; padding:12px; background:var(--bg-main); border:1px solid var(--border-color); border-radius:12px; color:var(--text-color); margin-bottom:12px; outline:none;">
                 <label style="font-size: 12px; font-weight: bold; color: var(--text-muted);">Dari (Pembuat/Owner)</label>
-                <input type="text" id="input-song-artist" value="Owner" placeholder="Contoh: Owner">
-                
+                <input type="text" id="input-song-artist" value="Owner" placeholder="Owner" style="width:100%; padding:12px; background:var(--bg-main); border:1px solid var(--border-color); border-radius:12px; color:var(--text-color); margin-bottom:12px; outline:none;">
                 <label style="font-size: 12px; font-weight: bold; color: var(--text-muted);">URL File Audio (.mp3 / .mp4)</label>
-                <input type="text" id="input-song-url" placeholder="https://domain.com/audio.mp3">
-                
-                <button class="action-btn" style="margin-top: 10px;" onclick="saveNewSong()">Simpan & Publikasikan Lagu</button>
+                <input type="text" id="input-song-url" placeholder="https://domain.com/audio.mp3" style="width:100%; padding:12px; background:var(--bg-main); border:1px solid var(--border-color); border-radius:12px; color:var(--text-color); margin-bottom:15px; outline:none;">
+                <button class="action-btn" onclick="saveNewSong()">Simpan & Publikasikan Lagu</button>
             </div>
         </div>
 
-        <!-- Halaman Add Kenangan (Khusus Owner) -->
+        <!-- Halaman Add Kenangan -->
         <div id="page-add-kenangan" class="page-container">
             <div class="form-card">
                 <h2>Add Kenangan 📸</h2>
@@ -427,9 +414,7 @@
                 <h2 style="font-size: 20px; color: var(--text-color);">Tempat Lagu 🎵</h2>
                 <p style="font-size: 13px; color: var(--text-muted);">Dengarkan koleksi lagu pilihan dari owner.</p>
             </div>
-            <div class="song-list-container" id="song-list-wrapper">
-                <!-- Daftar lagu akan dirender secara dinamis di sini -->
-            </div>
+            <div class="song-list-container" id="song-list-wrapper"></div>
         </div>
 
         <!-- Halaman Profile -->
@@ -438,22 +423,33 @@
                 <div class="profile-avatar" id="profile-initial">U</div>
                 <h3 id="profile-name" style="margin-bottom: 5px; font-size: 18px;">Username</h3>
                 <p id="profile-role-badge" style="font-size: 12px; color: #38bdf8; font-weight: bold; margin-bottom: 15px;">Member</p>
-                
                 <div class="profile-info">
                     <p><strong>Email Terdaftar:</strong></p>
                     <span id="profile-email">user@email.com</span>
                 </div>
-
                 <button class="logout-btn" onclick="logoutUser()">Keluar Akun</button>
             </div>
         </div>
 
     </div>
 
+    <!-- Modal Kotak Masuk (Bulat Berjejer Kebawah) -->
+    <div id="inbox-modal" class="inbox-modal" onclick="toggleInboxModal()">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <span>📥 Kotak Masuk Anda</span>
+                <button class="close-btn" onclick="toggleInboxModal()">✕</button>
+            </div>
+            <div class="inbox-list" id="user-inbox-wrapper">
+                <!-- Diisi secara dinamis -->
+            </div>
+        </div>
+    </div>
+
     <!-- Modal Pengaturan -->
     <div id="settings-modal" class="settings-modal" onclick="toggleSettingsModal()">
-        <div class="settings-content" onclick="event.stopPropagation()">
-            <div class="settings-header">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <div class="modal-header">
                 <span>Pengaturan Aplikasi</span>
                 <button class="close-btn" onclick="toggleSettingsModal()">✕</button>
             </div>
@@ -477,10 +473,10 @@
         </div>
     </div>
 
-    <!-- Bubble Notification Modal -->
+    <!-- Bubble Notification Modal dengan Suara "Ting" -->
     <div id="bubble-modal" class="bubble-modal" onclick="closeBubble()">
-        <div class="bubble-content" onclick="event.stopPropagation()">
-            <p id="bubble-text" style="color: var(--text-color); margin-bottom: 15px; font-size: 14px;">Pesan pemberitahuan...</p>
+        <div class="modal-box" style="text-align: center; max-width: 320px;" onclick="event.stopPropagation()">
+            <p id="bubble-text" style="color: var(--text-color); margin-bottom: 15px; font-size: 14px;">Pemberitahuan...</p>
             <button class="bubble-btn" onclick="closeBubble()">Mengerti</button>
         </div>
     </div>
@@ -489,7 +485,6 @@
     <div class="bottom-nav" id="bottom-nav">
         <a class="nav-item active" id="nav-beranda" onclick="switchTab(this, 'Beranda')">🏠<span>Beranda</span></a>
         <a class="nav-item" id="nav-tiktok" onclick="switchTab(this, 'TikTok')">🎵<span>TikTok</span></a>
-        <a class="nav-item" id="nav-chat" onclick="switchTab(this, 'Chat AI')">🤖<span>Chat AI</span></a>
         <a class="nav-item" id="nav-profile" onclick="switchTab(this, 'Profile')">👤<span>Profile</span></a>
     </div>
 
@@ -498,7 +493,6 @@
         let currentUser = null;
         let tempRegisterData = null;
         let generatedOtpCode = null;
-        let targetResetEmail = null;
 
         window.onload = function() {
             const savedUser = localStorage.getItem('sea_tycoon_user');
@@ -506,10 +500,31 @@
                 currentUser = JSON.parse(savedUser);
                 applyUserSession();
                 openMenu('home');
+                checkInboxBadge();
             } else {
                 openAuthScreen();
             }
         };
+
+        // Suara "Ting" otomatis menggunakan Web Audio API
+        function playTingSound() {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(1200, audioCtx.currentTime); // Nada tinggi khas "ting"
+                osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.15);
+                gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.3);
+            } catch (e) {
+                console.log('Audio Context tidak diizinkan browser sebelum interaksi.');
+            }
+        }
 
         function openAuthScreen() {
             document.getElementById('bottom-nav').classList.add('hidden');
@@ -527,16 +542,11 @@
             const switchContainer = document.getElementById('auth-switch-container');
             const groupUsername = document.getElementById('group-username');
             const groupPassword = document.getElementById('group-password');
-            const groupOtp = document.getElementById('form-otp-inputs');
-            const groupReset = document.getElementById('form-reset-inputs');
             const forgotLink = document.getElementById('forgot-pw-trigger');
 
             groupUsername.style.display = 'none';
             groupPassword.style.display = 'block';
-            groupOtp.style.display = 'none';
-            groupReset.style.display = 'none';
             forgotLink.style.display = 'none';
-            switchContainer.style.display = 'block';
 
             if (state === 'login') {
                 title.innerText = "Selamat Datang Kembali! 👋";
@@ -547,16 +557,9 @@
             } else if (state === 'register') {
                 title.innerText = "Buat Akun Baru 🚀";
                 subtitle.innerText = "Daftar menggunakan email aktifmu";
-                btnAction.innerText = "Kirim Kode Verifikasi";
+                btnAction.innerText = "Daftar Sekarang";
                 groupUsername.style.display = 'block';
                 switchContainer.innerHTML = `<span onclick="setAuthState('login')">Sudah punya akun? Masuk di sini</span>`;
-            } else if (state === 'verify_otp') {
-                title.innerText = "Verifikasi Email ✉️";
-                subtitle.innerText = "Masukkan kode yang masuk ke inbox/folder spam emailmu";
-                btnAction.innerText = "Konfirmasi & Daftar";
-                groupPassword.style.display = 'none';
-                groupOtp.style.display = 'block';
-                switchContainer.style.display = 'none';
             }
         }
 
@@ -571,30 +574,19 @@
                 showBubble('Masukkan email akun terlebih dahulu di kolom email! ⚠️');
                 return;
             }
-            generatedOtpCode = Math.floor(1000 + Math.random() * 9000).toString();
-            showBubble(`[SIMULASI LUPA PASSWORD]\nKode OTP Reset dikirim ke ${emailInput}: ${generatedOtpCode}`);
-            let userOtpCheck = prompt("Masukkan 4 digit kode verifikasi yang dikirim ke email:");
-            if (userOtpCheck === generatedOtpCode) {
-                let newPass = prompt("Masukkan password baru (minimal 6 karakter):");
-                if (newPass && newPass.length >= 6) {
-                    if (emailInput === 'owner@seatycoon.com') {
-                        showBubble('Password Owner utama tidak dapat diubah dari sini! ⚠️');
-                        return;
-                    }
-                    let dbUsers = JSON.parse(localStorage.getItem('sea_tycoon_db') || '[]');
-                    let userIndex = dbUsers.findIndex(u => u.email === emailInput);
-                    if (userIndex !== -1) {
-                        dbUsers[userIndex].password = newPass;
-                        localStorage.setItem('sea_tycoon_db', JSON.stringify(dbUsers));
-                        showBubble('Password berhasil diubah! Silakan masuk ✨');
-                    } else {
-                        showBubble('Email tidak ditemukan di database member. ❌');
-                    }
+            let newPass = prompt("Masukkan password baru (minimal 6 karakter):");
+            if (newPass && newPass.length >= 6) {
+                let dbUsers = JSON.parse(localStorage.getItem('sea_tycoon_db') || '[]');
+                let userIndex = dbUsers.findIndex(u => u.email === emailInput);
+                if (userIndex !== -1) {
+                    dbUsers[userIndex].password = newPass;
+                    localStorage.setItem('sea_tycoon_db', JSON.stringify(dbUsers));
+                    showBubble('Password berhasil diubah! Silakan masuk ✨');
                 } else {
-                    showBubble('Password baru tidak valid! ⚠️');
+                    showBubble('Email tidak ditemukan di database member. ❌');
                 }
             } else {
-                showBubble('Kode verifikasi salah! ❌');
+                showBubble('Password baru tidak valid! ⚠️');
             }
         }
 
@@ -602,8 +594,6 @@
             const emailInput = document.getElementById('input-email').value.trim();
             const passwordInput = document.getElementById('input-password').value.trim();
             const usernameInput = document.getElementById('input-username').value.trim();
-            const otpInput = document.getElementById('input-otp').value.trim();
-
             let dbUsers = JSON.parse(localStorage.getItem('sea_tycoon_db') || '[]');
 
             if (authState === 'login') {
@@ -611,13 +601,11 @@
                     showBubble('Email dan Password wajib diisi! ⚠️');
                     return;
                 }
-
                 if (emailInput === 'owner' || (emailInput === 'owner@seatycoon.com' && passwordInput === 'owner123')) {
                     currentUser = { username: 'owner', email: 'owner@seatycoon.com', role: 'Owner' };
                     finalizeLogin();
                     return;
                 }
-
                 let found = dbUsers.find(u => (u.email === emailInput || u.username === emailInput) && u.password === passwordInput);
                 if (found) {
                     currentUser = found;
@@ -625,8 +613,7 @@
                 } else {
                     showBubble('Email/Username atau Password salah! ❌');
                 }
-            } 
-            else if (authState === 'register') {
+            } else if (authState === 'register') {
                 if (!emailInput || !passwordInput || !usernameInput) {
                     showBubble('Semua kolom wajib diisi! ⚠️');
                     return;
@@ -639,23 +626,10 @@
                     showBubble('Email atau Username sudah terdaftar! ⚠️');
                     return;
                 }
-
-                generatedOtpCode = Math.floor(1000 + Math.random() * 9000).toString();
-                tempRegisterData = { username: usernameInput, email: emailInput, password: passwordInput, role: 'Member' };
-                
-                showBubble(`[SIMULASI EMAIL/SPAM]\nKode verifikasi Sea Tycoon kamu adalah: ${generatedOtpCode}`);
-                setAuthState('verify_otp');
-            } 
-            else if (authState === 'verify_otp') {
-                if (otpInput !== generatedOtpCode) {
-                    showBubble('Kode verifikasi salah! Cek folder spam/Gmail kamu. ❌');
-                    return;
-                }
-
-                dbUsers.push(tempRegisterData);
+                const newUser = { username: usernameInput, email: emailInput, password: passwordInput, role: 'Member' };
+                dbUsers.push(newUser);
                 localStorage.setItem('sea_tycoon_db', JSON.stringify(dbUsers));
-                currentUser = tempRegisterData;
-                showBubble('Email berhasil diverifikasi! Pendaftaran sukses 🎉');
+                currentUser = newUser;
                 finalizeLogin();
             }
         }
@@ -675,7 +649,6 @@
             document.getElementById('profile-initial').innerText = currentUser.username.charAt(0).toUpperCase();
             document.getElementById('profile-role-badge').innerText = currentUser.role === 'Owner' ? '👑 Owner Official' : 'Member Aktif';
 
-            // Tampilkan menu khusus Owner jika role adalah Owner
             const isOwner = (currentUser.role === 'Owner');
             document.querySelectorAll('.owner-menu-label').forEach(el => el.style.display = isOwner ? 'block' : 'none');
             document.querySelectorAll('.owner-menu').forEach(el => el.style.display = isOwner ? 'flex' : 'none');
@@ -701,6 +674,14 @@
 
         function toggleSettingsModal() {
             document.getElementById('settings-modal').classList.toggle('active');
+        }
+
+        function toggleInboxModal() {
+            const modal = document.getElementById('inbox-modal');
+            modal.classList.toggle('active');
+            if (modal.classList.contains('active')) {
+                renderUserInbox();
+            }
         }
 
         function setTheme(themeName) {
@@ -737,12 +718,18 @@
                 topLeftBtn.innerText = '✕';
                 bottomNav.classList.remove('hidden');
                 setActiveNav('TikTok');
-            } else if (menu === 'chat-ai') {
-                document.getElementById('page-chat').classList.add('active');
-                title.innerText = 'Chat AI Assistant';
+            } else if (menu === 'req-fitur') {
+                document.getElementById('page-req-fitur').classList.add('active');
+                title.innerText = 'Req Fitur / Lagu';
                 topLeftBtn.innerText = '✕';
-                bottomNav.classList.add('hidden');
-                setActiveNav('Chat AI');
+                bottomNav.classList.remove('hidden');
+            } else if (menu === 'owner-notif-user') {
+                if (currentUser.role !== 'Owner') { showBubble('Akses ditolak! Khusus Owner.'); return; }
+                document.getElementById('page-owner-notif-user').classList.add('active');
+                title.innerText = 'Notif User (Owner)';
+                topLeftBtn.innerText = '✕';
+                bottomNav.classList.remove('hidden');
+                renderOwnerRequests();
             } else if (menu === 'add-lagu') {
                 if (currentUser.role !== 'Owner') { showBubble('Akses ditolak! Khusus Owner.'); return; }
                 document.getElementById('page-add-lagu').classList.add('active');
@@ -773,7 +760,6 @@
         function switchTab(element, name) {
             if (name === 'Beranda') openMenu('home');
             else if (name === 'TikTok') openMenu('tiktok');
-            else if (name === 'Chat AI') openMenu('chat-ai');
             else if (name === 'Profile') openMenu('profile');
         }
 
@@ -781,12 +767,12 @@
             document.querySelectorAll('.bottom-nav .nav-item').forEach(i => i.classList.remove('active'));
             if(name === 'Beranda') document.getElementById('nav-beranda').classList.add('active');
             else if(name === 'TikTok') document.getElementById('nav-tiktok').classList.add('active');
-            else if(name === 'Chat AI') document.getElementById('nav-chat').classList.add('active');
             else if(name === 'Profile') document.getElementById('nav-profile').classList.add('active');
         }
 
         function showBubble(message) {
             if(document.getElementById('sidebar').classList.contains('open')) toggleSidebar();
+            playTingSound(); // Mainkan suara ting otomatis
             document.getElementById('bubble-text').innerText = message;
             document.getElementById('bubble-modal').classList.add('active');
         }
@@ -795,7 +781,136 @@
             document.getElementById('bubble-modal').classList.remove('active');
         }
 
-        // Logika Penyimpanan & Pemutaran Lagu
+        // --- FITUR REQ & KOTAK MASUK (DENGAN SUPPORT FOTO & BALASAN OWNER) ---
+        function submitUserRequest() {
+            const message = document.getElementById('req-message').value.trim();
+            const fileInput = document.getElementById('req-image');
+
+            if (!message && fileInput.files.length === 0) {
+                showBubble('Tuliskan pesan request atau lampirkan foto terlebih dahulu! ⚠️');
+                return;
+            }
+
+            const processSubmit = (imgData) => {
+                let requests = JSON.parse(localStorage.getItem('sea_tycoon_requests') || '[]');
+                const newReq = {
+                    id: Date.now(),
+                    username: currentUser.username,
+                    email: currentUser.email,
+                    message: message || '(Lampiran Gambar)',
+                    image: imgData || null,
+                    reply: null,
+                    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                };
+                requests.push(newReq);
+                localStorage.setItem('sea_tycoon_requests', JSON.stringify(requests));
+
+                document.getElementById('req-message').value = '';
+                fileInput.value = '';
+                showBubble('Request berhasil dikirim ke Owner! Silakan cek Kotak Masuk untuk melihat balasan nanti ✨');
+                checkInboxBadge();
+            };
+
+            if (fileInput.files.length > 0) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    processSubmit(e.target.result);
+                };
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                processSubmit(null);
+            }
+        }
+
+        function renderUserInbox() {
+            const wrapper = document.getElementById('user-inbox-wrapper');
+            let requests = JSON.parse(localStorage.getItem('sea_tycoon_requests') || '[]');
+            let userReqs = requests.filter(r => r.username === currentUser.username);
+
+            if (userReqs.length === 0) {
+                wrapper.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 20px;">Belum ada riwayat request atau pesan masuk.</div>`;
+                return;
+            }
+
+            let html = '';
+            userReqs.reverse().forEach(req => {
+                html += `
+                    <div class="inbox-item-bubble">
+                        <div class="inbox-avatar-circle">📤</div>
+                        <div class="inbox-content-box">
+                            <b>Request Anda:</b>
+                            <p>${req.message}</p>
+                            ${req.image ? `<img src="${req.image}" class="inbox-img-preview">` : ''}
+                            <span>${req.time}</span>
+                            ${req.reply ? `<div class="reply-box-owner">👑 <b>Balasan Owner:</b> ${req.reply}</div>` : `<span style="color: #f59e0b;">Menunggu balasan owner...</span>`}
+                        </div>
+                    </div>
+                `;
+            });
+            wrapper.innerHTML = html;
+            document.getElementById('inbox-badge-dot').style.display = 'none';
+        }
+
+        function checkInboxBadge() {
+            let requests = JSON.parse(localStorage.getItem('sea_tycoon_requests') || '[]');
+            if (!currentUser) return;
+            let userReqs = requests.filter(r => r.username === currentUser.username && r.reply);
+            const hasUnreadReply = userReqs.some(r => !r.readByUser);
+            document.getElementById('inbox-badge-dot').style.display = hasUnreadReply ? 'block' : 'none';
+        }
+
+        // --- PANEL OWNER: NOTIF USER ---
+        function renderOwnerRequests() {
+            const wrapper = document.getElementById('owner-requests-wrapper');
+            let requests = JSON.parse(localStorage.getItem('sea_tycoon_requests') || '[]');
+
+            if (requests.length === 0) {
+                wrapper.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px;">Belum ada notif atau request dari user.</div>`;
+                return;
+            }
+
+            let html = '';
+            requests.reverse().forEach(req => {
+                html += `
+                    <div class="song-card">
+                        <div class="song-info">
+                            <h3>👤 User: @${req.username}</h3>
+                            <span>Waktu: ${req.time} | Email: ${req.email}</span>
+                        </div>
+                        <p style="font-size: 14px; margin-top: 5px; color: var(--text-color);">${req.message}</p>
+                        ${req.image ? `<img src="${req.image}" style="max-width: 100%; max-height: 180px; border-radius: 10px; margin-top: 8px; object-fit: cover;">` : ''}
+                        
+                        ${req.reply ? `<div class="reply-box-owner" style="margin-top: 10px;">👑 <b>Balasan Anda:</b> ${req.reply}</div>` : `
+                            <div style="display: flex; gap: 8px; margin-top: 10px;">
+                                <input type="text" id="reply-input-${req.id}" placeholder="Balas request user ini..." style="flex:1; padding:10px; background:var(--bg-main); border:1px solid var(--border-color); border-radius:10px; color:var(--text-color); font-size:13px; outline:none;">
+                                <button onclick="ownerReplyRequest('${req.id}')" style="padding: 10px 16px; background: var(--accent-gradient); border: none; border-radius: 10px; font-weight: bold; color: #0f172a; cursor: pointer;">Kirim Balasan</button>
+                            </div>
+                        `}
+                    </div>
+                `;
+            });
+            wrapper.innerHTML = html;
+        }
+
+        function ownerReplyRequest(reqId) {
+            const replyText = document.getElementById(`reply-input-${reqId}`).value.trim();
+            if (!replyText) {
+                showBubble('Tuliskan balasan terlebih dahulu! ⚠️');
+                return;
+            }
+
+            let requests = JSON.parse(localStorage.getItem('sea_tycoon_requests') || '[]');
+            let index = requests.findIndex(r => r.id == reqId);
+            if (index !== -1) {
+                requests[index].reply = replyText;
+                requests[index].readByUser = false;
+                localStorage.setItem('sea_tycoon_requests', JSON.stringify(requests));
+                showBubble('Balasan berhasil dikirim ke user! ✨');
+                renderOwnerRequests();
+            }
+        }
+
+        // --- PENGELOLAAN LAGU ---
         function saveNewSong() {
             const title = document.getElementById('input-song-title').value.trim();
             const artist = document.getElementById('input-song-artist').value.trim();
@@ -864,7 +979,6 @@
                 btn.innerText = '▶';
                 status.innerText = 'Jeda';
             }
-
             audio.onended = function() {
                 btn.innerText = '▶';
                 status.innerText = 'Selesai';
@@ -874,41 +988,6 @@
         function changeVolume(id, val) {
             const audio = document.getElementById(`audio-${id}`);
             audio.volume = val;
-        }
-
-        // Fungsi Chat AI Backend
-        async function sendChatMessage() {
-            const input = document.getElementById('chat-input');
-            const messageText = input.value.trim();
-            if(!messageText) return;
-
-            const chatBox = document.getElementById('chat-box');
-            chatBox.innerHTML += `<div class="chat-message user">${messageText}</div>`;
-            input.value = '';
-            chatBox.scrollTop = chatBox.scrollHeight;
-
-            const loadingId = 'loading-' + Date.now();
-            chatBox.innerHTML += `<div class="chat-message ai" id="${loadingId}">AI sedang mengetik...</div>`;
-            chatBox.scrollTop = chatBox.scrollHeight;
-
-            try {
-                const response = await fetch('/api/chat-ai', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: messageText })
-                });
-                const data = await response.json();
-                document.getElementById(loadingId).remove();
-                if (data && data.reply) {
-                    chatBox.innerHTML += `<div class="chat-message ai">${data.reply}</div>`;
-                } else {
-                    chatBox.innerHTML += `<div class="chat-message ai">Maaf, respons server tidak valid.</div>`;
-                }
-            } catch (error) {
-                document.getElementById(loadingId).remove();
-                chatBox.innerHTML += `<div class="chat-message ai">Gagal terhubung ke server backend AI.</div>`;
-            }
-            chatBox.scrollTop = chatBox.scrollHeight;
         }
     </script>
 </body>
