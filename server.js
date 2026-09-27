@@ -4,16 +4,18 @@ const axios = require('axios');
 const path = require('path');
 
 const app = express();
+
+// Middleware untuk memparsing data JSON dan URL-encoded
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Koneksi ke MongoDB Atlas
+// Koneksi ke MongoDB Atlas menggunakan variabel environment dari Railway
 const MONGO_URI = process.env.MONGO_URI;
 mongoose.connect(MONGO_URI)
     .then(() => console.log('MongoDB Terhubung!'))
     .catch(err => console.error('Koneksi MongoDB Gagal:', err));
 
-// Schema untuk menyimpan riwayat download video TikTok ke MongoDB
+// Schema untuk menyimpan riwayat download video TikTok
 const historySchema = new mongoose.Schema({
     platform: String,
     url: String,
@@ -29,11 +31,11 @@ app.post('/api/download-tiktok', async (req, res) => {
         const { url } = req.body;
         if (!url) return res.status(400).json({ success: false, message: 'URL tidak boleh kosong!' });
 
-        // Memanggil API downloader
+        // Memanggil API downloader TikTok
         const apiResponse = await axios.get(`https://api.ikyyxd.my.id/download/tiktokkv2?url=${encodeURIComponent(url)}`);
         const resultData = apiResponse.data;
 
-        // Simpan data ke MongoDB
+        // Simpan riwayat ke MongoDB Atlas
         const newHistory = new History({
             platform: 'TikTok',
             url: url,
@@ -49,16 +51,21 @@ app.post('/api/download-tiktok', async (req, res) => {
     }
 });
 
-// Menyajikan file statis (jika ada file CSS/JS terpisah, tapi kalau inline aman)
-app.use(express.static(path.join(__dirname)));
+// Menyajikan file statis (CSS, JS, gambar) dari dalam folder 'public'
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Mengarahkan rute utama ke index.html yang sudah ada
+// Mengarahkan rute utama ke public/index.html
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Menjalankan server port untuk Railway
+// Mengarahkan semua rute lainnya ke public/index.html (aman untuk routing frontend)
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Menjalankan server di port yang disiapkan oleh Railway atau port 3000
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server berjalan di port ${PORT}`);
+    console.log(`Server aktif dan berjalan di port ${PORT}`);
 });
