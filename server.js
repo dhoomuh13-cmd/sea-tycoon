@@ -13,27 +13,27 @@ mongoose.connect(MONGO_URI)
     .then(() => console.log('MongoDB Terhubung!'))
     .catch(err => console.error('Koneksi MongoDB Gagal:', err));
 
-// Endpoint Backend untuk Chat AI
+// Endpoint Backend untuk Chat AI dengan Debugging
 app.post('/api/chat-ai', async (req, res) => {
     try {
         let { message } = req.body;
         if (!message) return res.status(400).json({ success: false, message: 'Pesan tidak boleh kosong!' });
 
-        // Memanggil API ChatGPT ikyyxd yang baru
         const apiResponse = await axios.get(`https://api.ikyyxd.my.id/ai/gpt-5-mini?question=${encodeURIComponent(message)}`, {
             headers: {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
             }
         });
 
+        // Cetak respons mentah ke log Railway untuk diperiksa
+        console.log("DEBUG API RESPON:", JSON.stringify(apiResponse.data));
+
         const resultData = apiResponse.data;
 
-        if (resultData && resultData.status) {
-            // Sesuai dokumentasi baru, balasan teks ada di result
-            const aiReply = resultData.result || "Maaf, AI sedang tidak merespons.";
-            return res.json({ success: true, reply: aiReply });
+        if (resultData && resultData.result) {
+            return res.json({ success: true, reply: resultData.result });
         } else {
-            return res.status(400).json({ success: false, message: 'Gagal mendapatkan respons dari AI.' });
+            return res.json({ success: true, reply: "AI merespons tapi format kosong." });
         }
 
     } catch (error) {
