@@ -192,7 +192,7 @@
         }
         .page-container.active { display: flex; opacity: 1; transform: scale(1) translateY(0); }
 
-        /* Smooth Loading Overlay for Channel Info Update */
+        /* Smooth Loading Overlay */
         .page-loader {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--bg-main); z-index: 500; display: flex; flex-direction: column;
@@ -225,7 +225,7 @@
             width: 100%; padding: 14px; background: var(--accent-gradient); border: none; border-radius: 14px;
             color: #0f172a; font-weight: 700; font-size: 14px; cursor: pointer; margin-top: 10px; transition: 0.2s;
         }
-        .action-btn:hover { opacity: 0.92; transform: translateY(-1px); }
+        .action-btn:hover { opacity: 0.92; transform: translateY(-1px); box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3); }
         .auth-switch { text-align: center; margin-top: 16px; font-size: 13px; color: var(--text-muted); }
         .auth-switch span { color: #38bdf8; font-weight: 600; cursor: pointer; }
         .forgot-password-link { text-align: right; margin-top: -6px; margin-bottom: 14px; font-size: 12px; color: #38bdf8; cursor: pointer; font-weight: 600; display: block; }
@@ -265,7 +265,7 @@
             box-shadow: 0 15px 30px rgba(56, 189, 248, 0.25);
         }
 
-        /* Saluran Style (Info Update, Kenangan, & Cerita) */
+        /* Saluran Style */
         .channel-feed-container {
             width: 100%;
             max-width: 480px;
@@ -300,7 +300,6 @@
         .channel-title { font-size: 15px; font-weight: 700; color: #38bdf8; }
         .channel-body-text { font-size: 14px; line-height: 1.5; color: var(--text-color); white-space: pre-wrap; }
         
-        /* Multi Photos & Video Support */
         .channel-images-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
@@ -340,7 +339,6 @@
             display: block;
         }
 
-        /* Delete Button */
         .delete-post-btn {
             background: rgba(239, 68, 68, 0.15);
             border: 1px solid rgba(239, 68, 68, 0.3);
@@ -354,7 +352,6 @@
         }
         .delete-post-btn:hover { background: #ef4444; color: #fff; }
 
-        /* Reactions Box */
         .reactions-wrapper {
             display: flex;
             flex-wrap: wrap;
@@ -379,7 +376,6 @@
         .react-btn:hover { background: rgba(56, 189, 248, 0.15); border-color: #38bdf8; }
         .react-btn.reacted { background: var(--accent-gradient); color: #0f172a; border-color: transparent; font-weight: 700; }
 
-        /* Comments / Ulasan Section (Telegram Channel Style) */
         .comments-section {
             margin-top: 8px;
             padding-top: 10px;
@@ -432,7 +428,6 @@
             cursor: pointer;
         }
 
-        /* Image Lightbox Modal */
         .lightbox-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.9); z-index: 3000; justify-content: center; align-items: center; backdrop-filter: blur(6px);
@@ -441,7 +436,6 @@
         .lightbox-modal.active { display: flex; }
         .lightbox-content { max-width: 100%; max-height: 90vh; border-radius: 14px; object-fit: contain; }
 
-        /* Tempat Lagu Styling */
         .song-list-container { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 15px; margin: 0 auto; padding-bottom: 30px; }
         .song-card { background: var(--card-bg); border: 1px solid var(--border-color); padding: 18px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); text-align: left; display: flex; flex-direction: column; gap: 12px; }
         .song-info h3 { font-size: 15px; margin-bottom: 2px; font-weight: 700; }
@@ -451,7 +445,6 @@
         .volume-control { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-muted); margin-left: auto; }
         .volume-control input[type=range] { width: 75px; accent-color: #38bdf8; cursor: pointer; }
 
-        /* Modals */
         .inbox-modal, .owner-notif-modal, .settings-modal, .bubble-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.65); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px);
@@ -480,14 +473,89 @@
         .inbox-img-preview { margin-top: 6px; max-width: 100%; max-height: 120px; border-radius: 8px; object-fit: cover; border: 1px solid var(--border-color); }
         .reply-box-owner { margin-top: 8px; background: rgba(56, 189, 248, 0.1); border-left: 3px solid #38bdf8; padding: 6px 10px; border-radius: 6px; font-size: 12px; }
 
-        /* Profile */
-        .profile-card { background: var(--card-bg); padding: 30px; border-radius: 22px; border: 1px solid var(--border-color); width: 100%; max-width: 400px; text-align: center; box-shadow: 0 12px 30px rgba(0,0,0,0.3); margin: auto; }
-        .profile-avatar { width: 76px; height: 76px; border-radius: 50%; background: var(--accent-gradient); margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 30px; color: #0f172a; font-weight: 800; }
-        .profile-info { margin-bottom: 20px; text-align: left; background: var(--bg-main); padding: 15px; border-radius: 14px; border: 1px solid var(--border-color); }
-        .profile-info p { font-size: 13px; margin-bottom: 6px; }
-        .profile-info span { color: var(--text-muted); font-size: 12px; display: block; font-weight: 600; }
-        .logout-btn { background: #ef4444; color: white; border: none; padding: 12px; width: 100%; border-radius: 14px; font-weight: 700; cursor: pointer; transition: 0.2s; }
-        .logout-btn:hover { opacity: 0.9; }
+        /* Profile Styles (Updated with Tabs & Modern Design) */
+        .profile-container-card {
+            background: var(--card-bg);
+            padding: 24px;
+            border-radius: 22px;
+            border: 1px solid var(--border-color);
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .profile-header-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 16px;
+        }
+        .profile-avatar-large {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            color: #0f172a;
+            font-size: 28px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(56, 189, 248, 0.25);
+        }
+        .profile-tabs-header {
+            display: flex;
+            background: var(--bg-main);
+            padding: 4px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            gap: 4px;
+        }
+        .profile-tab-btn {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .profile-tab-btn.active {
+            background: var(--accent-gradient);
+            color: #0f172a;
+        }
+        .profile-tab-content {
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+            text-align: left;
+        }
+        .profile-tab-content.active {
+            display: flex;
+        }
+        .profile-info-row {
+            background: var(--bg-main);
+            padding: 12px 14px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .profile-info-row span { font-size: 11px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; }
+        .profile-info-row b { font-size: 13px; color: var(--text-color); }
+        
+        .logout-btn { background: #ef4444; color: white; border: none; padding: 12px; width: 100%; border-radius: 14px; font-weight: 700; cursor: pointer; transition: 0.2s; margin-top: 6px; }
+        .logout-btn:hover { opacity: 0.9; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3); }
 
         /* Settings */
         .setting-group { display: flex; flex-direction: column; gap: 8px; text-align: left; }
@@ -497,7 +565,7 @@
         .theme-btn.active, .notif-btn.active { background: var(--accent-gradient); color: #0f172a; border-color: transparent; }
         .bubble-btn { background: var(--accent-gradient); color: #0f172a; border: none; padding: 10px 24px; border-radius: 12px; font-weight: 700; cursor: pointer; }
 
-        /* Bottom Nav with Smooth Auto-Hide Effect */
+        /* Bottom Nav */
         .bottom-nav {
             position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%);
             width: 92%; max-width: 440px; background: var(--bottom-nav-bg); display: flex; justify-content: space-around;
@@ -546,48 +614,55 @@
         </div>
         
         <div class="menu-category">Fitur Utama</div>
-        <div class="sidebar-item" onclick="openMenu('home')">🏠 Beranda</div>
-        <div class="sidebar-item" onclick="openMenu('tiktok')">🎵 TikTok Downloader</div>
-        <div class="sidebar-item" onclick="openMenu('req-fitur')">💡 Req Fitur / Lagu</div>
+        <div class="sidebar-item" onclick="openMenu('home')">Beranda</div>
+        <div class="sidebar-item" onclick="openMenu('tiktok')">TikTok Downloader</div>
+        <div class="sidebar-item" onclick="openMenu('req-fitur')">Req Fitur / Lagu</div>
 
         <div class="menu-category owner-menu-label" style="display:none;">Panel Owner</div>
         <div class="sidebar-item owner-menu" onclick="showBubble('Panel Kontrol Owner Aktif 👑')">👑 Kontrol Panel Owner</div>
         <div class="sidebar-item owner-menu" onclick="openMenu('owner-notif-user')">🔔 Notif User & Request</div>
         <div class="sidebar-item owner-menu" onclick="openMenu('add-lagu')">🎶 Tambah Lagu</div>
-        <div class="sidebar-item owner-menu" onclick="openMenu('add-info-update')">📢 Buat Info Update Baru</div>
+        <div class="sidebar-item owner-menu" onclick="openMenu('add-info-update')">Buat Info Update Baru</div>
 
         <div class="menu-category">Fitur Saluran Eksklusif</div>
-        <div class="sidebar-item" onclick="openInfoUpdateWithLoader()">📢 Saluran Info Update</div>
-        <div class="sidebar-item" onclick="openMenu('lihat-kenangan')">📸 Lihat Saluran Kenangan</div>
-        <div class="sidebar-item" onclick="openMenu('add-kenangan')">➕ Kirim Kenangan (Multi Foto)</div>
-        <div class="sidebar-item" onclick="openMenu('lihat-cerita')">📖 Lihat Saluran Cerita</div>
-        <div class="sidebar-item" onclick="openMenu('add-cerita')">➕ Kirim Cerita</div>
-        <div class="sidebar-item" onclick="openMenu('susun-kata')">🧩 Tebak Kata</div>
+        <div class="sidebar-item" onclick="openInfoUpdateWithLoader()">Saluran Info Update</div>
+        <div class="sidebar-item" onclick="openMenu('lihat-kenangan')">Lihat Saluran Kenangan</div>
+        <div class="sidebar-item" onclick="openMenu('add-kenangan')">Kirim Kenangan (Multi Foto)</div>
+        <div class="sidebar-item" onclick="openMenu('lihat-cerita')">Lihat Saluran Cerita</div>
+        <div class="sidebar-item" onclick="openMenu('add-cerita')">Kirim Cerita</div>
+        <div class="sidebar-item" onclick="openMenu('susun-kata')">Tebak Kata</div>
 
         <div class="menu-category">Eksplorasi Lainnya</div>
-        <div class="sidebar-item" onclick="openMenu('tempat-lagu')">🎵 Tempat Lagu</div>
+        <div class="sidebar-item" onclick="openMenu('tempat-lagu')">Tempat Lagu</div>
     </div>
 
     <!-- Main Content -->
     <div class="main-content" id="content-area">
         
-        <!-- Smooth Loading Overlay for Info Update -->
+        <!-- Smooth Loading Overlay -->
         <div id="page-loader" class="page-loader">
             <div class="spinner"></div>
-            <span style="font-size: 13px; font-weight: 600; color: #38bdf8;">Memuat Saluran Info Update...</span>
+            <span style="font-size: 13px; font-weight: 600; color: #38bdf8;" id="loader-text">Memuat Halaman...</span>
         </div>
 
         <!-- Auth -->
         <div id="page-auth" class="page-container">
             <div class="auth-card">
-                <h2 id="auth-title">Selamat Datang! 🚀</h2>
+                <h2 id="auth-title">Selamat Datang!</h2>
                 <p id="auth-subtitle">Masuk dengan email & password akunmu</p>
                 
                 <div id="form-main-inputs">
-                    <div class="input-group" id="group-username" style="display:none;">
-                        <label>Username</label>
-                        <input type="text" id="input-username" placeholder="Buat username unik...">
+                    <!-- Register Only Inputs -->
+                    <div class="input-group auth-reg-only" id="group-fullname" style="display:none;">
+                        <label>Nama Lengkap</label>
+                        <input type="text" id="input-fullname" placeholder="Masukkan nama lengkap...">
                     </div>
+                    <div class="input-group auth-reg-only" id="group-phone" style="display:none;">
+                        <label>Nomor Telepon</label>
+                        <input type="tel" id="input-phone" placeholder="08xxxxxxxxxx...">
+                    </div>
+
+                    <!-- Common Inputs -->
                     <div class="input-group">
                         <label>Email Pribadi</label>
                         <input type="email" id="input-email" placeholder="nama@email.com...">
@@ -614,25 +689,25 @@
                 
                 <div class="home-action-buttons">
                     <button class="home-big-btn" onclick="openInfoUpdateWithLoader()">
-                        <span>📢</span>
+                        <span></span>
                         Info Update
                     </button>
                     <button class="home-big-btn" onclick="openMenu('lihat-kenangan')">
-                        <span>📸</span>
+                        <span></span>
                         Kenangan
                     </button>
                     <button class="home-big-btn" onclick="openMenu('lihat-cerita')">
-                        <span>📖</span>
+                        <span></span>
                         Cerita
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Saluran Info Update (Telegram Channel Style) -->
+        <!-- Saluran Info Update -->
         <div id="page-info-update" class="page-container">
             <div style="width: 100%; max-width: 480px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
-                <h2 style="font-size: 17px; font-weight: 700;">📢 Saluran Info Update</h2>
+                <h2 style="font-size: 17px; font-weight: 700;">Saluran Info Update</h2>
                 <button class="action-btn owner-only-action" id="btn-add-info-top" style="width: auto; padding: 8px 14px; font-size: 12px; margin: 0; display: none;" onclick="openMenu('add-info-update')">+ Buat Update</button>
             </div>
             <div class="channel-feed-container" id="info-update-feed-wrapper"></div>
@@ -690,7 +765,7 @@
             </div>
         </div>
 
-        <!-- Kirim Kenangan (Multi Foto) -->
+        <!-- Kirim Kenangan -->
         <div id="page-add-kenangan" class="page-container">
             <div class="form-card">
                 <h2>Kirim Kenangan 📸</h2>
@@ -723,8 +798,8 @@
         <!-- Kirim Cerita -->
         <div id="page-add-cerita" class="page-container">
             <div class="form-card">
-                <h2>Kirim Cerita 📖</h2>
-                <p>Bagikan ceritamu secara langsung dengan username aktif.</p>
+                <h2>Kirim Cerita</h2>
+                <p>Bagikan ceritamu secara langsung dengan akun aktif.</p>
                 <div class="input-group">
                     <label>Isi Cerita</label>
                     <textarea id="cerita-isi" rows="5" placeholder="Tuliskan ceritamu di sini..."></textarea>
@@ -736,7 +811,7 @@
         <!-- Lihat Cerita -->
         <div id="page-lihat-cerita" class="page-container">
             <div style="width: 100%; max-width: 480px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
-                <h2 style="font-size: 17px; font-weight: 700;">Saluran Cerita 📖</h2>
+                <h2 style="font-size: 17px; font-weight: 700;">Saluran Cerita</h2>
                 <button class="action-btn" style="width: auto; padding: 8px 14px; font-size: 12px; margin: 0;" onclick="openMenu('add-cerita')">+ Buat Cerita</button>
             </div>
             <div class="channel-feed-container" id="cerita-feed-wrapper"></div>
@@ -784,21 +859,61 @@
         <!-- Tempat Lagu -->
         <div id="page-tempat-lagu" class="page-container">
             <div style="width: 100%; max-width: 500px; margin-bottom: 20px; text-align: left;">
-                <h2 style="font-size: 18px; font-weight: 700;">Tempat Lagu 🎵</h2>
+                <h2 style="font-size: 18px; font-weight: 700;">Tempat Lagu</h2>
             </div>
             <div class="song-list-container" id="song-list-wrapper"></div>
         </div>
 
-        <!-- Profile -->
+        <!-- Profile (Updated with Tabs & Visual Effects) -->
         <div id="page-profile" class="page-container">
-            <div class="profile-card">
-                <div class="profile-avatar" id="profile-initial">U</div>
-                <h3 id="profile-name" style="margin-bottom: 4px; font-size: 17px; font-weight: 700;">Username</h3>
-                <p id="profile-role-badge" style="font-size: 12px; color: #38bdf8; font-weight: bold; margin-bottom: 15px;">Member</p>
-                <div class="profile-info">
-                    <p><strong>Email Akun:</strong></p>
-                    <span id="profile-email">user@email.com</span>
+            <div class="profile-container-card">
+                <div class="profile-header-area">
+                    <div class="profile-avatar-large" id="profile-initial">U</div>
+                    <h3 id="profile-name" style="font-size: 18px; font-weight: 700;">Nama Lengkap</h3>
+                    <span id="profile-role-badge" style="font-size: 11px; color: #38bdf8; font-weight: bold; background: rgba(56, 189, 248, 0.12); padding: 3px 10px; border-radius: 8px;">Member Aktif</span>
                 </div>
+
+                <!-- Navigasi Tab Profil -->
+                <div class="profile-tabs-header">
+                    <button class="profile-tab-btn active" onclick="switchProfileTab('info')">Profil</button>
+                    <button class="profile-tab-btn" onclick="switchProfileTab('password')">Password</button>
+                    <button class="profile-tab-btn" onclick="switchProfileTab('security')">Keamanan</button>
+                </div>
+
+                <!-- Tab 1: Informasi Profil -->
+                <div class="profile-tab-content active" id="ptab-info">
+                    <div class="profile-info-row">
+                        <span>Nama Lengkap</span>
+                        <b id="profile-display-name">-</b>
+                    </div>
+                    <div class="profile-info-row">
+                        <span>Nomor Telepon</span>
+                        <b id="profile-display-phone">-</b>
+                    </div>
+                    <div class="profile-info-row">
+                        <span>Email Akun (Gmail)</span>
+                        <b id="profile-display-email">-</b>
+                    </div>
+                </div>
+
+                <!-- Tab 2: Ubah Password -->
+                <div class="profile-tab-content" id="ptab-password">
+                    <div class="input-group" style="margin-bottom: 8px;">
+                        <label>Password Baru</label>
+                        <input type="password" id="profile-new-pass" placeholder="Min. 6 karakter...">
+                    </div>
+                    <button class="action-btn" style="margin-top: 4px;" onclick="updateProfilePassword()">Perbarui Password</button>
+                </div>
+
+                <!-- Tab 3: Keamanan & Sesi -->
+                <div class="profile-tab-content" id="ptab-security">
+                    <div class="profile-info-row">
+                        <span>Status Sesi</span>
+                        <b>Terverifikasi Aman 🔒</b>
+                    </div>
+                    <p style="font-size: 12px; color: var(--text-muted); text-align: left;">Pastikan Anda selalu keluar akun jika menggunakan perangkat umum.</p>
+                </div>
+
                 <button class="logout-btn" onclick="logoutUser()">Keluar Akun</button>
             </div>
         </div>
@@ -809,7 +924,7 @@
     <div id="inbox-modal" class="inbox-modal" onclick="toggleInboxModal()">
         <div class="modal-box" onclick="event.stopPropagation()">
             <div class="modal-header">
-                <span>📥 Kotak Masuk</span>
+                <span>Kotak Masuk</span>
                 <button class="close-btn" onclick="toggleInboxModal()">✕</button>
             </div>
             <div class="inbox-list" id="user-inbox-wrapper"></div>
@@ -847,7 +962,7 @@
         <img id="lightbox-img" class="lightbox-content" src="">
     </div>
 
-    <!-- Bottom Nav (Auto Hide di Saluran) -->
+    <!-- Bottom Nav -->
     <div class="bottom-nav" id="bottom-nav">
         <a class="nav-item active" id="nav-beranda" onclick="switchTab('Beranda')">🏠<span>Beranda</span></a>
         <a class="nav-item" id="nav-tiktok" onclick="switchTab('TikTok')">🎵<span>TikTok</span></a>
@@ -885,22 +1000,19 @@
             const subtitle = document.getElementById('auth-subtitle');
             const btnAction = document.getElementById('auth-btn-action');
             const switchContainer = document.getElementById('auth-switch-container');
-            const groupUsername = document.getElementById('group-username');
-            const groupPassword = document.getElementById('group-password');
-
-            groupUsername.style.display = 'none';
-            groupPassword.style.display = 'block';
+            const regOnlyElements = document.querySelectorAll('.auth-reg-only');
 
             if (state === 'login') {
                 title.innerText = "Selamat Datang Kembali! 👋";
                 subtitle.innerText = "Masuk dengan email & password akunmu";
                 btnAction.innerText = "Masuk";
+                regOnlyElements.forEach(el => el.style.display = 'none');
                 switchContainer.innerHTML = `<span onclick="setAuthState('register')">Belum punya akun? Daftar sekarang</span>`;
             } else if (state === 'register') {
                 title.innerText = "Buat Akun Baru 🚀";
-                subtitle.innerText = "Daftar menggunakan email aktifmu";
+                subtitle.innerText = "Daftar dengan melengkapi data dirimu";
                 btnAction.innerText = "Daftar Sekarang";
-                groupUsername.style.display = 'block';
+                regOnlyElements.forEach(el => el.style.display = 'block');
                 switchContainer.innerHTML = `<span onclick="setAuthState('login')">Sudah punya akun? Masuk di sini</span>`;
             }
         }
@@ -935,7 +1047,8 @@
         function handleAuthSubmit() {
             const emailInput = document.getElementById('input-email').value.trim();
             const passwordInput = document.getElementById('input-password').value.trim();
-            const usernameInput = document.getElementById('input-username').value.trim();
+            const fullnameInput = document.getElementById('input-fullname').value.trim();
+            const phoneInput = document.getElementById('input-phone').value.trim();
             let dbUsers = JSON.parse(localStorage.getItem('sea_tycoon_db') || '[]');
 
             if (authState === 'login') {
@@ -943,12 +1056,13 @@
                     showBubble('Email dan Password wajib diisi! ⚠️');
                     return;
                 }
+                // Owner Credential Shortcut
                 if (emailInput === 'owner' || (emailInput === 'owner@seatycoon.com' && passwordInput === 'owner123')) {
-                    currentUser = { username: 'owner', email: 'owner@seatycoon.com', role: 'Owner' };
+                    currentUser = { fullname: 'Owner Official', phone: '-', email: 'owner@seatycoon.com', role: 'Owner' };
                     finalizeLogin();
                     return;
                 }
-                let found = dbUsers.find(u => (u.email === emailInput || u.username === emailInput) && u.password === passwordInput);
+                let found = dbUsers.find(u => u.email === emailInput && u.password === passwordInput);
                 if (found) {
                     currentUser = found;
                     finalizeLogin();
@@ -956,19 +1070,25 @@
                     showBubble('Email atau Password salah! ❌');
                 }
             } else if (authState === 'register') {
-                if (!emailInput || !passwordInput || !usernameInput) {
-                    showBubble('Semua kolom wajib diisi! ⚠️');
+                if (!fullnameInput || !phoneInput || !emailInput || !passwordInput) {
+                    showBubble('Semua kolom formulir wajib diisi! ⚠️');
                     return;
                 }
                 if (passwordInput.length < 6) {
                     showBubble('Password minimal 6 karakter! ⚠️');
                     return;
                 }
-                if (dbUsers.some(u => u.email === emailInput || u.username === usernameInput)) {
-                    showBubble('Email atau Username sudah terdaftar! ⚠️');
+                if (dbUsers.some(u => u.email === emailInput)) {
+                    showBubble('Email sudah terdaftar dalam sistem! ⚠️');
                     return;
                 }
-                const newUser = { username: usernameInput, email: emailInput, password: passwordInput, role: 'Member' };
+                const newUser = { 
+                    fullname: fullnameInput, 
+                    phone: phoneInput, 
+                    email: emailInput, 
+                    password: passwordInput, 
+                    role: 'Member' 
+                };
                 dbUsers.push(newUser);
                 localStorage.setItem('sea_tycoon_db', JSON.stringify(dbUsers));
                 currentUser = newUser;
@@ -980,15 +1100,17 @@
             localStorage.setItem('sea_tycoon_user', JSON.stringify(currentUser));
             applyUserSession();
             openMenu('home');
-            showBubble(`Berhasil masuk sebagai @${currentUser.username} ✨`);
+            showBubble(`Berhasil masuk, Selamat datang ${currentUser.fullname}! ✨`);
         }
 
         function applyUserSession() {
             if (!currentUser) return;
-            document.getElementById('welcome-username').innerText = currentUser.username;
-            document.getElementById('profile-name').innerText = currentUser.username;
-            document.getElementById('profile-email').innerText = currentUser.email;
-            document.getElementById('profile-initial').innerText = currentUser.username.charAt(0).toUpperCase();
+            document.getElementById('welcome-username').innerText = currentUser.fullname;
+            document.getElementById('profile-name').innerText = currentUser.fullname;
+            document.getElementById('profile-display-name').innerText = currentUser.fullname;
+            document.getElementById('profile-display-phone').innerText = currentUser.phone || '-';
+            document.getElementById('profile-display-email').innerText = currentUser.email;
+            document.getElementById('profile-initial').innerText = currentUser.fullname.charAt(0).toUpperCase();
             document.getElementById('profile-role-badge').innerText = currentUser.role === 'Owner' ? '👑 Owner Official' : 'Member Aktif';
 
             const isOwner = (currentUser.role === 'Owner');
@@ -1031,15 +1153,22 @@
             document.getElementById(`theme-${themeName}`).classList.add('active');
         }
 
-        // Smooth Loading Effect for Info Update Channel
+        // Smooth Loading Effect with 1-3 seconds adjustment
         function openInfoUpdateWithLoader() {
             if(document.getElementById('sidebar').classList.contains('open')) toggleSidebar();
+            triggerSmoothLoader("Memuat Saluran Info Update...", () => {
+                openMenu('info-update');
+            });
+        }
+
+        function triggerSmoothLoader(text, callback) {
             const loader = document.getElementById('page-loader');
+            document.getElementById('loader-text').innerText = text;
             loader.classList.add('active');
             setTimeout(() => {
                 loader.classList.remove('active');
-                openMenu('info-update');
-            }, 600);
+                if (callback) callback();
+            }, 1000); // 1 detik loading halus
         }
 
         function openMenu(menu) {
@@ -1053,7 +1182,6 @@
             const title = document.getElementById('page-title');
             const topLeftBtn = document.getElementById('top-left-btn');
 
-            // Atur Tampilan Header Marquee & Bottom Nav Berdasarkan Halaman
             if (menu === 'info-update' || menu === 'lihat-kenangan' || menu === 'lihat-cerita') {
                 bottomNav.classList.add('hidden');
             } else {
@@ -1128,10 +1256,13 @@
                 topLeftBtn.innerText = '✕';
                 renderSongList();
             } else if (menu === 'profile') {
-                document.getElementById('page-profile').classList.add('active');
-                title.innerText = 'Profile User';
-                topLeftBtn.innerText = '✕';
-                setActiveNav('Profile');
+                // Efek loading profil 1-2 detik sesuai permintaan
+                triggerSmoothLoader("Memuat Profil Pengguna...", () => {
+                    document.getElementById('page-profile').classList.add('active');
+                    title.innerText = 'Profile User';
+                    topLeftBtn.innerText = '✕';
+                    setActiveNav('Profile');
+                });
             }
         }
 
@@ -1139,6 +1270,42 @@
             if (name === 'Beranda') openMenu('home');
             else if (name === 'TikTok') openMenu('tiktok');
             else if (name === 'Profile') openMenu('profile');
+        }
+
+        // Profile Tabs Switching Function
+        function switchProfileTab(tabName) {
+            document.querySelectorAll('.profile-tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.profile-tab-content').forEach(content => content.classList.remove('active'));
+
+            if (tabName === 'info') {
+                document.querySelectorAll('.profile-tab-btn')[0].classList.add('active');
+                document.getElementById('ptab-info').classList.add('active');
+            } else if (tabName === 'password') {
+                document.querySelectorAll('.profile-tab-btn')[1].classList.add('active');
+                document.getElementById('ptab-password').classList.add('active');
+            } else if (tabName === 'security') {
+                document.querySelectorAll('.profile-tab-btn')[2].classList.add('active');
+                document.getElementById('ptab-security').classList.add('active');
+            }
+        }
+
+        function updateProfilePassword() {
+            const newPass = document.getElementById('profile-new-pass').value.trim();
+            if (!newPass || newPass.length < 6) {
+                showBubble('Password baru minimal 6 karakter! ⚠️');
+                return;
+            }
+            currentUser.password = newPass;
+            localStorage.setItem('sea_tycoon_user', JSON.stringify(currentUser));
+            
+            let dbUsers = JSON.parse(localStorage.getItem('sea_tycoon_db') || '[]');
+            let idx = dbUsers.findIndex(u => u.email === currentUser.email);
+            if (idx !== -1) {
+                dbUsers[idx].password = newPass;
+                localStorage.setItem('sea_tycoon_db', JSON.stringify(dbUsers));
+            }
+            document.getElementById('profile-new-pass').value = '';
+            showBubble('Password akun berhasil diperbarui! ✨');
         }
 
         function setActiveNav(name) {
@@ -1204,7 +1371,6 @@
                 });
                 localStorage.setItem('sea_tycoon_info_updates', JSON.stringify(infoList));
 
-                // Kirim Notifikasi Kotak Masuk Otomatis ke Semua User
                 let globalInbox = JSON.parse(localStorage.getItem('sea_tycoon_global_inbox') || '[]');
                 globalInbox.push({
                     id: newUpdateId,
@@ -1224,7 +1390,6 @@
                 openInfoUpdateWithLoader();
             };
 
-            // Handle Multiple Images & Video Readers
             if (videoInput.files.length > 0) {
                 const reader = new FileReader();
                 reader.onload = (e) => {
@@ -1271,7 +1436,7 @@
                 const emojis = ['👍', '❤️', '🔥', '🚀', '👏'];
                 emojis.forEach(emoji => {
                     let count = item.reactions[emoji] || 0;
-                    let hasReacted = item.userReacted && item.userReacted[currentUser.username] === emoji;
+                    let hasReacted = item.userReacted && item.userReacted[currentUser.fullname] === emoji;
                     reactionsHtml += `
                         <button class="react-btn ${hasReacted ? 'reacted' : ''}" onclick="reactInfoUpdate('${item.id}', '${emoji}')">
                             ${emoji} <span>${count}</span>
@@ -1300,7 +1465,6 @@
                     `;
                 }
 
-                // Render Comments Section (Telegram Channel Style)
                 let commentsHtml = '';
                 if (item.comments && item.comments.length > 0) {
                     item.comments.forEach(com => {
@@ -1354,15 +1518,15 @@
             if (!item) return;
 
             if (!item.userReacted) item.userReacted = {};
-            let prevReact = item.userReacted[currentUser.username];
+            let prevReact = item.userReacted[currentUser.fullname];
 
             if (prevReact === emoji) {
                 item.reactions[emoji]--;
-                delete item.userReacted[currentUser.username];
+                delete item.userReacted[currentUser.fullname];
             } else {
                 if (prevReact) item.reactions[prevReact]--;
                 item.reactions[emoji] = (item.reactions[emoji] || 0) + 1;
-                item.userReacted[currentUser.username] = emoji;
+                item.userReacted[currentUser.fullname] = emoji;
             }
 
             localStorage.setItem('sea_tycoon_info_updates', JSON.stringify(infoList));
@@ -1380,7 +1544,7 @@
 
             if (!item.comments) item.comments = [];
             item.comments.push({
-                username: currentUser.username,
+                username: currentUser.fullname,
                 text: text,
                 time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
             });
@@ -1399,7 +1563,7 @@
             renderInfoUpdateFeed();
         }
 
-        // --- KENANGAN SYSTEM (MULTI FOTO + HAPUS) ---
+        // --- KENANGAN SYSTEM ---
         function submitKenangan() {
             const judul = document.getElementById('kenangan-judul').value.trim();
             const isi = document.getElementById('kenangan-isi').value.trim();
@@ -1424,7 +1588,7 @@
             let kenanganList = JSON.parse(localStorage.getItem('sea_tycoon_kenangan') || '[]');
             kenanganList.push({
                 id: Date.now(),
-                from: currentUser.username,
+                from: currentUser.fullname,
                 judul: judul,
                 kenangan: isi,
                 images: images,
@@ -1455,7 +1619,7 @@
                 const emojis = ['😂', '❤️', '👍', '🔥', '👏'];
                 emojis.forEach(emoji => {
                     let count = item.reactions[emoji] || 0;
-                    let hasReacted = item.userReacted && item.userReacted[currentUser.username] === emoji;
+                    let hasReacted = item.userReacted && item.userReacted[currentUser.fullname] === emoji;
                     reactionsHtml += `
                         <button class="react-btn ${hasReacted ? 'reacted' : ''}" onclick="reactKenangan('${item.id}', '${emoji}')">
                             ${emoji} <span>${count}</span>
@@ -1476,7 +1640,7 @@
                     imagesHtml += `</div>`;
                 }
 
-                let canDelete = (currentUser.role === 'Owner' || item.from === currentUser.username);
+                let canDelete = (currentUser.role === 'Owner' || item.from === currentUser.fullname);
 
                 html += `
                     <div class="channel-card">
@@ -1505,15 +1669,15 @@
             if (!item) return;
 
             if (!item.userReacted) item.userReacted = {};
-            let prevReact = item.userReacted[currentUser.username];
+            let prevReact = item.userReacted[currentUser.fullname];
 
             if (prevReact === emoji) {
                 item.reactions[emoji]--;
-                delete item.userReacted[currentUser.username];
+                delete item.userReacted[currentUser.fullname];
             } else {
                 if (prevReact) item.reactions[prevReact]--;
                 item.reactions[emoji] = (item.reactions[emoji] || 0) + 1;
-                item.userReacted[currentUser.username] = emoji;
+                item.userReacted[currentUser.fullname] = emoji;
             }
 
             localStorage.setItem('sea_tycoon_kenangan', JSON.stringify(kenanganList));
@@ -1540,7 +1704,7 @@
             let ceritaList = JSON.parse(localStorage.getItem('sea_tycoon_cerita') || '[]');
             ceritaList.push({
                 id: Date.now(),
-                from: currentUser.username,
+                from: currentUser.fullname,
                 cerita: isi,
                 time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
                 reactions: { '❤️': 0, '🔥': 0, '😢': 0, '👏': 0, '✨': 0 },
@@ -1567,7 +1731,7 @@
                 const emojis = ['❤️', '🔥', '😢', '👏', '✨'];
                 emojis.forEach(emoji => {
                     let count = item.reactions[emoji] || 0;
-                    let hasReacted = item.userReacted && item.userReacted[currentUser.username] === emoji;
+                    let hasReacted = item.userReacted && item.userReacted[currentUser.fullname] === emoji;
                     reactionsHtml += `
                         <button class="react-btn ${hasReacted ? 'reacted' : ''}" onclick="reactCerita('${item.id}', '${emoji}')">
                             ${emoji} <span>${count}</span>
@@ -1575,7 +1739,7 @@
                     `;
                 });
 
-                let canDelete = (currentUser.role === 'Owner' || item.from === currentUser.username);
+                let canDelete = (currentUser.role === 'Owner' || item.from === currentUser.fullname);
 
                 html += `
                     <div class="channel-card">
@@ -1602,15 +1766,15 @@
             if (!item) return;
 
             if (!item.userReacted) item.userReacted = {};
-            let prevReact = item.userReacted[currentUser.username];
+            let prevReact = item.userReacted[currentUser.fullname];
 
             if (prevReact === emoji) {
                 item.reactions[emoji]--;
-                delete item.userReacted[currentUser.username];
+                delete item.userReacted[currentUser.fullname];
             } else {
                 if (prevReact) item.reactions[prevReact]--;
                 item.reactions[emoji] = (item.reactions[emoji] || 0) + 1;
-                item.userReacted[currentUser.username] = emoji;
+                item.userReacted[currentUser.fullname] = emoji;
             }
 
             localStorage.setItem('sea_tycoon_cerita', JSON.stringify(ceritaList));
@@ -1640,7 +1804,7 @@
                 let requests = JSON.parse(localStorage.getItem('sea_tycoon_requests') || '[]');
                 requests.push({
                     id: Date.now(),
-                    username: currentUser.username,
+                    username: currentUser.fullname,
                     email: currentUser.email,
                     message: message || '(Lampiran Gambar)',
                     image: imgData || null,
@@ -1667,11 +1831,10 @@
             const wrapper = document.getElementById('user-inbox-wrapper');
             let globalInbox = JSON.parse(localStorage.getItem('sea_tycoon_global_inbox') || '[]');
             let requests = JSON.parse(localStorage.getItem('sea_tycoon_requests') || '[]');
-            let userReqs = requests.filter(r => r.username === currentUser.username);
+            let userReqs = requests.filter(r => r.username === currentUser.fullname);
 
             let html = '';
 
-            // Tampilkan Info Update Global di Kotak Masuk
             if (globalInbox.length > 0) {
                 globalInbox.reverse().forEach(info => {
                     html += `
@@ -1687,7 +1850,6 @@
                 });
             }
 
-            // Tampilkan Request User & Balasan Owner
             if (userReqs.length > 0) {
                 userReqs.reverse().forEach(req => {
                     html += `
@@ -1710,7 +1872,6 @@
             }
 
             wrapper.innerHTML = html;
-            // Mark as read
             localStorage.setItem('sea_tycoon_inbox_read', 'true');
             checkInboxBadge();
         }
@@ -1719,7 +1880,7 @@
             let globalInbox = JSON.parse(localStorage.getItem('sea_tycoon_global_inbox') || '[]');
             let requests = JSON.parse(localStorage.getItem('sea_tycoon_requests') || '[]');
             if (!currentUser) return;
-            let userReqs = requests.filter(r => r.username === currentUser.username && r.reply);
+            let userReqs = requests.filter(r => r.username === currentUser.fullname && r.reply);
             let hasUnreadGlobal = globalInbox.length > 0 && localStorage.getItem('sea_tycoon_inbox_read') !== 'true';
 
             document.getElementById('inbox-badge-dot').style.display = (userReqs.length > 0 || hasUnreadGlobal) ? 'block' : 'none';
