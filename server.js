@@ -13,7 +13,7 @@ mongoose.connect(MONGO_URI)
     .then(() => console.log('MongoDB Terhubung!'))
     .catch(err => console.error('Koneksi MongoDB Gagal:', err));
 
-// Endpoint Backend untuk Chat AI dengan Debugging
+// Endpoint Backend untuk Chat AI (Debug langsung ke web)
 app.post('/api/chat-ai', async (req, res) => {
     try {
         let { message } = req.body;
@@ -25,16 +25,8 @@ app.post('/api/chat-ai', async (req, res) => {
             }
         });
 
-        // Cetak respons mentah ke log Railway untuk diperiksa
-        console.log("DEBUG API RESPON:", JSON.stringify(apiResponse.data));
-
-        const resultData = apiResponse.data;
-
-        if (resultData && resultData.result) {
-            return res.json({ success: true, reply: resultData.result });
-        } else {
-            return res.json({ success: true, reply: "AI merespons tapi format kosong." });
-        }
+        // Kirim seluruh isi data mentah dari API langsung sebagai balasan chat di web
+        return res.json({ success: true, reply: JSON.stringify(apiResponse.data) });
 
     } catch (error) {
         console.error('Error Chat AI:', error.message);
