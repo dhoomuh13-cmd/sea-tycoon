@@ -38,19 +38,44 @@
         }
         .app-title { font-size: 18px; font-weight: 600; }
 
-        /* Sidebar */
+        /* Sidebar (Bisa Dislide/Scroll & Estetik) */
         .sidebar {
             position: fixed; top: 0; left: -280px; width: 280px; height: 100%;
-            background: #111827; box-shadow: 5px 0 25px rgba(0,0,0,0.5);
+            background: linear-gradient(180deg, #111827 0%, #0b0f19 100%);
+            box-shadow: 5px 0 25px rgba(0,0,0,0.5);
             transition: left 0.3s ease-in-out; z-index: 1000; padding: 20px;
             display: flex; flex-direction: column; border-right: 1px solid #1f2937;
+            overflow-y: auto; /* Memungkinkan sidebar di-slide/scroll ke bawah */
         }
         .sidebar.open { left: 0; }
-        .sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; font-size: 18px; font-weight: bold; color: #38bdf8; }
+        .sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 18px; font-weight: bold; color: #38bdf8; flex-shrink: 0; }
         .close-btn { background: none; border: none; color: #9ca3af; font-size: 22px; cursor: pointer; }
-        .menu-category { font-size: 12px; text-transform: uppercase; color: #6b7280; margin: 15px 0 10px; font-weight: 700; letter-spacing: 1px; }
-        .sidebar-item { padding: 12px 16px; color: #e5e7eb; text-decoration: none; border-radius: 10px; margin-bottom: 6px; background: #1f2937; font-size: 15px; cursor: pointer; transition: 0.2s; }
-        .sidebar-item:hover { background: #374151; color: #38bdf8; }
+        .menu-category { font-size: 12px; text-transform: uppercase; color: #38bdf8; margin: 15px 0 8px; font-weight: 700; letter-spacing: 1px; flex-shrink: 0; }
+        
+        /* Tombol Sidebar dengan Efek Gradasi dan Rounded Bulat */
+        .sidebar-item { 
+            padding: 12px 16px; 
+            color: #f8fafc; 
+            text-decoration: none; 
+            border-radius: 14px; 
+            margin-bottom: 6px; 
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); 
+            border: 1px solid #334155;
+            font-size: 14px; 
+            font-weight: 600;
+            cursor: pointer; 
+            transition: all 0.25s ease; 
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+        .sidebar-item:hover { 
+            background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%); 
+            color: #0f172a;
+            border-color: #38bdf8;
+            transform: translateX(4px);
+        }
 
         .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; backdrop-filter: blur(3px); }
         .overlay.active { display: block; }
@@ -77,15 +102,15 @@
         }
         .home-container h2 { font-size: 24px; font-weight: 700; margin-bottom: 8px; color: #f8fafc; }
         .home-container p { font-size: 14px; color: #94a3b8; margin-bottom: 30px; }
-        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; width: 100%; }
+        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; width: 100%; padding-bottom: 30px; }
         
         .menu-card-btn {
             background: linear-gradient(145deg, #1e293b, #0f172a);
             border: 1.5px solid #1e3a8a;
             padding: 24px 16px; 
-            border-radius: 18px;
+            border-radius: 20px; /* Membuat tombol berbentuk bulat/melengkung halus */
             color: #f8fafc; 
-            font-size: 16px; 
+            font-size: 15px; 
             font-weight: 700;
             cursor: pointer; 
             transition: all 0.25s ease;
@@ -108,20 +133,20 @@
         .downloader-card p { font-size: 13px; color: #94a3b8; margin-bottom: 20px; }
         .input-group { position: relative; margin-bottom: 15px; }
         .input-group input {
-            width: 100%; padding: 14px 16px; background: #0f172a; border: 1px solid #475569; border-radius: 12px; color: #fff; font-size: 14px; outline: none;
+            width: 100%; padding: 14px 16px; background: #0f172a; border: 1px solid #475569; border-radius: 14px; color: #fff; font-size: 14px; outline: none;
         }
         .input-group input:focus { border-color: #38bdf8; }
         .download-btn {
-            width: 100%; padding: 14px; background: #38bdf8; border: none; border-radius: 12px; color: #0f172a; font-weight: bold; font-size: 15px; cursor: pointer; transition: 0.2s;
+            width: 100%; padding: 14px; background: linear-gradient(135deg, #38bdf8, #0284c7); border: none; border-radius: 14px; color: #0f172a; font-weight: bold; font-size: 15px; cursor: pointer; transition: 0.2s;
         }
-        .download-btn:hover { background: #0ea5e9; }
+        .download-btn:hover { background: linear-gradient(135deg, #0ea5e9, #0369a1); }
         #loading { display: none; margin-top: 20px; color: #38bdf8; font-size: 14px; }
         .spinner { width: 24px; height: 24px; border: 3px solid rgba(56,189,248,0.3); border-top-color: #38bdf8; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 10px; }
         @keyframes spin { to { transform: rotate(360deg); } }
-        #result-box { display: none; margin-top: 20px; background: #0f172a; padding: 15px; border-radius: 12px; border: 1px solid #334155; text-align: left; }
+        #result-box { display: none; margin-top: 20px; background: #0f172a; padding: 15px; border-radius: 14px; border: 1px solid #334155; text-align: left; }
         #result-box video { width: 100%; border-radius: 8px; margin-top: 10px; }
 
-        /* Chat AI Room Section (Dipaksa Naik Signifikan dan Diberi Jarak Aman) */
+        /* Chat AI Room Section */
         .chat-section {
             display: none; 
             flex-direction: column; 
@@ -147,13 +172,12 @@
             max-width: 85%; padding: 14px 18px; border-radius: 16px; font-size: 15px; line-height: 1.6; word-wrap: break-word;
         }
         .chat-message.user {
-            background: #38bdf8; color: #0f172a; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 600;
+            background: linear-gradient(135deg, #38bdf8, #0284c7); color: #0f172a; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 600;
         }
         .chat-message.ai {
             background: #1e293b; color: #f8fafc; align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid #334155;
         }
         
-        /* Area Input Chat Nangkring Rapi di Atas Batas Bawah HP */
         .chat-input-area {
             display: flex; 
             gap: 12px; 
@@ -162,7 +186,7 @@
             border-radius: 20px; 
             border: 1.5px solid #334155; 
             margin-top: 8px; 
-            margin-bottom: 25px; /* Jarak aman agar tidak ketutup gesture bar HP */
+            margin-bottom: 25px; 
             flex-shrink: 0;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             align-items: center;
@@ -179,7 +203,7 @@
         }
         .chat-input-area input:focus { border-color: #38bdf8; }
         .send-btn {
-            background: #38bdf8; 
+            background: linear-gradient(135deg, #38bdf8, #0284c7); 
             border: none; 
             color: #0f172a; 
             padding: 0 22px; 
@@ -192,7 +216,7 @@
             flex-shrink: 0;
             box-shadow: 0 2px 8px rgba(56, 189, 248, 0.3);
         }
-        .send-btn:hover { background: #0ea5e9; }
+        .send-btn:hover { background: linear-gradient(135deg, #0ea5e9, #0369a1); }
         
         .typing-indicator {
             display: none; align-self: flex-start; background: #1e293b; padding: 10px 14px; border-radius: 12px; font-size: 13px; color: #94a3b8; border: 1px solid #334155; margin-bottom: 5px; flex-shrink: 0;
@@ -206,16 +230,16 @@
         }
         .bubble-modal.active { display: flex; }
         .bubble-content {
-            background: #1e293b; border: 1px solid #38bdf8; padding: 22px 24px; border-radius: 20px;
+            background: linear-gradient(145deg, #1e293b, #0f172a); border: 1px solid #38bdf8; padding: 24px; border-radius: 20px;
             max-width: 320px; width: 85%; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.5);
             position: relative; animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .bubble-content p { color: #f8fafc; font-size: 14px; line-height: 1.5; margin-bottom: 18px; }
         .bubble-btn {
-            background: #38bdf8; color: #0f172a; border: none; padding: 10px 24px; border-radius: 10px;
+            background: linear-gradient(135deg, #38bdf8, #0284c7); color: #0f172a; border: none; padding: 10px 24px; border-radius: 12px;
             font-weight: bold; font-size: 14px; cursor: pointer; transition: 0.2s;
         }
-        .bubble-btn:hover { background: #0ea5e9; }
+        .bubble-btn:hover { background: linear-gradient(135deg, #0ea5e9, #0369a1); }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes popUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
@@ -233,7 +257,7 @@
             pointer-events: none;
         }
         .nav-item { color: #94a3b8; text-decoration: none; font-size: 12px; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; padding: 8px 12px; border-radius: 20px; transition: 0.3s; }
-        .nav-item.active, .nav-item:hover { color: #0f172a; background: #38bdf8; font-weight: 600; }
+        .nav-item.active, .nav-item:hover { color: #0f172a; background: linear-gradient(135deg, #38bdf8, #0284c7); font-weight: 600; }
     </style>
 </head>
 <body>
@@ -245,18 +269,26 @@
 
     <div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
 
-    <!-- Sidebar -->
+    <!-- Sidebar (Dapat di-slide/scroll ke bawah & memiliki efek gradasi) -->
     <div id="sidebar" class="sidebar">
         <div class="sidebar-header">
             <span>Menu Utama</span>
             <button class="close-btn" onclick="toggleSidebar()">✕</button>
         </div>
+        
         <div class="menu-category">Fitur Utama</div>
         <div class="sidebar-item" onclick="openMenu('home')">🏠 Beranda</div>
         <div class="sidebar-item" onclick="openMenu('tiktok')">🎵 TikTok Downloader</div>
         <div class="sidebar-item" onclick="openMenu('chat-ai')">🤖 Chat AI Assistant</div>
+
+        <div class="menu-category">Fitur Fun</div>
+        <div class="sidebar-item" onclick="showBubble('Fitur Susun Kata sedang dalam tahap pengembangan. Segera hadir! 🧩')">🧩 Susun Kata</div>
+        <div class="sidebar-item" onclick="showBubble('Fitur Info Gempa sedang dalam tahap pengembangan. Segera hadir! 🌍')">🌍 Info Gempa</div>
+        <div class="sidebar-item" onclick="showBubble('Fitur Spotify Song sedang dalam tahap pengembangan. Segera hadir! 🎧')">🎧 Spotify Song</div>
+        <div class="sidebar-item" onclick="showBubble('Fitur Tebak Kata sedang dalam tahap pengembangan. Segera hadir! 💡')">💡 Tebak Kata</div>
+
         <div class="menu-category">Eksplorasi</div>
-        <div class="sidebar-item" onclick="showBubble('Fitur Tempat Lagu sedang dalam tahap pengembangan. Mohon ditunggu ya! 🎶')">🎵 Tempat Lagu</div>
+        <div class="sidebar-item" onclick="showBubble('Fitur Tempat Lagu sedang dalam tahap pengembangan. Mohon ditunggu ya! 🎵')">🎵 Tempat Lagu</div>
         <div class="sidebar-item" onclick="showBubble('Fitur Tempat Bermain sedang dalam tahap pengembangan. Mohon ditunggu ya! 🎮')">🎮 Tempat Bermain</div>
         <div class="sidebar-item" onclick="showBubble('Fitur Tempat Cerita sedang dalam tahap pengembangan. Mohon ditunggu ya! 📖')">📖 Tempat Cerita</div>
         <div class="sidebar-item" onclick="showBubble('Fitur Tempat Kenangan sedang dalam tahap pengembangan. Mohon ditunggu ya! 📸')">📸 Tempat Kenangan</div>
@@ -275,6 +307,18 @@
                 </button>
                 <button class="menu-card-btn" onclick="openMenu('chat-ai')">
                     🤖 <br>Chat AI Assistant
+                </button>
+                <button class="menu-card-btn" onclick="showBubble('Fitur Susun Kata sedang dalam proses pembuatan. Segera hadir! 🧩')">
+                    🧩 <br>Susun Kata
+                </button>
+                <button class="menu-card-btn" onclick="showBubble('Fitur Info Gempa sedang dalam proses pembuatan. Segera hadir! 🌍')">
+                    🌍 <br>Info Gempa
+                </button>
+                <button class="menu-card-btn" onclick="showBubble('Fitur Spotify Song sedang dalam proses pembuatan. Segera hadir! 🎧')">
+                    🎧 <br>Spotify Song
+                </button>
+                <button class="menu-card-btn" onclick="showBubble('Fitur Tebak Kata sedang dalam proses pembuatan. Segera hadir! 💡')">
+                    💡 <br>Tebak Kata
                 </button>
                 <button class="menu-card-btn" onclick="showBubble('Fitur Tempat Cerita sedang dalam proses pembuatan. Mohon bersabar ya! 📖')">
                     📖 <br>Tempat Cerita
@@ -415,7 +459,7 @@
             } else if (name === 'Chat AI') {
                 openMenu('chat-ai');
             } else {
-                showBubble(`Fitur ${name} sedang dalam proses pembuatan. Mohon ditunggu ya! ✨`);
+                showBubble(`Fitur ${name} sedang dalam proses pembuatan. Segera hadir! ✨`);
             }
         }
 
@@ -473,7 +517,7 @@
                 } else if (resData.reply) {
                     aiMsgDiv.innerText = resData.reply;
                 } else {
-                    aiMsgDiv.innerText = 'Maaf, server AI belum dikonfigurasi dengan benar atau API Key belum terpasang di backend.';
+                    aiMsgDiv.innerText = 'Maaf, server AI belum dikonfigurasi dengan benar.';
                 }
 
                 chatBox.appendChild(aiMsgDiv);
@@ -483,7 +527,7 @@
                 typingIndicator.style.display = 'none';
                 const aiMsgDiv = document.createElement('div');
                 aiMsgDiv.className = 'chat-message ai';
-                aiMsgDiv.innerText = 'Gagal terhubung ke server backend (/api/chat-ai). Pastikan file server Node.js kamu sudah menangani route tersebut.';
+                aiMsgDiv.innerText = 'Gagal terhubung ke server backend (/api/chat-ai).';
                 chatBox.appendChild(aiMsgDiv);
                 chatBox.scrollTop = chatBox.scrollHeight;
             }
