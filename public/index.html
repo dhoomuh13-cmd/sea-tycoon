@@ -121,18 +121,17 @@
         #result-box { display: none; margin-top: 20px; background: #0f172a; padding: 15px; border-radius: 12px; border: 1px solid #334155; text-align: left; }
         #result-box video { width: 100%; border-radius: 8px; margin-top: 10px; }
 
-        /* Chat AI Room Section (Diperbaiki posisinya agar naik ke atas dan tidak tenggelam) */
+        /* Chat AI Room Section (Murni Flexbox, Posisi Aman dan Pas di Atas Navigasi HP) */
         .chat-section {
             display: none; 
             flex-direction: column; 
-            height: calc(100vh - 60px); 
+            height: 100%; 
             width: 100%; 
             max-width: 600px;
             margin: 0 auto;
             background: #0b0f19;
-            padding: 12px 16px 35px 16px; /* Padding bawah diperbesar agar tidak ketutup navigasi HP */
-            position: absolute;
-            top: 0; left: 0; right: 0;
+            padding: 12px 16px 24px 16px; 
+            justify-content: space-between;
         }
         .chat-box {
             flex: 1; 
@@ -153,7 +152,7 @@
             background: #1e293b; color: #f8fafc; align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid #334155;
         }
         
-        /* Area Input Chat Besar dan Aman dari bawah layar */
+        /* Area Input Chat Proporsional dan Tidak Tenggelam */
         .chat-input-area {
             display: flex; 
             gap: 12px; 
@@ -467,10 +466,12 @@
                 const aiMsgDiv = document.createElement('div');
                 aiMsgDiv.className = 'chat-message ai';
 
-                if (resData.success) {
+                if (resData.success && resData.reply) {
+                    aiMsgDiv.innerText = resData.reply;
+                } else if (resData.reply) {
                     aiMsgDiv.innerText = resData.reply;
                 } else {
-                    aiMsgDiv.innerText = 'Maaf, terjadi kesalahan saat menghubungi server AI.';
+                    aiMsgDiv.innerText = 'Maaf, server AI belum dikonfigurasi dengan benar atau API Key belum terpasang di backend.';
                 }
 
                 chatBox.appendChild(aiMsgDiv);
@@ -480,7 +481,7 @@
                 typingIndicator.style.display = 'none';
                 const aiMsgDiv = document.createElement('div');
                 aiMsgDiv.className = 'chat-message ai';
-                aiMsgDiv.innerText = 'Koneksi ke server gagal. Coba beberapa saat lagi ya.';
+                aiMsgDiv.innerText = 'Gagal terhubung ke server backend (/api/chat-ai). Pastikan file server Node.js kamu sudah menangani route tersebut.';
                 chatBox.appendChild(aiMsgDiv);
                 chatBox.scrollTop = chatBox.scrollHeight;
             }
