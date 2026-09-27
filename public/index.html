@@ -111,6 +111,52 @@
             background: #ef4444; border-radius: 50%; border: 2px solid var(--bg-main); display: none;
         }
 
+        /* Marquee Header Banner */
+        .header-banner-container {
+            width: 100%;
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+        .marquee-wrapper {
+            overflow: hidden;
+            white-space: nowrap;
+            flex: 1;
+            position: relative;
+        }
+        .marquee-text {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #38bdf8;
+            animation: marquee 16s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .info-update-shortcut-btn {
+            background: var(--accent-gradient);
+            border: none;
+            color: #0f172a;
+            padding: 6px 12px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-shrink: 0;
+            transition: 0.2s;
+        }
+        .info-update-shortcut-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
         /* Sidebar */
         .sidebar {
             position: fixed; top: 0; left: -290px; width: 290px; height: 100%;
@@ -136,7 +182,7 @@
         .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 999; backdrop-filter: blur(4px); transition: 0.3s; }
         .overlay.active { display: block; }
 
-        /* Main Content & Smooth Premium Page Animation */
+        /* Main Content & Page Animation */
         .main-content { flex: 1; width: 100%; display: flex; flex-direction: column; overflow: hidden; position: relative; }
         .page-container { 
             display: none; width: 100%; height: 100%; padding: 20px; overflow-y: auto; 
@@ -145,6 +191,20 @@
             transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .page-container.active { display: flex; opacity: 1; transform: scale(1) translateY(0); }
+
+        /* Smooth Loading Overlay for Channel Info Update */
+        .page-loader {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-main); z-index: 500; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; gap: 12px; opacity: 0; pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+        .page-loader.active { opacity: 1; pointer-events: auto; }
+        .spinner {
+            width: 38px; height: 38px; border: 3px solid var(--border-color);
+            border-top-color: #38bdf8; border-radius: 50%; animation: spin 0.7s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         .auth-card, .downloader-card, .form-card {
             background: var(--card-bg); padding: 24px; border-radius: 22px; border: 1px solid var(--border-color);
@@ -205,7 +265,7 @@
             box-shadow: 0 15px 30px rgba(56, 189, 248, 0.25);
         }
 
-        /* Saluran Style (Lihat Kenangan & Lihat Cerita) */
+        /* Saluran Style (Info Update, Kenangan, & Cerita) */
         .channel-feed-container {
             width: 100%;
             max-width: 480px;
@@ -240,7 +300,7 @@
         .channel-title { font-size: 15px; font-weight: 700; color: #38bdf8; }
         .channel-body-text { font-size: 14px; line-height: 1.5; color: var(--text-color); white-space: pre-wrap; }
         
-        /* Multi Photos Support & Full Screen Preview */
+        /* Multi Photos & Video Support */
         .channel-images-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
@@ -266,7 +326,21 @@
         }
         .channel-img-wrapper:hover img { transform: scale(1.04); }
 
-        /* Delete Button for Kenangan/Cerita */
+        .channel-video-wrapper {
+            width: 100%;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #000;
+            border: 1px solid var(--border-color);
+            margin-top: 4px;
+        }
+        .channel-video-wrapper video {
+            width: 100%;
+            max-height: 260px;
+            display: block;
+        }
+
+        /* Delete Button */
         .delete-post-btn {
             background: rgba(239, 68, 68, 0.15);
             border: 1px solid rgba(239, 68, 68, 0.3);
@@ -285,7 +359,7 @@
             display: flex;
             flex-wrap: wrap;
             gap: 6px;
-            margin-top: 6px;
+            margin-top: 4px;
             padding-top: 8px;
             border-top: 1px dashed var(--border-color);
         }
@@ -304,6 +378,59 @@
         }
         .react-btn:hover { background: rgba(56, 189, 248, 0.15); border-color: #38bdf8; }
         .react-btn.reacted { background: var(--accent-gradient); color: #0f172a; border-color: transparent; font-weight: 700; }
+
+        /* Comments / Ulasan Section (Telegram Channel Style) */
+        .comments-section {
+            margin-top: 8px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .comments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+        .comment-bubble {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .comment-bubble b { color: #38bdf8; font-size: 12px; }
+        .comment-input-row {
+            display: flex;
+            gap: 6px;
+            margin-top: 4px;
+        }
+        .comment-input-row input {
+            flex: 1;
+            padding: 8px 12px;
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-color);
+            font-size: 12px;
+            outline: none;
+        }
+        .comment-input-row button {
+            background: var(--accent-gradient);
+            border: none;
+            color: #0f172a;
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 12px;
+            cursor: pointer;
+        }
 
         /* Image Lightbox Modal */
         .lightbox-modal {
@@ -399,6 +526,16 @@
         </div>
     </div>
 
+    <!-- Marquee Banner & Info Update Shortcut Bar -->
+    <div class="header-banner-container" id="main-header-banner" style="display: none;">
+        <div class="marquee-wrapper">
+            <span class="marquee-text">📢 Selamat datang di Sea Tycoon! Cek saluran Info Update terbaru untuk mengetahui pengumuman penting hari ini ✨</span>
+        </div>
+        <button class="info-update-shortcut-btn" onclick="openInfoUpdateWithLoader()">
+            📢 Info Update
+        </button>
+    </div>
+
     <div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
 
     <!-- Sidebar -->
@@ -417,8 +554,10 @@
         <div class="sidebar-item owner-menu" onclick="showBubble('Panel Kontrol Owner Aktif 👑')">👑 Kontrol Panel Owner</div>
         <div class="sidebar-item owner-menu" onclick="openMenu('owner-notif-user')">🔔 Notif User & Request</div>
         <div class="sidebar-item owner-menu" onclick="openMenu('add-lagu')">🎶 Tambah Lagu</div>
+        <div class="sidebar-item owner-menu" onclick="openMenu('add-info-update')">📢 Buat Info Update Baru</div>
 
         <div class="menu-category">Fitur Saluran Eksklusif</div>
+        <div class="sidebar-item" onclick="openInfoUpdateWithLoader()">📢 Saluran Info Update</div>
         <div class="sidebar-item" onclick="openMenu('lihat-kenangan')">📸 Lihat Saluran Kenangan</div>
         <div class="sidebar-item" onclick="openMenu('add-kenangan')">➕ Kirim Kenangan (Multi Foto)</div>
         <div class="sidebar-item" onclick="openMenu('lihat-cerita')">📖 Lihat Saluran Cerita</div>
@@ -432,6 +571,12 @@
     <!-- Main Content -->
     <div class="main-content" id="content-area">
         
+        <!-- Smooth Loading Overlay for Info Update -->
+        <div id="page-loader" class="page-loader">
+            <div class="spinner"></div>
+            <span style="font-size: 13px; font-weight: 600; color: #38bdf8;">Memuat Saluran Info Update...</span>
+        </div>
+
         <!-- Auth -->
         <div id="page-auth" class="page-container">
             <div class="auth-card">
@@ -465,19 +610,56 @@
         <div id="page-home" class="page-container">
             <div style="margin: auto 0; width: 100%; display: flex; flex-direction: column; align-items: center;">
                 <h2>Selamat Datang, <span id="welcome-username" style="color: #38bdf8;">User</span>!</h2>
-                <p style="color: var(--text-muted); margin-top: 8px; max-width: 330px; font-size: 13px;">Gunakan menu di bawah atau tombol pilihan cepat di bawah ini untuk masuk ke saluran kenangan & cerita.</p>
+                <p style="color: var(--text-muted); margin-top: 8px; max-width: 330px; font-size: 13px;">Gunakan menu di bawah atau tombol pilihan cepat untuk masuk ke saluran info update, kenangan & cerita.</p>
                 
-                <!-- Dua Tombol Utama Sesuai Lingkaran Merah -->
                 <div class="home-action-buttons">
+                    <button class="home-big-btn" onclick="openInfoUpdateWithLoader()">
+                        <span>📢</span>
+                        Info Update
+                    </button>
                     <button class="home-big-btn" onclick="openMenu('lihat-kenangan')">
                         <span>📸</span>
-                        Lihat Kenangan
+                        Kenangan
                     </button>
                     <button class="home-big-btn" onclick="openMenu('lihat-cerita')">
                         <span>📖</span>
-                        Lihat Cerita
+                        Cerita
                     </button>
                 </div>
+            </div>
+        </div>
+
+        <!-- Saluran Info Update (Telegram Channel Style) -->
+        <div id="page-info-update" class="page-container">
+            <div style="width: 100%; max-width: 480px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                <h2 style="font-size: 17px; font-weight: 700;">📢 Saluran Info Update</h2>
+                <button class="action-btn owner-only-action" id="btn-add-info-top" style="width: auto; padding: 8px 14px; font-size: 12px; margin: 0; display: none;" onclick="openMenu('add-info-update')">+ Buat Update</button>
+            </div>
+            <div class="channel-feed-container" id="info-update-feed-wrapper"></div>
+        </div>
+
+        <!-- Buat Info Update (Hanya Owner) -->
+        <div id="page-add-info-update" class="page-container">
+            <div class="form-card">
+                <h2>Buat Info Update 📢</h2>
+                <p>Kirim informasi update baru ke saluran (Support Foto & Video).</p>
+                <div class="input-group">
+                    <label>Judul Informasi</label>
+                    <input type="text" id="info-judul" placeholder="Contoh: Update Fitur Baru v2.5...">
+                </div>
+                <div class="input-group">
+                    <label>Isi Pesan / Pengumuman</label>
+                    <textarea id="info-isi" rows="4" placeholder="Tuliskan detail info update..."></textarea>
+                </div>
+                <div class="input-group">
+                    <label>Lampirkan Foto (Bisa banyak foto)</label>
+                    <input type="file" id="info-imgs" accept="image/*" multiple style="padding: 8px; font-size: 12px;">
+                </div>
+                <div class="input-group">
+                    <label>Atau Lampirkan Video (Opsional)</label>
+                    <input type="file" id="info-video" accept="video/*" style="padding: 8px; font-size: 12px;">
+                </div>
+                <button class="action-btn" onclick="submitInfoUpdate()">Publikasikan Info Update</button>
             </div>
         </div>
 
@@ -529,7 +711,7 @@
             </div>
         </div>
 
-        <!-- Lihat Kenangan (Saluran Channel) -->
+        <!-- Lihat Kenangan -->
         <div id="page-lihat-kenangan" class="page-container">
             <div style="width: 100%; max-width: 480px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
                 <h2 style="font-size: 17px; font-weight: 700;">Saluran Kenangan 📸</h2>
@@ -538,7 +720,7 @@
             <div class="channel-feed-container" id="kenangan-feed-wrapper"></div>
         </div>
 
-        <!-- Kirim Cerita (Tanpa Judul) -->
+        <!-- Kirim Cerita -->
         <div id="page-add-cerita" class="page-container">
             <div class="form-card">
                 <h2>Kirim Cerita 📖</h2>
@@ -551,7 +733,7 @@
             </div>
         </div>
 
-        <!-- Lihat Cerita (Saluran Channel) -->
+        <!-- Lihat Cerita -->
         <div id="page-lihat-cerita" class="page-container">
             <div style="width: 100%; max-width: 480px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
                 <h2 style="font-size: 17px; font-weight: 700;">Saluran Cerita 📖</h2>
@@ -690,6 +872,7 @@
 
         function openAuthScreen() {
             document.getElementById('bottom-nav').classList.add('hidden');
+            document.getElementById('main-header-banner').style.display = 'none';
             document.querySelectorAll('.page-container').forEach(p => p.classList.remove('active'));
             document.getElementById('page-auth').classList.add('active');
             document.getElementById('page-title').innerText = 'Autentikasi';
@@ -811,6 +994,7 @@
             const isOwner = (currentUser.role === 'Owner');
             document.querySelectorAll('.owner-menu-label').forEach(el => el.style.display = isOwner ? 'block' : 'none');
             document.querySelectorAll('.owner-menu').forEach(el => el.style.display = isOwner ? 'flex' : 'none');
+            document.querySelectorAll('.owner-only-action').forEach(el => el.style.display = isOwner ? 'block' : 'none');
         }
 
         function logoutUser() {
@@ -847,6 +1031,17 @@
             document.getElementById(`theme-${themeName}`).classList.add('active');
         }
 
+        // Smooth Loading Effect for Info Update Channel
+        function openInfoUpdateWithLoader() {
+            if(document.getElementById('sidebar').classList.contains('open')) toggleSidebar();
+            const loader = document.getElementById('page-loader');
+            loader.classList.add('active');
+            setTimeout(() => {
+                loader.classList.remove('active');
+                openMenu('info-update');
+            }, 600);
+        }
+
         function openMenu(menu) {
             if(document.getElementById('sidebar').classList.contains('open')) toggleSidebar();
             if(!currentUser) { openAuthScreen(); return; }
@@ -854,11 +1049,12 @@
             currentView = menu;
             document.querySelectorAll('.page-container').forEach(p => p.classList.remove('active'));
             const bottomNav = document.getElementById('bottom-nav');
+            const mainHeaderBanner = document.getElementById('main-header-banner');
             const title = document.getElementById('page-title');
             const topLeftBtn = document.getElementById('top-left-btn');
 
-            // Auto Hide Bottom Nav untuk Halaman Saluran (Kenangan & Cerita)
-            if (menu === 'lihat-kenangan' || menu === 'lihat-cerita') {
+            // Atur Tampilan Header Marquee & Bottom Nav Berdasarkan Halaman
+            if (menu === 'info-update' || menu === 'lihat-kenangan' || menu === 'lihat-cerita') {
                 bottomNav.classList.add('hidden');
             } else {
                 bottomNav.classList.remove('hidden');
@@ -866,9 +1062,24 @@
 
             if (menu === 'home') {
                 document.getElementById('page-home').classList.add('active');
+                mainHeaderBanner.style.display = 'flex';
                 title.innerText = 'Sea Tycoon';
                 topLeftBtn.innerText = '☰';
                 setActiveNav('Beranda');
+            } else {
+                mainHeaderBanner.style.display = 'none';
+            }
+
+            if (menu === 'info-update') {
+                document.getElementById('page-info-update').classList.add('active');
+                title.innerText = 'Info Update';
+                topLeftBtn.innerText = '✕';
+                renderInfoUpdateFeed();
+            } else if (menu === 'add-info-update') {
+                if (currentUser.role !== 'Owner') { showBubble('Akses khusus Owner!'); return; }
+                document.getElementById('page-add-info-update').classList.add('active');
+                title.innerText = 'Buat Info Update';
+                topLeftBtn.innerText = '✕';
             } else if (menu === 'tiktok') {
                 document.getElementById('page-tiktok').classList.add('active');
                 title.innerText = 'TikTok Downloader';
@@ -956,6 +1167,238 @@
             document.getElementById('lightbox-modal').classList.remove('active');
         }
 
+        // --- INFO UPDATE CHANNEL SYSTEM ---
+        function submitInfoUpdate() {
+            if (currentUser.role !== 'Owner') {
+                showBubble('Hanya Owner yang dapat mengirim Info Update! 👑');
+                return;
+            }
+
+            const judul = document.getElementById('info-judul').value.trim();
+            const isi = document.getElementById('info-isi').value.trim();
+            const imageInput = document.getElementById('info-imgs');
+            const videoInput = document.getElementById('info-video');
+
+            if (!judul || !isi) {
+                showBubble('Judul dan isi pengumuman wajib diisi! ⚠️');
+                return;
+            }
+
+            let imagesArray = [];
+            let videoData = null;
+
+            const processSave = () => {
+                let infoList = JSON.parse(localStorage.getItem('sea_tycoon_info_updates') || '[]');
+                const newUpdateId = Date.now();
+                
+                infoList.push({
+                    id: newUpdateId,
+                    judul: judul,
+                    isi: isi,
+                    images: imagesArray,
+                    video: videoData,
+                    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                    reactions: { '👍': 0, '❤️': 0, '🔥': 0, '🚀': 0, '👏': 0 },
+                    userReacted: {},
+                    comments: []
+                });
+                localStorage.setItem('sea_tycoon_info_updates', JSON.stringify(infoList));
+
+                // Kirim Notifikasi Kotak Masuk Otomatis ke Semua User
+                let globalInbox = JSON.parse(localStorage.getItem('sea_tycoon_global_inbox') || '[]');
+                globalInbox.push({
+                    id: newUpdateId,
+                    title: `📢 Info Update Baru: ${judul}`,
+                    message: isi,
+                    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                    unread: true
+                });
+                localStorage.setItem('sea_tycoon_global_inbox', JSON.stringify(globalInbox));
+
+                document.getElementById('info-judul').value = '';
+                document.getElementById('info-isi').value = '';
+                document.getElementById('info-imgs').value = '';
+                document.getElementById('info-video').value = '';
+
+                showBubble('Info Update berhasil disiarkan ke semua user! ✨');
+                openInfoUpdateWithLoader();
+            };
+
+            // Handle Multiple Images & Video Readers
+            if (videoInput.files.length > 0) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    videoData = e.target.result;
+                    if (imageInput.files.length > 0) {
+                        processImagesAndSave(imageInput.files, processSave, imagesArray);
+                    } else {
+                        processSave();
+                    }
+                };
+                reader.readAsDataURL(videoInput.files[0]);
+            } else if (imageInput.files.length > 0) {
+                processImagesAndSave(imageInput.files, processSave, imagesArray);
+            } else {
+                processSave();
+            }
+        }
+
+        function processImagesAndSave(files, callback, imagesArray) {
+            let processed = 0;
+            for (let i = 0; i < files.length; i++) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    imagesArray.push(e.target.result);
+                    processed++;
+                    if (processed === files.length) callback();
+                };
+                reader.readAsDataURL(files[i]);
+            }
+        }
+
+        function renderInfoUpdateFeed() {
+            const wrapper = document.getElementById('info-update-feed-wrapper');
+            let infoList = JSON.parse(localStorage.getItem('sea_tycoon_info_updates') || '[]');
+
+            if (infoList.length === 0) {
+                wrapper.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px;">Belum ada info update dari owner.</div>`;
+                return;
+            }
+
+            let html = '';
+            infoList.reverse().forEach(item => {
+                let reactionsHtml = '';
+                const emojis = ['👍', '❤️', '🔥', '🚀', '👏'];
+                emojis.forEach(emoji => {
+                    let count = item.reactions[emoji] || 0;
+                    let hasReacted = item.userReacted && item.userReacted[currentUser.username] === emoji;
+                    reactionsHtml += `
+                        <button class="react-btn ${hasReacted ? 'reacted' : ''}" onclick="reactInfoUpdate('${item.id}', '${emoji}')">
+                            ${emoji} <span>${count}</span>
+                        </button>
+                    `;
+                });
+
+                let mediaHtml = '';
+                if (item.images && item.images.length > 0) {
+                    mediaHtml += `<div class="channel-images-grid">`;
+                    item.images.forEach(imgSrc => {
+                        mediaHtml += `
+                            <div class="channel-img-wrapper" onclick="openLightbox('${imgSrc}')">
+                                <img src="${imgSrc}" alt="Foto Update">
+                            </div>
+                        `;
+                    });
+                    mediaHtml += `</div>`;
+                }
+
+                if (item.video) {
+                    mediaHtml += `
+                        <div class="channel-video-wrapper">
+                            <video controls src="${item.video}"></video>
+                        </div>
+                    `;
+                }
+
+                // Render Comments Section (Telegram Channel Style)
+                let commentsHtml = '';
+                if (item.comments && item.comments.length > 0) {
+                    item.comments.forEach(com => {
+                        commentsHtml += `
+                            <div class="comment-bubble">
+                                <b>@${com.username}</b>
+                                <span>${com.text}</span>
+                            </div>
+                        `;
+                    });
+                } else {
+                    commentsHtml = `<span style="font-size: 11px; color: var(--text-muted); text-align: center; padding: 4px;">Belum ada ulasan/komentar.</span>`;
+                }
+
+                let canDelete = (currentUser.role === 'Owner');
+
+                html += `
+                    <div class="channel-card">
+                        <div class="channel-header-info">
+                            <span>Dari : <b>@Owner Official 👑</b></span>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span>${item.time}</span>
+                                ${canDelete ? `<button class="delete-post-btn" onclick="deleteInfoUpdate('${item.id}')">Hapus</button>` : ''}
+                            </div>
+                        </div>
+                        <div class="channel-title">${item.judul}</div>
+                        <div class="channel-body-text">${item.isi}</div>
+                        ${mediaHtml}
+                        <div class="reactions-wrapper">
+                            ${reactionsHtml}
+                        </div>
+                        <div class="comments-section">
+                            <span style="font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase;">Ulasan & Balasan User:</span>
+                            <div class="comments-list">
+                                ${commentsHtml}
+                            </div>
+                            <div class="comment-input-row">
+                                <input type="text" id="comment-input-${item.id}" placeholder="Tulis balasan atau ulasan...">
+                                <button onclick="sendInfoComment('${item.id}')">Kirim</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            wrapper.innerHTML = html;
+        }
+
+        function reactInfoUpdate(id, emoji) {
+            let infoList = JSON.parse(localStorage.getItem('sea_tycoon_info_updates') || '[]');
+            let item = infoList.find(i => i.id == id);
+            if (!item) return;
+
+            if (!item.userReacted) item.userReacted = {};
+            let prevReact = item.userReacted[currentUser.username];
+
+            if (prevReact === emoji) {
+                item.reactions[emoji]--;
+                delete item.userReacted[currentUser.username];
+            } else {
+                if (prevReact) item.reactions[prevReact]--;
+                item.reactions[emoji] = (item.reactions[emoji] || 0) + 1;
+                item.userReacted[currentUser.username] = emoji;
+            }
+
+            localStorage.setItem('sea_tycoon_info_updates', JSON.stringify(infoList));
+            renderInfoUpdateFeed();
+        }
+
+        function sendInfoComment(id) {
+            const input = document.getElementById(`comment-input-${id}`);
+            const text = input.value.trim();
+            if (!text) return;
+
+            let infoList = JSON.parse(localStorage.getItem('sea_tycoon_info_updates') || '[]');
+            let item = infoList.find(i => i.id == id);
+            if (!item) return;
+
+            if (!item.comments) item.comments = [];
+            item.comments.push({
+                username: currentUser.username,
+                text: text,
+                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+            });
+
+            localStorage.setItem('sea_tycoon_info_updates', JSON.stringify(infoList));
+            input.value = '';
+            renderInfoUpdateFeed();
+        }
+
+        function deleteInfoUpdate(id) {
+            if (!confirm("Hapus info update ini?")) return;
+            let infoList = JSON.parse(localStorage.getItem('sea_tycoon_info_updates') || '[]');
+            infoList = infoList.filter(i => i.id != id);
+            localStorage.setItem('sea_tycoon_info_updates', JSON.stringify(infoList));
+            showBubble('Info Update berhasil dihapus! 🗑️');
+            renderInfoUpdateFeed();
+        }
+
         // --- KENANGAN SYSTEM (MULTI FOTO + HAPUS) ---
         function submitKenangan() {
             const judul = document.getElementById('kenangan-judul').value.trim();
@@ -971,18 +1414,7 @@
             let imagesArray = [];
 
             if (files.length > 0) {
-                let processedCount = 0;
-                for (let i = 0; i < files.length; i++) {
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        imagesArray.push(e.target.result);
-                        processedCount++;
-                        if (processedCount === files.length) {
-                            saveKenanganData(judul, isi, imagesArray);
-                        }
-                    };
-                    reader.readAsDataURL(files[i]);
-                }
+                processImagesAndSave(files, () => saveKenanganData(judul, isi, imagesArray), imagesArray);
             } else {
                 saveKenanganData(judul, isi, []);
             }
@@ -1097,7 +1529,7 @@
             renderKenanganFeed();
         }
 
-        // --- CERITA SYSTEM (TANPA JUDUL + HAPUS) ---
+        // --- CERITA SYSTEM ---
         function submitCerita() {
             const isi = document.getElementById('cerita-isi').value.trim();
             if (!isi) {
@@ -1194,7 +1626,7 @@
             renderCeritaFeed();
         }
 
-        // --- REQUEST & LAGU HANDLERS ---
+        // --- REQUEST & INBOX SYSTEM ---
         function submitUserRequest() {
             const message = document.getElementById('req-message').value.trim();
             const fileInput = document.getElementById('req-image');
@@ -1233,37 +1665,64 @@
 
         function renderUserInbox() {
             const wrapper = document.getElementById('user-inbox-wrapper');
+            let globalInbox = JSON.parse(localStorage.getItem('sea_tycoon_global_inbox') || '[]');
             let requests = JSON.parse(localStorage.getItem('sea_tycoon_requests') || '[]');
             let userReqs = requests.filter(r => r.username === currentUser.username);
 
-            if (userReqs.length === 0) {
-                wrapper.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 20px;">Belum ada riwayat pesan.</div>`;
-                return;
+            let html = '';
+
+            // Tampilkan Info Update Global di Kotak Masuk
+            if (globalInbox.length > 0) {
+                globalInbox.reverse().forEach(info => {
+                    html += `
+                        <div class="inbox-item-bubble" style="border-color: #38bdf8;">
+                            <div class="inbox-avatar-circle" style="background: var(--accent-gradient);">📢</div>
+                            <div class="inbox-content-box">
+                                <b>${info.title}</b>
+                                <p>${info.message}</p>
+                                <span>${info.time}</span>
+                            </div>
+                        </div>
+                    `;
+                });
             }
 
-            let html = '';
-            userReqs.reverse().forEach(req => {
-                html += `
-                    <div class="inbox-item-bubble">
-                        <div class="inbox-avatar-circle">📤</div>
-                        <div class="inbox-content-box">
-                            <b>Request Anda:</b>
-                            <p>${req.message}</p>
-                            ${req.image ? `<img src="${req.image}" class="inbox-img-preview">` : ''}
-                            <span>${req.time}</span>
-                            ${req.reply ? `<div class="reply-box-owner">👑 <b>Balasan Owner:</b> ${req.reply}</div>` : `<span style="color: #f59e0b;">Menunggu balasan...</span>`}
+            // Tampilkan Request User & Balasan Owner
+            if (userReqs.length > 0) {
+                userReqs.reverse().forEach(req => {
+                    html += `
+                        <div class="inbox-item-bubble">
+                            <div class="inbox-avatar-circle">📤</div>
+                            <div class="inbox-content-box">
+                                <b>Request Anda:</b>
+                                <p>${req.message}</p>
+                                ${req.image ? `<img src="${req.image}" class="inbox-img-preview">` : ''}
+                                <span>${req.time}</span>
+                                ${req.reply ? `<div class="reply-box-owner">👑 <b>Balasan Owner:</b> ${req.reply}</div>` : `<span style="color: #f59e0b;">Menunggu balasan...</span>`}
+                            </div>
                         </div>
-                    </div>
-                `;
-            });
+                    `;
+                });
+            }
+
+            if (html === '') {
+                html = `<div style="text-align: center; color: var(--text-muted); padding: 20px;">Belum ada pesan di kotak masuk.</div>`;
+            }
+
             wrapper.innerHTML = html;
+            // Mark as read
+            localStorage.setItem('sea_tycoon_inbox_read', 'true');
+            checkInboxBadge();
         }
 
         function checkInboxBadge() {
+            let globalInbox = JSON.parse(localStorage.getItem('sea_tycoon_global_inbox') || '[]');
             let requests = JSON.parse(localStorage.getItem('sea_tycoon_requests') || '[]');
             if (!currentUser) return;
-            let userReqs = requests.filter(r => r.username === currentUser.username && r.reply && !r.readByUser);
-            document.getElementById('inbox-badge-dot').style.display = userReqs.length > 0 ? 'block' : 'none';
+            let userReqs = requests.filter(r => r.username === currentUser.username && r.reply);
+            let hasUnreadGlobal = globalInbox.length > 0 && localStorage.getItem('sea_tycoon_inbox_read') !== 'true';
+
+            document.getElementById('inbox-badge-dot').style.display = (userReqs.length > 0 || hasUnreadGlobal) ? 'block' : 'none';
         }
 
         function renderOwnerRequests() {
