@@ -57,57 +57,27 @@
 
         /* Main Content Area */
         .main-content {
-            flex: 1; padding: 100px 20px 100px; overflow-y: auto; max-width: 600px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            flex: 1; padding: 80px 15px 90px; overflow-y: auto; max-width: 600px; margin: 0 auto; width: 100%; display: flex; flex-direction: column;
         }
 
         /* Beranda Menu Buttons Grid */
         .home-container {
             text-align: center;
+            margin: auto;
             width: 100%;
         }
-        .home-container h2 {
-            font-size: 22px;
-            margin-bottom: 6px;
-            color: #f8fafc;
-        }
-        .home-container p {
-            font-size: 14px;
-            color: #94a3b8;
-            margin-bottom: 30px;
-        }
-        .menu-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            width: 100%;
-        }
+        .home-container h2 { font-size: 22px; margin-bottom: 6px; color: #f8fafc; }
+        .home-container p { font-size: 14px; color: #94a3b8; margin-bottom: 30px; }
+        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; width: 100%; }
         .menu-card-btn {
-            background: #1e293b;
-            border: 1px solid #334155;
-            padding: 22px 16px;
-            border-radius: 16px;
-            color: #f8fafc;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
+            background: #1e293b; border: 1px solid #334155; padding: 22px 16px; border-radius: 16px;
+            color: #f8fafc; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2); display: flex; flex-direction: column; align-items: center; gap: 8px;
         }
-        .menu-card-btn:hover {
-            background: #334155;
-            border-color: #38bdf8;
-            transform: translateY(-2px);
-        }
+        .menu-card-btn:hover { background: #334155; border-color: #38bdf8; transform: translateY(-2px); }
 
-        /* Downloader Card (Hidden by default, shown when TikTok menu selected) */
-        .downloader-section {
-            display: none;
-            width: 100%;
-        }
+        /* Downloader Section */
+        .downloader-section { display: none; margin: auto; width: 100%; }
         .downloader-card {
             background: #1e293b; padding: 24px; border-radius: 20px; border: 1px solid #334155; box-shadow: 0 10px 25px rgba(0,0,0,0.3); text-align: center; width: 100%;
         }
@@ -122,16 +92,42 @@
             width: 100%; padding: 14px; background: #38bdf8; border: none; border-radius: 12px; color: #0f172a; font-weight: bold; font-size: 15px; cursor: pointer; transition: 0.2s;
         }
         .download-btn:hover { background: #0ea5e9; }
-
-        /* Loading & Result Section */
         #loading { display: none; margin-top: 20px; color: #38bdf8; font-size: 14px; }
-        .spinner {
-            width: 24px; height: 24px; border: 3px solid rgba(56,189,248,0.3); border-top-color: #38bdf8; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 10px;
-        }
+        .spinner { width: 24px; height: 24px; border: 3px solid rgba(56,189,248,0.3); border-top-color: #38bdf8; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 10px; }
         @keyframes spin { to { transform: rotate(360deg); } }
-
         #result-box { display: none; margin-top: 20px; background: #0f172a; padding: 15px; border-radius: 12px; border: 1px solid #334155; text-align: left; }
         #result-box video { width: 100%; border-radius: 8px; margin-top: 10px; }
+
+        /* Chat AI Room Section */
+        .chat-section {
+            display: none; flex-direction: column; height: 100%; width: 100%; justify-content: space-between;
+        }
+        .chat-box {
+            flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; padding-bottom: 15px; scroll-behavior: smooth;
+        }
+        .chat-message {
+            max-width: 80%; padding: 12px 16px; border-radius: 16px; font-size: 14px; line-height: 1.5; word-wrap: break-word;
+        }
+        .chat-message.user {
+            background: #38bdf8; color: #0f172a; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 500;
+        }
+        .chat-message.ai {
+            background: #1e293b; color: #f8fafc; align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid #334155;
+        }
+        .chat-input-area {
+            display: flex; gap: 10px; background: #1e293b; padding: 10px; border-radius: 16px; border: 1px solid #334155; position: sticky; bottom: 75px;
+        }
+        .chat-input-area input {
+            flex: 1; background: #0f172a; border: 1px solid #475569; border-radius: 12px; padding: 10px 14px; color: #fff; font-size: 14px; outline: none;
+        }
+        .chat-input-area input:focus { border-color: #38bdf8; }
+        .send-btn {
+            background: #38bdf8; border: none; color: #0f172a; padding: 0 16px; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.2s;
+        }
+        .send-btn:hover { background: #0ea5e9; }
+        .typing-indicator {
+            display: none; align-self: flex-start; background: #1e293b; padding: 10px 14px; border-radius: 12px; font-size: 12px; color: #94a3b8; border: 1px solid #334155;
+        }
 
         /* Bubble Chat Notification Modal */
         .bubble-modal {
@@ -155,13 +151,13 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes popUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-        /* Bottom Nav */
+        /* Bottom Nav (4 Menu Items with Chat AI in Center) */
         .bottom-nav {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 400px; background: #1e293b; display: flex; justify-content: space-around;
-            padding: 12px 10px; border-radius: 35px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); border: 1px solid #334155; z-index: 90;
+            width: 92%; max-width: 440px; background: #1e293b; display: flex; justify-content: space-around;
+            padding: 10px 8px; border-radius: 35px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); border: 1px solid #334155; z-index: 90;
         }
-        .nav-item { color: #94a3b8; text-decoration: none; font-size: 13px; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; padding: 8px 20px; border-radius: 20px; transition: 0.3s; }
+        .nav-item { color: #94a3b8; text-decoration: none; font-size: 12px; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; padding: 8px 12px; border-radius: 20px; transition: 0.3s; }
         .nav-item.active, .nav-item:hover { color: #0f172a; background: #38bdf8; font-weight: 600; }
     </style>
 </head>
@@ -183,6 +179,7 @@
         <div class="menu-category">Fitur Utama</div>
         <div class="sidebar-item" onclick="openMenu('home')">🏠 Beranda</div>
         <div class="sidebar-item" onclick="openMenu('tiktok')">🎵 TikTok Downloader</div>
+        <div class="sidebar-item" onclick="openMenu('chat-ai')">🤖 Chat AI Assistant</div>
         <div class="menu-category">Eksplorasi</div>
         <div class="sidebar-item" onclick="showBubble('Fitur Tempat Lagu sedang dalam tahap pengembangan. Mohon ditunggu ya! 🎶')">🎵 Tempat Lagu</div>
         <div class="sidebar-item" onclick="showBubble('Fitur Tempat Bermain sedang dalam tahap pengembangan. Mohon ditunggu ya! 🎮')">🎮 Tempat Bermain</div>
@@ -198,11 +195,11 @@
             <h2>Selamat Datang di Sea Tycoon</h2>
             <p>Silakan pilih menu menarik di bawah ini:</p>
             <div class="menu-grid">
-                <button class="menu-card-btn" onclick="showBubble('Fitur Tempat Lagu sedang dalam proses pembuatan. Mohon bersabar ya! 🎵')">
-                    🎵 <br>Tempat Lagu
+                <button class="menu-card-btn" onclick="openMenu('tiktok')">
+                    🎵 <br>TikTok Downloader
                 </button>
-                <button class="menu-card-btn" onclick="showBubble('Fitur Tempat Bermain sedang dalam proses pembuatan. Mohon bersabar ya! 🎮')">
-                    🎮 <br>Tempat Bermain
+                <button class="menu-card-btn" onclick="openMenu('chat-ai')">
+                    🤖 <br>Chat AI Assistant
                 </button>
                 <button class="menu-card-btn" onclick="showBubble('Fitur Tempat Cerita sedang dalam proses pembuatan. Mohon bersabar ya! 📖')">
                     📖 <br>Tempat Cerita
@@ -236,6 +233,20 @@
             </div>
         </div>
 
+        <!-- Halaman Chat AI Room -->
+        <div id="page-chat" class="chat-section">
+            <div class="chat-box" id="chat-box">
+                <div class="chat-message ai">Halo! Aku asisten AI Sea Tycoon. Ada yang bisa kubantu hari ini?</div>
+            </div>
+
+            <div class="typing-indicator" id="typing-indicator">AI sedang mengetik...</div>
+
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Tulis pesan atau pertanyaan ke AI..." onkeypress="handleChatKeyPress(event)">
+                <button class="send-btn" onclick="sendChatMessage()">Kirim</button>
+            </div>
+        </div>
+
     </div>
 
     <!-- Bubble Chat Notification Modal -->
@@ -246,10 +257,11 @@
         </div>
     </div>
 
-    <!-- Bottom Nav -->
+    <!-- Bottom Nav (Beranda, Kotak Masuk, Chat AI di Tengah, Profile) -->
     <div class="bottom-nav">
         <a class="nav-item active" id="nav-beranda" onclick="switchTab(this, 'Beranda')">🏠<span>Beranda</span></a>
         <a class="nav-item" id="nav-kotak" onclick="switchTab(this, 'Kotak Masuk')">📥<span>Kotak Masuk</span></a>
+        <a class="nav-item" id="nav-chat" onclick="switchTab(this, 'Chat AI')">🤖<span>Chat AI</span></a>
         <a class="nav-item" id="nav-profile" onclick="switchTab(this, 'Profile')">👤<span>Profile</span></a>
     </div>
 
@@ -260,25 +272,37 @@
         }
 
         function openMenu(menu) {
-            toggleSidebar();
+            if(document.getElementById('sidebar').classList.contains('open')) {
+                toggleSidebar();
+            }
             const homePage = document.getElementById('page-home');
             const tiktokPage = document.getElementById('page-tiktok');
+            const chatPage = document.getElementById('page-chat');
             const title = document.getElementById('page-title');
+
+            homePage.style.display = 'none';
+            tiktokPage.style.display = 'none';
+            chatPage.style.display = 'none';
 
             if (menu === 'home') {
                 homePage.style.display = 'block';
-                tiktokPage.style.display = 'none';
                 title.innerText = 'Sea Tycoon';
                 setActiveNav('Beranda');
             } else if (menu === 'tiktok') {
-                homePage.style.display = 'none';
                 tiktokPage.style.display = 'block';
                 title.innerText = 'TikTok Downloader';
+                setActiveNav('');
+            } else if (menu === 'chat-ai') {
+                chatPage.style.display = 'flex';
+                title.innerText = 'Chat AI Assistant';
+                setActiveNav('Chat AI');
             }
         }
 
         function showBubble(message) {
-            toggleSidebar();
+            if(document.getElementById('sidebar').classList.contains('open')) {
+                toggleSidebar();
+            }
             document.getElementById('bubble-text').innerText = message;
             document.getElementById('bubble-modal').classList.add('active');
         }
@@ -292,14 +316,10 @@
             items.forEach(item => item.classList.remove('active'));
             element.classList.add('active');
 
-            const homePage = document.getElementById('page-home');
-            const tiktokPage = document.getElementById('page-tiktok');
-            const title = document.getElementById('page-title');
-
             if (name === 'Beranda') {
-                homePage.style.display = 'block';
-                tiktokPage.style.display = 'none';
-                title.innerText = 'Sea Tycoon';
+                openMenu('home');
+            } else if (name === 'Chat AI') {
+                openMenu('chat-ai');
             } else {
                 showBubble(`Fitur ${name} sedang dalam proses pembuatan. Mohon ditunggu ya! ✨`);
             }
@@ -310,44 +330,68 @@
             items.forEach(item => item.classList.remove('active'));
             if(name === 'Beranda') {
                 document.getElementById('nav-beranda').classList.add('active');
+            } else if(name === 'Chat AI') {
+                document.getElementById('nav-chat').classList.add('active');
             }
         }
 
-        async function startDownload() {
-            const url = document.getElementById('tiktok-url').value;
-            if (!url) {
-                showBubble('Silakan masukkan link TikTok terlebih dahulu ya!');
-                return;
+        // --- Logika Chat AI ---
+        function handleChatKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendChatMessage();
             }
+        }
 
-            document.getElementById('loading').style.display = 'block';
-            document.getElementById('result-box').style.display = 'none';
+        async function sendChatMessage() {
+            const inputField = document.getElementById('chat-input');
+            const messageText = inputField.value.trim();
+            if (!messageText) return;
+
+            const chatBox = document.getElementById('chat-box');
+
+            // Tambahkan pesan user ke layar
+            const userMsgDiv = document.createElement('div');
+            userMsgDiv.className = 'chat-message user';
+            userMsgDiv.innerText = messageText;
+            chatBox.appendChild(userMsgDiv);
+
+            inputField.value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            // Tampilkan indikator AI mengetik
+            const typingIndicator = document.getElementById('typing-indicator');
+            typingIndicator.style.display = 'block';
+            chatBox.scrollTop = chatBox.scrollHeight;
 
             try {
-                const response = await fetch('/api/download-tiktok', {
+                const response = await fetch('/api/chat-ai', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ url: url })
+                    body: JSON.stringify({ message: messageText })
                 });
                 const resData = await response.json();
 
-                document.getElementById('loading').style.display = 'none';
+                typingIndicator.style.display = 'none';
 
-                if (resData.success && resData.data.result) {
-                    const result = resData.data.result;
-                    const videoUrl = Array.isArray(result.video) ? result.video[0] : result.video;
-                    const videoTitle = result.title || 'Video TikTok';
+                const aiMsgDiv = document.createElement('div');
+                aiMsgDiv.className = 'chat-message ai';
 
-                    document.getElementById('video-title').innerText = videoTitle;
-                    document.getElementById('video-player').src = videoUrl;
-                    document.getElementById('download-link').href = videoUrl;
-                    document.getElementById('result-box').style.display = 'block';
+                if (resData.success) {
+                    aiMsgDiv.innerText = resData.reply;
                 } else {
-                    showBubble('Gagal mendownload video. Pastikan link valid!');
+                    aiMsgDiv.innerText = 'Maaf, terjadi kesalahan saat menghubungi server AI.';
                 }
+
+                chatBox.appendChild(aiMsgDiv);
+                chatBox.scrollTop = chatBox.scrollHeight;
+
             } catch (err) {
-                document.getElementById('loading').style.display = 'none';
-                showBubble('Terjadi kesalahan pada server saat mengambil data.');
+                typingIndicator.style.display = 'none';
+                const aiMsgDiv = document.createElement('div');
+                aiMsgDiv.className = 'chat-message ai';
+                aiMsgDiv.innerText = 'Koneksi ke server gagal. Coba beberapa saat lagi ya.';
+                chatBox.appendChild(aiMsgDiv);
+                chatBox.scrollTop = chatBox.scrollHeight;
             }
         }
     </script>
