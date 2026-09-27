@@ -188,7 +188,7 @@
             color: #0f172a; font-weight: bold; font-size: 15px; cursor: pointer; transition: 0.2s;
         }
 
-        /* Chat AI Room Section (Sudah Diperbaiki) */
+        /* Chat AI Room Section */
         .chat-section {
             display: flex; 
             flex-direction: column; 
@@ -786,18 +786,53 @@
             document.getElementById('bubble-modal').classList.remove('active');
         }
 
-        function sendChatMessage() {
+        // Fungsi Chat AI yang terhubung ke server.js (/api/chat-ai)
+        async function sendChatMessage() {
             const input = document.getElementById('chat-input');
-            if(!input.value.trim()) return;
+            const messageText = input.value.trim();
+            if(!messageText) return;
+
             const chatBox = document.getElementById('chat-box');
-            chatBox.innerHTML += `<div class="chat-message user">${input.value}</div>`;
+            
+            // Tampilkan pesan user
+            chatBox.innerHTML += `<div class="chat-message user">${messageText}</div>`;
             input.value = '';
             chatBox.scrollTop = chatBox.scrollHeight;
 
-            setTimeout(() => {
-                chatBox.innerHTML += `<div class="chat-message ai">Maaf, AI sedang tidak merespons.</div>`;
-                chatBox.scrollTop = chatBox.scrollHeight;
-            }, 600);
+            // Tampilkan indikator loading / sedang mengetik
+            const loadingId = 'loading-' + Date.now();
+            chatBox.innerHTML += `<div class="chat-message ai" id="${loadingId}">AI sedang mengetik...</div>`;
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            try {
+                // Request ke backend server.js
+                const response = await fetch('/api/chat-ai', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message: messageText })
+                });
+
+                const data = await response.json();
+                
+                // Hapus indikator loading
+                document.getElementById(loadingId).remove();
+
+                // Tampilkan balasan AI dari backend
+                if (data && data.reply) {
+                    chatBox.innerHTML += `<div class="chat-message ai">${data.reply}</div>`;
+                } else {
+                    chatBox.innerHTML += `<div class="chat-message ai">Maaf, respons server tidak valid.</div>`;
+                }
+                
+            } catch (error) {
+                // Hapus indikator loading jika error jaringan
+                document.getElementById(loadingId).remove();
+                chatBox.innerHTML += `<div class="chat-message ai">Gagal terhubung ke server backend AI.</div>`;
+            }
+            
+            chatBox.scrollTop = chatBox.scrollHeight;
         }
     </script>
 </body>
