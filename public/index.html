@@ -231,7 +231,7 @@
                 <div id="result-box">
                     <p id="video-title" style="font-size: 13px; font-weight: bold; margin-bottom: 5px;"></p>
                     <video id="video-player" controls></video>
-                    <a id="download-link" href="#" target="_blank" style="display: block; margin-top: 10px; padding: 10px; background: #22c55e; color: #fff; text-align: center; border-radius: 8px; text-decoration: none; font-weight: bold;">Simpan Video ke Galeri</a>
+                    <a id="download-link" href="#" target="_blank" style="display: block; margin-top: 10px; padding: 12px; background: #38bdf8; color: #0f172a; text-align: center; border-radius: 12px; text-decoration: none; font-weight: bold;">Unduh Video</a>
                 </div>
             </div>
         </div>
@@ -333,11 +333,14 @@
 
                 document.getElementById('loading').style.display = 'none';
 
-                if (resData.success) {
-                    const data = resData.data;
-                    document.getElementById('video-title').innerText = data.title || 'Video TikTok';
-                    document.getElementById('video-player').src = data.video || data.data;
-                    document.getElementById('download-link').href = data.video || data.data;
+                if (resData.success && resData.data.result) {
+                    const result = resData.data.result;
+                    const videoUrl = Array.isArray(result.video) ? result.video[0] : result.video;
+                    const videoTitle = result.title || 'Video TikTok';
+
+                    document.getElementById('video-title').innerText = videoTitle;
+                    document.getElementById('video-player').src = videoUrl;
+                    document.getElementById('download-link').href = videoUrl;
                     document.getElementById('result-box').style.display = 'block';
                 } else {
                     showBubble('Gagal mendownload video. Pastikan link valid!');
