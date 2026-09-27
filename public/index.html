@@ -121,17 +121,18 @@
         #result-box { display: none; margin-top: 20px; background: #0f172a; padding: 15px; border-radius: 12px; border: 1px solid #334155; text-align: left; }
         #result-box video { width: 100%; border-radius: 8px; margin-top: 10px; }
 
-        /* Chat AI Room Section (Murni Flexbox, Posisi Aman dan Pas di Atas Navigasi HP) */
+        /* Chat AI Room Section (Dipaksa Naik Signifikan dan Diberi Jarak Aman) */
         .chat-section {
             display: none; 
             flex-direction: column; 
-            height: 100%; 
+            height: calc(100vh - 120px); 
             width: 100%; 
             max-width: 600px;
             margin: 0 auto;
             background: #0b0f19;
-            padding: 12px 16px 24px 16px; 
-            justify-content: space-between;
+            padding: 10px 16px;
+            position: absolute;
+            top: 0; left: 0; right: 0;
         }
         .chat-box {
             flex: 1; 
@@ -152,7 +153,7 @@
             background: #1e293b; color: #f8fafc; align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid #334155;
         }
         
-        /* Area Input Chat Proporsional dan Tidak Tenggelam */
+        /* Area Input Chat Nangkring Rapi di Atas Batas Bawah HP */
         .chat-input-area {
             display: flex; 
             gap: 12px; 
@@ -160,7 +161,8 @@
             padding: 12px 14px; 
             border-radius: 20px; 
             border: 1.5px solid #334155; 
-            margin-top: 10px; 
+            margin-top: 8px; 
+            margin-bottom: 25px; /* Jarak aman agar tidak ketutup gesture bar HP */
             flex-shrink: 0;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             align-items: center;
