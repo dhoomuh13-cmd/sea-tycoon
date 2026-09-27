@@ -191,7 +191,7 @@
         /* Chat AI Room Section */
         .chat-section {
             display: flex; flex-direction: column; width: 100%; max-width: 600px;
-            height: 100%; margin: 0 auto; background: var(--bg-main); padding: 10px 16px 80px 16px;
+            height: 100%; margin: 0 auto; background: var(--bg-main); padding: 10px 16px 20px 16px;
         }
         .chat-box { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; padding: 10px 0; }
         .chat-message { max-width: 85%; padding: 14px 18px; border-radius: 16px; font-size: 15px; line-height: 1.6; word-wrap: break-word; }
@@ -704,27 +704,29 @@
             const title = document.getElementById('page-title');
             const topLeftBtn = document.getElementById('top-left-btn');
 
-            bottomNav.classList.remove('hidden');
-
             if (menu === 'home') {
                 document.getElementById('page-home').classList.add('active');
                 title.innerText = 'Sea Tycoon';
                 topLeftBtn.innerText = '☰';
+                bottomNav.classList.remove('hidden');
                 setActiveNav('Beranda');
             } else if (menu === 'tiktok') {
                 document.getElementById('page-tiktok').classList.add('active');
                 title.innerText = 'TikTok Downloader';
                 topLeftBtn.innerText = '✕';
+                bottomNav.classList.remove('hidden');
                 setActiveNav('TikTok');
             } else if (menu === 'chat-ai') {
                 document.getElementById('page-chat').classList.add('active');
                 title.innerText = 'Chat AI Assistant';
                 topLeftBtn.innerText = '✕';
+                bottomNav.classList.add('hidden'); // Menyembunyikan navigasi bawah agar input chat tidak tertutup
                 setActiveNav('Chat AI');
             } else if (menu === 'profile') {
                 document.getElementById('page-profile').classList.add('active');
                 title.innerText = 'Profile Pengguna';
                 topLeftBtn.innerText = '✕';
+                bottomNav.classList.remove('hidden');
                 setActiveNav('Profile');
             }
         }
