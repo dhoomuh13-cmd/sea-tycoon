@@ -7,13 +7,13 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Koneksi ke MongoDB Atlas menggunakan variabel environment dari Railway
+// Koneksi ke MongoDB Atlas
 const MONGO_URI = process.env.MONGO_URI;
-mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(MONGO_URI)
     .then(() => console.log('MongoDB Terhubung!'))
     .catch(err => console.error('Koneksi MongoDB Gagal:', err));
 
-// Schema untuk menyimpan riwayat download video TikTok
+// Schema untuk menyimpan riwayat download video TikTok ke MongoDB
 const historySchema = new mongoose.Schema({
     platform: String,
     url: String,
@@ -23,17 +23,17 @@ const historySchema = new mongoose.Schema({
 });
 const History = mongoose.model('DownloadHistory', historySchema);
 
-// Endpoint API untuk memproses download TikTok
+// Endpoint API untuk memproses download TikTok & Simpan ke MongoDB
 app.post('/api/download-tiktok', async (req, res) => {
     try {
         const { url } = req.body;
         if (!url) return res.status(400).json({ success: false, message: 'URL tidak boleh kosong!' });
 
-        // Memanggil API downloader sesuai permintaanmu
+        // Memanggil API downloader
         const apiResponse = await axios.get(`https://api.ikyyxd.my.id/download/tiktokkv2?url=${encodeURIComponent(url)}`);
         const resultData = apiResponse.data;
 
-        // Simpan riwayat ke MongoDB Atlas
+        // Simpan data ke MongoDB
         const newHistory = new History({
             platform: 'TikTok',
             url: url,
@@ -49,9 +49,16 @@ app.post('/api/download-tiktok', async (req, res) => {
     }
 });
 
-// Menyajikan file frontend HTML
-app.get('*', (req, res) => {
-    res.send(htmlContent);
+// Menyajikan file statis (jika ada file CSS/JS terpisah, tapi kalau inline aman)
+app.use(express.static(path.join(__dirname)));
+
+// Mengarahkan rute utama ke index.html yang sudah ada
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// (Simpan kode HTML frontend di bawah atau di index.html terpisah)
+// Menjalankan server port untuk Railway
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server berjalan di port ${PORT}`);
+});
