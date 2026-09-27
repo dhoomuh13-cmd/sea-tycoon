@@ -13,52 +13,32 @@ mongoose.connect(MONGO_URI)
     .then(() => console.log('MongoDB Terhubung!'))
     .catch(err => console.error('Koneksi MongoDB Gagal:', err));
 
-const historySchema = new mongoose.Schema({
-    platform: String,
-    url: String,
-    title: String,
-    videoUrl: String,
-    createdAt: { type: Date, default: Date.now }
-});
-const History = mongoose.model('DownloadHistory', historySchema);
-
-app.post('/api/download-tiktok', async (req, res) => {
+// Endpoint Backend untuk Chat AI
+app.post('/api/chat-ai', async (req, res) => {
     try {
-        let { url } = req.body;
-        if (!url) return res.status(400).json({ success: false, message: 'URL tidak boleh kosong!' });
+        let { message } = req.body;
+        if (!message) return res.status(400).json({ success: false, message: 'Pesan tidak boleh kosong!' });
 
-        const targetUrl = url.trim();
-        
-        // Memanggil API dengan menyertakan User-Agent agar tidak diblokir oleh server API
-        const apiResponse = await axios.get(`https://api.ikyyxd.my.id/download/tiktokkv2?url=${encodeURIComponent(targetUrl)}`, {
+        // Memanggil API AI ikyyxd
+        const apiResponse = await axios.get(`https://api.ikyyxd.my.id/ai/unliai?teks=${encodeURIComponent(message)}`, {
             headers: {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
             }
         });
 
         const resultData = apiResponse.data;
 
-        if (resultData && resultData.result) {
-            const result = resultData.result;
-            const videoUrl = Array.isArray(result.video) ? result.video[0] : result.video;
-
-            // Simpan riwayat ke MongoDB Atlas
-            const newHistory = new History({
-                platform: 'TikTok',
-                url: targetUrl,
-                title: result.title || 'TikTok Video',
-                videoUrl: videoUrl || targetUrl
-            });
-            await newHistory.save();
-
-            return res.json({ success: true, data: resultData });
+        if (resultData && resultData.status && resultData.result) {
+            // Sesuai dokumentasi, balasan teks ada di result.response
+            const aiReply = resultData.result.response || "Maaf, AI sedang tidak merespons.";
+            return res.json({ success: true, reply: aiReply });
         } else {
-            return res.status(400).json({ success: false, message: 'API tidak mengembalikan data video.' });
+            return res.status(400).json({ success: false, message: 'Gagal mendapatkan respons dari AI.' });
         }
 
     } catch (error) {
-        console.error('Error Backend:', error.message);
-        res.status(500).json({ success: false, message: 'Gagal mengambil data dari API downloader.' });
+        console.error('Error Chat AI:', error.message);
+        res.status(500).json({ success: false, message: 'Terjadi kesalahan pada server AI.' });
     }
 });
 
