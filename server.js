@@ -25,22 +25,39 @@ const historySchema = new mongoose.Schema({
 });
 const History = mongoose.model('DownloadHistory', historySchema);
 
+// Fungsi pembantu untuk mengubah link pendek vt.tiktok.com menjadi link panjang asli
+async function expandUrl(shortUrl) {
+    try {
+        if (shortUrl.includes('vt.tiktok.com') || shortUrl.includes('vm.tiktok.com')) {
+            const response = await axios.get(shortUrl, { maxRedirects: 5, validateStatus: status => status >= 200 && status < 400 });
+            return response.request.res.responseUrl || shortUrl;
+        }
+        return shortUrl;
+    } catch (error) {
+        // Jika gagal expand, kembalikan URL aslinya
+        return shortUrl;
+    }
+}
+
 // Endpoint API untuk memproses download TikTok & Simpan ke MongoDB
 app.post('/api/download-tiktok', async (req, res) => {
     try {
-        const { url } = req.body;
+        let { url } = req.body;
         if (!url) return res.status(400).json({ success: false, message: 'URL tidak boleh kosong!' });
 
-        // Memanggil API downloader TikTok
-        const apiResponse = await axios.get(`https://api.ikyyxd.my.id/download/tiktokkv2?url=${encodeURIComponent(url)}`);
+        // Ubah link pendek jadi link panjang otomatis
+        const longUrl = await expandUrl(url.trim());
+
+        // Memanggil API downloader TikTok dengan link yang sudah valid
+        const apiResponse = await axios.get(`https://api.ikyyxd.my.id/download/tiktokkv2?url=${encodeURIComponent(longUrl)}`);
         const resultData = apiResponse.data;
 
         // Simpan riwayat ke MongoDB Atlas
         const newHistory = new History({
             platform: 'TikTok',
-            url: url,
+            url: longUrl,
             title: resultData.title || 'TikTok Video',
-            videoUrl: resultData.video || resultData.data || url
+            videoUrl: resultData.video || resultData.data || longUrl
         });
         await newHistory.save();
 
@@ -59,7 +76,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Mengarahkan semua rute lainnya ke public/index.html (aman untuk routing frontend)
+// Mengarahkan semua rute lainnya ke public/index.html
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
