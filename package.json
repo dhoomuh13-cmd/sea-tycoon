@@ -1,0 +1,18 @@
+{
+  "name": "sea-tycoon",
+  "version": "1.0.0",
+  "description": "Game Tycoon Bawah Laut",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "express": "^4.19.2",
+    "mongoose": "^8.3.1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
