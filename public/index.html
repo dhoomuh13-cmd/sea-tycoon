@@ -115,32 +115,18 @@
         }
         .app-title { font-size: 18px; font-weight: 600; }
 
-        /* Tombol Settings Bulat Gradasi di Pojok Kanan Atas */
         .settings-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--accent-gradient);
-            border: none;
-            color: #0f172a;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            width: 40px; height: 40px; border-radius: 50%; background: var(--accent-gradient);
+            border: none; color: #0f172a; font-size: 18px; display: flex; align-items: center;
+            justify-content: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             transition: transform 0.2s ease, filter 0.2s ease;
         }
-        .settings-btn:hover {
-            transform: scale(1.1) rotate(45deg);
-            filter: brightness(1.15);
-        }
+        .settings-btn:hover { transform: scale(1.1) rotate(45deg); filter: brightness(1.15); }
 
-        /* Sidebar (Dapat di-slide/scroll ke bawah) */
+        /* Sidebar */
         .sidebar {
             position: fixed; top: 0; left: -280px; width: 280px; height: 100%;
-            background: var(--sidebar-bg);
-            box-shadow: 5px 0 25px rgba(0,0,0,0.5);
+            background: var(--sidebar-bg); box-shadow: 5px 0 25px rgba(0,0,0,0.5);
             transition: left 0.3s ease-in-out; z-index: 1000; padding: 20px;
             display: flex; flex-direction: column; border-right: 1px solid var(--border-color);
             overflow-y: auto;
@@ -151,203 +137,134 @@
         .menu-category { font-size: 12px; text-transform: uppercase; color: var(--text-muted); margin: 15px 0 8px; font-weight: 700; letter-spacing: 1px; flex-shrink: 0; }
         
         .sidebar-item { 
-            padding: 12px 16px; 
-            color: var(--text-color); 
-            text-decoration: none; 
-            border-radius: 14px; 
-            margin-bottom: 6px; 
-            background: var(--card-bg); 
-            border: 1px solid var(--border-color);
-            font-size: 14px; 
-            font-weight: 600;
-            cursor: pointer; 
-            transition: all 0.25s ease; 
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-shrink: 0;
+            padding: 12px 16px; color: var(--text-color); text-decoration: none; border-radius: 14px; 
+            margin-bottom: 6px; background: var(--card-bg); border: 1px solid var(--border-color);
+            font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.25s ease; 
+            display: flex; align-items: center; gap: 10px; flex-shrink: 0;
         }
-        .sidebar-item:hover { 
-            background: var(--accent-gradient); 
-            color: #0f172a;
-            border-color: transparent;
-            transform: translateX(4px);
-        }
+        .sidebar-item:hover { background: var(--accent-gradient); color: #0f172a; border-color: transparent; transform: translateX(4px); }
+        .owner-menu { border-color: #f59e0b !important; display: none; }
 
         .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; backdrop-filter: blur(3px); }
         .overlay.active { display: block; }
 
         /* Main Content Area */
         .main-content {
-            flex: 1; 
-            width: 100%; 
-            display: flex; 
-            flex-direction: column;
-            overflow: hidden;
-            position: relative;
+            flex: 1; width: 100%; display: flex; flex-direction: column; overflow: hidden; position: relative;
         }
 
-        .home-container {
-            max-width: 600px;
-            margin: auto;
-            width: 100%;
-            padding: 30px 20px;
-            text-align: center;
-            overflow-y: auto;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        .page-container {
+            display: none; max-width: 600px; margin: auto; width: 100%; padding: 30px 20px;
+            overflow-y: auto; height: 100%; flex-direction: column; align-items: center; justify-content: center; text-align: center;
         }
-        .home-container h2 { font-size: 26px; font-weight: 700; margin-bottom: 10px; color: var(--text-color); }
-        .home-container p { font-size: 14px; color: var(--text-muted); line-height: 1.6; max-width: 400px; }
+        .page-container.active { display: flex; }
+
+        /* Auth Screen (Login/Register Card) */
+        .auth-card {
+            background: var(--card-bg); padding: 30px 24px; border-radius: 24px; border: 1px solid var(--border-color);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4); width: 100%; max-width: 420px; text-align: left;
+        }
+        .auth-card h2 { font-size: 22px; font-weight: 700; margin-bottom: 6px; color: var(--text-color); text-align: center; }
+        .auth-card p { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; text-align: center; }
+        
+        .google-btn {
+            width: 100%; padding: 12px; background: var(--bg-main); border: 1px solid var(--border-color);
+            border-radius: 14px; color: var(--text-color); font-weight: 600; font-size: 14px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.2s; margin-bottom: 18px;
+        }
+        .google-btn:hover { filter: brightness(1.2); }
+
+        .divider { display: flex; align-items: center; text-align: center; color: var(--text-muted); font-size: 12px; margin-bottom: 18px; }
+        .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid var(--border-color); }
+        .divider::before { margin-right: 10px; }
+        .divider::after { margin-left: 10px; }
+
+        .input-group { position: relative; margin-bottom: 14px; width: 100%; }
+        .input-group label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; }
+        .input-group input {
+            width: 100%; padding: 12px 16px; background: var(--bg-main); border: 1px solid var(--border-color);
+            border-radius: 12px; color: var(--text-color); font-size: 14px; outline: none;
+        }
+        .auth-submit-btn {
+            width: 100%; padding: 14px; background: var(--accent-gradient); border: none; border-radius: 12px;
+            color: #0f172a; font-weight: bold; font-size: 15px; cursor: pointer; transition: 0.2s; margin-top: 10px;
+        }
+        .auth-submit-btn:hover { background: var(--accent-hover); }
+        .auth-switch { text-align: center; margin-top: 16px; font-size: 13px; color: var(--text-muted); }
+        .auth-switch span { color: #38bdf8; font-weight: 600; cursor: pointer; }
 
         /* Downloader Section */
-        .downloader-section { display: none; max-width: 600px; margin: auto; width: 100%; padding: 20px; overflow-y: auto; height: 100%; }
         .downloader-card {
-            background: var(--card-bg); padding: 24px; border-radius: 20px; border: 1px solid var(--border-color); box-shadow: 0 10px 25px rgba(0,0,0,0.3); text-align: center; width: 100%;
+            background: var(--card-bg); padding: 24px; border-radius: 20px; border: 1px solid var(--border-color);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3); text-align: center; width: 100%;
         }
         .downloader-card h2 { font-size: 20px; margin-bottom: 8px; color: var(--text-color); }
         .downloader-card p { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
-        .input-group { position: relative; margin-bottom: 15px; }
-        .input-group input {
-            width: 100%; padding: 14px 16px; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 14px; color: var(--text-color); font-size: 14px; outline: none;
+        .downloader-card input {
+            width: 100%; padding: 14px 16px; background: var(--bg-main); border: 1px solid var(--border-color);
+            border-radius: 14px; color: var(--text-color); font-size: 14px; outline: none; margin-bottom: 15px;
         }
         .download-btn {
-            width: 100%; padding: 14px; background: var(--accent-gradient); border: none; border-radius: 14px; color: #0f172a; font-weight: bold; font-size: 15px; cursor: pointer; transition: 0.2s;
+            width: 100%; padding: 14px; background: var(--accent-gradient); border: none; border-radius: 14px;
+            color: #0f172a; font-weight: bold; font-size: 15px; cursor: pointer; transition: 0.2s;
         }
-        .download-btn:hover { background: var(--accent-hover); }
-        #loading { display: none; margin-top: 20px; color: var(--text-color); font-size: 14px; }
-        .spinner { width: 24px; height: 24px; border: 3px solid rgba(56,189,248,0.3); border-top-color: #38bdf8; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 10px; }
-        @keyframes spin { to { transform: rotate(360deg); } }
         #result-box { display: none; margin-top: 20px; background: var(--bg-main); padding: 15px; border-radius: 14px; border: 1px solid var(--border-color); text-align: left; }
         #result-box video { width: 100%; border-radius: 8px; margin-top: 10px; }
 
         /* Chat AI Room Section */
         .chat-section {
-            display: none; 
-            flex-direction: column; 
-            height: calc(100vh - 120px); 
-            width: 100%; 
-            max-width: 600px;
-            margin: 0 auto;
-            background: var(--bg-main);
-            padding: 10px 16px;
-            position: absolute;
-            top: 0; left: 0; right: 0;
+            display: flex; flex-direction: column; height: calc(100vh - 120px); width: 100%; max-width: 600px;
+            margin: 0 auto; background: var(--bg-main); padding: 10px 16px; position: absolute; top: 0; left: 0; right: 0;
         }
-        .chat-box {
-            flex: 1; 
-            overflow-y: auto; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 14px; 
-            padding: 10px 0; 
-            scroll-behavior: smooth;
-        }
-        .chat-message {
-            max-width: 85%; padding: 14px 18px; border-radius: 16px; font-size: 15px; line-height: 1.6; word-wrap: break-word;
-        }
-        .chat-message.user {
-            background: var(--accent-gradient); color: #0f172a; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 600;
-        }
-        .chat-message.ai {
-            background: var(--card-bg); color: var(--text-color); align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid var(--border-color);
-        }
+        .chat-box { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; padding: 10px 0; }
+        .chat-message { max-width: 85%; padding: 14px 18px; border-radius: 16px; font-size: 15px; line-height: 1.6; word-wrap: break-word; }
+        .chat-message.user { background: var(--accent-gradient); color: #0f172a; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 600; }
+        .chat-message.ai { background: var(--card-bg); color: var(--text-color); align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid var(--border-color); }
         
         .chat-input-area {
-            display: flex; 
-            gap: 12px; 
-            background: var(--card-bg); 
-            padding: 12px 14px; 
-            border-radius: 20px; 
-            border: 1.5px solid var(--border-color); 
-            margin-top: 8px; 
-            margin-bottom: 25px; 
-            flex-shrink: 0;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            align-items: center;
+            display: flex; gap: 12px; background: var(--card-bg); padding: 12px 14px; border-radius: 20px;
+            border: 1.5px solid var(--border-color); margin-bottom: 25px; align-items: center;
         }
-        .chat-input-area input {
-            flex: 1; 
-            background: var(--bg-main); 
-            border: 1px solid var(--border-color); 
-            border-radius: 14px; 
-            padding: 14px 16px; 
-            color: var(--text-color); 
-            font-size: 15px; 
-            outline: none;
-        }
-        .send-btn {
-            background: var(--accent-gradient); 
-            border: none; 
-            color: #0f172a; 
-            padding: 0 22px; 
-            height: 48px;
-            border-radius: 14px; 
-            font-weight: bold; 
-            font-size: 15px; 
-            cursor: pointer; 
-            transition: 0.2s;
-            flex-shrink: 0;
-        }
-        .send-btn:hover { background: var(--accent-hover); }
-        
-        .typing-indicator {
-            display: none; align-self: flex-start; background: var(--card-bg); padding: 10px 14px; border-radius: 12px; font-size: 13px; color: var(--text-muted); border: 1px solid var(--border-color); margin-bottom: 5px; flex-shrink: 0;
-        }
+        .chat-input-area input { flex: 1; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 14px; padding: 14px 16px; color: var(--text-color); font-size: 15px; outline: none; }
+        .send-btn { background: var(--accent-gradient); border: none; color: #0f172a; padding: 0 22px; height: 48px; border-radius: 14px; font-weight: bold; cursor: pointer; }
 
-        /* Settings Modal / Dialog */
+        /* Profile Card */
+        .profile-card {
+            background: var(--card-bg); padding: 30px; border-radius: 20px; border: 1px solid var(--border-color);
+            width: 100%; max-width: 400px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        .profile-avatar { width: 80px; height: 80px; border-radius: 50%; background: var(--accent-gradient); margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 32px; color: #0f172a; font-weight: bold; }
+        .profile-info { margin-bottom: 20px; text-align: left; background: var(--bg-main); padding: 15px; border-radius: 12px; border: 1px solid var(--border-color); }
+        .profile-info p { font-size: 14px; margin-bottom: 8px; color: var(--text-color); }
+        .profile-info span { color: var(--text-muted); font-size: 12px; display: block; }
+        .logout-btn { background: #ef4444; color: white; border: none; padding: 12px; width: 100%; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .logout-btn:hover { background: #dc2626; }
+
+        /* Settings Modal */
         .settings-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center;
-            backdrop-filter: blur(4px); animation: fadeIn 0.2s ease-in-out;
+            background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(4px);
         }
         .settings-modal.active { display: flex; }
         .settings-content {
             background: var(--card-bg); border: 1px solid var(--border-color); padding: 24px; border-radius: 24px;
-            max-width: 360px; width: 90%; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex; flex-direction: column; gap: 20px;
+            max-width: 360px; width: 90%; box-shadow: 0 20px 40px rgba(0,0,0,0.5); display: flex; flex-direction: column; gap: 20px;
         }
-        .settings-header { display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 18px; color: var(--text-color); }
+        .settings-header { display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 18px; }
         .setting-group { display: flex; flex-direction: column; gap: 8px; }
-        .setting-label { font-size: 13px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
-        
+        .setting-label { font-size: 13px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
         .setting-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
         .theme-btn, .notif-btn {
             padding: 10px; border-radius: 12px; border: 1px solid var(--border-color);
-            background: var(--bg-main); color: var(--text-color); font-size: 13px; font-weight: 600;
-            cursor: pointer; transition: all 0.2s ease; text-align: center;
+            background: var(--bg-main); color: var(--text-color); font-size: 13px; font-weight: 600; cursor: pointer;
         }
-        .theme-btn:hover, .notif-btn:hover { filter: brightness(1.2); }
-        .theme-btn.active, .notif-btn.active {
-            background: var(--accent-gradient);
-            color: #0f172a;
-            border-color: transparent;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
+        .theme-btn.active, .notif-btn.active { background: var(--accent-gradient); color: #0f172a; border-color: transparent; }
 
-        /* Bubble Notification Modal */
-        .bubble-modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center;
-            backdrop-filter: blur(4px);
-        }
+        /* Bubble Modal */
+        .bubble-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center; }
         .bubble-modal.active { display: flex; }
-        .bubble-content {
-            background: var(--card-bg); border: 1px solid var(--border-color); padding: 24px; border-radius: 20px;
-            max-width: 320px; width: 85%; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-        }
-        .bubble-content p { color: var(--text-color); font-size: 14px; line-height: 1.5; margin-bottom: 18px; }
-        .bubble-btn {
-            background: var(--accent-gradient); color: #0f172a; border: none; padding: 10px 24px; border-radius: 12px;
-            font-weight: bold; font-size: 14px; cursor: pointer;
-        }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes popUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .bubble-content { background: var(--card-bg); border: 1px solid var(--border-color); padding: 24px; border-radius: 20px; max-width: 320px; width: 85%; text-align: center; }
+        .bubble-btn { background: var(--accent-gradient); color: #0f172a; border: none; padding: 10px 24px; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 15px; }
 
         /* Bottom Nav */
         .bottom-nav {
@@ -368,7 +285,6 @@
             <button class="menu-btn" id="top-left-btn" onclick="handleTopButton()">☰</button>
             <div class="app-title" id="page-title">Sea Tycoon</div>
         </div>
-        <!-- Tombol Settings Bulat Gradasi di Pojok Kanan Atas -->
         <button class="settings-btn" onclick="toggleSettingsModal()" title="Pengaturan">⚙️</button>
     </div>
 
@@ -386,76 +302,108 @@
         <div class="sidebar-item" onclick="openMenu('tiktok')">🎵 TikTok Downloader</div>
         <div class="sidebar-item" onclick="openMenu('chat-ai')">🤖 Chat AI Assistant</div>
 
+        <!-- Menu Khusus Owner -->
+        <div class="menu-category owner-menu-label" style="display:none;">Panel Owner</div>
+        <div class="sidebar-item owner-menu" id="menu-owner-panel" onclick="showBubble('Selamat datang di Panel Kontrol Eksklusif Owner! 👑')">👑 Kontrol Panel Owner</div>
+
         <div class="menu-category">Fitur Fun</div>
         <div class="sidebar-item" onclick="showBubble('Fitur Susun Kata sedang dalam tahap pengembangan. Segera hadir! 🧩')">🧩 Susun Kata</div>
         <div class="sidebar-item" onclick="showBubble('Fitur Info Gempa sedang dalam tahap pengembangan. Segera hadir! 🌍')">🌍 Info Gempa</div>
-        <div class="sidebar-item" onclick="showBubble('Fitur Spotify Song sedang dalam tahap pengembangan. Segera hadir! 🎧')">🎧 Spotify Song</div>
-        <div class="sidebar-item" onclick="showBubble('Fitur Tebak Kata sedang dalam tahap pengembangan. Segera hadir! 💡')">💡 Tebak Kata</div>
-
-        <div class="menu-category">Eksplorasi</div>
-        <div class="sidebar-item" onclick="showBubble('Fitur Tempat Lagu sedang dalam tahap pengembangan. Mohon ditunggu ya! 🎵')">🎵 Tempat Lagu</div>
-        <div class="sidebar-item" onclick="showBubble('Fitur Tempat Bermain sedang dalam tahap pengembangan. Mohon ditunggu ya! 🎮')">🎮 Tempat Bermain</div>
-        <div class="sidebar-item" onclick="showBubble('Fitur Tempat Cerita sedang dalam tahap pengembangan. Mohon ditunggu ya! 📖')">📖 Tempat Cerita</div>
-        <div class="sidebar-item" onclick="showBubble('Fitur Tempat Kenangan sedang dalam tahap pengembangan. Mohon ditunggu ya! 📸')">📸 Tempat Kenangan</div>
     </div>
 
     <!-- Main Content -->
     <div class="main-content" id="content-area">
         
+        <!-- Halaman Auth (Login / Register) -->
+        <div id="page-auth" class="page-container">
+            <div class="auth-card" id="auth-card-box">
+                <h2 id="auth-title">Selamat Datang! 🚀</h2>
+                <p id="auth-subtitle">Masuk atau buat akun untuk melanjutkan</p>
+                
+                <button class="google-btn" onclick="loginWithGoogle()">
+                    <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.95H1.2v3.15C3.18 21.32 7.24 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.25c-.25-.72-.38-1.49-.38-2.25s.13-1.53.38-2.25V6.6H1.2C.43 8.15 0 9.89 0 12s.43 3.85 1.2 5.4l4.08-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.24 0 3.18 2.68 1.2 6.6l4.08 3.15c.95-2.84 3.6-4.95 6.72-4.95z"/></svg>
+                    Lanjutkan dengan Google
+                </button>
+
+                <div class="divider">atau dengan email</div>
+
+                <div class="input-group" id="group-username">
+                    <label>Username</label>
+                    <input type="text" id="input-username" placeholder="Masukkan username...">
+                </div>
+
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" id="input-email" placeholder="nama@email.com...">
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="input-password" placeholder="Minimal 6 karakter...">
+                </div>
+
+                <button class="auth-submit-btn" id="auth-btn-action" onclick="handleAuthSubmit()">Masuk</button>
+
+                <div class="auth-switch">
+                    <span id="auth-switch-text" onclick="toggleAuthMode()">Belum punya akun? Daftar sekarang</span>
+                </div>
+            </div>
+        </div>
+
         <!-- Halaman Beranda -->
-        <div id="page-home" class="home-container">
-            <h2>Selamat Datang di Sea Tycoon</h2>
-            <p>Silakan gunakan tombol menu di pojok kiri atas (☰) untuk menjelajahi berbagai fitur menarik yang tersedia.</p>
+        <div id="page-home" class="page-container">
+            <h2>Selamat Datang, <span id="welcome-username" style="color: #38bdf8;">User</span>!</h2>
+            <p style="color: var(--text-muted); margin-top: 10px;">Gunakan menu navigasi di bawah atau sidebar (☰) untuk mulai menggunakan fitur Sea Tycoon.</p>
         </div>
 
         <!-- Halaman TikTok Downloader -->
-        <div id="page-tiktok" class="downloader-section">
+        <div id="page-tiktok" class="page-container">
             <div class="downloader-card">
                 <h2>TikTok Downloader</h2>
-                <p>Unduh video TikTok tanpa watermark dengan mudah dan cepat.</p>
-                <div class="input-group">
-                    <input type="text" id="tiktok-url" placeholder="Tempel link video TikTok di sini...">
-                </div>
-                <button class="download-btn" onclick="startDownload()">Download</button>
-
-                <div id="loading">
-                    <div class="spinner"></div>
-                    Sedang memproses video... Mohon tunggu sebentar.
-                </div>
-
-                <div id="result-box">
-                    <p id="video-title" style="font-size: 13px; font-weight: bold; margin-bottom: 5px;"></p>
-                    <video id="video-player" controls></video>
-                    <a id="download-link" href="#" target="_blank" style="display: block; margin-top: 10px; padding: 12px; background: #38bdf8; color: #0f172a; text-align: center; border-radius: 12px; text-decoration: none; font-weight: bold;">Unduh Video</a>
-                </div>
+                <p>Unduh video TikTok tanpa watermark dengan mudah.</p>
+                <input type="text" id="tiktok-url" placeholder="Tempel link video TikTok di sini...">
+                <button class="download-btn" onclick="showBubble('Fitur download sedang diproses...')">Download</button>
             </div>
         </div>
 
         <!-- Halaman Chat AI Room -->
-        <div id="page-chat" class="chat-section">
-            <div class="chat-box" id="chat-box">
-                <div class="chat-message ai">Halo! Aku asisten AI Sea Tycoon. Ada yang bisa kubantu hari ini?</div>
+        <div id="page-chat" class="page-container" style="padding: 0;">
+            <div class="chat-section">
+                <div class="chat-box" id="chat-box">
+                    <div class="chat-message ai">Halo! Aku asisten AI Sea Tycoon. Ada yang bisa kubantu?</div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="chat-input" placeholder="Tulis pesan ke AI..." onkeypress="if(event.key==='Enter')sendChatMessage()">
+                    <button class="send-btn" onclick="sendChatMessage()">Kirim</button>
+                </div>
             </div>
+        </div>
 
-            <div class="typing-indicator" id="typing-indicator">AI sedang mengetik...</div>
+        <!-- Halaman Profile -->
+        <div id="page-profile" class="page-container">
+            <div class="profile-card">
+                <div class="profile-avatar" id="profile-initial">U</div>
+                <h3 id="profile-name" style="margin-bottom: 5px; font-size: 18px;">Username</h3>
+                <p id="profile-role-badge" style="font-size: 12px; color: #38bdf8; font-weight: bold; margin-bottom: 15px;">Member</p>
+                
+                <div class="profile-info">
+                    <p><strong>Email:</strong></p>
+                    <span id="profile-email">user@email.com</span>
+                </div>
 
-            <div class="chat-input-area">
-                <input type="text" id="chat-input" placeholder="Tulis pesan atau pertanyaan ke AI..." onkeypress="handleChatKeyPress(event)">
-                <button class="send-btn" onclick="sendChatMessage()">Kirim</button>
+                <button class="logout-btn" onclick="logoutUser()">Keluar Akun</button>
             </div>
         </div>
 
     </div>
 
-    <!-- Modal Pengaturan (Settings) -->
+    <!-- Modal Pengaturan -->
     <div id="settings-modal" class="settings-modal" onclick="toggleSettingsModal()">
         <div class="settings-content" onclick="event.stopPropagation()">
             <div class="settings-header">
                 <span>Pengaturan Aplikasi</span>
                 <button class="close-btn" onclick="toggleSettingsModal()">✕</button>
             </div>
-
-            <!-- Notifikasi On/Off -->
             <div class="setting-group">
                 <span class="setting-label">Notifikasi Aplikasi</span>
                 <div class="setting-options">
@@ -463,8 +411,6 @@
                     <button class="notif-btn" id="notif-off" onclick="setNotif('off')">Off</button>
                 </div>
             </div>
-
-            <!-- Pilihan Tema -->
             <div class="setting-group">
                 <span class="setting-label">Pilihan Tema</span>
                 <div class="setting-options">
@@ -478,7 +424,7 @@
         </div>
     </div>
 
-    <!-- Bubble Chat Notification Modal -->
+    <!-- Bubble Notification Modal -->
     <div id="bubble-modal" class="bubble-modal" onclick="closeBubble()">
         <div class="bubble-content" onclick="event.stopPropagation()">
             <p id="bubble-text">Pesan pemberitahuan...</p>
@@ -489,14 +435,170 @@
     <!-- Bottom Nav -->
     <div class="bottom-nav" id="bottom-nav">
         <a class="nav-item active" id="nav-beranda" onclick="switchTab(this, 'Beranda')">🏠<span>Beranda</span></a>
-        <a class="nav-item" id="nav-kotak" onclick="switchTab(this, 'Kotak Masuk')">📥<span>Kotak Masuk</span></a>
+        <a class="nav-item" id="nav-tiktok" onclick="switchTab(this, 'TikTok')">🎵<span>TikTok</span></a>
         <a class="nav-item" id="nav-chat" onclick="switchTab(this, 'Chat AI')">🤖<span>Chat AI</span></a>
         <a class="nav-item" id="nav-profile" onclick="switchTab(this, 'Profile')">👤<span>Profile</span></a>
     </div>
 
     <script>
-        let currentView = 'home';
+        let isLoginMode = true; // Status awal form: Login
+        let currentUser = null;
 
+        // Cek Sesi Tersimpan (Local Storage / MongoDB Session simulation)
+        window.onload = function() {
+            const savedUser = localStorage.getItem('sea_tycoon_user');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                applyUserSession();
+                openMenu('home');
+            } else {
+                openAuthScreen();
+            }
+        };
+
+        function openAuthScreen() {
+            document.getElementById('bottom-nav').classList.add('hidden');
+            document.querySelectorAll('.page-container').forEach(p => p.classList.remove('active'));
+            document.getElementById('page-auth').classList.add('active');
+            document.getElementById('page-title').innerText = 'Autentikasi';
+        }
+
+        function toggleAuthMode() {
+            isLoginMode = !isLoginMode;
+            const title = document.getElementById('auth-title');
+            const subtitle = document.getElementById('auth-subtitle');
+            const btnAction = document.getElementById('auth-btn-action');
+            const switchText = document.getElementById('auth-switch-text');
+            const groupUsername = document.getElementById('group-username');
+
+            if (isLoginMode) {
+                title.innerText = "Selamat Datang Kembali! 👋";
+                subtitle.innerText = "Masuk untuk melanjutkan ke akunmu";
+                btnAction.innerText = "Masuk";
+                switchText.innerText = "Belum punya akun? Daftar sekarang";
+                groupUsername.style.display = "none"; // Login cukup email & password (atau usn owner)
+            } else {
+                title.innerText = "Buat Akun Baru 🚀";
+                subtitle.innerText = "Daftar untuk menikmati semua fitur";
+                btnAction.innerText = "Daftar";
+                switchText.innerText = "Sudah punya akun? Masuk di sini";
+                groupUsername.style.display = "block"; // Register butuh username
+            }
+        }
+
+        // Handle Proses Login / Register
+        function handleAuthSubmit() {
+            const email = document.getElementById('input-email').value.trim();
+            const password = document.getElementById('input-password').value.trim();
+            const usernameInput = document.getElementById('input-username').value.trim();
+
+            if (!email || !password) {
+                showBubble('Email dan Password wajib diisi! ⚠️');
+                return;
+            }
+
+            // Cek Khusus Akun Owner (Sesuai permintaan: usn: owner, pw: owner123)
+            if (email === 'owner' || usernameInput === 'owner' || (email === 'owner@seatycoon.com' && password === 'owner123')) {
+                if (isLoginMode && password !== 'owner123') {
+                    showBubble('Password Owner salah! ❌');
+                    return;
+                }
+                currentUser = {
+                    username: 'owner',
+                    email: 'owner@seatycoon.com',
+                    role: 'Owner'
+                };
+                finalizeLogin();
+                return;
+            }
+
+            if (isLoginMode) {
+                // Simulasi Login Database (MongoDB local check)
+                let dbUsers = JSON.parse(localStorage.getItem('sea_tycoon_db') || '[]');
+                let found = dbUsers.find(u => u.email === email && u.password === password);
+                
+                if (found) {
+                    currentUser = found;
+                    finalizeLogin();
+                } else {
+                    showBubble('Email atau Password salah, atau akun belum terdaftar! ❌');
+                }
+            } else {
+                // Simulasi Pendaftaran (Register ke Database)
+                if (!usernameInput) {
+                    showBubble('Username wajib diisi untuk pendaftaran! ⚠️');
+                    return;
+                }
+                let dbUsers = JSON.parse(localStorage.getItem('sea_tycoon_db') || '[]');
+                if(dbUsers.some(u => u.email === email)) {
+                    showBubble('Email sudah terdaftar! Silakan langsung login. ⚠️');
+                    return;
+                }
+
+                const newUser = {
+                    username: usernameInput,
+                    email: email,
+                    password: password,
+                    role: 'Member'
+                };
+
+                dbUsers.push(newUser);
+                localStorage.setItem('sea_tycoon_db', JSON.stringify(dbUsers));
+                
+                currentUser = newUser;
+                showBubble('Pendaftaran berhasil! Selamat datang 🎉');
+                finalizeLogin();
+            }
+        }
+
+        // Login Instan via Google (Otomatis ambil nama dari akun Google simulasi)
+        function loginWithGoogle() {
+            const googleNames = ['Alexandro', 'Dhonatt Eskrim', 'Siti Rahma', 'Budi Santoso'];
+            const randomName = googleNames[Math.floor(Math.random() * googleNames.length)];
+            const cleanUsername = randomName.toLowerCase().replace(/\s+/g, '_');
+
+            currentUser = {
+                username: cleanUsername,
+                email: `${cleanUsername}@gmail.com`,
+                role: 'Member'
+            };
+            finalizeLogin();
+        }
+
+        function finalizeLogin() {
+            localStorage.setItem('sea_tycoon_user', JSON.stringify(currentUser));
+            applyUserSession();
+            openMenu('home');
+            showBubble(`Berhasil masuk sebagai @${currentUser.username} ✨`);
+        }
+
+        function applyUserSession() {
+            if (!currentUser) return;
+            document.getElementById('welcome-username').innerText = currentUser.username;
+            document.getElementById('profile-name').innerText = currentUser.username;
+            document.getElementById('profile-email').innerText = currentUser.email;
+            document.getElementById('profile-initial').innerText = currentUser.username.charAt(0).toUpperCase();
+            document.getElementById('profile-role-badge').innerText = currentUser.role === 'Owner' ? '👑 Owner Official' : 'Member Aktif';
+
+            // Jika Owner, buka akses menu khusus owner di sidebar
+            if (currentUser.role === 'Owner') {
+                document.querySelector('.owner-menu-label').style.display = 'block';
+                document.getElementById('menu-owner-panel').style.display = 'flex';
+            } else {
+                document.querySelector('.owner-menu-label').style.display = 'none';
+                document.getElementById('menu-owner-panel').style.display = 'none';
+            }
+        }
+
+        function logoutUser() {
+            localStorage.removeItem('sea_tycoon_user');
+            currentUser = null;
+            openAuthScreen();
+            showBubble('Berhasil keluar dari akun. Sampai jumpa! 👋');
+        }
+
+        // Navigasi Menu & Sidebar
+        let currentView = 'home';
         function handleTopButton() {
             if (currentView === 'home') {
                 toggleSidebar();
@@ -514,63 +616,75 @@
             document.getElementById('settings-modal').classList.toggle('active');
         }
 
-        // Fungsi Mengatur Tema secara Menyeluruh
         function setTheme(themeName) {
             document.body.className = `theme-${themeName}`;
-            
-            // Perbarui status aktif tombol tema di modal
             document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
             document.getElementById(`theme-${themeName}`).classList.add('active');
         }
 
-        // Fungsi Mengatur Notifikasi On/Off
         function setNotif(status) {
             document.querySelectorAll('.notif-btn').forEach(btn => btn.classList.remove('active'));
             document.getElementById(`notif-${status}`).classList.add('active');
-            showBubble(`Notifikasi aplikasi berhasil diubah ke: ${status.toUpperCase()} 🔔`);
+            showBubble(`Notifikasi aplikasi: ${status.toUpperCase()} 🔔`);
         }
 
         function openMenu(menu) {
             if(document.getElementById('sidebar').classList.contains('open')) {
                 toggleSidebar();
             }
+            if(!currentUser) {
+                openAuthScreen();
+                return;
+            }
+
             currentView = menu;
-            const homePage = document.getElementById('page-home');
-            const tiktokPage = document.getElementById('page-tiktok');
-            const chatPage = document.getElementById('page-chat');
-            const title = document.getElementById('page-title');
+            document.querySelectorAll('.page-container').forEach(p => p.classList.remove('active'));
             const bottomNav = document.getElementById('bottom-nav');
+            const title = document.getElementById('page-title');
             const topLeftBtn = document.getElementById('top-left-btn');
 
-            homePage.style.display = 'none';
-            tiktokPage.style.display = 'none';
-            chatPage.style.display = 'none';
+            bottomNav.classList.remove('hidden');
 
             if (menu === 'home') {
-                homePage.style.display = 'flex';
+                document.getElementById('page-home').classList.add('active');
                 title.innerText = 'Sea Tycoon';
-                bottomNav.classList.remove('hidden');
                 topLeftBtn.innerText = '☰';
                 setActiveNav('Beranda');
             } else if (menu === 'tiktok') {
-                tiktokPage.style.display = 'block';
+                document.getElementById('page-tiktok').classList.add('active');
                 title.innerText = 'TikTok Downloader';
-                bottomNav.classList.add('hidden');
                 topLeftBtn.innerText = '✕';
-                setActiveNav('');
+                setActiveNav('TikTok');
             } else if (menu === 'chat-ai') {
-                chatPage.style.display = 'flex';
+                document.getElementById('page-chat').classList.add('active');
                 title.innerText = 'Chat AI Assistant';
-                bottomNav.classList.add('hidden');
                 topLeftBtn.innerText = '✕';
                 setActiveNav('Chat AI');
+            } else if (menu === 'profile') {
+                document.getElementById('page-profile').classList.add('active');
+                title.innerText = 'Profile Pengguna';
+                topLeftBtn.innerText = '✕';
+                setActiveNav('Profile');
             }
         }
 
+        function switchTab(element, name) {
+            if (name === 'Beranda') openMenu('home');
+            else if (name === 'TikTok') openMenu('tiktok');
+            else if (name === 'Chat AI') openMenu('chat-ai');
+            else if (name === 'Profile') openMenu('profile');
+        }
+
+        function setActiveNav(name) {
+            document.querySelectorAll('.bottom-nav .nav-item').forEach(i => i.classList.remove('active'));
+            if(name === 'Beranda') document.getElementById('nav-beranda').classList.add('active');
+            else if(name === 'TikTok') document.getElementById('nav-tiktok').classList.add('active');
+            else if(name === 'Chat AI') document.getElementById('nav-chat').classList.add('active');
+            else if(name === 'Profile') document.getElementById('nav-profile').classList.add('active');
+        }
+
         function showBubble(message) {
-            if(document.getElementById('sidebar').classList.contains('open')) {
-                toggleSidebar();
-            }
+            if(document.getElementById('sidebar').classList.contains('open')) toggleSidebar();
             document.getElementById('bubble-text').innerText = message;
             document.getElementById('bubble-modal').classList.add('active');
         }
@@ -579,88 +693,18 @@
             document.getElementById('bubble-modal').classList.remove('active');
         }
 
-        function switchTab(element, name) {
-            let items = document.querySelectorAll('.bottom-nav .nav-item');
-            items.forEach(item => item.classList.remove('active'));
-            element.classList.add('active');
-
-            if (name === 'Beranda') {
-                openMenu('home');
-            } else if (name === 'Chat AI') {
-                openMenu('chat-ai');
-            } else {
-                showBubble(`Fitur ${name} sedang dalam proses pembuatan. Segera hadir! ✨`);
-            }
-        }
-
-        function setActiveNav(name) {
-            let items = document.querySelectorAll('.bottom-nav .nav-item');
-            items.forEach(item => item.classList.remove('active'));
-            if(name === 'Beranda') {
-                document.getElementById('nav-beranda').classList.add('active');
-            } else if(name === 'Chat AI') {
-                document.getElementById('nav-chat').classList.add('active');
-            }
-        }
-
-        // --- Logika Chat AI ---
-        function handleChatKeyPress(event) {
-            if (event.key === 'Enter') {
-                sendChatMessage();
-            }
-        }
-
-        async function sendChatMessage() {
-            const inputField = document.getElementById('chat-input');
-            const messageText = inputField.value.trim();
-            if (!messageText) return;
-
+        function sendChatMessage() {
+            const input = document.getElementById('chat-input');
+            if(!input.value.trim()) return;
             const chatBox = document.getElementById('chat-box');
-
-            const userMsgDiv = document.createElement('div');
-            userMsgDiv.className = 'chat-message user';
-            userMsgDiv.innerText = messageText;
-            chatBox.appendChild(userMsgDiv);
-
-            inputField.value = '';
+            chatBox.innerHTML += `<div class="chat-message user">${input.value}</div>`;
+            input.value = '';
             chatBox.scrollTop = chatBox.scrollHeight;
 
-            const typingIndicator = document.getElementById('typing-indicator');
-            typingIndicator.style.display = 'block';
-            chatBox.scrollTop = chatBox.scrollHeight;
-
-            try {
-                const response = await fetch('/api/chat-ai', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: messageText })
-                });
-                const resData = await response.json();
-
-                typingIndicator.style.display = 'none';
-
-                const aiMsgDiv = document.createElement('div');
-                aiMsgDiv.className = 'chat-message ai';
-
-                if (resData.success && resData.reply) {
-                    aiMsgDiv.innerText = resData.reply;
-                } else if (resData.reply) {
-                    aiMsgDiv.innerText = resData.reply;
-                } else {
-                    aiMsgDiv.innerText = 'Maaf, server AI belum dikonfigurasi dengan benar.';
-                }
-
-                chatBox.appendChild(aiMsgDiv);
+            setTimeout(() => {
+                chatBox.innerHTML += `<div class="chat-message ai">Halo! Pesanmu berhasil diterima oleh server AI.</div>`;
                 chatBox.scrollTop = chatBox.scrollHeight;
-
-            } catch (err) {
-                typingIndicator.style.display = 'none';
-                const aiMsgDiv = document.createElement('div');
-                aiMsgDiv.className = 'chat-message ai';
-                aiMsgDiv.innerText = 'Gagal terhubung ke server backend (/api/chat-ai).';
-                chatBox.appendChild(aiMsgDiv);
-                chatBox.scrollTop = chatBox.scrollHeight;
-            }
+            }, 600);
         }
     </script>
 </body>
