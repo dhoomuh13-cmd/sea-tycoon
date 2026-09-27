@@ -136,15 +136,15 @@
         .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 999; backdrop-filter: blur(4px); transition: 0.3s; }
         .overlay.active { display: block; }
 
-        /* Main Content & Enhanced Premium Page Animation (Efek Loading / Transisi Halus) */
+        /* Main Content & Smooth Premium Page Animation */
         .main-content { flex: 1; width: 100%; display: flex; flex-direction: column; overflow: hidden; position: relative; }
         .page-container { 
             display: none; width: 100%; height: 100%; padding: 20px; overflow-y: auto; 
             flex-direction: column; align-items: center; text-align: center; 
-            opacity: 0; transform: translateY(18px) scale(0.96); 
-            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0; transform: scale(0.97) translateY(12px); 
+            transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .page-container.active { display: flex; opacity: 1; transform: translateY(0) scale(1); }
+        .page-container.active { display: flex; opacity: 1; transform: scale(1) translateY(0); }
 
         .auth-card, .downloader-card, .form-card {
             background: var(--card-bg); padding: 24px; border-radius: 22px; border: 1px solid var(--border-color);
@@ -266,27 +266,19 @@
         }
         .channel-img-wrapper:hover img { transform: scale(1.04); }
 
-        /* Improved Modern Delete Button for Kenangan/Cerita */
+        /* Delete Button for Kenangan/Cerita */
         .delete-post-btn {
-            background: rgba(239, 68, 68, 0.12);
-            border: 1px solid rgba(239, 68, 68, 0.35);
-            color: #f87171;
-            padding: 5px 12px;
-            border-radius: 8px;
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+            padding: 4px 10px;
+            border-radius: 10px;
             font-size: 11px;
             font-weight: 700;
             cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            transition: all 0.2s ease;
+            transition: 0.2s;
         }
-        .delete-post-btn:hover {
-            background: #ef4444;
-            color: #ffffff;
-            border-color: #ef4444;
-            transform: translateY(-1px);
-        }
+        .delete-post-btn:hover { background: #ef4444; color: #fff; }
 
         /* Reactions Box */
         .reactions-wrapper {
@@ -417,24 +409,24 @@
         </div>
         
         <div class="menu-category">Fitur Utama</div>
-        <div class="sidebar-item" onclick="openMenu('home')">&#82; Beranda</div>
-        <div class="sidebar-item" onclick="openMenu('tiktok')">&#9835; TikTok Downloader</div>
-        <div class="sidebar-item" onclick="openMenu('req-fitur')">&#9881; Req Fitur / Lagu</div>
+        <div class="sidebar-item" onclick="openMenu('home')">🏠 Beranda</div>
+        <div class="sidebar-item" onclick="openMenu('tiktok')">🎵 TikTok Downloader</div>
+        <div class="sidebar-item" onclick="openMenu('req-fitur')">💡 Req Fitur / Lagu</div>
 
         <div class="menu-category owner-menu-label" style="display:none;">Panel Owner</div>
-        <div class="sidebar-item owner-menu" onclick="showBubble('Panel Kontrol Owner Aktif 👑')">&#9733; Kontrol Panel Owner</div>
-        <div class="sidebar-item owner-menu" onclick="openMenu('owner-notif-user')">&#9873; Notif User & Request</div>
-        <div class="sidebar-item owner-menu" onclick="openMenu('add-lagu')">&#9834; Tambah Lagu</div>
+        <div class="sidebar-item owner-menu" onclick="showBubble('Panel Kontrol Owner Aktif 👑')">👑 Kontrol Panel Owner</div>
+        <div class="sidebar-item owner-menu" onclick="openMenu('owner-notif-user')">🔔 Notif User & Request</div>
+        <div class="sidebar-item owner-menu" onclick="openMenu('add-lagu')">🎶 Tambah Lagu</div>
 
         <div class="menu-category">Fitur Saluran Eksklusif</div>
-        <div class="sidebar-item" onclick="openMenu('lihat-kenangan')">&#9632; Lihat Saluran Kenangan</div>
-        <div class="sidebar-item" onclick="openMenu('add-kenangan')">&#10010; Kirim Kenangan (Multi Foto)</div>
-        <div class="sidebar-item" onclick="openMenu('lihat-cerita')">&#9644; Lihat Saluran Cerita</div>
-        <div class="sidebar-item" onclick="openMenu('add-cerita')">&#10010; Kirim Cerita</div>
-        <div class="sidebar-item" onclick="openMenu('susun-kata')">&#9638; Tebak Kata</div>
+        <div class="sidebar-item" onclick="openMenu('lihat-kenangan')">📸 Lihat Saluran Kenangan</div>
+        <div class="sidebar-item" onclick="openMenu('add-kenangan')">➕ Kirim Kenangan (Multi Foto)</div>
+        <div class="sidebar-item" onclick="openMenu('lihat-cerita')">📖 Lihat Saluran Cerita</div>
+        <div class="sidebar-item" onclick="openMenu('add-cerita')">➕ Kirim Cerita</div>
+        <div class="sidebar-item" onclick="openMenu('susun-kata')">🧩 Tebak Kata</div>
 
         <div class="menu-category">Eksplorasi Lainnya</div>
-        <div class="sidebar-item" onclick="openMenu('tempat-lagu')">&#9836; Tempat Lagu</div>
+        <div class="sidebar-item" onclick="openMenu('tempat-lagu')">🎵 Tempat Lagu</div>
     </div>
 
     <!-- Main Content -->
@@ -443,7 +435,7 @@
         <!-- Auth -->
         <div id="page-auth" class="page-container">
             <div class="auth-card">
-                <h2 id="auth-title">Selamat Datang! &#10022;</h2>
+                <h2 id="auth-title">Selamat Datang! 🚀</h2>
                 <p id="auth-subtitle">Masuk dengan email & password akunmu</p>
                 
                 <div id="form-main-inputs">
@@ -475,14 +467,14 @@
                 <h2>Selamat Datang, <span id="welcome-username" style="color: #38bdf8;">User</span>!</h2>
                 <p style="color: var(--text-muted); margin-top: 8px; max-width: 330px; font-size: 13px;">Gunakan menu di bawah atau tombol pilihan cepat di bawah ini untuk masuk ke saluran kenangan & cerita.</p>
                 
-                <!-- Dua Tombol Utama -->
+                <!-- Dua Tombol Utama Sesuai Lingkaran Merah -->
                 <div class="home-action-buttons">
                     <button class="home-big-btn" onclick="openMenu('lihat-kenangan')">
-                        <span>&#9632;</span>
+                        <span>📸</span>
                         Lihat Kenangan
                     </button>
                     <button class="home-big-btn" onclick="openMenu('lihat-cerita')">
-                        <span>&#9644;</span>
+                        <span>📖</span>
                         Lihat Cerita
                     </button>
                 </div>
@@ -502,7 +494,7 @@
         <!-- Req Fitur -->
         <div id="page-req-fitur" class="page-container">
             <div class="form-card">
-                <h2>Req Fitur / Kendala &#9881;</h2>
+                <h2>Req Fitur / Kendala 💡</h2>
                 <p>Kirimkan masukan atau request fitur baru kepada Owner.</p>
                 <div class="input-group">
                     <label>Pesan & Detail Request</label>
@@ -519,7 +511,7 @@
         <!-- Kirim Kenangan (Multi Foto) -->
         <div id="page-add-kenangan" class="page-container">
             <div class="form-card">
-                <h2>Kirim Kenangan &#9632;</h2>
+                <h2>Kirim Kenangan 📸</h2>
                 <p>Bagikan memori spesialmu dengan dukungan banyak foto.</p>
                 <div class="input-group">
                     <label>Judul Kenangan</label>
@@ -540,7 +532,7 @@
         <!-- Lihat Kenangan (Saluran Channel) -->
         <div id="page-lihat-kenangan" class="page-container">
             <div style="width: 100%; max-width: 480px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
-                <h2 style="font-size: 17px; font-weight: 700;">Saluran Kenangan &#9632;</h2>
+                <h2 style="font-size: 17px; font-weight: 700;">Saluran Kenangan 📸</h2>
                 <button class="action-btn" style="width: auto; padding: 8px 14px; font-size: 12px; margin: 0;" onclick="openMenu('add-kenangan')">+ Buat Kenangan</button>
             </div>
             <div class="channel-feed-container" id="kenangan-feed-wrapper"></div>
@@ -549,7 +541,7 @@
         <!-- Kirim Cerita (Tanpa Judul) -->
         <div id="page-add-cerita" class="page-container">
             <div class="form-card">
-                <h2>Kirim Cerita &#9644;</h2>
+                <h2>Kirim Cerita 📖</h2>
                 <p>Bagikan ceritamu secara langsung dengan username aktif.</p>
                 <div class="input-group">
                     <label>Isi Cerita</label>
@@ -562,7 +554,7 @@
         <!-- Lihat Cerita (Saluran Channel) -->
         <div id="page-lihat-cerita" class="page-container">
             <div style="width: 100%; max-width: 480px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
-                <h2 style="font-size: 17px; font-weight: 700;">Saluran Cerita &#9644;</h2>
+                <h2 style="font-size: 17px; font-weight: 700;">Saluran Cerita 📖</h2>
                 <button class="action-btn" style="width: auto; padding: 8px 14px; font-size: 12px; margin: 0;" onclick="openMenu('add-cerita')">+ Buat Cerita</button>
             </div>
             <div class="channel-feed-container" id="cerita-feed-wrapper"></div>
@@ -571,7 +563,7 @@
         <!-- Tebak Kata -->
         <div id="page-susun-kata" class="page-container">
             <div class="form-card" style="text-align: center;">
-                <h2>Tebak Kata &#9638;</h2>
+                <h2>Tebak Kata 🧩</h2>
                 <p>Asah otakmu dengan menebak susunan kata acak.</p>
                 <div style="background: var(--bg-main); padding: 20px; border-radius: 14px; margin: 15px 0; border: 1px solid var(--border-color);">
                     <h3 style="letter-spacing: 4px; color: #38bdf8;" id="scramble-word-display">R T A K I</h3>
@@ -586,7 +578,7 @@
         <!-- Notif User (Owner) -->
         <div id="page-owner-notif-user" class="page-container">
             <div style="width: 100%; max-width: 550px; margin-bottom: 20px; text-align: left;">
-                <h2 style="font-size: 18px; font-weight: 700;">Notif User & Request &#9873;</h2>
+                <h2 style="font-size: 18px; font-weight: 700;">Notif User & Request 🔔</h2>
             </div>
             <div id="owner-requests-wrapper" style="width: 100%; max-width: 550px; display: flex; flex-direction: column; gap: 15px; padding-bottom: 30px;"></div>
         </div>
@@ -594,7 +586,7 @@
         <!-- Add Lagu -->
         <div id="page-add-lagu" class="page-container">
             <div class="form-card">
-                <h2>Tambah Lagu Baru &#9834;</h2>
+                <h2>Tambah Lagu Baru 🎶</h2>
                 <div class="input-group">
                     <label>Judul Lagu</label>
                     <input type="text" id="input-song-title" placeholder="Judul lagu...">
@@ -610,7 +602,7 @@
         <!-- Tempat Lagu -->
         <div id="page-tempat-lagu" class="page-container">
             <div style="width: 100%; max-width: 500px; margin-bottom: 20px; text-align: left;">
-                <h2 style="font-size: 18px; font-weight: 700;">Tempat Lagu &#9836;</h2>
+                <h2 style="font-size: 18px; font-weight: 700;">Tempat Lagu 🎵</h2>
             </div>
             <div class="song-list-container" id="song-list-wrapper"></div>
         </div>
@@ -673,11 +665,11 @@
         <img id="lightbox-img" class="lightbox-content" src="">
     </div>
 
-    <!-- Bottom Nav -->
+    <!-- Bottom Nav (Auto Hide di Saluran) -->
     <div class="bottom-nav" id="bottom-nav">
-        <a class="nav-item active" id="nav-beranda" onclick="switchTab('Beranda')">&#8962;<span>Beranda</span></a>
-        <a class="nav-item" id="nav-tiktok" onclick="switchTab('TikTok')">&#9835;<span>TikTok</span></a>
-        <a class="nav-item" id="nav-profile" onclick="switchTab('Profile')">&#128100;<span>Profile</span></a>
+        <a class="nav-item active" id="nav-beranda" onclick="switchTab('Beranda')">🏠<span>Beranda</span></a>
+        <a class="nav-item" id="nav-tiktok" onclick="switchTab('TikTok')">🎵<span>TikTok</span></a>
+        <a class="nav-item" id="nav-profile" onclick="switchTab('Profile')">👤<span>Profile</span></a>
     </div>
 
     <script>
@@ -717,12 +709,12 @@
             groupPassword.style.display = 'block';
 
             if (state === 'login') {
-                title.innerText = "Selamat Datang Kembali! \u2728";
+                title.innerText = "Selamat Datang Kembali! 👋";
                 subtitle.innerText = "Masuk dengan email & password akunmu";
                 btnAction.innerText = "Masuk";
                 switchContainer.innerHTML = `<span onclick="setAuthState('register')">Belum punya akun? Daftar sekarang</span>`;
             } else if (state === 'register') {
-                title.innerText = "Buat Akun Baru \uD83D\uDE80";
+                title.innerText = "Buat Akun Baru 🚀";
                 subtitle.innerText = "Daftar menggunakan email aktifmu";
                 btnAction.innerText = "Daftar Sekarang";
                 groupUsername.style.display = 'block';
@@ -865,6 +857,7 @@
             const title = document.getElementById('page-title');
             const topLeftBtn = document.getElementById('top-left-btn');
 
+            // Auto Hide Bottom Nav untuk Halaman Saluran (Kenangan & Cerita)
             if (menu === 'lihat-kenangan' || menu === 'lihat-cerita') {
                 bottomNav.classList.add('hidden');
             } else {
@@ -963,7 +956,7 @@
             document.getElementById('lightbox-modal').classList.remove('active');
         }
 
-        // --- KENANGAN SYSTEM ---
+        // --- KENANGAN SYSTEM (MULTI FOTO + HAPUS) ---
         function submitKenangan() {
             const judul = document.getElementById('kenangan-judul').value.trim();
             const isi = document.getElementById('kenangan-isi').value.trim();
@@ -1059,7 +1052,7 @@
                             <span>Dari : <b>@${item.from}</b></span>
                             <div style="display: flex; align-items: center; gap: 8px;">
                                 <span>${item.time}</span>
-                                ${canDelete ? `<button class="delete-post-btn" onclick="deleteKenangan('${item.id}')">🗑️ Hapus</button>` : ''}
+                                ${canDelete ? `<button class="delete-post-btn" onclick="deleteKenangan('${item.id}')">Hapus</button>` : ''}
                             </div>
                         </div>
                         <div class="channel-title">Judul : ${item.judul}</div>
@@ -1104,7 +1097,7 @@
             renderKenanganFeed();
         }
 
-        // --- CERITA SYSTEM ---
+        // --- CERITA SYSTEM (TANPA JUDUL + HAPUS) ---
         function submitCerita() {
             const isi = document.getElementById('cerita-isi').value.trim();
             if (!isi) {
@@ -1158,7 +1151,7 @@
                             <span>Dari : <b>@${item.from}</b></span>
                             <div style="display: flex; align-items: center; gap: 8px;">
                                 <span>${item.time}</span>
-                                ${canDelete ? `<button class="delete-post-btn" onclick="deleteCerita('${item.id}')">🗑️ Hapus</button>` : ''}
+                                ${canDelete ? `<button class="delete-post-btn" onclick="deleteCerita('${item.id}')">Hapus</button>` : ''}
                             </div>
                         </div>
                         <div class="channel-body-text">${item.cerita}</div>
@@ -1383,4 +1376,5 @@
             document.getElementById(`audio-${id}`).volume = val;
         }
     </script>
+</body>
 </html>
