@@ -5,6 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sea Tycoon</title>
     <style>
+        /* Variabel Tema Default (Gelap Elegan) */
+        :root {
+            --bg-main: #0b0f19;
+            --bg-topbar: rgba(15, 23, 42, 0.95);
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-gradient: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+            --accent-hover: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
+            --card-bg: linear-gradient(145deg, #1e293b, #0f172a);
+            --border-color: #334155;
+            --sidebar-bg: linear-gradient(180deg, #111827 0%, #0b0f19 100%);
+            --bottom-nav-bg: #1e293b;
+        }
+
+        /* Tema Gelap Pekat (Dark) */
+        body.theme-gelap {
+            --bg-main: #000000;
+            --bg-topbar: rgba(10, 10, 10, 0.95);
+            --text-color: #ffffff;
+            --text-muted: #a1a1aa;
+            --accent-gradient: linear-gradient(135deg, #27272a 0%, #09090b 100%);
+            --accent-hover: linear-gradient(135deg, #3f3f46 0%, #18181b 100%);
+            --card-bg: linear-gradient(145deg, #121212, #050505);
+            --border-color: #27272a;
+            --sidebar-bg: linear-gradient(180deg, #09090b 0%, #000000 100%);
+            --bottom-nav-bg: #121212;
+        }
+
+        /* Tema Galaxy */
+        body.theme-galaxy {
+            --bg-main: #13001e;
+            --bg-topbar: rgba(26, 0, 43, 0.95);
+            --text-color: #fae8ff;
+            --text-muted: #d8b4fe;
+            --accent-gradient: linear-gradient(135deg, #c084fc 0%, #7e22ce 100%);
+            --accent-hover: linear-gradient(135deg, #d8b4fe 0%, #6b21a8 100%);
+            --card-bg: linear-gradient(145deg, #2e1065, #1e1b4b);
+            --border-color: #581c87;
+            --sidebar-bg: linear-gradient(180deg, #2e1065 0%, #13001e 100%);
+            --bottom-nav-bg: #2e1065;
+        }
+
+        /* Tema Biru (Ocean) */
+        body.theme-biru {
+            --bg-main: #02203c;
+            --bg-topbar: rgba(3, 37, 65, 0.95);
+            --text-color: #e0f2fe;
+            --text-muted: #7dd3fc;
+            --accent-gradient: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            --accent-hover: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+            --card-bg: linear-gradient(145deg, #03346e, #02203c);
+            --border-color: #0369a1;
+            --sidebar-bg: linear-gradient(180deg, #032b52 0%, #02203c 100%);
+            --bottom-nav-bg: #03346e;
+        }
+
+        /* Tema Putih (Light) */
+        body.theme-putih {
+            --bg-main: #f1f5f9;
+            --bg-topbar: rgba(255, 255, 255, 0.95);
+            --text-color: #0f172a;
+            --text-muted: #64748b;
+            --accent-gradient: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+            --accent-hover: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
+            --card-bg: linear-gradient(145deg, #ffffff, #e2e8f0);
+            --border-color: #cbd5e1;
+            --sidebar-bg: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+            --bottom-nav-bg: #ffffff;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,54 +82,82 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
         body {
-            background-color: #0b0f19;
-            color: #f8fafc;
+            background-color: var(--bg-main);
+            color: var(--text-color);
             height: 100vh;
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         /* Top Bar */
         .top-bar {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             padding: 0 20px;
-            background: rgba(15, 23, 42, 0.95);
+            background: var(--bg-topbar);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid #1e293b;
+            border-bottom: 1px solid var(--border-color);
             width: 100%;
             height: 60px;
             flex-shrink: 0;
             z-index: 100;
         }
+        .top-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
         .menu-btn {
-            background: none; border: none; color: #f8fafc; font-size: 22px; cursor: pointer; margin-right: 15px; display: flex; align-items: center; justify-content: center;
+            background: none; border: none; color: var(--text-color); font-size: 22px; cursor: pointer; display: flex; align-items: center; justify-content: center;
         }
         .app-title { font-size: 18px; font-weight: 600; }
 
-        /* Sidebar (Dapat di-slide/scroll ke bawah & memiliki efek gradasi) */
+        /* Tombol Settings Bulat Gradasi di Pojok Kanan Atas */
+        .settings-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            border: none;
+            color: #0f172a;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
+        .settings-btn:hover {
+            transform: scale(1.1) rotate(45deg);
+            filter: brightness(1.15);
+        }
+
+        /* Sidebar (Dapat di-slide/scroll ke bawah) */
         .sidebar {
             position: fixed; top: 0; left: -280px; width: 280px; height: 100%;
-            background: linear-gradient(180deg, #111827 0%, #0b0f19 100%);
+            background: var(--sidebar-bg);
             box-shadow: 5px 0 25px rgba(0,0,0,0.5);
             transition: left 0.3s ease-in-out; z-index: 1000; padding: 20px;
-            display: flex; flex-direction: column; border-right: 1px solid #1f2937;
+            display: flex; flex-direction: column; border-right: 1px solid var(--border-color);
             overflow-y: auto;
         }
         .sidebar.open { left: 0; }
-        .sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 18px; font-weight: bold; color: #38bdf8; flex-shrink: 0; }
-        .close-btn { background: none; border: none; color: #9ca3af; font-size: 22px; cursor: pointer; }
-        .menu-category { font-size: 12px; text-transform: uppercase; color: #38bdf8; margin: 15px 0 8px; font-weight: 700; letter-spacing: 1px; flex-shrink: 0; }
+        .sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 18px; font-weight: bold; color: var(--text-color); flex-shrink: 0; }
+        .close-btn { background: none; border: none; color: var(--text-muted); font-size: 22px; cursor: pointer; }
+        .menu-category { font-size: 12px; text-transform: uppercase; color: var(--text-muted); margin: 15px 0 8px; font-weight: 700; letter-spacing: 1px; flex-shrink: 0; }
         
         .sidebar-item { 
             padding: 12px 16px; 
-            color: #f8fafc; 
+            color: var(--text-color); 
             text-decoration: none; 
             border-radius: 14px; 
             margin-bottom: 6px; 
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); 
-            border: 1px solid #334155;
+            background: var(--card-bg); 
+            border: 1px solid var(--border-color);
             font-size: 14px; 
             font-weight: 600;
             cursor: pointer; 
@@ -70,9 +168,9 @@
             flex-shrink: 0;
         }
         .sidebar-item:hover { 
-            background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%); 
+            background: var(--accent-gradient); 
             color: #0f172a;
-            border-color: #38bdf8;
+            border-color: transparent;
             transform: translateX(4px);
         }
 
@@ -89,7 +187,6 @@
             position: relative;
         }
 
-        /* Halaman Beranda (Bersih tanpa tombol menu berjejer) */
         .home-container {
             max-width: 600px;
             margin: auto;
@@ -103,29 +200,28 @@
             justify-content: center;
             align-items: center;
         }
-        .home-container h2 { font-size: 26px; font-weight: 700; margin-bottom: 10px; color: #f8fafc; }
-        .home-container p { font-size: 14px; color: #94a3b8; line-height: 1.6; max-width: 400px; }
+        .home-container h2 { font-size: 26px; font-weight: 700; margin-bottom: 10px; color: var(--text-color); }
+        .home-container p { font-size: 14px; color: var(--text-muted); line-height: 1.6; max-width: 400px; }
 
         /* Downloader Section */
         .downloader-section { display: none; max-width: 600px; margin: auto; width: 100%; padding: 20px; overflow-y: auto; height: 100%; }
         .downloader-card {
-            background: #1e293b; padding: 24px; border-radius: 20px; border: 1px solid #334155; box-shadow: 0 10px 25px rgba(0,0,0,0.3); text-align: center; width: 100%;
+            background: var(--card-bg); padding: 24px; border-radius: 20px; border: 1px solid var(--border-color); box-shadow: 0 10px 25px rgba(0,0,0,0.3); text-align: center; width: 100%;
         }
-        .downloader-card h2 { font-size: 20px; margin-bottom: 8px; color: #f8fafc; }
-        .downloader-card p { font-size: 13px; color: #94a3b8; margin-bottom: 20px; }
+        .downloader-card h2 { font-size: 20px; margin-bottom: 8px; color: var(--text-color); }
+        .downloader-card p { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
         .input-group { position: relative; margin-bottom: 15px; }
         .input-group input {
-            width: 100%; padding: 14px 16px; background: #0f172a; border: 1px solid #475569; border-radius: 14px; color: #fff; font-size: 14px; outline: none;
+            width: 100%; padding: 14px 16px; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 14px; color: var(--text-color); font-size: 14px; outline: none;
         }
-        .input-group input:focus { border-color: #38bdf8; }
         .download-btn {
-            width: 100%; padding: 14px; background: linear-gradient(135deg, #38bdf8, #0284c7); border: none; border-radius: 14px; color: #0f172a; font-weight: bold; font-size: 15px; cursor: pointer; transition: 0.2s;
+            width: 100%; padding: 14px; background: var(--accent-gradient); border: none; border-radius: 14px; color: #0f172a; font-weight: bold; font-size: 15px; cursor: pointer; transition: 0.2s;
         }
-        .download-btn:hover { background: linear-gradient(135deg, #0ea5e9, #0369a1); }
-        #loading { display: none; margin-top: 20px; color: #38bdf8; font-size: 14px; }
+        .download-btn:hover { background: var(--accent-hover); }
+        #loading { display: none; margin-top: 20px; color: var(--text-color); font-size: 14px; }
         .spinner { width: 24px; height: 24px; border: 3px solid rgba(56,189,248,0.3); border-top-color: #38bdf8; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 10px; }
         @keyframes spin { to { transform: rotate(360deg); } }
-        #result-box { display: none; margin-top: 20px; background: #0f172a; padding: 15px; border-radius: 14px; border: 1px solid #334155; text-align: left; }
+        #result-box { display: none; margin-top: 20px; background: var(--bg-main); padding: 15px; border-radius: 14px; border: 1px solid var(--border-color); text-align: left; }
         #result-box video { width: 100%; border-radius: 8px; margin-top: 10px; }
 
         /* Chat AI Room Section */
@@ -136,7 +232,7 @@
             width: 100%; 
             max-width: 600px;
             margin: 0 auto;
-            background: #0b0f19;
+            background: var(--bg-main);
             padding: 10px 16px;
             position: absolute;
             top: 0; left: 0; right: 0;
@@ -154,19 +250,19 @@
             max-width: 85%; padding: 14px 18px; border-radius: 16px; font-size: 15px; line-height: 1.6; word-wrap: break-word;
         }
         .chat-message.user {
-            background: linear-gradient(135deg, #38bdf8, #0284c7); color: #0f172a; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 600;
+            background: var(--accent-gradient); color: #0f172a; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 600;
         }
         .chat-message.ai {
-            background: #1e293b; color: #f8fafc; align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid #334155;
+            background: var(--card-bg); color: var(--text-color); align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid var(--border-color);
         }
         
         .chat-input-area {
             display: flex; 
             gap: 12px; 
-            background: #1e293b; 
+            background: var(--card-bg); 
             padding: 12px 14px; 
             border-radius: 20px; 
-            border: 1.5px solid #334155; 
+            border: 1.5px solid var(--border-color); 
             margin-top: 8px; 
             margin-bottom: 25px; 
             flex-shrink: 0;
@@ -175,17 +271,16 @@
         }
         .chat-input-area input {
             flex: 1; 
-            background: #0f172a; 
-            border: 1px solid #475569; 
+            background: var(--bg-main); 
+            border: 1px solid var(--border-color); 
             border-radius: 14px; 
             padding: 14px 16px; 
-            color: #fff; 
+            color: var(--text-color); 
             font-size: 15px; 
             outline: none;
         }
-        .chat-input-area input:focus { border-color: #38bdf8; }
         .send-btn {
-            background: linear-gradient(135deg, #38bdf8, #0284c7); 
+            background: var(--accent-gradient); 
             border: none; 
             color: #0f172a; 
             padding: 0 22px; 
@@ -196,32 +291,60 @@
             cursor: pointer; 
             transition: 0.2s;
             flex-shrink: 0;
-            box-shadow: 0 2px 8px rgba(56, 189, 248, 0.3);
         }
-        .send-btn:hover { background: linear-gradient(135deg, #0ea5e9, #0369a1); }
+        .send-btn:hover { background: var(--accent-hover); }
         
         .typing-indicator {
-            display: none; align-self: flex-start; background: #1e293b; padding: 10px 14px; border-radius: 12px; font-size: 13px; color: #94a3b8; border: 1px solid #334155; margin-bottom: 5px; flex-shrink: 0;
+            display: none; align-self: flex-start; background: var(--card-bg); padding: 10px 14px; border-radius: 12px; font-size: 13px; color: var(--text-muted); border: 1px solid var(--border-color); margin-bottom: 5px; flex-shrink: 0;
         }
 
-        /* Bubble Chat Notification Modal */
-        .bubble-modal {
+        /* Settings Modal / Dialog */
+        .settings-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center;
             backdrop-filter: blur(4px); animation: fadeIn 0.2s ease-in-out;
         }
+        .settings-modal.active { display: flex; }
+        .settings-content {
+            background: var(--card-bg); border: 1px solid var(--border-color); padding: 24px; border-radius: 24px;
+            max-width: 360px; width: 90%; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex; flex-direction: column; gap: 20px;
+        }
+        .settings-header { display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 18px; color: var(--text-color); }
+        .setting-group { display: flex; flex-direction: column; gap: 8px; }
+        .setting-label { font-size: 13px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        .setting-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+        .theme-btn, .notif-btn {
+            padding: 10px; border-radius: 12px; border: 1px solid var(--border-color);
+            background: var(--bg-main); color: var(--text-color); font-size: 13px; font-weight: 600;
+            cursor: pointer; transition: all 0.2s ease; text-align: center;
+        }
+        .theme-btn:hover, .notif-btn:hover { filter: brightness(1.2); }
+        .theme-btn.active, .notif-btn.active {
+            background: var(--accent-gradient);
+            color: #0f172a;
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* Bubble Notification Modal */
+        .bubble-modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center;
+            backdrop-filter: blur(4px);
+        }
         .bubble-modal.active { display: flex; }
         .bubble-content {
-            background: linear-gradient(145deg, #1e293b, #0f172a); border: 1px solid #38bdf8; padding: 24px; border-radius: 20px;
+            background: var(--card-bg); border: 1px solid var(--border-color); padding: 24px; border-radius: 20px;
             max-width: 320px; width: 85%; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-            position: relative; animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .bubble-content p { color: #f8fafc; font-size: 14px; line-height: 1.5; margin-bottom: 18px; }
+        .bubble-content p { color: var(--text-color); font-size: 14px; line-height: 1.5; margin-bottom: 18px; }
         .bubble-btn {
-            background: linear-gradient(135deg, #38bdf8, #0284c7); color: #0f172a; border: none; padding: 10px 24px; border-radius: 12px;
-            font-weight: bold; font-size: 14px; cursor: pointer; transition: 0.2s;
+            background: var(--accent-gradient); color: #0f172a; border: none; padding: 10px 24px; border-radius: 12px;
+            font-weight: bold; font-size: 14px; cursor: pointer;
         }
-        .bubble-btn:hover { background: linear-gradient(135deg, #0ea5e9, #0369a1); }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes popUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
@@ -229,29 +352,29 @@
         /* Bottom Nav */
         .bottom-nav {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            width: 92%; max-width: 440px; background: #1e293b; display: flex; justify-content: space-around;
-            padding: 10px 8px; border-radius: 35px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); border: 1px solid #334155; z-index: 90;
+            width: 92%; max-width: 440px; background: var(--bottom-nav-bg); display: flex; justify-content: space-around;
+            padding: 10px 8px; border-radius: 35px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); border: 1px solid var(--border-color); z-index: 90;
             transition: transform 0.3s ease, opacity 0.3s ease;
         }
-        .bottom-nav.hidden {
-            transform: translate(-50%, 100px);
-            opacity: 0;
-            pointer-events: none;
-        }
-        .nav-item { color: #94a3b8; text-decoration: none; font-size: 12px; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; padding: 8px 12px; border-radius: 20px; transition: 0.3s; }
-        .nav-item.active, .nav-item:hover { color: #0f172a; background: linear-gradient(135deg, #38bdf8, #0284c7); font-weight: 600; }
+        .bottom-nav.hidden { transform: translate(-50%, 100px); opacity: 0; pointer-events: none; }
+        .nav-item { color: var(--text-muted); text-decoration: none; font-size: 12px; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; padding: 8px 12px; border-radius: 20px; transition: 0.3s; }
+        .nav-item.active, .nav-item:hover { color: #0f172a; background: var(--accent-gradient); font-weight: 600; }
     </style>
 </head>
-<body>
+<body class="theme-default">
 
     <div class="top-bar">
-        <button class="menu-btn" id="top-left-btn" onclick="handleTopButton()">☰</button>
-        <div class="app-title" id="page-title">Sea Tycoon</div>
+        <div class="top-left">
+            <button class="menu-btn" id="top-left-btn" onclick="handleTopButton()">☰</button>
+            <div class="app-title" id="page-title">Sea Tycoon</div>
+        </div>
+        <!-- Tombol Settings Bulat Gradasi di Pojok Kanan Atas -->
+        <button class="settings-btn" onclick="toggleSettingsModal()" title="Pengaturan">⚙️</button>
     </div>
 
     <div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
 
-    <!-- Sidebar (Dapat di-slide/scroll ke bawah & memiliki efek gradasi) -->
+    <!-- Sidebar -->
     <div id="sidebar" class="sidebar">
         <div class="sidebar-header">
             <span>Menu Utama</span>
@@ -279,7 +402,7 @@
     <!-- Main Content -->
     <div class="main-content" id="content-area">
         
-        <!-- Halaman Beranda (Bersih tanpa tombol-tombol menu) -->
+        <!-- Halaman Beranda -->
         <div id="page-home" class="home-container">
             <h2>Selamat Datang di Sea Tycoon</h2>
             <p>Silakan gunakan tombol menu di pojok kiri atas (☰) untuk menjelajahi berbagai fitur menarik yang tersedia.</p>
@@ -324,6 +447,37 @@
 
     </div>
 
+    <!-- Modal Pengaturan (Settings) -->
+    <div id="settings-modal" class="settings-modal" onclick="toggleSettingsModal()">
+        <div class="settings-content" onclick="event.stopPropagation()">
+            <div class="settings-header">
+                <span>Pengaturan Aplikasi</span>
+                <button class="close-btn" onclick="toggleSettingsModal()">✕</button>
+            </div>
+
+            <!-- Notifikasi On/Off -->
+            <div class="setting-group">
+                <span class="setting-label">Notifikasi Aplikasi</span>
+                <div class="setting-options">
+                    <button class="notif-btn active" id="notif-on" onclick="setNotif('on')">On</button>
+                    <button class="notif-btn" id="notif-off" onclick="setNotif('off')">Off</button>
+                </div>
+            </div>
+
+            <!-- Pilihan Tema -->
+            <div class="setting-group">
+                <span class="setting-label">Pilihan Tema</span>
+                <div class="setting-options">
+                    <button class="theme-btn active" id="theme-default" onclick="setTheme('default')">Default</button>
+                    <button class="theme-btn" id="theme-gelap" onclick="setTheme('gelap')">Gelap</button>
+                    <button class="theme-btn" id="theme-galaxy" onclick="setTheme('galaxy')">Galaxy</button>
+                    <button class="theme-btn" id="theme-biru" onclick="setTheme('biru')">Biru</button>
+                    <button class="theme-btn" id="theme-putih" onclick="setTheme('putih')">Putih</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bubble Chat Notification Modal -->
     <div id="bubble-modal" class="bubble-modal" onclick="closeBubble()">
         <div class="bubble-content" onclick="event.stopPropagation()">
@@ -354,6 +508,26 @@
         function toggleSidebar() {
             document.getElementById('sidebar').classList.toggle('open');
             document.getElementById('overlay').classList.toggle('active');
+        }
+
+        function toggleSettingsModal() {
+            document.getElementById('settings-modal').classList.toggle('active');
+        }
+
+        // Fungsi Mengatur Tema secara Menyeluruh
+        function setTheme(themeName) {
+            document.body.className = `theme-${themeName}`;
+            
+            // Perbarui status aktif tombol tema di modal
+            document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`theme-${themeName}`).classList.add('active');
+        }
+
+        // Fungsi Mengatur Notifikasi On/Off
+        function setNotif(status) {
+            document.querySelectorAll('.notif-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`notif-${status}`).classList.add('active');
+            showBubble(`Notifikasi aplikasi berhasil diubah ke: ${status.toUpperCase()} 🔔`);
         }
 
         function openMenu(menu) {
