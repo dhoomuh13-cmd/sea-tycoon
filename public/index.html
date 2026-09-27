@@ -65,7 +65,7 @@
             position: relative;
         }
 
-        /* Beranda Menu Buttons Grid dengan Efek Gradasi Biru di Pinggiran & Font Tebal */
+        /* Beranda Menu Buttons Grid */
         .home-container {
             max-width: 600px;
             margin: auto;
@@ -121,7 +121,7 @@
         #result-box { display: none; margin-top: 20px; background: #0f172a; padding: 15px; border-radius: 12px; border: 1px solid #334155; text-align: left; }
         #result-box video { width: 100%; border-radius: 8px; margin-top: 10px; }
 
-        /* Chat AI Room Section (Diperbaiki dengan Flexbox penuh agar input selalu kelihatan di bawah) */
+        /* Chat AI Room Section (Bar dibuat besar, proporsional, dan nyaman) */
         .chat-section {
             display: none; 
             flex-direction: column; 
@@ -130,15 +130,14 @@
             max-width: 600px;
             margin: 0 auto;
             background: #0b0f19;
-            padding: 12px 15px;
-            justify-content: space-between;
+            padding: 15px 16px 20px 16px;
         }
         .chat-box {
             flex: 1; 
             overflow-y: auto; 
             display: flex; 
             flex-direction: column; 
-            gap: 12px; 
+            gap: 14px; 
             padding: 10px 0; 
             scroll-behavior: smooth;
         }
@@ -151,18 +150,47 @@
         .chat-message.ai {
             background: #1e293b; color: #f8fafc; align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid #334155;
         }
+        
+        /* Area Input Chat yang Lebih Besar dan Kokoh */
         .chat-input-area {
-            display: flex; gap: 10px; background: #1e293b; padding: 10px 12px; border-radius: 16px; border: 1px solid #334155; margin-top: 10px; flex-shrink: 0;
+            display: flex; 
+            gap: 12px; 
+            background: #1e293b; 
+            padding: 12px 14px; 
+            border-radius: 20px; 
+            border: 1.5px solid #334155; 
+            margin-top: 12px; 
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            align-items: center;
         }
         .chat-input-area input {
-            flex: 1; background: #0f172a; border: 1px solid #475569; border-radius: 12px; padding: 12px 14px; color: #fff; font-size: 15px; outline: none;
+            flex: 1; 
+            background: #0f172a; 
+            border: 1px solid #475569; 
+            border-radius: 14px; 
+            padding: 14px 16px; 
+            color: #fff; 
+            font-size: 15px; 
+            outline: none;
         }
         .chat-input-area input:focus { border-color: #38bdf8; }
         .send-btn {
-            background: #38bdf8; border: none; color: #0f172a; padding: 0 18px; border-radius: 12px; font-weight: bold; font-size: 14px; cursor: pointer; transition: 0.2s;
+            background: #38bdf8; 
+            border: none; 
+            color: #0f172a; 
+            padding: 0 22px; 
+            height: 48px;
+            border-radius: 14px; 
+            font-weight: bold; 
+            font-size: 15px; 
+            cursor: pointer; 
+            transition: 0.2s;
             flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(56, 189, 248, 0.3);
         }
         .send-btn:hover { background: #0ea5e9; }
+        
         .typing-indicator {
             display: none; align-self: flex-start; background: #1e293b; padding: 10px 14px; border-radius: 12px; font-size: 13px; color: #94a3b8; border: 1px solid #334155; margin-bottom: 5px; flex-shrink: 0;
         }
