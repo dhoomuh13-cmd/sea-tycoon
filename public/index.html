@@ -101,11 +101,11 @@
         .app-title { font-size: 17px; font-weight: 700; letter-spacing: 0.5px; }
 
         .top-icon-btn {
-            width: 38px; height: 38px; border-radius: 12px; background: var(--card-bg);
+            width: 40px; height: 40px; border-radius: 50%; background: var(--card-bg);
             border: 1px solid var(--border-color); color: var(--text-color); font-size: 15px; display: flex; align-items: center;
             justify-content: center; cursor: pointer; position: relative; transition: 0.2s;
         }
-        .top-icon-btn:hover { border-color: #38bdf8; }
+        .top-icon-btn:hover, .top-icon-btn:active { background: var(--accent-gradient); color: #0f172a; border-color: transparent; transform: scale(0.95); }
         .badge-dot {
             position: absolute; top: 4px; right: 4px; width: 9px; height: 9px;
             background: #ef4444; border-radius: 50%; border: 2px solid var(--bg-main); display: none;
@@ -144,8 +144,8 @@
             background: var(--accent-gradient);
             border: none;
             color: #0f172a;
-            padding: 6px 12px;
-            border-radius: 10px;
+            padding: 8px 16px;
+            border-radius: 50px;
             font-size: 11px;
             font-weight: 800;
             cursor: pointer;
@@ -155,7 +155,7 @@
             flex-shrink: 0;
             transition: 0.2s;
         }
-        .info-update-shortcut-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        .info-update-shortcut-btn:hover, .info-update-shortcut-btn:active { opacity: 0.9; transform: scale(0.95); }
 
         /* Sidebar */
         .sidebar {
@@ -171,12 +171,12 @@
         .menu-category { font-size: 11px; text-transform: uppercase; color: var(--text-muted); margin: 16px 0 8px; font-weight: 800; letter-spacing: 1.2px; }
         
         .sidebar-item { 
-            padding: 12px 14px; color: var(--text-color); text-decoration: none; border-radius: 14px; 
+            padding: 12px 16px; color: var(--text-color); text-decoration: none; border-radius: 50px; 
             margin-bottom: 6px; background: var(--card-bg); border: 1px solid var(--border-color);
-            font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 12px; 
+            font-size: 13px; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 12px; 
             transition: 0.2s;
         }
-        .sidebar-item:hover { background: var(--accent-gradient); color: #0f172a; border-color: transparent; transform: translateX(4px); }
+        .sidebar-item:hover, .sidebar-item:active { background: var(--accent-gradient); color: #0f172a; border-color: transparent; transform: scale(0.98); }
         .owner-menu { border-color: #f59e0b !important; display: none; }
 
         .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 999; backdrop-filter: blur(4px); transition: 0.3s; }
@@ -207,7 +207,7 @@
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         .auth-card, .downloader-card, .form-card {
-            background: var(--card-bg); padding: 24px; border-radius: 22px; border: 1px solid var(--border-color);
+            background: var(--card-bg); padding: 24px; border-radius: 24px; border: 1px solid var(--border-color);
             box-shadow: 0 12px 30px rgba(0,0,0,0.35); text-align: left; width: 100%; max-width: 450px; margin: auto;
         }
         .auth-card h2, .downloader-card h2, .form-card h2 { font-size: 20px; margin-bottom: 6px; text-align: center; font-weight: 700; }
@@ -217,23 +217,24 @@
         .input-group label { display: block; font-size: 11px; font-weight: 800; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.8px; }
         .input-group input, .input-group textarea {
             width: 100%; padding: 12px 16px; background: var(--bg-main); border: 1px solid var(--border-color);
-            border-radius: 14px; color: var(--text-color); font-size: 14px; outline: none; resize: none; transition: 0.2s;
+            border-radius: 50px; color: var(--text-color); font-size: 14px; outline: none; resize: none; transition: 0.2s;
         }
+        .input-group textarea { border-radius: 20px; }
         .input-group input:focus, .input-group textarea:focus { border-color: #38bdf8; }
         
         .action-btn {
-            width: 100%; padding: 14px; background: var(--accent-gradient); border: none; border-radius: 14px;
-            color: #0f172a; font-weight: 700; font-size: 14px; cursor: pointer; margin-top: 10px; transition: 0.2s;
+            width: 100%; padding: 14px; background: var(--accent-gradient); border: none; border-radius: 50px;
+            color: #0f172a; font-weight: 800; font-size: 14px; cursor: pointer; margin-top: 10px; transition: 0.2s;
         }
-        .action-btn:hover { opacity: 0.92; transform: translateY(-1px); box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3); }
+        .action-btn:hover, .action-btn:active { opacity: 0.92; transform: scale(0.98); box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3); }
         .auth-switch { text-align: center; margin-top: 16px; font-size: 13px; color: var(--text-muted); }
         .auth-switch span { color: #38bdf8; font-weight: 600; cursor: pointer; }
         .forgot-password-link { text-align: right; margin-top: -6px; margin-bottom: 14px; font-size: 12px; color: #38bdf8; cursor: pointer; font-weight: 600; display: block; }
 
-        /* Home Custom Buttons Styling */
+        /* Home Custom Buttons Styling (Tanpa Emoji, Ukuran Sama, Teks Tebal, Efek Gradasi) */
         .home-action-buttons {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             width: 100%;
             max-width: 420px;
             margin: 20px auto 0;
@@ -241,27 +242,26 @@
         }
         .home-big-btn {
             flex: 1;
-            padding: 18px 14px;
+            padding: 16px 10px;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 20px;
+            border-radius: 50px;
             color: var(--text-color);
-            font-weight: 700;
+            font-weight: 800;
             font-size: 13px;
             cursor: pointer;
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            transition: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            text-align: center;
         }
-        .home-big-btn span { font-size: 24px; }
-        .home-big-btn:hover {
+        .home-big-btn:hover, .home-big-btn:active {
             background: var(--accent-gradient);
             color: #0f172a;
             border-color: transparent;
-            transform: translateY(-3px);
+            transform: scale(0.96);
             box-shadow: 0 15px 30px rgba(56, 189, 248, 0.25);
         }
 
@@ -278,7 +278,7 @@
         .channel-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 22px;
+            border-radius: 24px;
             padding: 16px;
             text-align: left;
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
@@ -308,7 +308,7 @@
         }
         .channel-img-wrapper {
             width: 100%;
-            border-radius: 14px;
+            border-radius: 16px;
             overflow: hidden;
             background: #000;
             border: 1px solid var(--border-color);
@@ -327,7 +327,7 @@
 
         .channel-video-wrapper {
             width: 100%;
-            border-radius: 14px;
+            border-radius: 16px;
             overflow: hidden;
             background: #000;
             border: 1px solid var(--border-color);
@@ -344,7 +344,7 @@
             border: 1px solid rgba(239, 68, 68, 0.3);
             color: #ef4444;
             padding: 4px 10px;
-            border-radius: 10px;
+            border-radius: 50px;
             font-size: 11px;
             font-weight: 700;
             cursor: pointer;
@@ -363,8 +363,8 @@
         .react-btn {
             background: var(--bg-main);
             border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 4px 10px;
+            border-radius: 50px;
+            padding: 6px 12px;
             font-size: 12px;
             color: var(--text-color);
             cursor: pointer;
@@ -373,7 +373,7 @@
             gap: 4px;
             transition: 0.2s;
         }
-        .react-btn:hover { background: rgba(56, 189, 248, 0.15); border-color: #38bdf8; }
+        .react-btn:hover, .react-btn:active { background: rgba(56, 189, 248, 0.15); border-color: #38bdf8; transform: scale(0.95); }
         .react-btn.reacted { background: var(--accent-gradient); color: #0f172a; border-color: transparent; font-weight: 700; }
 
         .comments-section {
@@ -395,7 +395,7 @@
             background: var(--bg-main);
             border: 1px solid var(--border-color);
             padding: 8px 12px;
-            border-radius: 12px;
+            border-radius: 14px;
             font-size: 12px;
             display: flex;
             flex-direction: column;
@@ -409,10 +409,10 @@
         }
         .comment-input-row input {
             flex: 1;
-            padding: 8px 12px;
+            padding: 8px 14px;
             background: var(--bg-main);
             border: 1px solid var(--border-color);
-            border-radius: 10px;
+            border-radius: 50px;
             color: var(--text-color);
             font-size: 12px;
             outline: none;
@@ -421,9 +421,9 @@
             background: var(--accent-gradient);
             border: none;
             color: #0f172a;
-            padding: 8px 14px;
-            border-radius: 10px;
-            font-weight: 700;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: 800;
             font-size: 12px;
             cursor: pointer;
         }
@@ -434,14 +434,14 @@
             padding: 20px;
         }
         .lightbox-modal.active { display: flex; }
-        .lightbox-content { max-width: 100%; max-height: 90vh; border-radius: 14px; object-fit: contain; }
+        .lightbox-content { max-width: 100%; max-height: 90vh; border-radius: 16px; object-fit: contain; }
 
         .song-list-container { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 15px; margin: 0 auto; padding-bottom: 30px; }
-        .song-card { background: var(--card-bg); border: 1px solid var(--border-color); padding: 18px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); text-align: left; display: flex; flex-direction: column; gap: 12px; }
+        .song-card { background: var(--card-bg); border: 1px solid var(--border-color); padding: 18px; border-radius: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); text-align: left; display: flex; flex-direction: column; gap: 12px; }
         .song-info h3 { font-size: 15px; margin-bottom: 2px; font-weight: 700; }
         .song-info span { font-size: 12px; color: var(--text-muted); }
         .song-player-controls { display: flex; align-items: center; gap: 12px; width: 100%; }
-        .play-song-btn { background: var(--accent-gradient); border: none; color: #0f172a; width: 38px; height: 38px; border-radius: 50%; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .play-song-btn { background: var(--accent-gradient); border: none; color: #0f172a; width: 40px; height: 40px; border-radius: 50%; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .volume-control { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-muted); margin-left: auto; }
         .volume-control input[type=range] { width: 75px; accent-color: #38bdf8; cursor: pointer; }
 
@@ -461,7 +461,7 @@
         .inbox-list { display: flex; flex-direction: column; gap: 12px; }
         .inbox-item-bubble {
             display: flex; align-items: flex-start; gap: 12px; background: var(--bg-main); border: 1px solid var(--border-color);
-            padding: 14px; border-radius: 18px; box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            padding: 14px; border-radius: 20px; box-shadow: 0 6px 20px rgba(0,0,0,0.2);
         }
         .inbox-avatar-circle {
             width: 40px; height: 40px; border-radius: 50%; background: var(--accent-gradient); color: #0f172a;
@@ -470,14 +470,14 @@
         .inbox-content-box { flex: 1; display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
         .inbox-content-box b { color: var(--text-color); font-size: 13px; }
         .inbox-content-box span { color: var(--text-muted); font-size: 11px; }
-        .inbox-img-preview { margin-top: 6px; max-width: 100%; max-height: 120px; border-radius: 8px; object-fit: cover; border: 1px solid var(--border-color); }
-        .reply-box-owner { margin-top: 8px; background: rgba(56, 189, 248, 0.1); border-left: 3px solid #38bdf8; padding: 6px 10px; border-radius: 6px; font-size: 12px; }
+        .inbox-img-preview { margin-top: 6px; max-width: 100%; max-height: 120px; border-radius: 12px; object-fit: cover; border: 1px solid var(--border-color); }
+        .reply-box-owner { margin-top: 8px; background: rgba(56, 189, 248, 0.1); border-left: 3px solid #38bdf8; padding: 6px 10px; border-radius: 8px; font-size: 12px; }
 
-        /* Profile Styles (Updated with Tabs & Modern Design) */
+        /* Profile Styles */
         .profile-container-card {
             background: var(--card-bg);
             padding: 24px;
-            border-radius: 22px;
+            border-radius: 24px;
             border: 1px solid var(--border-color);
             width: 100%;
             max-width: 420px;
@@ -513,7 +513,7 @@
             display: flex;
             background: var(--bg-main);
             padding: 4px;
-            border-radius: 12px;
+            border-radius: 50px;
             border: 1px solid var(--border-color);
             gap: 4px;
         }
@@ -525,7 +525,7 @@
             color: var(--text-muted);
             font-size: 12px;
             font-weight: 700;
-            border-radius: 8px;
+            border-radius: 50px;
             cursor: pointer;
             transition: 0.2s;
         }
@@ -545,7 +545,7 @@
         .profile-info-row {
             background: var(--bg-main);
             padding: 12px 14px;
-            border-radius: 12px;
+            border-radius: 16px;
             border: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
@@ -554,27 +554,36 @@
         .profile-info-row span { font-size: 11px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; }
         .profile-info-row b { font-size: 13px; color: var(--text-color); }
         
-        .logout-btn { background: #ef4444; color: white; border: none; padding: 12px; width: 100%; border-radius: 14px; font-weight: 700; cursor: pointer; transition: 0.2s; margin-top: 6px; }
+        .logout-btn { background: #ef4444; color: white; border: none; padding: 12px; width: 100%; border-radius: 50px; font-weight: 700; cursor: pointer; transition: 0.2s; margin-top: 6px; }
         .logout-btn:hover { opacity: 0.9; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3); }
 
         /* Settings */
         .setting-group { display: flex; flex-direction: column; gap: 8px; text-align: left; }
         .setting-label { font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; }
         .setting-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-        .theme-btn, .notif-btn { padding: 10px; border-radius: 12px; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-color); font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.2s; }
+        .theme-btn, .notif-btn { padding: 10px; border-radius: 14px; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-color); font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.2s; }
         .theme-btn.active, .notif-btn.active { background: var(--accent-gradient); color: #0f172a; border-color: transparent; }
-        .bubble-btn { background: var(--accent-gradient); color: #0f172a; border: none; padding: 10px 24px; border-radius: 12px; font-weight: 700; cursor: pointer; }
+        .bubble-btn { background: var(--accent-gradient); color: #0f172a; border: none; padding: 10px 24px; border-radius: 50px; font-weight: 800; cursor: pointer; }
 
-        /* Bottom Nav */
+        /* Bottom Nav - Bentuk Bulat & Efek Gradasi Klik */
         .bottom-nav {
             position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%);
             width: 92%; max-width: 440px; background: var(--bottom-nav-bg); display: flex; justify-content: space-around;
-            padding: 8px; border-radius: 35px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45); border: 1px solid var(--border-color); z-index: 100;
+            padding: 8px 12px; border-radius: 50px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45); border: 1px solid var(--border-color); z-index: 100;
             transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .bottom-nav.hidden { transform: translate(-50%, 120px); opacity: 0; pointer-events: none; }
-        .nav-item { color: var(--text-muted); text-decoration: none; font-size: 11px; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; padding: 6px 12px; border-radius: 20px; transition: 0.3s; font-weight: 600; }
-        .nav-item.active, .nav-item:hover { color: #0f172a; background: var(--accent-gradient); }
+        .nav-item { 
+            color: var(--text-muted); text-decoration: none; font-size: 11px; display: flex; flex-direction: column; 
+            align-items: center; justify-content: center; cursor: pointer; padding: 10px 24px; border-radius: 50px; 
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); font-weight: 800; 
+        }
+        .nav-item.active, .nav-item:hover, .nav-item:active { 
+            color: #0f172a; 
+            background: var(--accent-gradient); 
+            transform: scale(0.95);
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
+        }
     </style>
 </head>
 <body class="theme-default">
@@ -600,7 +609,7 @@
             <span class="marquee-text">📢 SELAMAT DATANG DI SEA TYCOON KALIAN BISA MENCOBA FITUR PREMIUM DARI KAMI DAN MENDAPATKAN UPDATE SETIAP HARI ✨</span>
         </div>
         <button class="info-update-shortcut-btn" onclick="openInfoUpdateWithLoader()">
-            📢 Info Update
+            Info Update
         </button>
     </div>
 
@@ -619,9 +628,9 @@
         <div class="sidebar-item" onclick="openMenu('req-fitur')">Req Fitur / Lagu</div>
 
         <div class="menu-category owner-menu-label" style="display:none;">Panel Owner</div>
-        <div class="sidebar-item owner-menu" onclick="showBubble('Panel Kontrol Owner Aktif 👑')">👑 Kontrol Panel Owner</div>
-        <div class="sidebar-item owner-menu" onclick="openMenu('owner-notif-user')">🔔 Notif User & Request</div>
-        <div class="sidebar-item owner-menu" onclick="openMenu('add-lagu')">🎶 Tambah Lagu</div>
+        <div class="sidebar-item owner-menu" onclick="showBubble('Panel Kontrol Owner Aktif 👑')">Kontrol Panel Owner</div>
+        <div class="sidebar-item owner-menu" onclick="openMenu('owner-notif-user')">Notif User & Request</div>
+        <div class="sidebar-item owner-menu" onclick="openMenu('add-lagu')">Tambah Lagu</div>
         <div class="sidebar-item owner-menu" onclick="openMenu('add-info-update')">Buat Info Update Baru</div>
 
         <div class="menu-category">Fitur Saluran Eksklusif</div>
@@ -652,7 +661,6 @@
                 <p id="auth-subtitle">Masuk dengan email & password akunmu</p>
                 
                 <div id="form-main-inputs">
-                    <!-- Register Only Inputs -->
                     <div class="input-group auth-reg-only" id="group-fullname" style="display:none;">
                         <label>Nama Lengkap</label>
                         <input type="text" id="input-fullname" placeholder="Masukkan nama lengkap...">
@@ -661,8 +669,6 @@
                         <label>Nomor Telepon</label>
                         <input type="tel" id="input-phone" placeholder="08xxxxxxxxxx...">
                     </div>
-
-                    <!-- Common Inputs -->
                     <div class="input-group">
                         <label>Email Pribadi</label>
                         <input type="email" id="input-email" placeholder="nama@email.com...">
@@ -681,7 +687,7 @@
             </div>
         </div>
 
-        <!-- Beranda -->
+        <!-- Beranda (Tombol Disamakan, Tanpa Emoji, Teks Tebal) -->
         <div id="page-home" class="page-container">
             <div style="margin: auto 0; width: 100%; display: flex; flex-direction: column; align-items: center;">
                 <h2>Selamat Datang, <span id="welcome-username" style="color: #38bdf8;">User</span>!</h2>
@@ -689,15 +695,12 @@
                 
                 <div class="home-action-buttons">
                     <button class="home-big-btn" onclick="openInfoUpdateWithLoader()">
-                        <span>📢</span>
                         Info Update
                     </button>
                     <button class="home-big-btn" onclick="openMenu('lihat-kenangan')">
-                        <span>📸</span>
                         Kenangan
                     </button>
                     <button class="home-big-btn" onclick="openMenu('lihat-cerita')">
-                        <span>📖</span>
                         Cerita
                     </button>
                 </div>
@@ -708,15 +711,15 @@
         <div id="page-info-update" class="page-container">
             <div style="width: 100%; max-width: 480px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
                 <h2 style="font-size: 17px; font-weight: 700;">Saluran Info Update</h2>
-                <button class="action-btn owner-only-action" id="btn-add-info-top" style="width: auto; padding: 8px 14px; font-size: 12px; margin: 0; display: none;" onclick="openMenu('add-info-update')">+ Buat Update</button>
+                <button class="action-btn owner-only-action" id="btn-add-info-top" style="width: auto; padding: 8px 16px; font-size: 12px; margin: 0; display: none;" onclick="openMenu('add-info-update')">+ Buat Update</button>
             </div>
             <div class="channel-feed-container" id="info-update-feed-wrapper"></div>
         </div>
 
-        <!-- Buat Info Update (Hanya Owner) -->
+        <!-- Buat Info Update -->
         <div id="page-add-info-update" class="page-container">
             <div class="form-card">
-                <h2>Buat Info Update 📢</h2>
+                <h2>Buat Info Update</h2>
                 <p>Kirim informasi update baru ke saluran (Support Foto & Video).</p>
                 <div class="input-group">
                     <label>Judul Informasi</label>
@@ -743,7 +746,7 @@
             <div class="downloader-card">
                 <h2>TikTok Downloader</h2>
                 <p>Unduh video TikTok tanpa watermark dengan mudah.</p>
-                <input type="text" id="tiktok-url" placeholder="Tempel link video TikTok di sini..." style="width:100%; padding:12px; border-radius:14px; background:var(--bg-main); border:1px solid var(--border-color); color:var(--text-color); margin-bottom:15px; outline:none; font-size:13px;">
+                <input type="text" id="tiktok-url" placeholder="Tempel link video TikTok di sini..." style="width:100%; padding:12px 16px; border-radius:50px; background:var(--bg-main); border:1px solid var(--border-color); color:var(--text-color); margin-bottom:15px; outline:none; font-size:13px;">
                 <button class="action-btn" onclick="showBubble('Proses unduh video sedang berjalan...')">Download Video</button>
             </div>
         </div>
@@ -751,7 +754,7 @@
         <!-- Req Fitur -->
         <div id="page-req-fitur" class="page-container">
             <div class="form-card">
-                <h2>Req Fitur / Kendala 💡</h2>
+                <h2>Req Fitur / Kendala</h2>
                 <p>Kirimkan masukan atau request fitur baru kepada Owner.</p>
                 <div class="input-group">
                     <label>Pesan & Detail Request</label>
@@ -768,7 +771,7 @@
         <!-- Kirim Kenangan -->
         <div id="page-add-kenangan" class="page-container">
             <div class="form-card">
-                <h2>Kirim Kenangan 📸</h2>
+                <h2>Kirim Kenangan</h2>
                 <p>Bagikan memori spesialmu dengan dukungan banyak foto.</p>
                 <div class="input-group">
                     <label>Judul Kenangan</label>
@@ -789,8 +792,8 @@
         <!-- Lihat Kenangan -->
         <div id="page-lihat-kenangan" class="page-container">
             <div style="width: 100%; max-width: 480px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
-                <h2 style="font-size: 17px; font-weight: 700;">Saluran Kenangan 📸</h2>
-                <button class="action-btn" style="width: auto; padding: 8px 14px; font-size: 12px; margin: 0;" onclick="openMenu('add-kenangan')">+ Buat Kenangan</button>
+                <h2 style="font-size: 17px; font-weight: 700;">Saluran Kenangan</h2>
+                <button class="action-btn" style="width: auto; padding: 8px 16px; font-size: 12px; margin: 0;" onclick="openMenu('add-kenangan')">+ Buat Kenangan</button>
             </div>
             <div class="channel-feed-container" id="kenangan-feed-wrapper"></div>
         </div>
@@ -812,7 +815,7 @@
         <div id="page-lihat-cerita" class="page-container">
             <div style="width: 100%; max-width: 480px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
                 <h2 style="font-size: 17px; font-weight: 700;">Saluran Cerita</h2>
-                <button class="action-btn" style="width: auto; padding: 8px 14px; font-size: 12px; margin: 0;" onclick="openMenu('add-cerita')">+ Buat Cerita</button>
+                <button class="action-btn" style="width: auto; padding: 8px 16px; font-size: 12px; margin: 0;" onclick="openMenu('add-cerita')">+ Buat Cerita</button>
             </div>
             <div class="channel-feed-container" id="cerita-feed-wrapper"></div>
         </div>
@@ -820,9 +823,9 @@
         <!-- Tebak Kata -->
         <div id="page-susun-kata" class="page-container">
             <div class="form-card" style="text-align: center;">
-                <h2>Tebak Kata 🧩</h2>
+                <h2>Tebak Kata</h2>
                 <p>Asah otakmu dengan menebak susunan kata acak.</p>
-                <div style="background: var(--bg-main); padding: 20px; border-radius: 14px; margin: 15px 0; border: 1px solid var(--border-color);">
+                <div style="background: var(--bg-main); padding: 20px; border-radius: 20px; margin: 15px 0; border: 1px solid var(--border-color);">
                     <h3 style="letter-spacing: 4px; color: #38bdf8;" id="scramble-word-display">R T A K I</h3>
                 </div>
                 <div class="input-group">
@@ -835,7 +838,7 @@
         <!-- Notif User (Owner) -->
         <div id="page-owner-notif-user" class="page-container">
             <div style="width: 100%; max-width: 550px; margin-bottom: 20px; text-align: left;">
-                <h2 style="font-size: 18px; font-weight: 700;">Notif User & Request 🔔</h2>
+                <h2 style="font-size: 18px; font-weight: 700;">Notif User & Request</h2>
             </div>
             <div id="owner-requests-wrapper" style="width: 100%; max-width: 550px; display: flex; flex-direction: column; gap: 15px; padding-bottom: 30px;"></div>
         </div>
@@ -843,7 +846,7 @@
         <!-- Add Lagu -->
         <div id="page-add-lagu" class="page-container">
             <div class="form-card">
-                <h2>Tambah Lagu Baru 🎶</h2>
+                <h2>Tambah Lagu Baru</h2>
                 <div class="input-group">
                     <label>Judul Lagu</label>
                     <input type="text" id="input-song-title" placeholder="Judul lagu...">
@@ -864,23 +867,21 @@
             <div class="song-list-container" id="song-list-wrapper"></div>
         </div>
 
-        <!-- Profile (Updated with Tabs & Visual Effects) -->
+        <!-- Profile -->
         <div id="page-profile" class="page-container">
             <div class="profile-container-card">
                 <div class="profile-header-area">
                     <div class="profile-avatar-large" id="profile-initial">U</div>
                     <h3 id="profile-name" style="font-size: 18px; font-weight: 700;">Nama Lengkap</h3>
-                    <span id="profile-role-badge" style="font-size: 11px; color: #38bdf8; font-weight: bold; background: rgba(56, 189, 248, 0.12); padding: 3px 10px; border-radius: 8px;">Member Aktif</span>
+                    <span id="profile-role-badge" style="font-size: 11px; color: #38bdf8; font-weight: bold; background: rgba(56, 189, 248, 0.12); padding: 3px 10px; border-radius: 50px;">Member Aktif</span>
                 </div>
 
-                <!-- Navigasi Tab Profil -->
                 <div class="profile-tabs-header">
                     <button class="profile-tab-btn active" onclick="switchProfileTab('info')">Profil</button>
                     <button class="profile-tab-btn" onclick="switchProfileTab('password')">Password</button>
                     <button class="profile-tab-btn" onclick="switchProfileTab('security')">Keamanan</button>
                 </div>
 
-                <!-- Tab 1: Informasi Profil -->
                 <div class="profile-tab-content active" id="ptab-info">
                     <div class="profile-info-row">
                         <span>Nama Lengkap</span>
@@ -896,7 +897,6 @@
                     </div>
                 </div>
 
-                <!-- Tab 2: Ubah Password -->
                 <div class="profile-tab-content" id="ptab-password">
                     <div class="input-group" style="margin-bottom: 8px;">
                         <label>Password Baru</label>
@@ -905,7 +905,6 @@
                     <button class="action-btn" style="margin-top: 4px;" onclick="updateProfilePassword()">Perbarui Password</button>
                 </div>
 
-                <!-- Tab 3: Keamanan & Sesi -->
                 <div class="profile-tab-content" id="ptab-security">
                     <div class="profile-info-row">
                         <span>Status Sesi</span>
@@ -957,16 +956,15 @@
         </div>
     </div>
 
-    <!-- Lightbox Modal untuk Klik Foto Full -->
     <div id="lightbox-modal" class="lightbox-modal" onclick="closeLightbox()">
         <img id="lightbox-img" class="lightbox-content" src="">
     </div>
 
-    <!-- Bottom Nav -->
+    <!-- Bottom Nav (Bulat & Efek Gradasi) -->
     <div class="bottom-nav" id="bottom-nav">
-        <a class="nav-item active" id="nav-beranda" onclick="switchTab('Beranda')"><span>Beranda</span></a>
-        <a class="nav-item" id="nav-tiktok" onclick="switchTab('TikTok')"><span>TikTok</span></a>
-        <a class="nav-item" id="nav-profile" onclick="switchTab('Profile')"><span>Profile</span></a>
+        <a class="nav-item active" id="nav-beranda" onclick="switchTab('Beranda')">Beranda</a>
+        <a class="nav-item" id="nav-tiktok" onclick="switchTab('TikTok')">TikTok</a>
+        <a class="nav-item" id="nav-profile" onclick="switchTab('Profile')">Profile</a>
     </div>
 
     <script>
@@ -1003,13 +1001,13 @@
             const regOnlyElements = document.querySelectorAll('.auth-reg-only');
 
             if (state === 'login') {
-                title.innerText = "Selamat Datang Kembali! 👋";
+                title.innerText = "Selamat Datang Kembali!";
                 subtitle.innerText = "Masuk dengan email & password akunmu";
                 btnAction.innerText = "Masuk";
                 regOnlyElements.forEach(el => el.style.display = 'none');
                 switchContainer.innerHTML = `<span onclick="setAuthState('register')">Belum punya akun? Daftar sekarang</span>`;
             } else if (state === 'register') {
-                title.innerText = "Buat Akun Baru 🚀";
+                title.innerText = "Buat Akun Baru";
                 subtitle.innerText = "Daftar dengan melengkapi data dirimu";
                 btnAction.innerText = "Daftar Sekarang";
                 regOnlyElements.forEach(el => el.style.display = 'block');
@@ -1056,7 +1054,6 @@
                     showBubble('Email dan Password wajib diisi! ⚠️');
                     return;
                 }
-                // Owner Credential Shortcut
                 if (emailInput === 'owner' || (emailInput === 'owner@seatycoon.com' && passwordInput === 'owner123')) {
                     currentUser = { fullname: 'Owner Official', phone: '-', email: 'owner@seatycoon.com', role: 'Owner' };
                     finalizeLogin();
@@ -1111,7 +1108,7 @@
             document.getElementById('profile-display-phone').innerText = currentUser.phone || '-';
             document.getElementById('profile-display-email').innerText = currentUser.email;
             document.getElementById('profile-initial').innerText = currentUser.fullname.charAt(0).toUpperCase();
-            document.getElementById('profile-role-badge').innerText = currentUser.role === 'Owner' ? '👑 Owner Official' : 'Member Aktif';
+            document.getElementById('profile-role-badge').innerText = currentUser.role === 'Owner' ? 'Owner Official' : 'Member Aktif';
 
             const isOwner = (currentUser.role === 'Owner');
             document.querySelectorAll('.owner-menu-label').forEach(el => el.style.display = isOwner ? 'block' : 'none');
@@ -1123,7 +1120,7 @@
             localStorage.removeItem('sea_tycoon_user');
             currentUser = null;
             openAuthScreen();
-            showBubble('Berhasil keluar akun. Sampai jumpa! 👋');
+            showBubble('Berhasil keluar akun. Sampai jumpa!');
         }
 
         let currentView = 'home';
@@ -1153,7 +1150,6 @@
             document.getElementById(`theme-${themeName}`).classList.add('active');
         }
 
-        // Smooth Loading Effect with 1-3 seconds adjustment
         function openInfoUpdateWithLoader() {
             if(document.getElementById('sidebar').classList.contains('open')) toggleSidebar();
             triggerSmoothLoader("Memuat Saluran Info Update...", () => {
@@ -1168,7 +1164,7 @@
             setTimeout(() => {
                 loader.classList.remove('active');
                 if (callback) callback();
-            }, 1000); // 1 detik loading halus
+            }, 1000);
         }
 
         function openMenu(menu) {
@@ -1256,7 +1252,6 @@
                 topLeftBtn.innerText = '✕';
                 renderSongList();
             } else if (menu === 'profile') {
-                // Efek loading profil 1-2 detik sesuai permintaan
                 triggerSmoothLoader("Memuat Profil Pengguna...", () => {
                     document.getElementById('page-profile').classList.add('active');
                     title.innerText = 'Profile User';
@@ -1272,7 +1267,6 @@
             else if (name === 'Profile') openMenu('profile');
         }
 
-        // Profile Tabs Switching Function
         function switchProfileTab(tabName) {
             document.querySelectorAll('.profile-tab-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.profile-tab-content').forEach(content => content.classList.remove('active'));
@@ -1334,7 +1328,6 @@
             document.getElementById('lightbox-modal').classList.remove('active');
         }
 
-        // --- INFO UPDATE CHANNEL SYSTEM ---
         function submitInfoUpdate() {
             if (currentUser.role !== 'Owner') {
                 showBubble('Hanya Owner yang dapat mengirim Info Update! 👑');
@@ -1484,7 +1477,7 @@
                 html += `
                     <div class="channel-card">
                         <div class="channel-header-info">
-                            <span>Dari : <b>@Owner Official 👑</b></span>
+                            <span>Dari : <b>@Owner Official</b></span>
                             <div style="display: flex; align-items: center; gap: 8px;">
                                 <span>${item.time}</span>
                                 ${canDelete ? `<button class="delete-post-btn" onclick="deleteInfoUpdate('${item.id}')">Hapus</button>` : ''}
@@ -1563,7 +1556,6 @@
             renderInfoUpdateFeed();
         }
 
-        // --- KENANGAN SYSTEM ---
         function submitKenangan() {
             const judul = document.getElementById('kenangan-judul').value.trim();
             const isi = document.getElementById('kenangan-isi').value.trim();
@@ -1693,7 +1685,6 @@
             renderKenanganFeed();
         }
 
-        // --- CERITA SYSTEM ---
         function submitCerita() {
             const isi = document.getElementById('cerita-isi').value.trim();
             if (!isi) {
@@ -1790,7 +1781,6 @@
             renderCeritaFeed();
         }
 
-        // --- REQUEST & INBOX SYSTEM ---
         function submitUserRequest() {
             const message = document.getElementById('req-message').value.trim();
             const fileInput = document.getElementById('req-image');
@@ -1904,12 +1894,12 @@
                             <span>${req.time} | ${req.email}</span>
                         </div>
                         <p style="font-size: 13px; margin-top: 4px;">${req.message}</p>
-                        ${req.image ? `<img src="${req.image}" style="max-width: 100%; max-height: 160px; border-radius: 10px; margin-top: 6px; object-fit: cover;">` : ''}
+                        ${req.image ? `<img src="${req.image}" style="max-width: 100%; max-height: 160px; border-radius: 12px; margin-top: 6px; object-fit: cover;">` : ''}
                         
                         ${req.reply ? `<div class="reply-box-owner" style="margin-top: 8px;">👑 <b>Balasan:</b> ${req.reply}</div>` : `
                             <div style="display: flex; gap: 8px; margin-top: 8px;">
-                                <input type="text" id="reply-input-${req.id}" placeholder="Balas user..." style="flex:1; padding:10px; background:var(--bg-main); border:1px solid var(--border-color); border-radius:10px; color:var(--text-color); font-size:12px; outline:none;">
-                                <button onclick="ownerReplyRequest('${req.id}')" style="padding: 10px 16px; background: var(--accent-gradient); border: none; border-radius: 10px; font-weight: 700; color: #0f172a; cursor: pointer; font-size: 12px;">Kirim</button>
+                                <input type="text" id="reply-input-${req.id}" placeholder="Balas user..." style="flex:1; padding:10px 14px; background:var(--bg-main); border:1px solid var(--border-color); border-radius:50px; color:var(--text-color); font-size:12px; outline:none;">
+                                <button onclick="ownerReplyRequest('${req.id}')" style="padding: 10px 18px; background: var(--accent-gradient); border: none; border-radius: 50px; font-weight: 800; color: #0f172a; cursor: pointer; font-size: 12px;">Kirim</button>
                             </div>
                         `}
                     </div>
