@@ -5,17 +5,14 @@ const path = require('path');
 
 const app = express();
 
-// Middleware untuk memparsing data JSON dan URL-encoded
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Koneksi ke MongoDB Atlas menggunakan variabel environment dari Railway
 const MONGO_URI = process.env.MONGO_URI;
 mongoose.connect(MONGO_URI)
     .then(() => console.log('MongoDB Terhubung!'))
     .catch(err => console.error('Koneksi MongoDB Gagal:', err));
 
-// Schema untuk menyimpan riwayat download video TikTok
 const historySchema = new mongoose.Schema({
     platform: String,
     url: String,
@@ -25,63 +22,47 @@ const historySchema = new mongoose.Schema({
 });
 const History = mongoose.model('DownloadHistory', historySchema);
 
-// Fungsi pembantu untuk mengubah link pendek vt.tiktok.com menjadi link panjang asli
-async function expandUrl(shortUrl) {
-    try {
-        if (shortUrl.includes('vt.tiktok.com') || shortUrl.includes('vm.tiktok.com')) {
-            const response = await axios.get(shortUrl, { maxRedirects: 5, validateStatus: status => status >= 200 && status < 400 });
-            return response.request.res.responseUrl || shortUrl;
-        }
-        return shortUrl;
-    } catch (error) {
-        // Jika gagal expand, kembalikan URL aslinya
-        return shortUrl;
-    }
-}
-
-// Endpoint API untuk memproses download TikTok & Simpan ke MongoDB
 app.post('/api/download-tiktok', async (req, res) => {
     try {
         let { url } = req.body;
         if (!url) return res.status(400).json({ success: false, message: 'URL tidak boleh kosong!' });
 
-        // Ubah link pendek jadi link panjang otomatis
-        const longUrl = await expandUrl(url.trim());
-
-        // Memanggil API downloader TikTok dengan link yang sudah valid
-        const apiResponse = await axios.get(`https://api.ikyyxd.my.id/download/tiktokkv2?url=${encodeURIComponent(longUrl)}`);
+        // Langsung lempar URL apa adanya ke API downloader
+        const targetUrl = url.trim();
+        const apiResponse = await axios.get(`https://api.ikyyxd.my.id/download/tiktokkv2?url=${encodeURIComponent(targetUrl)}`);
         const resultData = apiResponse.data;
 
-        // Simpan riwayat ke MongoDB Atlas
-        const newHistory = new History({
-            platform: 'TikTok',
-            url: longUrl,
-            title: resultData.title || 'TikTok Video',
-            videoUrl: resultData.video || resultData.data || longUrl
-        });
-        await newHistory.save();
+        // Pastikan respons dari API valid memiliki properti result
+        if (resultData && resultData.result) {
+            const result = resultData.result;
+            const videoUrl = Array.isArray(result.video) ? result.video[0] : result.video;
 
-        res.json({ success: true, data: resultData });
+            // Simpan riwayat ke MongoDB Atlas
+            const newHistory = new History({
+                platform: 'TikTok',
+                url: targetUrl,
+                title: result.title || 'TikTok Video',
+                videoUrl: videoUrl || targetUrl
+            });
+            await newHistory.save();
+
+            return res.json({ success: true, data: resultData });
+        } else {
+            return res.status(400).json({ success: false, message: 'API tidak mengembalikan data video.' });
+        }
+
     } catch (error) {
-        console.error(error);
+        console.error('Error Backend:', error.message);
         res.status(500).json({ success: false, message: 'Gagal mengambil data dari API downloader.' });
     }
 });
 
-// Menyajikan file statis (CSS, JS, gambar) dari dalam folder 'public'
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Mengarahkan rute utama ke public/index.html
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
-// Mengarahkan semua rute lainnya ke public/index.html
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Menjalankan server di port yang disiapkan oleh Railway atau port 3000
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server aktif dan berjalan di port ${PORT}`);
