@@ -160,54 +160,6 @@
         .auth-switch span { color: #38bdf8; font-weight: 600; cursor: pointer; }
         .forgot-password-link { text-align: right; margin-top: -6px; margin-bottom: 14px; font-size: 12px; color: #38bdf8; cursor: pointer; font-weight: 600; display: block; }
 
-        /* --- CHAT AI INTERAKTIF --- */
-        #page-chat-ai.page-container {
-            padding: 0;
-            justify-content: flex-start;
-            height: 100%;
-            padding-bottom: 75px; 
-        }
-        .chat-container-box {
-            width: 100%; max-width: 600px; height: 100%; display: flex; flex-direction: column; margin: 0 auto; background: var(--bg-main); position: relative;
-        }
-        .chat-messages-scroll {
-            flex: 1; overflow-y: auto; padding: 16px 16px 20px 16px; display: flex; flex-direction: column; gap: 12px; scroll-behavior: smooth;
-        }
-        .chat-bubble-row { display: flex; width: 100%; margin-bottom: 4px; }
-        .chat-bubble-row.user { justify-content: flex-end; }
-        .chat-bubble-row.ai { justify-content: flex-start; }
-        
-        .chat-bubble-content {
-            max-width: 80%; padding: 12px 16px; border-radius: 18px; font-size: 14px; line-height: 1.4; text-align: left; word-break: break-word; box-shadow: 0 4px 15px rgba(0,0,0,0.15);
-        }
-        .chat-bubble-row.user .chat-bubble-content {
-            background: var(--accent-gradient); color: #0f172a; border-bottom-right-radius: 4px; font-weight: 500;
-        }
-        .chat-bubble-row.ai .chat-bubble-content {
-            background: var(--card-bg); color: var(--text-color); border: 1px solid var(--border-color); border-bottom-left-radius: 4px;
-        }
-        
-        .chat-input-area {
-            position: absolute; 
-            bottom: 65px; 
-            left: 0; 
-            width: 100%;
-            padding: 10px 16px; 
-            background: var(--bg-topbar); 
-            border-top: 1px solid var(--border-color); 
-            display: flex; 
-            align-items: center; 
-            gap: 10px; 
-            z-index: 50; 
-            backdrop-filter: blur(10px);
-        }
-        .chat-input-box {
-            flex: 1; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 20px; padding: 10px 16px; color: var(--text-color); font-size: 14px; outline: none; max-height: 100px; resize: none;
-        }
-        .chat-send-btn {
-            background: var(--accent-gradient); border: none; width: 40px; height: 40px; border-radius: 50%; color: #0f172a; font-size: 15px; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; font-weight: bold;
-        }
-
         /* Tempat Lagu Styling */
         .song-list-container { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 15px; margin: 0 auto; padding-bottom: 90px; }
         .song-card { background: var(--card-bg); border: 1px solid var(--border-color); padding: 18px; border-radius: 18px; box-shadow: 0 8px 20px rgba(0,0,0,0.3); text-align: left; display: flex; flex-direction: column; gap: 12px; }
@@ -304,7 +256,6 @@
         <div class="menu-category">Fitur Utama</div>
         <div class="sidebar-item" onclick="openMenu('home')">🏠 Beranda</div>
         <div class="sidebar-item" onclick="openMenu('tiktok')">🎵 TikTok Downloader</div>
-        <div class="sidebar-item" onclick="openMenu('chat-ai')">🤖 Chat AI Assistant</div>
         <div class="sidebar-item" onclick="openMenu('req-fitur')">💡 Req Fitur/Lagu</div>
 
         <div class="menu-category owner-menu-label" style="display:none;">Panel Owner</div>
@@ -370,21 +321,6 @@
                 <p>Unduh video TikTok tanpa watermark dengan mudah.</p>
                 <input type="text" id="tiktok-url" placeholder="Tempel link video TikTok di sini..." style="width:100%; padding:12px; border-radius:12px; background:var(--bg-main); border:1px solid var(--border-color); color:var(--text-color); margin-bottom:15px; outline:none;">
                 <button class="action-btn" onclick="showBubble('Fitur download sedang diproses...')">Download</button>
-            </div>
-        </div>
-
-        <!-- Chat AI -->
-        <div id="page-chat-ai" class="page-container">
-            <div class="chat-container-box">
-                <div class="chat-messages-scroll" id="chat-messages-list">
-                    <div class="chat-bubble-row ai">
-                        <div class="chat-bubble-content">Halo! Saya AI Assistant Sea Tycoon. Ada yang bisa saya bantu hari ini? 🤖✨</div>
-                    </div>
-                </div>
-                <div class="chat-input-area">
-                    <textarea class="chat-input-box" id="ai-chat-input" rows="1" placeholder="Ketik pesan ke AI..."></textarea>
-                    <button class="chat-send-btn" onclick="sendChatMessage()">➤</button>
-                </div>
             </div>
         </div>
 
@@ -535,10 +471,9 @@
         </div>
     </div>
 
-    <!-- Bottom Nav -->
+    <!-- Bottom Nav (Chat AI removed) -->
     <div class="bottom-nav" id="bottom-nav">
         <a class="nav-item active" id="nav-beranda" onclick="switchTab('Beranda')">🏠<span>Beranda</span></a>
-        <a class="nav-item" id="nav-chat-ai" onclick="switchTab('ChatAI')">🤖<span>Chat AI</span></a>
         <a class="nav-item" id="nav-tiktok" onclick="switchTab('TikTok')">🎵<span>TikTok</span></a>
         <a class="nav-item" id="nav-profile" onclick="switchTab('Profile')">👤<span>Profile</span></a>
     </div>
@@ -554,7 +489,6 @@
                 applyUserSession();
                 openMenu('home');
                 checkInboxBadge();
-                loadChatHistory();
             } else {
                 openAuthScreen();
             }
@@ -669,7 +603,6 @@
             localStorage.setItem('sea_tycoon_user', JSON.stringify(currentUser));
             applyUserSession();
             openMenu('home');
-            loadChatHistory();
             showBubble(`Berhasil masuk sebagai @${currentUser.username} ✨`);
         }
 
@@ -736,13 +669,6 @@
                 topLeftBtn.innerText = '☰';
                 bottomNav.classList.remove('hidden');
                 setActiveNav('Beranda');
-            } else if (menu === 'chat-ai') {
-                document.getElementById('page-chat-ai').classList.add('active');
-                title.innerText = 'Chat AI Assistant';
-                topLeftBtn.innerText = '✕';
-                bottomNav.classList.remove('hidden');
-                setActiveNav('ChatAI');
-                scrollToBottomChat();
             } else if (menu === 'tiktok') {
                 document.getElementById('page-tiktok').classList.add('active');
                 title.innerText = 'TikTok Downloader';
@@ -799,7 +725,6 @@
 
         function switchTab(name) {
             if (name === 'Beranda') openMenu('home');
-            else if (name === 'ChatAI') openMenu('chat-ai');
             else if (name === 'TikTok') openMenu('tiktok');
             else if (name === 'Profile') openMenu('profile');
         }
@@ -807,7 +732,6 @@
         function setActiveNav(name) {
             document.querySelectorAll('.bottom-nav .nav-item').forEach(i => i.classList.remove('active'));
             if(name === 'Beranda') document.getElementById('nav-beranda').classList.add('active');
-            else if(name === 'ChatAI') document.getElementById('nav-chat-ai').classList.add('active');
             else if(name === 'TikTok') document.getElementById('nav-tiktok').classList.add('active');
             else if(name === 'Profile') document.getElementById('nav-profile').classList.add('active');
         }
@@ -820,74 +744,6 @@
 
         function closeBubble() {
             document.getElementById('bubble-modal').classList.remove('active');
-        }
-
-        function loadChatHistory() {
-            if (!currentUser) return;
-            const chatKey = `sea_tycoon_chat_${currentUser.username}`;
-            let history = JSON.parse(localStorage.getItem(chatKey) || '[]');
-            const listWrapper = document.getElementById('chat-messages-list');
-            
-            let html = `<div class="chat-bubble-row ai"><div class="chat-bubble-content">Halo @${currentUser.username}! Ada yang bisa saya bantu hari ini? 🤖✨</div></div>`;
-            
-            history.forEach(item => {
-                if (item.sender === 'user') {
-                    html += `<div class="chat-bubble-row user"><div class="chat-bubble-content">${item.text}</div></div>`;
-                } else {
-                    html += `<div class="chat-bubble-row ai"><div class="chat-bubble-content">${item.text}</div></div>`;
-                }
-            });
-            listWrapper.innerHTML = html;
-            scrollToBottomChat();
-        }
-
-        async function sendChatMessage() {
-            const input = document.getElementById('ai-chat-input');
-            const text = input.value.trim();
-            if (!text) return;
-
-            const chatKey = `sea_tycoon_chat_${currentUser.username}`;
-            let history = JSON.parse(localStorage.getItem(chatKey) || '[]');
-
-            history.push({ sender: 'user', text: text });
-            localStorage.setItem(chatKey, JSON.stringify(history));
-            input.value = '';
-            loadChatHistory();
-
-            const listWrapper = document.getElementById('chat-messages-list');
-            const loadingId = 'loading-' + Date.now();
-            listWrapper.innerHTML += `
-                <div class="chat-bubble-row ai" id="${loadingId}">
-                    <div class="chat-bubble-content" style="color: var(--text-muted);">Sedang berpikir... ⏳</div>
-                </div>
-            `;
-            scrollToBottomChat();
-
-            try {
-                const response = await fetch('/api/chat-ai', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ message: text })
-                });
-
-                const data = await response.json();
-                let aiReply = data.success ? data.reply : 'Maaf, terjadi kendala pada server AI.';
-
-                history.push({ sender: 'ai', text: aiReply });
-                localStorage.setItem(chatKey, JSON.stringify(history));
-                loadChatHistory();
-
-            } catch (error) {
-                console.error("Error:", error);
-                history.push({ sender: 'ai', text: 'Gagal terhubung ke server backend.' });
-                localStorage.setItem(chatKey, JSON.stringify(history));
-                loadChatHistory();
-            }
-        }
-
-        function scrollToBottomChat() {
-            const scrollDiv = document.getElementById('chat-messages-list');
-            if(scrollDiv) scrollDiv.scrollTop = scrollDiv.scrollHeight;
         }
 
         function submitUserRequest() {
