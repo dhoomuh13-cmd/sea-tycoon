@@ -14,7 +14,7 @@
             --accent-hover: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
             --card-bg: linear-gradient(145deg, #1e293b, #0f172a);
             --border-color: #334155;
-            --sidebar-bg: #111827;
+            --sidebar-bg: linear-gradient(180deg, #111827 0%, #0b0f19 100%);
             --bottom-nav-bg: #1e293b;
         }
 
@@ -24,9 +24,10 @@
             --text-color: #ffffff;
             --text-muted: #a1a1aa;
             --accent-gradient: linear-gradient(135deg, #27272a 0%, #09090b 100%);
+            --accent-hover: linear-gradient(135deg, #3f3f46 0%, #18181b 100%);
             --card-bg: linear-gradient(145deg, #121212, #050505);
             --border-color: #27272a;
-            --sidebar-bg: #09090b;
+            --sidebar-bg: linear-gradient(180deg, #09090b 0%, #000000 100%);
             --bottom-nav-bg: #121212;
         }
 
@@ -36,9 +37,10 @@
             --text-color: #fae8ff;
             --text-muted: #d8b4fe;
             --accent-gradient: linear-gradient(135deg, #c084fc 0%, #7e22ce 100%);
+            --accent-hover: linear-gradient(135deg, #d8b4fe 0%, #6b21a8 100%);
             --card-bg: linear-gradient(145deg, #2e1065, #1e1b4b);
             --border-color: #581c87;
-            --sidebar-bg: #2e1065;
+            --sidebar-bg: linear-gradient(180deg, #2e1065 0%, #13001e 100%);
             --bottom-nav-bg: #2e1065;
         }
 
@@ -48,9 +50,10 @@
             --text-color: #e0f2fe;
             --text-muted: #7dd3fc;
             --accent-gradient: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            --accent-hover: linear-gradient(135deg, #0369a1 100%, #075985 100%);
             --card-bg: linear-gradient(145deg, #03346e, #02203c);
             --border-color: #0369a1;
-            --sidebar-bg: #032b52;
+            --sidebar-bg: linear-gradient(180deg, #032b52 0%, #02203c 100%);
             --bottom-nav-bg: #03346e;
         }
 
@@ -60,9 +63,10 @@
             --text-color: #0f172a;
             --text-muted: #64748b;
             --accent-gradient: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+            --accent-hover: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
             --card-bg: linear-gradient(145deg, #ffffff, #e2e8f0);
             --border-color: #cbd5e1;
-            --sidebar-bg: #ffffff;
+            --sidebar-bg: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
             --bottom-nav-bg: #ffffff;
         }
 
@@ -72,15 +76,14 @@
             box-sizing: border-box;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
-
         body {
             background-color: var(--bg-main);
             color: var(--text-color);
             height: 100vh;
-            height: 100dvh;
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         /* Top Bar */
@@ -88,161 +91,167 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 16px;
+            padding: 0 20px;
             background: var(--bg-topbar);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-color);
-            height: 55px;
+            width: 100%;
+            height: 60px;
             flex-shrink: 0;
             z-index: 100;
         }
-        .top-left { display: flex; align-items: center; gap: 12px; }
-        .menu-btn { background: none; border: none; color: var(--text-color); font-size: 20px; cursor: pointer; }
-        .app-title { font-size: 16px; font-weight: 600; }
+        .top-left { display: flex; align-items: center; gap: 15px; }
+        .menu-btn { background: none; border: none; color: var(--text-color); font-size: 22px; cursor: pointer; }
+        .app-title { font-size: 18px; font-weight: 600; }
 
         .settings-btn {
-            width: 36px; height: 36px; border-radius: 50%; background: var(--accent-gradient);
-            border: none; color: #0f172a; font-size: 16px; display: flex; align-items: center;
-            justify-content: center; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            width: 40px; height: 40px; border-radius: 50%; background: var(--accent-gradient);
+            border: none; color: #0f172a; font-size: 18px; display: flex; align-items: center;
+            justify-content: center; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease, filter 0.2s ease;
         }
+        .settings-btn:hover { transform: scale(1.1) rotate(45deg); filter: brightness(1.15); }
 
         /* Sidebar */
         .sidebar {
             position: fixed; top: 0; left: -280px; width: 280px; height: 100%;
             background: var(--sidebar-bg); box-shadow: 5px 0 25px rgba(0,0,0,0.5);
-            transition: left 0.3s ease-in-out; z-index: 1100; padding: 20px;
+            transition: left 0.3s ease-in-out; z-index: 1000; padding: 20px;
             display: flex; flex-direction: column; border-right: 1px solid var(--border-color);
             overflow-y: auto;
         }
         .sidebar.open { left: 0; }
-        .sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; font-size: 18px; font-weight: bold; color: var(--text-color); }
-        .close-btn { background: none; border: none; color: var(--text-muted); font-size: 20px; cursor: pointer; }
-        .menu-category { font-size: 11px; text-transform: uppercase; color: var(--text-muted); margin: 12px 0 6px; font-weight: 700; letter-spacing: 1px; }
+        .sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 18px; font-weight: bold; color: var(--text-color); flex-shrink: 0; }
+        .close-btn { background: none; border: none; color: var(--text-muted); font-size: 22px; cursor: pointer; }
+        .menu-category { font-size: 12px; text-transform: uppercase; color: var(--text-muted); margin: 15px 0 8px; font-weight: 700; letter-spacing: 1px; flex-shrink: 0; }
         
         .sidebar-item { 
-            padding: 10px 14px; color: var(--text-color); text-decoration: none; border-radius: 12px; 
-            margin-bottom: 5px; background: var(--card-bg); border: 1px solid var(--border-color);
-            font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 10px; 
+            padding: 12px 16px; color: var(--text-color); text-decoration: none; border-radius: 14px; 
+            margin-bottom: 6px; background: var(--card-bg); border: 1px solid var(--border-color);
+            font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.25s ease; 
+            display: flex; align-items: center; gap: 10px; flex-shrink: 0;
         }
+        .sidebar-item:hover { background: var(--accent-gradient); color: #0f172a; border-color: transparent; transform: translateX(4px); }
         .owner-menu { border-color: #f59e0b !important; display: none; }
 
-        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1050; backdrop-filter: blur(2px); }
+        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; backdrop-filter: blur(3px); }
         .overlay.active { display: block; }
 
-        /* Main Content */
+        /* Main Content Area */
         .main-content {
             flex: 1; width: 100%; display: flex; flex-direction: column; overflow: hidden; position: relative;
         }
 
         .page-container {
-            display: none; width: 100%; height: 100%; padding: 16px; padding-bottom: 85px;
+            display: none; width: 100%; height: 100%; padding: 20px;
             overflow-y: auto; flex-direction: column; align-items: center; justify-content: center; text-align: center;
         }
         .page-container.active { display: flex; }
 
         /* Auth Screen */
         .auth-card {
-            background: var(--card-bg); padding: 24px 20px; border-radius: 20px; border: 1px solid var(--border-color);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3); width: 100%; max-width: 380px; text-align: left; margin: auto;
+            background: var(--card-bg); padding: 30px 24px; border-radius: 24px; border: 1px solid var(--border-color);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4); width: 100%; max-width: 400px; text-align: left; margin: auto;
         }
-        .auth-card h2 { font-size: 20px; font-weight: 700; margin-bottom: 4px; color: var(--text-color); text-align: center; }
-        .auth-card p { font-size: 12px; color: var(--text-muted); margin-bottom: 16px; text-align: center; }
+        .auth-card h2 { font-size: 22px; font-weight: 700; margin-bottom: 6px; color: var(--text-color); text-align: center; }
+        .auth-card p { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; text-align: center; }
         
-        .input-group { position: relative; margin-bottom: 12px; width: 100%; }
-        .input-group label { display: block; font-size: 11px; font-weight: 700; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase; }
+        .input-group { position: relative; margin-bottom: 14px; width: 100%; }
+        .input-group label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; }
         .input-group input {
-            width: 100%; padding: 10px 14px; background: var(--bg-main); border: 1px solid var(--border-color);
-            border-radius: 10px; color: var(--text-color); font-size: 13px; outline: none;
+            width: 100%; padding: 12px 16px; background: var(--bg-main); border: 1px solid var(--border-color);
+            border-radius: 12px; color: var(--text-color); font-size: 14px; outline: none;
         }
         .auth-submit-btn {
-            width: 100%; padding: 12px; background: var(--accent-gradient); border: none; border-radius: 10px;
-            color: #0f172a; font-weight: bold; font-size: 14px; cursor: pointer; margin-top: 6px;
+            width: 100%; padding: 14px; background: var(--accent-gradient); border: none; border-radius: 12px;
+            color: #0f172a; font-weight: bold; font-size: 15px; cursor: pointer; transition: 0.2s; margin-top: 10px;
         }
-        .auth-switch { text-align: center; margin-top: 14px; font-size: 12px; color: var(--text-muted); }
+        .auth-submit-btn:hover { background: var(--accent-hover); }
+        
+        .auth-switch { text-align: center; margin-top: 16px; font-size: 13px; color: var(--text-muted); }
         .auth-switch span { color: #38bdf8; font-weight: 600; cursor: pointer; }
-        .forgot-password-link { text-align: right; margin-top: -4px; margin-bottom: 10px; font-size: 11px; color: #38bdf8; cursor: pointer; font-weight: 600; display: block; }
+        .forgot-password-link { text-align: right; margin-top: -6px; margin-bottom: 14px; font-size: 12px; color: #38bdf8; cursor: pointer; font-weight: 600; display: block; }
 
         /* Downloader Section */
         .downloader-card {
-            background: var(--card-bg); padding: 20px; border-radius: 16px; border: 1px solid var(--border-color);
-            width: 100%; max-width: 400px; margin: auto;
+            background: var(--card-bg); padding: 24px; border-radius: 20px; border: 1px solid var(--border-color);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3); text-align: center; width: 100%; max-width: 450px; margin: auto;
         }
-        .downloader-card h2 { font-size: 18px; margin-bottom: 6px; }
-        .downloader-card p { font-size: 12px; color: var(--text-muted); margin-bottom: 15px; }
+        .downloader-card h2 { font-size: 20px; margin-bottom: 8px; color: var(--text-color); }
+        .downloader-card p { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
         .downloader-card input {
-            width: 100%; padding: 12px 14px; background: var(--bg-main); border: 1px solid var(--border-color);
-            border-radius: 12px; color: var(--text-color); font-size: 13px; outline: none; margin-bottom: 12px;
+            width: 100%; padding: 14px 16px; background: var(--bg-main); border: 1px solid var(--border-color);
+            border-radius: 14px; color: var(--text-color); font-size: 14px; outline: none; margin-bottom: 15px;
         }
         .download-btn {
-            width: 100%; padding: 12px; background: var(--accent-gradient); border: none; border-radius: 12px;
-            color: #0f172a; font-weight: bold; font-size: 14px; cursor: pointer;
+            width: 100%; padding: 14px; background: var(--accent-gradient); border: none; border-radius: 14px;
+            color: #0f172a; font-weight: bold; font-size: 15px; cursor: pointer; transition: 0.2s;
         }
 
-        /* Chat AI Room Section - Diperbaiki agar tidak tertutup nav */
-        #page-chat {
-            padding: 10px 12px 75px 12px !important;
-            justify-content: flex-start !important;
-        }
+        /* Chat AI Room Section */
         .chat-section {
             display: flex; flex-direction: column; width: 100%; max-width: 600px;
-            height: 100%; margin: 0 auto; background: var(--bg-main);
+            height: 100%; margin: 0 auto; background: var(--bg-main); padding: 10px 16px 80px 16px;
         }
-        .chat-box { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding: 10px 0; }
-        .chat-message { max-width: 85%; padding: 10px 14px; border-radius: 14px; font-size: 13px; line-height: 1.5; word-wrap: break-word; }
+        .chat-box { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; padding: 10px 0; }
+        .chat-message { max-width: 85%; padding: 14px 18px; border-radius: 16px; font-size: 15px; line-height: 1.6; word-wrap: break-word; }
         .chat-message.user { background: var(--accent-gradient); color: #0f172a; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 600; }
         .chat-message.ai { background: var(--card-bg); color: var(--text-color); align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid var(--border-color); }
         
         .chat-input-area {
-            display: flex; gap: 8px; background: var(--card-bg); padding: 8px 10px; border-radius: 16px;
-            border: 1px solid var(--border-color); margin-top: 5px; align-items: center; flex-shrink: 0;
+            display: flex; gap: 12px; background: var(--card-bg); padding: 12px 14px; border-radius: 20px;
+            border: 1.5px solid var(--border-color); margin-top: 10px; align-items: center; flex-shrink: 0;
         }
-        .chat-input-area input { flex: 1; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 10px; padding: 10px 12px; color: var(--text-color); font-size: 13px; outline: none; }
-        .send-btn { background: var(--accent-gradient); border: none; color: #0f172a; padding: 0 16px; height: 40px; border-radius: 10px; font-weight: bold; cursor: pointer; }
+        .chat-input-area input { flex: 1; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 14px; padding: 14px 16px; color: var(--text-color); font-size: 15px; outline: none; }
+        .send-btn { background: var(--accent-gradient); border: none; color: #0f172a; padding: 0 22px; height: 48px; border-radius: 14px; font-weight: bold; cursor: pointer; flex-shrink: 0; }
 
         /* Profile Card */
         .profile-card {
-            background: var(--card-bg); padding: 24px; border-radius: 16px; border: 1px solid var(--border-color);
-            width: 100%; max-width: 380px; text-align: center; margin: auto;
+            background: var(--card-bg); padding: 30px; border-radius: 20px; border: 1px solid var(--border-color);
+            width: 100%; max-width: 400px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.3); margin: auto;
         }
-        .profile-avatar { width: 70px; height: 70px; border-radius: 50%; background: var(--accent-gradient); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; font-size: 28px; color: #0f172a; font-weight: bold; }
-        .profile-info { margin-bottom: 16px; text-align: left; background: var(--bg-main); padding: 12px; border-radius: 10px; border: 1px solid var(--border-color); }
-        .profile-info p { font-size: 13px; margin-bottom: 4px; }
-        .profile-info span { color: var(--text-muted); font-size: 11px; display: block; }
-        .logout-btn { background: #ef4444; color: white; border: none; padding: 10px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; }
+        .profile-avatar { width: 80px; height: 80px; border-radius: 50%; background: var(--accent-gradient); margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 32px; color: #0f172a; font-weight: bold; }
+        .profile-info { margin-bottom: 20px; text-align: left; background: var(--bg-main); padding: 15px; border-radius: 12px; border: 1px solid var(--border-color); }
+        .profile-info p { font-size: 14px; margin-bottom: 8px; color: var(--text-color); }
+        .profile-info span { color: var(--text-muted); font-size: 12px; display: block; }
+        .logout-btn { background: #ef4444; color: white; border: none; padding: 12px; width: 100%; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .logout-btn:hover { background: #dc2626; }
 
         /* Settings Modal */
-        .settings-modal, .bubble-modal {
+        .settings-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(2px);
+            background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(4px);
         }
-        .settings-modal.active, .bubble-modal.active { display: flex; }
+        .settings-modal.active { display: flex; }
         .settings-content {
-            background: var(--card-bg); border: 1px solid var(--border-color); padding: 20px; border-radius: 20px;
-            max-width: 320px; width: 90%; display: flex; flex-direction: column; gap: 15px;
+            background: var(--card-bg); border: 1px solid var(--border-color); padding: 24px; border-radius: 24px;
+            max-width: 360px; width: 90%; box-shadow: 0 20px 40px rgba(0,0,0,0.5); display: flex; flex-direction: column; gap: 20px;
         }
-        .settings-header { display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 16px; }
-        .setting-group { display: flex; flex-direction: column; gap: 6px; }
-        .setting-label { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
-        .setting-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+        .settings-header { display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 18px; }
+        .setting-group { display: flex; flex-direction: column; gap: 8px; }
+        .setting-label { font-size: 13px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
+        .setting-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
         .theme-btn, .notif-btn {
-            padding: 8px; border-radius: 10px; border: 1px solid var(--border-color);
-            background: var(--bg-main); color: var(--text-color); font-size: 12px; font-weight: 600; cursor: pointer;
+            padding: 10px; border-radius: 12px; border: 1px solid var(--border-color);
+            background: var(--bg-main); color: var(--text-color); font-size: 13px; font-weight: 600; cursor: pointer;
         }
         .theme-btn.active, .notif-btn.active { background: var(--accent-gradient); color: #0f172a; border-color: transparent; }
 
-        /* Bubble Content */
-        .bubble-content { background: var(--card-bg); border: 1px solid var(--border-color); padding: 20px; border-radius: 16px; max-width: 280px; width: 85%; text-align: center; }
-        .bubble-btn { background: var(--accent-gradient); color: #0f172a; border: none; padding: 8px 20px; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 12px; }
+        /* Bubble Modal */
+        .bubble-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center; }
+        .bubble-modal.active { display: flex; }
+        .bubble-content { background: var(--card-bg); border: 1px solid var(--border-color); padding: 24px; border-radius: 20px; max-width: 320px; width: 85%; text-align: center; }
+        .bubble-btn { background: var(--accent-gradient); color: #0f172a; border: none; padding: 10px 24px; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 15px; }
 
-        /* Bottom Nav - Diperbaiki posisinya agar rapi */
+        /* Bottom Nav */
         .bottom-nav {
-            position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 400px; background: var(--bottom-nav-bg); display: flex; justify-content: space-around;
-            padding: 6px; border-radius: 30px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4); border: 1px solid var(--border-color); z-index: 90;
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+            width: 92%; max-width: 440px; background: var(--bottom-nav-bg); display: flex; justify-content: space-around;
+            padding: 10px 8px; border-radius: 35px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); border: 1px solid var(--border-color); z-index: 90;
             transition: transform 0.3s ease, opacity 0.3s ease;
         }
         .bottom-nav.hidden { transform: translate(-50%, 100px); opacity: 0; pointer-events: none; }
-        .nav-item { color: var(--text-muted); text-decoration: none; font-size: 11px; display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; padding: 6px 10px; border-radius: 16px; transition: 0.2s; }
+        .nav-item { color: var(--text-muted); text-decoration: none; font-size: 12px; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; padding: 8px 12px; border-radius: 20px; transition: 0.3s; }
         .nav-item.active, .nav-item:hover { color: #0f172a; background: var(--accent-gradient); font-weight: 600; }
     </style>
 </head>
@@ -277,6 +286,14 @@
         <div class="menu-category">Fitur Fun</div>
         <div class="sidebar-item" onclick="showBubble('Fitur Susun Kata sedang dalam tahap pengembangan. Segera hadir! 🧩')">🧩 Susun Kata</div>
         <div class="sidebar-item" onclick="showBubble('Fitur Info Gempa sedang dalam tahap pengembangan. Segera hadir! 🌍')">🌍 Info Gempa</div>
+        <div class="sidebar-item" onclick="showBubble('Fitur Spotify Song sedang dalam tahap pengembangan. Segera hadir! 🎧')">🎧 Spotify Song</div>
+        <div class="sidebar-item" onclick="showBubble('Fitur Tebak Kata sedang dalam tahap pengembangan. Segera hadir! 💡')">💡 Tebak Kata</div>
+
+        <div class="menu-category">Eksplorasi</div>
+        <div class="sidebar-item" onclick="showBubble('Fitur Tempat Lagu sedang dalam tahap pengembangan. Mohon ditunggu ya! 🎵')">🎵 Tempat Lagu</div>
+        <div class="sidebar-item" onclick="showBubble('Fitur Tempat Bermain sedang dalam tahap pengembangan. Mohon ditunggu ya! 🎮')">🎮 Tempat Bermain</div>
+        <div class="sidebar-item" onclick="showBubble('Fitur Tempat Cerita sedang dalam tahap pengembangan. Mohon ditunggu ya! 📖')">📖 Tempat Cerita</div>
+        <div class="sidebar-item" onclick="showBubble('Fitur Tempat Kenangan sedang dalam tahap pengembangan. Mohon ditunggu ya! 📸')">📸 Tempat Kenangan</div>
     </div>
 
     <!-- Main Content -->
@@ -284,7 +301,7 @@
         
         <!-- Halaman Auth -->
         <div id="page-auth" class="page-container">
-            <div class="auth-card">
+            <div class="auth-card" id="auth-card-box">
                 <h2 id="auth-title">Selamat Datang! 🚀</h2>
                 <p id="auth-subtitle">Masuk dengan email pribadi & password</p>
                 
@@ -312,7 +329,7 @@
                         <label>Kode Verifikasi (Cek Folder Spam/Gmail)</label>
                         <input type="text" id="input-otp" placeholder="Masukkan 4 digit kode...">
                     </div>
-                    <p style="font-size: 10px; color: #38bdf8; margin-bottom: 12px; text-align: center;">*Kode verifikasi telah dikirim ke email kamu.</p>
+                    <p style="font-size: 11px; color: #38bdf8; margin-bottom: 15px; text-align: center;">*Kode verifikasi telah dikirim ke email kamu.</p>
                 </div>
 
                 <div id="form-reset-inputs" style="display:none;">
@@ -333,8 +350,8 @@
         <!-- Halaman Beranda -->
         <div id="page-home" class="page-container">
             <div>
-                <h2>Selamat Datang, <span id="welcome-username" style="color: #38bdf8;">User</span>[span_2](start_span)[span_2](end_span)!</h2>
-                <p style="color: var(--text-muted); margin-top: 8px; font-size: 13px;">Gunakan menu navigasi di bawah atau sidebar (☰) untuk mulai menjelajah.</p>[span_3](start_span)[span_3](end_span)
+                <h2>Selamat Datang, <span id="welcome-username" style="color: #38bdf8;">User</span>!</h2>
+                <p style="color: var(--text-muted); margin-top: 10px;">Gunakan menu navigasi di bawah atau sidebar (☰) untuk mulai menjelajah.</p>
             </div>
         </div>
 
@@ -349,10 +366,10 @@
         </div>
 
         <!-- Halaman Chat AI Room -->
-        <div id="page-chat" class="page-container">
+        <div id="page-chat" class="page-container" style="padding: 10px 16px 0 16px;">
             <div class="chat-section">
                 <div class="chat-box" id="chat-box">
-                    <div class="chat-message ai">Halo! Aku asisten AI Sea Tycoon. Ada yang bisa kubantu?[span_4](start_span)[span_4](end_span)</div>
+                    <div class="chat-message ai">Halo! Aku asisten AI Sea Tycoon. Ada yang bisa kubantu?</div>
                 </div>
                 <div class="chat-input-area">
                     <input type="text" id="chat-input" placeholder="Tulis pesan ke AI..." onkeypress="if(event.key==='Enter')sendChatMessage()">
@@ -365,8 +382,8 @@
         <div id="page-profile" class="page-container">
             <div class="profile-card">
                 <div class="profile-avatar" id="profile-initial">U</div>
-                <h3 id="profile-name" style="margin-bottom: 4px; font-size: 16px;">Username</h3>
-                <p id="profile-role-badge" style="font-size: 11px; color: #38bdf8; font-weight: bold; margin-bottom: 12px;">Member</p>
+                <h3 id="profile-name" style="margin-bottom: 5px; font-size: 18px;">Username</h3>
+                <p id="profile-role-badge" style="font-size: 12px; color: #38bdf8; font-weight: bold; margin-bottom: 15px;">Member</p>
                 
                 <div class="profile-info">
                     <p><strong>Email Terdaftar:</strong></p>
@@ -409,17 +426,17 @@
     <!-- Bubble Notification Modal -->
     <div id="bubble-modal" class="bubble-modal" onclick="closeBubble()">
         <div class="bubble-content" onclick="event.stopPropagation()">
-            <p id="bubble-text" style="font-size: 13px;">Pesan pemberitahuan...</p>
+            <p id="bubble-text">Pesan pemberitahuan...</p>
             <button class="bubble-btn" onclick="closeBubble()">Mengerti</button>
         </div>
     </div>
 
     <!-- Bottom Nav -->
     <div class="bottom-nav" id="bottom-nav">
-        <a class="nav-item active" id="nav-beranda" onclick="switchTab(this, 'Beranda')">🏠<span>Beranda</span></a>[span_5](start_span)[span_5](end_span)[span_6](start_span)[span_6](end_span)
-        <a class="nav-item" id="nav-tiktok" onclick="switchTab(this, 'TikTok')">🎵<span>TikTok</span></a>[span_7](start_span)[span_7](end_span)[span_8](start_span)[span_8](end_span)
-        <a class="nav-item" id="nav-chat" onclick="switchTab(this, 'Chat AI')">🤖<span>Chat AI</span></a>[span_9](start_span)[span_9](end_span)[span_10](start_span)[span_10](end_span)
-        <a class="nav-item" id="nav-profile" onclick="switchTab(this, 'Profile')">👤<span>Profile</span></a>[span_11](start_span)[span_11](end_span)[span_12](start_span)[span_12](end_span)
+        <a class="nav-item active" id="nav-beranda" onclick="switchTab(this, 'Beranda')">🏠<span>Beranda</span></a>
+        <a class="nav-item" id="nav-tiktok" onclick="switchTab(this, 'TikTok')">🎵<span>TikTok</span></a>
+        <a class="nav-item" id="nav-chat" onclick="switchTab(this, 'Chat AI')">🤖<span>Chat AI</span></a>
+        <a class="nav-item" id="nav-profile" onclick="switchTab(this, 'Profile')">👤<span>Profile</span></a>
     </div>
 
     <script>
