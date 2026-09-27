@@ -1,27 +1,57 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const axios = require('axios');
 const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
-
-// Ganti link di bawah ini dengan link MongoDB Atlas kamu yang sudah diisi password
-const MONGO_URI = "mongodb+srv://dhoomuh13_db_user:aAGV5J0RJONSCbtI@cluster0.kkteamf.mongodb.net/ruangsantai?appName=Cluster0";
-
-// Hubungkan ke MongoDB Atlas
-mongoose.connect(MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-.then(() => console.log("Berhasil terhubung ke MongoDB Atlas!"))
-.catch(err => console.error("Koneksi MongoDB gagal:", err));
-
-// Middleware untuk membaca format JSON dan file statis dari folder public
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
 
-// Jalankan Server
-app.listen(PORT, () => {
-    console.log(`Server berjalan di http://localhost:${PORT}`);
+// Koneksi ke MongoDB Atlas menggunakan variabel environment dari Railway
+const MONGO_URI = process.env.MONGO_URI;
+mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('MongoDB Terhubung!'))
+    .catch(err => console.error('Koneksi MongoDB Gagal:', err));
+
+// Schema untuk menyimpan riwayat download video TikTok
+const historySchema = new mongoose.Schema({
+    platform: String,
+    url: String,
+    title: String,
+    videoUrl: String,
+    createdAt: { type: Date, default: Date.now }
 });
+const History = mongoose.model('DownloadHistory', historySchema);
+
+// Endpoint API untuk memproses download TikTok
+app.post('/api/download-tiktok', async (req, res) => {
+    try {
+        const { url } = req.body;
+        if (!url) return res.status(400).json({ success: false, message: 'URL tidak boleh kosong!' });
+
+        // Memanggil API downloader sesuai permintaanmu
+        const apiResponse = await axios.get(`https://api.ikyyxd.my.id/download/tiktokkv2?url=${encodeURIComponent(url)}`);
+        const resultData = apiResponse.data;
+
+        // Simpan riwayat ke MongoDB Atlas
+        const newHistory = new History({
+            platform: 'TikTok',
+            url: url,
+            title: resultData.title || 'TikTok Video',
+            videoUrl: resultData.video || resultData.data || url
+        });
+        await newHistory.save();
+
+        res.json({ success: true, data: resultData });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ success: false, message: 'Gagal mengambil data dari API downloader.' });
+    }
+});
+
+// Menyajikan file frontend HTML
+app.get('*', (req, res) => {
+    res.send(htmlContent);
+});
+
+// (Simpan kode HTML frontend di bawah atau di index.html terpisah)
