@@ -50,7 +50,7 @@
             --text-color: #e0f2fe;
             --text-muted: #7dd3fc;
             --accent-gradient: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-            --accent-hover: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+            --accent-hover: linear-gradient(135deg, #0369a1 100%, #075985 100%);
             --card-bg: linear-gradient(145deg, #03346e, #02203c);
             --border-color: #0369a1;
             --sidebar-bg: linear-gradient(180deg, #032b52 0%, #02203c 100%);
@@ -156,18 +156,6 @@
         .auth-card h2 { font-size: 22px; font-weight: 700; margin-bottom: 6px; color: var(--text-color); text-align: center; }
         .auth-card p { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; text-align: center; }
         
-        .google-btn {
-            width: 100%; padding: 12px; background: var(--bg-main); border: 1px solid var(--border-color);
-            border-radius: 14px; color: var(--text-color); font-weight: 600; font-size: 14px; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.2s; margin-bottom: 18px;
-        }
-        .google-btn:hover { filter: brightness(1.2); }
-
-        .divider { display: flex; align-items: center; text-align: center; color: var(--text-muted); font-size: 12px; margin-bottom: 18px; }
-        .divider::before, .divider::after { content: ''; flex: 1; border-bottom: 1px solid var(--border-color); }
-        .divider::before { margin-right: 10px; }
-        .divider::after { margin-left: 10px; }
-
         .input-group { position: relative; margin-bottom: 14px; width: 100%; }
         .input-group label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; }
         .input-group input {
@@ -179,8 +167,10 @@
             color: #0f172a; font-weight: bold; font-size: 15px; cursor: pointer; transition: 0.2s; margin-top: 10px;
         }
         .auth-submit-btn:hover { background: var(--accent-hover); }
+        
         .auth-switch { text-align: center; margin-top: 16px; font-size: 13px; color: var(--text-muted); }
         .auth-switch span { color: #38bdf8; font-weight: 600; cursor: pointer; }
+        .forgot-password-link { text-align: right; margin-top: -6px; margin-bottom: 14px; font-size: 12px; color: #38bdf8; cursor: pointer; font-weight: 600; display: block; }
 
         /* Downloader Section */
         .downloader-card {
@@ -198,7 +188,7 @@
             color: #0f172a; font-weight: bold; font-size: 15px; cursor: pointer; transition: 0.2s;
         }
 
-        /* Chat AI Room Section (Diperbaiki agar tidak tertutup navbar) */
+        /* Chat AI Room Section */
         .chat-section {
             display: flex; flex-direction: column; width: 100%; max-width: 600px;
             height: 100%; margin: 0 auto; background: var(--bg-main); padding: 10px 16px 80px 16px;
@@ -277,7 +267,7 @@
 
     <div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
 
-    <!-- Sidebar (Lengkap semua fitur kembali) -->
+    <!-- Sidebar -->
     <div id="sidebar" class="sidebar">
         <div class="sidebar-header">
             <span>Menu Utama</span>
@@ -309,37 +299,52 @@
     <!-- Main Content -->
     <div class="main-content" id="content-area">
         
-        <!-- Halaman Auth -->
+        <!-- Halaman Auth (Login / Register / Verifikasi / Lupa Password) -->
         <div id="page-auth" class="page-container">
             <div class="auth-card" id="auth-card-box">
                 <h2 id="auth-title">Selamat Datang! 🚀</h2>
-                <p id="auth-subtitle">Masuk atau buat akun untuk melanjutkan</p>
+                <p id="auth-subtitle">Masuk dengan email pribadi & password</p>
                 
-                <button class="google-btn" onclick="loginWithGoogle()">
-                    <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.72-4.95H1.2v3.15C3.18 21.32 7.24 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.25c-.25-.72-.38-1.49-.38-2.25s.13-1.53.38-2.25V6.6H1.2C.43 8.15 0 9.89 0 12s.43 3.85 1.2 5.4l4.08-3.15z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.24 0 3.18 2.68 1.2 6.6l4.08 3.15c.95-2.84 3.6-4.95 6.72-4.95z"/></svg>
-                    Lanjutkan dengan Google
-                </button>
+                <!-- Form Group Utama -->
+                <div id="form-main-inputs">
+                    <div class="input-group" id="group-username" style="display:none;">
+                        <label>Username</label>
+                        <input type="text" id="input-username" placeholder="Buat username unik...">
+                    </div>
 
-                <div class="divider">atau dengan email</div>
+                    <div class="input-group">
+                        <label>Email Pribadi</label>
+                        <input type="email" id="input-email" placeholder="nama@email.com atau 'owner'...">
+                    </div>
 
-                <div class="input-group" id="group-username" style="display:none;">
-                    <label>Username</label>
-                    <input type="text" id="input-username" placeholder="Masukkan username...">
+                    <div class="input-group" id="group-password">
+                        <label>Password</label>
+                        <input type="password" id="input-password" placeholder="Minimal 6 karakter...">
+                    </div>
+                    
+                    <span id="forgot-pw-trigger" class="forgot-password-link" onclick="showForgotPasswordView()">Lupa Password?</span>
                 </div>
 
-                <div class="input-group">
-                    <label>Email / Username</label>
-                    <input type="text" id="input-email" placeholder="nama@email.com atau 'owner'...">
+                <!-- Form Group Khusus Verifikasi OTP (Muncul saat Daftar) -->
+                <div id="form-otp-inputs" style="display:none;">
+                    <div class="input-group">
+                        <label>Kode Verifikasi (Cek Folder Spam/Gmail)</label>
+                        <input type="text" id="input-otp" placeholder="Masukkan 4 digit kode...">
+                    </div>
+                    <p style="font-size: 11px; color: #38bdf8; margin-bottom: 15px; text-align: center;">*Kode verifikasi telah dikirim ke email kamu.</p>
                 </div>
 
-                <div class="input-group">
-                    <label>Password</label>
-                    <input type="password" id="input-password" placeholder="Minimal 6 karakter...">
+                <!-- Form Group Khusus Reset Password (Muncul saat Lupa Password) -->
+                <div id="form-reset-inputs" style="display:none;">
+                    <div class="input-group">
+                        <label>Password Baru</label>
+                        <input type="password" id="input-new-password" placeholder="Masukkan password baru...">
+                    </div>
                 </div>
 
                 <button class="auth-submit-btn" id="auth-btn-action" onclick="handleAuthSubmit()">Masuk</button>
 
-                <div class="auth-switch">
+                <div class="auth-switch" id="auth-switch-container">
                     <span id="auth-switch-text" onclick="toggleAuthMode()">Belum punya akun? Daftar sekarang</span>
                 </div>
             </div>
@@ -384,7 +389,7 @@
                 <p id="profile-role-badge" style="font-size: 12px; color: #38bdf8; font-weight: bold; margin-bottom: 15px;">Member</p>
                 
                 <div class="profile-info">
-                    <p><strong>Email/Akun:</strong></p>
+                    <p><strong>Email Terdaftar:</strong></p>
                     <span id="profile-email">user@email.com</span>
                 </div>
 
@@ -438,8 +443,11 @@
     </div>
 
     <script>
-        let isLoginMode = true;
+        let authState = 'login'; // 'login', 'register', 'verify_otp', 'forgot_password', 'reset_password'
         let currentUser = null;
+        let tempRegisterData = null;
+        let generatedOtpCode = null;
+        let targetResetEmail = null;
 
         window.onload = function() {
             const savedUser = localStorage.getItem('sea_tycoon_user');
@@ -457,90 +465,184 @@
             document.querySelectorAll('.page-container').forEach(p => p.classList.remove('active'));
             document.getElementById('page-auth').classList.add('active');
             document.getElementById('page-title').innerText = 'Autentikasi';
+            setAuthState('login');
         }
 
-        function toggleAuthMode() {
-            isLoginMode = !isLoginMode;
+        function setAuthState(state) {
+            authState = state;
             const title = document.getElementById('auth-title');
             const subtitle = document.getElementById('auth-subtitle');
             const btnAction = document.getElementById('auth-btn-action');
-            const switchText = document.getElementById('auth-switch-text');
+            const switchContainer = document.getElementById('auth-switch-container');
             const groupUsername = document.getElementById('group-username');
+            const groupPassword = document.getElementById('group-password');
+            const groupOtp = document.getElementById('form-otp-inputs');
+            const groupReset = document.getElementById('form-reset-inputs');
+            const forgotLink = document.getElementById('forgot-pw-trigger');
+            const mainInputs = document.getElementById('form-main-inputs');
 
-            if (isLoginMode) {
+            // Reset visibility
+            groupUsername.style.display = 'none';
+            groupPassword.style.display = 'block';
+            groupOtp.style.display = 'none';
+            groupReset.style.display = 'none';
+            forgotLink.style.display = 'none';
+            switchContainer.style.display = 'block';
+
+            if (state === 'login') {
                 title.innerText = "Selamat Datang Kembali! 👋";
-                subtitle.innerText = "Masuk untuk melanjutkan ke akunmu";
+                subtitle.innerText = "Masuk dengan email pribadi & password";
                 btnAction.innerText = "Masuk";
-                switchText.innerText = "Belum punya akun? Daftar sekarang";
-                groupUsername.style.display = "none";
-            } else {
+                forgotLink.style.display = 'block';
+                switchContainer.innerHTML = `<span onclick="setAuthState('register')">Belum punya akun? Daftar sekarang</span>`;
+            } else if (state === 'register') {
                 title.innerText = "Buat Akun Baru 🚀";
-                subtitle.innerText = "Daftar untuk menikmati semua fitur";
-                btnAction.innerText = "Daftar";
-                switchText.innerText = "Sudah punya akun? Masuk di sini";
-                groupUsername.style.display = "block";
+                subtitle.innerText = "Daftar menggunakan email aktifmu";
+                btnAction.innerText = "Kirim Kode Verifikasi";
+                groupUsername.style.display = 'block';
+                switchContainer.innerHTML = `<span onclick="setAuthState('login')">Sudah punya akun? Masuk di sini</span>`;
+            } else if (state === 'verify_otp') {
+                title.innerText = "Verifikasi Email ✉️";
+                subtitle.innerText = "Masukkan kode yang masuk ke inbox/folder spam emailmu";
+                btnAction.innerText = "Konfirmasi & Daftar";
+                groupPassword.style.display = 'none';
+                groupOtp.style.display = 'block';
+                switchContainer.style.display = 'none';
+            } else if (state === 'forgot_password') {
+                title.innerText = "Lupa Password 🔑";
+                subtitle.innerText = "Masukkan email akunmu untuk reset password";
+                btnAction.innerText = "Kirim Kode Reset";
+                groupPassword.style.display = 'none';
+                switchContainer.innerHTML = `<span onclick="setAuthState('login')">Batal, kembali ke Login</span>`;
+            } else if (state === 'reset_password') {
+                title.innerText = "Buat Password Baru 🔒";
+                subtitle.innerText = "Masukkan password baru untuk akunmu";
+                btnAction.innerText = "Simpan Password Baru";
+                groupPassword.style.display = 'none';
+                groupReset.style.display = 'block';
+                switchContainer.style.display = 'none';
             }
+        }
+
+        function toggleAuthMode() {
+            if (authState === 'login') setAuthState('register');
+            else setAuthState('login');
+        }
+
+        function showForgotPasswordView() {
+            setAuthState('forgot_password');
         }
 
         function handleAuthSubmit() {
             const emailInput = document.getElementById('input-email').value.trim();
-            const password = document.getElementById('input-password').value.trim();
+            const passwordInput = document.getElementById('input-password').value.trim();
             const usernameInput = document.getElementById('input-username').value.trim();
+            const otpInput = document.getElementById('input-otp').value.trim();
+            const newPasswordInput = document.getElementById('input-new-password').value.trim();
 
-            if (!emailInput || !password) {
-                showBubble('Email/Username dan Password wajib diisi! ⚠️');
-                return;
-            }
+            let dbUsers = JSON.parse(localStorage.getItem('sea_tycoon_db') || '[]');
 
-            // Validasi khusus Owner
-            if (emailInput === 'owner' || (emailInput === 'owner@seatycoon.com' && password === 'owner123')) {
-                if (isLoginMode && password !== 'owner123') {
-                    showBubble('Password Owner salah! ❌');
+            if (authState === 'login') {
+                if (!emailInput || !passwordInput) {
+                    showBubble('Email dan Password wajib diisi! ⚠️');
                     return;
                 }
-                currentUser = { username: 'owner', email: 'owner@seatycoon.com', role: 'Owner' };
-                finalizeLogin();
-                return;
-            }
 
-            if (isLoginMode) {
-                let dbUsers = JSON.parse(localStorage.getItem('sea_tycoon_db') || '[]');
-                let found = dbUsers.find(u => (u.email === emailInput || u.username === emailInput) && u.password === password);
-                
+                // Cek Owner Default
+                if (emailInput === 'owner' || (emailInput === 'owner@seatycoon.com' && passwordInput === 'owner123')) {
+                    currentUser = { username: 'owner', email: 'owner@seatycoon.com', role: 'Owner' };
+                    finalizeLogin();
+                    return;
+                }
+
+                let found = dbUsers.find(u => (u.email === emailInput || u.username === emailInput) && u.password === passwordInput);
                 if (found) {
                     currentUser = found;
                     finalizeLogin();
                 } else {
-                    showBubble('Akun tidak ditemukan atau password salah! ❌');
+                    showBubble('Email/Username atau Password salah! ❌');
                 }
-            } else {
-                if (!usernameInput) {
-                    showBubble('Username wajib diisi untuk pendaftaran! ⚠️');
+            } 
+            else if (authState === 'register') {
+                if (!emailInput || !passwordInput || !usernameInput) {
+                    showBubble('Semua kolom wajib diisi! ⚠️');
                     return;
                 }
-                let dbUsers = JSON.parse(localStorage.getItem('sea_tycoon_db') || '[]');
-                if(dbUsers.some(u => u.email === emailInput || u.username === usernameInput)) {
+                if (passwordInput.length < 6) {
+                    showBubble('Password minimal harus 6 karakter! ⚠️');
+                    return;
+                }
+                if (dbUsers.some(u => u.email === emailInput || u.username === usernameInput)) {
                     showBubble('Email atau Username sudah terdaftar! ⚠️');
                     return;
                 }
 
-                const newUser = { username: usernameInput, email: emailInput, password: password, role: 'Member' };
-                dbUsers.push(newUser);
-                localStorage.setItem('sea_tycoon_db', JSON.stringify(dbUsers));
+                // Generate Kode OTP Palsu (Simulasi Kirim ke Email/Spam)
+                generatedOtpCode = Math.floor(1000 + Math.random() * 9000).toString();
+                tempRegisterData = { username: usernameInput, email: emailInput, password: passwordInput, role: 'Member' };
                 
-                currentUser = newUser;
-                showBubble('Pendaftaran berhasil! Selamat datang 🎉');
+                // Tampilkan simulasi pesan email masuk
+                showBubble(`[SIMULASI EMAIL/SPAM]\nKode verifikasi Sea Tycoon kamu adalah: ${generatedOtpCode}`);
+                setAuthState('verify_otp');
+            } 
+            else if (authState === 'verify_otp') {
+                if (otpInput !== generatedOtpCode) {
+                    showBubble('Kode verifikasi salah! Cek kembali folder spam/Gmail kamu. ❌');
+                    return;
+                }
+
+                dbUsers.push(tempRegisterData);
+                localStorage.setItem('sea_tycoon_db', JSON.stringify(dbUsers));
+                currentUser = tempRegisterData;
+                showBubble('Email berhasil diverifikasi! Pendaftaran sukses 🎉');
                 finalizeLogin();
             }
-        }
+            else if (authState === 'forgot_password') {
+                if (!emailInput) {
+                    showBubble('Masukkan email akun terlebih dahulu! ⚠️');
+                    return;
+                }
+                let found = dbUsers.find(u => u.email === emailInput);
+                if (!found && emailInput !== 'owner@seatycoon.com') {
+                    showBubble('Email tidak terdaftar di sistem! ❌');
+                    return;
+                }
 
-        function loginWithGoogle() {
-            const googleNames = ['Alexandro', 'Dhonatt Eskrim', 'Siti Rahma', 'Budi Santoso'];
-            const randomName = googleNames[Math.floor(Math.random() * googleNames.length)];
-            const cleanUsername = randomName.toLowerCase().replace(/\s+/g, '_');
+                targetResetEmail = emailInput;
+                generatedOtpCode = Math.floor(1000 + Math.random() * 9000).toString();
+                showBubble(`[SIMULASI LUPA PASSWORD]\nKode OTP Reset dikirim ke email ${emailInput}: ${generatedOtpCode}`);
+                
+                // Minta konfirmasi OTP sebelum ganti password baru
+                let userOtpCheck = prompt("Masukkan 4 digit kode verifikasi yang dikirim ke email (Cek Spam/Gmail):");
+                if (userOtpCheck === generatedOtpCode) {
+                    setAuthState('reset_password');
+                } else {
+                    showBubble('Kode verifikasi salah! Gagal mereset password. ❌');
+                }
+            }
+            else if (authState === 'reset_password') {
+                if (!newPasswordInput || newPasswordInput.length < 6) {
+                    showBubble('Password baru minimal 6 karakter! ⚠️');
+                    return;
+                }
 
-            currentUser = { username: cleanUsername, email: `${cleanUsername}@gmail.com`, role: 'Member' };
-            finalizeLogin();
+                if (targetResetEmail === 'owner@seatycoon.com') {
+                    showBubble('Password Owner tidak dapat diubah lewat sini! ⚠️');
+                    setAuthState('login');
+                    return;
+                }
+
+                let userIndex = dbUsers.findIndex(u => u.email === targetResetEmail);
+                if (userIndex !== -1) {
+                    dbUsers[userIndex].password = newPasswordInput;
+                    localStorage.setItem('sea_tycoon_db', JSON.stringify(dbUsers));
+                    showBubble('Password berhasil diubah! Silakan masuk dengan password baru ✨');
+                    setAuthState('login');
+                } else {
+                    showBubble('Terjadi kesalahan sistem. Coba lagi. ❌');
+                    setAuthState('login');
+                }
+            }
         }
 
         function finalizeLogin() {
