@@ -160,7 +160,7 @@
         .auth-switch span { color: #38bdf8; font-weight: 600; cursor: pointer; }
         .forgot-password-link { text-align: right; margin-top: -6px; margin-bottom: 14px; font-size: 12px; color: #38bdf8; cursor: pointer; font-weight: 600; display: block; }
 
-        /* --- CHAT AI INTERAKTIF --- */
+        /* --- CHAT AI INTERAKTIF (Diperbaiki & Terpisah dari Navbar) --- */
         #page-chat-ai.page-container {
             padding: 0;
             justify-content: flex-start;
@@ -170,7 +170,7 @@
             width: 100%; max-width: 600px; height: 100%; display: flex; flex-direction: column; margin: 0 auto; background: var(--bg-main); position: relative;
         }
         .chat-messages-scroll {
-            flex: 1; overflow-y: auto; padding: 16px 16px 95px 16px; display: flex; flex-direction: column; gap: 12px; scroll-behavior: smooth;
+            flex: 1; overflow-y: auto; padding: 16px 16px 85px 16px; display: flex; flex-direction: column; gap: 12px; scroll-behavior: smooth;
         }
         .chat-bubble-row { display: flex; width: 100%; margin-bottom: 4px; }
         .chat-bubble-row.user { justify-content: flex-end; }
@@ -187,7 +187,7 @@
         }
         
         .chat-input-area {
-            position: absolute; bottom: 75px; left: 0; width: 100%;
+            position: absolute; bottom: 0; left: 0; width: 100%;
             padding: 10px 16px; background: var(--bg-topbar); border-top: 1px solid var(--border-color); 
             display: flex; align-items: center; gap: 10px; z-index: 50; backdrop-filter: blur(10px);
         }
