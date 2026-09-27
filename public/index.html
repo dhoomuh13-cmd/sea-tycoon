@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sea Tycoon - TikTok Downloader</title>
+    <title>Sea Tycoon</title>
     <style>
         * {
             margin: 0;
@@ -57,12 +57,59 @@
 
         /* Main Content Area */
         .main-content {
-            flex: 1; padding: 90px 20px 100px; overflow-y: auto; max-width: 600px; margin: 0 auto; width: 100%;
+            flex: 1; padding: 100px 20px 100px; overflow-y: auto; max-width: 600px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
 
-        /* Downloader Box Style */
+        /* Beranda Menu Buttons Grid */
+        .home-container {
+            text-align: center;
+            width: 100%;
+        }
+        .home-container h2 {
+            font-size: 22px;
+            margin-bottom: 6px;
+            color: #f8fafc;
+        }
+        .home-container p {
+            font-size: 14px;
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            width: 100%;
+        }
+        .menu-card-btn {
+            background: #1e293b;
+            border: 1px solid #334155;
+            padding: 22px 16px;
+            border-radius: 16px;
+            color: #f8fafc;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        .menu-card-btn:hover {
+            background: #334155;
+            border-color: #38bdf8;
+            transform: translateY(-2px);
+        }
+
+        /* Downloader Card (Hidden by default, shown when TikTok menu selected) */
+        .downloader-section {
+            display: none;
+            width: 100%;
+        }
         .downloader-card {
-            background: #1e293b; padding: 24px; border-radius: 20px; border: 1px solid #334155; box-shadow: 0 10px 25px rgba(0,0,0,0.3); text-align: center;
+            background: #1e293b; padding: 24px; border-radius: 20px; border: 1px solid #334155; box-shadow: 0 10px 25px rgba(0,0,0,0.3); text-align: center; width: 100%;
         }
         .downloader-card h2 { font-size: 20px; margin-bottom: 8px; color: #f8fafc; }
         .downloader-card p { font-size: 13px; color: #94a3b8; margin-bottom: 20px; }
@@ -85,6 +132,28 @@
 
         #result-box { display: none; margin-top: 20px; background: #0f172a; padding: 15px; border-radius: 12px; border: 1px solid #334155; text-align: left; }
         #result-box video { width: 100%; border-radius: 8px; margin-top: 10px; }
+
+        /* Bubble Chat Notification Modal */
+        .bubble-modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center;
+            backdrop-filter: blur(4px); animation: fadeIn 0.2s ease-in-out;
+        }
+        .bubble-modal.active { display: flex; }
+        .bubble-content {
+            background: #1e293b; border: 1px solid #38bdf8; padding: 22px 24px; border-radius: 20px;
+            max-width: 320px; width: 85%; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            position: relative; animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .bubble-content p { color: #f8fafc; font-size: 14px; line-height: 1.5; margin-bottom: 18px; }
+        .bubble-btn {
+            background: #38bdf8; color: #0f172a; border: none; padding: 10px 24px; border-radius: 10px;
+            font-weight: bold; font-size: 14px; cursor: pointer; transition: 0.2s;
+        }
+        .bubble-btn:hover { background: #0ea5e9; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes popUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
         /* Bottom Nav */
         .bottom-nav {
@@ -111,41 +180,77 @@
             <span>Menu Utama</span>
             <button class="close-btn" onclick="toggleSidebar()">✕</button>
         </div>
-        <div class="menu-category">Downloader</div>
-        <div class="sidebar-item" onclick="loadPage('tiktok')">🎵 Tiktok</div>
-        <div class="sidebar-item" onclick="loadPage('instagram')">📸 Instagram</div>
-        <div class="menu-category">Bermain Game</div>
-        <div class="sidebar-item" onclick="loadPage('blockblast')">🎮 Block Blast</div>
+        <div class="menu-category">Fitur Utama</div>
+        <div class="sidebar-item" onclick="openMenu('home')">🏠 Beranda</div>
+        <div class="sidebar-item" onclick="openMenu('tiktok')">🎵 TikTok Downloader</div>
+        <div class="menu-category">Eksplorasi</div>
+        <div class="sidebar-item" onclick="showBubble('Fitur Tempat Lagu sedang dalam tahap pengembangan. Mohon ditunggu ya! 🎶')">🎵 Tempat Lagu</div>
+        <div class="sidebar-item" onclick="showBubble('Fitur Tempat Bermain sedang dalam tahap pengembangan. Mohon ditunggu ya! 🎮')">🎮 Tempat Bermain</div>
+        <div class="sidebar-item" onclick="showBubble('Fitur Tempat Cerita sedang dalam tahap pengembangan. Mohon ditunggu ya! 📖')">📖 Tempat Cerita</div>
+        <div class="sidebar-item" onclick="showBubble('Fitur Tempat Kenangan sedang dalam tahap pengembangan. Mohon ditunggu ya! 📸')">📸 Tempat Kenangan</div>
     </div>
 
     <!-- Main Content -->
     <div class="main-content" id="content-area">
-        <div class="downloader-card">
-            <h2>TikTok Downloader</h2>
-            <p>Unduh video TikTok tanpa watermark dengan mudah dan cepat.</p>
-            <div class="input-group">
-                <input type="text" id="tiktok-url" placeholder="Tempel link video TikTok di sini...">
+        
+        <!-- Halaman Beranda (Default) -->
+        <div id="page-home" class="home-container">
+            <h2>Selamat Datang di Sea Tycoon</h2>
+            <p>Silakan pilih menu menarik di bawah ini:</p>
+            <div class="menu-grid">
+                <button class="menu-card-btn" onclick="showBubble('Fitur Tempat Lagu sedang dalam proses pembuatan. Mohon bersabar ya! 🎵')">
+                    🎵 <br>Tempat Lagu
+                </button>
+                <button class="menu-card-btn" onclick="showBubble('Fitur Tempat Bermain sedang dalam proses pembuatan. Mohon bersabar ya! 🎮')">
+                    🎮 <br>Tempat Bermain
+                </button>
+                <button class="menu-card-btn" onclick="showBubble('Fitur Tempat Cerita sedang dalam proses pembuatan. Mohon bersabar ya! 📖')">
+                    📖 <br>Tempat Cerita
+                </button>
+                <button class="menu-card-btn" onclick="showBubble('Fitur Tempat Kenangan sedang dalam proses pembuatan. Mohon bersabar ya! 📸')">
+                    📸 <br>Tempat Kenangan
+                </button>
             </div>
-            <button class="download-btn" onclick="startDownload()">Download</button>
+        </div>
 
-            <div id="loading">
-                <div class="spinner"></div>
-                Sedang memproses video... Mohon tunggu sebentar.
-            </div>
+        <!-- Halaman TikTok Downloader -->
+        <div id="page-tiktok" class="downloader-section">
+            <div class="downloader-card">
+                <h2>TikTok Downloader</h2>
+                <p>Unduh video TikTok tanpa watermark dengan mudah dan cepat.</p>
+                <div class="input-group">
+                    <input type="text" id="tiktok-url" placeholder="Tempel link video TikTok di sini...">
+                </div>
+                <button class="download-btn" onclick="startDownload()">Download</button>
 
-            <div id="result-box">
-                <p id="video-title" style="font-size: 13px; font-weight: bold; margin-bottom: 5px;"></p>
-                <video id="video-player" controls></video>
-                <a id="download-link" href="#" target="_blank" style="display: block; margin-top: 10px; padding: 10px; background: #22c55e; color: #fff; text-align: center; border-radius: 8px; text-decoration: none; font-weight: bold;">Simpan Video ke Galeri</a>
+                <div id="loading">
+                    <div class="spinner"></div>
+                    Sedang memproses video... Mohon tunggu sebentar.
+                </div>
+
+                <div id="result-box">
+                    <p id="video-title" style="font-size: 13px; font-weight: bold; margin-bottom: 5px;"></p>
+                    <video id="video-player" controls></video>
+                    <a id="download-link" href="#" target="_blank" style="display: block; margin-top: 10px; padding: 10px; background: #22c55e; color: #fff; text-align: center; border-radius: 8px; text-decoration: none; font-weight: bold;">Simpan Video ke Galeri</a>
+                </div>
             </div>
+        </div>
+
+    </div>
+
+    <!-- Bubble Chat Notification Modal -->
+    <div id="bubble-modal" class="bubble-modal" onclick="closeBubble()">
+        <div class="bubble-content" onclick="event.stopPropagation()">
+            <p id="bubble-text">Pesan pemberitahuan...</p>
+            <button class="bubble-btn" onclick="closeBubble()">Mengerti</button>
         </div>
     </div>
 
     <!-- Bottom Nav -->
     <div class="bottom-nav">
-        <a class="nav-item active" onclick="switchTab(this, 'Beranda')">🏠<span>Beranda</span></a>
-        <a class="nav-item" onclick="switchTab(this, 'Kotak Masuk')">📥<span>Kotak Masuk</span></a>
-        <a class="nav-item" onclick="switchTab(this, 'Profile')">👤<span>Profile</span></a>
+        <a class="nav-item active" id="nav-beranda" onclick="switchTab(this, 'Beranda')">🏠<span>Beranda</span></a>
+        <a class="nav-item" id="nav-kotak" onclick="switchTab(this, 'Kotak Masuk')">📥<span>Kotak Masuk</span></a>
+        <a class="nav-item" id="nav-profile" onclick="switchTab(this, 'Profile')">👤<span>Profile</span></a>
     </div>
 
     <script>
@@ -154,19 +259,64 @@
             document.getElementById('overlay').classList.toggle('active');
         }
 
-        function loadPage(page) {
+        function openMenu(menu) {
             toggleSidebar();
-            if (page === 'tiktok') {
-                document.getElementById('page-title').innerText = 'TikTok Downloader';
+            const homePage = document.getElementById('page-home');
+            const tiktokPage = document.getElementById('page-tiktok');
+            const title = document.getElementById('page-title');
+
+            if (menu === 'home') {
+                homePage.style.display = 'block';
+                tiktokPage.style.display = 'none';
+                title.innerText = 'Sea Tycoon';
+                setActiveNav('Beranda');
+            } else if (menu === 'tiktok') {
+                homePage.style.display = 'none';
+                tiktokPage.style.display = 'block';
+                title.innerText = 'TikTok Downloader';
+            }
+        }
+
+        function showBubble(message) {
+            toggleSidebar();
+            document.getElementById('bubble-text').innerText = message;
+            document.getElementById('bubble-modal').classList.add('active');
+        }
+
+        function closeBubble() {
+            document.getElementById('bubble-modal').classList.remove('active');
+        }
+
+        function switchTab(element, name) {
+            let items = document.querySelectorAll('.bottom-nav .nav-item');
+            items.forEach(item => item.classList.remove('active'));
+            element.classList.add('active');
+
+            const homePage = document.getElementById('page-home');
+            const tiktokPage = document.getElementById('page-tiktok');
+            const title = document.getElementById('page-title');
+
+            if (name === 'Beranda') {
+                homePage.style.display = 'block';
+                tiktokPage.style.display = 'none';
+                title.innerText = 'Sea Tycoon';
             } else {
-                alert('Fitur sedang dalam perbaikan / akan segera hadir!');
+                showBubble(`Fitur ${name} sedang dalam proses pembuatan. Mohon ditunggu ya! ✨`);
+            }
+        }
+
+        function setActiveNav(name) {
+            let items = document.querySelectorAll('.bottom-nav .nav-item');
+            items.forEach(item => item.classList.remove('active'));
+            if(name === 'Beranda') {
+                document.getElementById('nav-beranda').classList.add('active');
             }
         }
 
         async function startDownload() {
             const url = document.getElementById('tiktok-url').value;
             if (!url) {
-                alert('Silakan masukkan link TikTok terlebih dahulu!');
+                showBubble('Silakan masukkan link TikTok terlebih dahulu ya!');
                 return;
             }
 
@@ -190,20 +340,11 @@
                     document.getElementById('download-link').href = data.video || data.data;
                     document.getElementById('result-box').style.display = 'block';
                 } else {
-                    alert('Gagal mendownload video. Pastikan link valid!');
+                    showBubble('Gagal mendownload video. Pastikan link valid!');
                 }
             } catch (err) {
                 document.getElementById('loading').style.display = 'none';
-                alert('Terjadi kesalahan pada server.');
-            }
-        }
-
-        function switchTab(element, name) {
-            let items = document.querySelectorAll('.bottom-nav .nav-item');
-            items.forEach(item => item.classList.remove('active'));
-            element.classList.add('active');
-            if (name !== 'Beranda') {
-                alert(`Menu ${name} sedang dalam perbaikan / fitur mendatang!`);
+                showBubble('Terjadi kesalahan pada server saat mengambil data.');
             }
         }
     </script>
