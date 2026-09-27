@@ -134,10 +134,14 @@
         .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; backdrop-filter: blur(3px); }
         .overlay.active { display: block; }
 
-        /* Main Content */
+        /* Main Content & Page Transition Effect */
         .main-content { flex: 1; width: 100%; display: flex; flex-direction: column; overflow: hidden; position: relative; }
-        .page-container { display: none; width: 100%; height: 100%; padding: 20px; overflow-y: auto; flex-direction: column; align-items: center; text-align: center; }
-        .page-container.active { display: flex; }
+        .page-container { 
+            display: none; width: 100%; height: 100%; padding: 20px; overflow-y: auto; 
+            flex-direction: column; align-items: center; text-align: center; 
+            opacity: 0; transform: translateY(15px); transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .page-container.active { display: flex; opacity: 1; transform: translateY(0); }
 
         .auth-card, .downloader-card, .form-card {
             background: var(--card-bg); padding: 24px; border-radius: 20px; border: 1px solid var(--border-color);
@@ -159,6 +163,127 @@
         .auth-switch { text-align: center; margin-top: 16px; font-size: 13px; color: var(--text-muted); }
         .auth-switch span { color: #38bdf8; font-weight: 600; cursor: pointer; }
         .forgot-password-link { text-align: right; margin-top: -6px; margin-bottom: 14px; font-size: 12px; color: #38bdf8; cursor: pointer; font-weight: 600; display: block; }
+
+        /* Home Custom Buttons Styling */
+        .home-action-buttons {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+            max-width: 420px;
+            margin: 20px auto 0;
+            justify-content: center;
+        }
+        .home-big-btn {
+            flex: 1;
+            padding: 16px 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            color: var(--text-color);
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transition: 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        .home-big-btn:hover {
+            background: var(--accent-gradient);
+            color: #0f172a;
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
+
+        /* Saluran Style (Lihat Kenangan & Lihat Cerita) */
+        .channel-feed-container {
+            width: 100%;
+            max-width: 480px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin: 0 auto;
+            padding-bottom: 90px;
+        }
+        .channel-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 16px;
+            text-align: left;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .channel-header-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+        .channel-header-info b { color: var(--text-color); font-size: 13px; }
+        .channel-title { font-size: 15px; font-weight: bold; color: #38bdf8; }
+        .channel-body-text { font-size: 14px; line-height: 1.5; color: var(--text-color); white-space: pre-wrap; }
+        
+        /* Full Image Without Cropping & Clickable */
+        .channel-img-wrapper {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #000;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            margin-top: 4px;
+        }
+        .channel-img-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+            max-height: 400px;
+            transition: transform 0.3s ease;
+        }
+        .channel-img-wrapper img:hover { transform: scale(1.02); }
+
+        /* Reactions Box */
+        .reactions-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 6px;
+            padding-top: 8px;
+            border-top: 1px dashed var(--border-color);
+        }
+        .react-btn {
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 4px 10px;
+            font-size: 12px;
+            color: var(--text-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: 0.2s;
+        }
+        .react-btn:hover { background: rgba(56, 189, 248, 0.2); border-color: #38bdf8; }
+        .react-btn.reacted { background: var(--accent-gradient); color: #0f172a; border-color: transparent; font-weight: bold; }
+
+        /* Image Lightbox Modal */
+        .lightbox-modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); z-index: 3000; justify-content: center; align-items: center; backdrop-filter: blur(5px);
+            padding: 20px;
+        }
+        .lightbox-modal.active { display: flex; }
+        .lightbox-content { max-width: 100%; max-height: 90vh; border-radius: 12px; object-fit: contain; }
 
         /* Tempat Lagu Styling */
         .song-list-container { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 15px; margin: 0 auto; padding-bottom: 90px; }
@@ -262,12 +387,13 @@
         <div class="sidebar-item owner-menu" onclick="showBubble('Selamat datang di Panel Kontrol Owner! 👑')">👑 Kontrol Panel Owner</div>
         <div class="sidebar-item owner-menu" onclick="openMenu('owner-notif-user')">🔔 Notif User</div>
         <div class="sidebar-item owner-menu" onclick="openMenu('add-lagu')">🎶 Add Lagu</div>
-        <div class="sidebar-item owner-menu" onclick="openMenu('add-kenangan')">📸 Add Kenangan</div>
 
-        <div class="menu-category">Fitur Fun & Kenangan</div>
-        <div class="sidebar-item" onclick="openMenu('add-kenangan')">📸 Tempat Kenangan</div>
+        <div class="menu-category">Fitur Fun & Saluran</div>
+        <div class="sidebar-item" onclick="openMenu('lihat-kenangan')">📸 Lihat Kenangan</div>
+        <div class="sidebar-item" onclick="openMenu('add-kenangan')">➕ Kirim Kenangan</div>
+        <div class="sidebar-item" onclick="openMenu('lihat-cerita')">📖 Lihat Cerita</div>
+        <div class="sidebar-item" onclick="openMenu('add-cerita')">➕ Kirim Cerita</div>
         <div class="sidebar-item" onclick="openMenu('susun-kata')">🧩 Tebak Kata</div>
-        <div class="sidebar-item" onclick="openMenu('tempat-cerita')">📖 Tempat Cerita</div>
         <div class="sidebar-item" onclick="showBubble('Fitur Info Gempa segera hadir! 🌍')">🌍 Info Gempa</div>
 
         <div class="menu-category">Eksplorasi</div>
@@ -308,9 +434,21 @@
 
         <!-- Beranda -->
         <div id="page-home" class="page-container">
-            <div>
+            <div style="margin: auto 0; width: 100%; display: flex; flex-direction: column; align-items: center;">
                 <h2>Selamat Datang, <span id="welcome-username" style="color: #38bdf8;">User</span>!</h2>
-                <p style="color: var(--text-muted); margin-top: 10px;">Gunakan menu navigasi di bawah atau sidebar (☰) untuk menjelajah.</p>
+                <p style="color: var(--text-muted); margin-top: 10px; max-width: 320px;">Gunakan menu navigasi di bawah atau tombol di bawah ini untuk melihat kenangan dan cerita.</p>
+                
+                <!-- Dua Tombol Utama Sesuai Lingkaran Merah -->
+                <div class="home-action-buttons">
+                    <button class="home-big-btn" onclick="openMenu('lihat-kenangan')">
+                        📸
+                        <span>Lihat Kenangan</span>
+                    </button>
+                    <button class="home-big-btn" onclick="openMenu('lihat-cerita')">
+                        📖
+                        <span>Lihat Cerita</span>
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -341,21 +479,56 @@
             </div>
         </div>
 
-        <!-- Tempat Kenangan -->
+        <!-- Kirim Kenangan (Form) -->
         <div id="page-add-kenangan" class="page-container">
             <div class="form-card">
-                <h2>Tempat Kenangan 📸</h2>
-                <p>Simpan momen dan memori spesialmu di sini.</p>
+                <h2>Kirim Kenangan 📸</h2>
+                <p>Bagikan memori spesialmu ke saluran kenangan.</p>
                 <div class="input-group">
                     <label>Judul Kenangan</label>
-                    <input type="text" placeholder="Contoh: Liburan ke Pantai...">
+                    <input type="text" id="kenangan-judul" placeholder="Contoh: Liburan ke Pantai...">
                 </div>
                 <div class="input-group">
-                    <label>Catatan / Cerita Momen</label>
-                    <textarea rows="3" placeholder="Tuliskan kenangan indah di sini..."></textarea>
+                    <label>Kenangan / Cerita Momen</label>
+                    <textarea id="kenangan-isi" rows="3" placeholder="Tuliskan kenangan indah di sini..."></textarea>
                 </div>
-                <button class="action-btn" onclick="showBubble('Fitur Tempat Kenangan segera aktif!')">Simpan Kenangan</button>
+                <div class="input-group">
+                    <label>Kirim Foto (Support & Klik Full)</label>
+                    <input type="file" id="kenangan-img" accept="image/*" style="padding: 8px;">
+                </div>
+                <button class="action-btn" onclick="submitKenangan()">Publikasikan Kenangan</button>
             </div>
+        </div>
+
+        <!-- Lihat Kenangan (Saluran Channel) -->
+        <div id="page-lihat-kenangan" class="page-container">
+            <div style="width: 100%; max-width: 480px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
+                <h2 style="font-size: 18px;">Saluran Kenangan 📸</h2>
+                <button class="action-btn" style="width: auto; padding: 8px 14px; font-size: 13px; margin: 0;" onclick="openMenu('add-kenangan')">+ Buat Kenangan</button>
+            </div>
+            <div class="channel-feed-container" id="kenangan-feed-wrapper"></div>
+        </div>
+
+        <!-- Kirim Cerita (Form Tanpa Judul) -->
+        <div id="page-add-cerita" class="page-container">
+            <div class="form-card">
+                <h2>Kirim Cerita 📖</h2>
+                <p>Bagikan ceritamu secara langsung tanpa judul.</p>
+                <div class="input-group">
+                    <label>Isi Cerita</label>
+                    <textarea id="cerita-isi" rows="5" placeholder="Tuliskan ceritamu di sini..."></textarea>
+                </div>
+                <button class="action-btn" onclick="submitCerita()">Publikasikan Cerita</button>
+            </div>
+        </div>
+
+        <!-- Lihat Cerita (Saluran Channel) -->
+        <div id="page-lihat-cerita" class="page-container">
+            <div style="width: 100%; max-width: 480px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
+                <h2 style="font-size: 18px;">Saluran Cerita 📖</h2>
+                <button class="action-btn" style="width: auto; padding: 8px 14px; font-size: 13px; margin: 0;" onclick="openMenu('add-cerita')">+ Buat Cerita</button>
+            </div>
+            <div class="channel-feed-container" id="cerita-feed-wrapper"></div>
         </div>
 
         <!-- Tebak Kata -->
@@ -370,23 +543,6 @@
                     <input type="text" placeholder="Jawaban kamu..." style="text-align: center;">
                 </div>
                 <button class="action-btn" onclick="showBubble('Fitur Tebak Kata segera aktif!')">Jawab</button>
-            </div>
-        </div>
-
-        <!-- Tempat Cerita -->
-        <div id="page-tempat-cerita" class="page-container">
-            <div class="form-card">
-                <h2>Tempat Cerita 📖</h2>
-                <p>Baca atau bagikan kisah menarikmu bersama pembaca lain.</p>
-                <div class="input-group">
-                    <label>Judul Cerita</label>
-                    <input type="text" placeholder="Judul cerita...">
-                </div>
-                <div class="input-group">
-                    <label>Isi Cerita</label>
-                    <textarea rows="4" placeholder="Tuliskan ceritamu di sini..."></textarea>
-                </div>
-                <button class="action-btn" onclick="showBubble('Fitur Tempat Cerita segera aktif!')">Publikasikan Cerita</button>
             </div>
         </div>
 
@@ -471,7 +627,12 @@
         </div>
     </div>
 
-    <!-- Bottom Nav (Chat AI removed) -->
+    <!-- Lightbox Modal untuk Klik Foto Full -->
+    <div id="lightbox-modal" class="lightbox-modal" onclick="closeLightbox()">
+        <img id="lightbox-img" class="lightbox-content" src="">
+    </div>
+
+    <!-- Bottom Nav -->
     <div class="bottom-nav" id="bottom-nav">
         <a class="nav-item active" id="nav-beranda" onclick="switchTab('Beranda')">🏠<span>Beranda</span></a>
         <a class="nav-item" id="nav-tiktok" onclick="switchTab('TikTok')">🎵<span>TikTok</span></a>
@@ -682,17 +843,29 @@
                 bottomNav.classList.remove('hidden');
             } else if (menu === 'add-kenangan') {
                 document.getElementById('page-add-kenangan').classList.add('active');
-                title.innerText = 'Tempat Kenangan';
+                title.innerText = 'Kirim Kenangan';
                 topLeftBtn.innerText = '✕';
                 bottomNav.classList.remove('hidden');
+            } else if (menu === 'lihat-kenangan') {
+                document.getElementById('page-lihat-kenangan').classList.add('active');
+                title.innerText = 'Saluran Kenangan';
+                topLeftBtn.innerText = '✕';
+                bottomNav.classList.remove('hidden');
+                renderKenanganFeed();
+            } else if (menu === 'add-cerita') {
+                document.getElementById('page-add-cerita').classList.add('active');
+                title.innerText = 'Kirim Cerita';
+                topLeftBtn.innerText = '✕';
+                bottomNav.classList.remove('hidden');
+            } else if (menu === 'lihat-cerita') {
+                document.getElementById('page-lihat-cerita').classList.add('active');
+                title.innerText = 'Saluran Cerita';
+                topLeftBtn.innerText = '✕';
+                bottomNav.classList.remove('hidden');
+                renderCeritaFeed();
             } else if (menu === 'susun-kata') {
                 document.getElementById('page-susun-kata').classList.add('active');
                 title.innerText = 'Tebak Kata';
-                topLeftBtn.innerText = '✕';
-                bottomNav.classList.remove('hidden');
-            } else if (menu === 'tempat-cerita') {
-                document.getElementById('page-tempat-cerita').classList.add('active');
-                title.innerText = 'Tempat Cerita';
                 topLeftBtn.innerText = '✕';
                 bottomNav.classList.remove('hidden');
             } else if (menu === 'owner-notif-user') {
@@ -746,6 +919,209 @@
             document.getElementById('bubble-modal').classList.remove('active');
         }
 
+        function openLightbox(imgSrc) {
+            document.getElementById('lightbox-img').src = imgSrc;
+            document.getElementById('lightbox-modal').classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox-modal').classList.remove('active');
+        }
+
+        // --- KENANGAN SYSTEM (CHANNEL) ---
+        function submitKenangan() {
+            const judul = document.getElementById('kenangan-judul').value.trim();
+            const isi = document.getElementById('kenangan-isi').value.trim();
+            const fileInput = document.getElementById('kenangan-img');
+
+            if (!judul || !isi) {
+                showBubble('Judul dan Kenangan wajib diisi! ⚠️');
+                return;
+            }
+
+            const processSave = (imgData) => {
+                let kenanganList = JSON.parse(localStorage.getItem('sea_tycoon_kenangan') || '[]');
+                kenanganList.push({
+                    id: Date.now(),
+                    from: currentUser.username,
+                    judul: judul,
+                    kenangan: isi,
+                    image: imgData || null,
+                    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                    reactions: { '😂': 0, '❤️': 0, '👍': 0, '🔥': 0, '👏': 0 },
+                    userReacted: {}
+                });
+                localStorage.setItem('sea_tycoon_kenangan', JSON.stringify(kenanganList));
+                document.getElementById('kenangan-judul').value = '';
+                document.getElementById('kenangan-isi').value = '';
+                fileInput.value = '';
+                showBubble('Kenangan berhasil dibagikan ke saluran! ✨');
+                openMenu('lihat-kenangan');
+            };
+
+            if (fileInput.files.length > 0) {
+                const reader = new FileReader();
+                reader.onload = (e) => processSave(e.target.result);
+                reader.readAsDataURL(fileInput.files[0]);
+            } else {
+                processSave(null);
+            }
+        }
+
+        function renderKenanganFeed() {
+            const wrapper = document.getElementById('kenangan-feed-wrapper');
+            let kenanganList = JSON.parse(localStorage.getItem('sea_tycoon_kenangan') || '[]');
+
+            if (kenanganList.length === 0) {
+                wrapper.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px;">Belum ada kenangan di saluran ini.</div>`;
+                return;
+            }
+
+            let html = '';
+            kenanganList.reverse().forEach(item => {
+                let reactionsHtml = '';
+                const emojis = ['😂', '❤️', '👍', '🔥', '👏'];
+                emojis.forEach(emoji => {
+                    let count = item.reactions[emoji] || 0;
+                    let hasReacted = item.userReacted && item.userReacted[currentUser.username] === emoji;
+                    reactionsHtml += `
+                        <button class="react-btn ${hasReacted ? 'reacted' : ''}" onclick="reactKenangan('${item.id}', '${emoji}')">
+                            ${emoji} <span>${count}</span>
+                        </button>
+                    `;
+                });
+
+                html += `
+                    <div class="channel-card">
+                        <div class="channel-header-info">
+                            <span>Dari : <b>@${item.from}</b></span>
+                            <span>${item.time}</span>
+                        </div>
+                        <div class="channel-title">Judul : ${item.judul}</div>
+                        <div class="channel-body-text">Kenangan : ${item.kenangan}</div>
+                        ${item.image ? `
+                            <div class="channel-img-wrapper" onclick="openLightbox('${item.image}')">
+                                <img src="${item.image}" alt="Kenangan Image">
+                            </div>
+                        ` : ''}
+                        <div class="reactions-wrapper">
+                            ${reactionsHtml}
+                        </div>
+                    </div>
+                `;
+            });
+            wrapper.innerHTML = html;
+        }
+
+        function reactKenangan(id, emoji) {
+            let kenanganList = JSON.parse(localStorage.getItem('sea_tycoon_kenangan') || '[]');
+            let item = kenanganList.find(k => k.id == id);
+            if (!item) return;
+
+            if (!item.userReacted) item.userReacted = {};
+            let prevReact = item.userReacted[currentUser.username];
+
+            if (prevReact === emoji) {
+                item.reactions[emoji]--;
+                delete item.userReacted[currentUser.username];
+            } else {
+                if (prevReact) {
+                    item.reactions[prevReact]--;
+                }
+                item.reactions[emoji] = (item.reactions[emoji] || 0) + 1;
+                item.userReacted[currentUser.username] = emoji;
+            }
+
+            localStorage.setItem('sea_tycoon_kenangan', JSON.stringify(kenanganList));
+            renderKenanganFeed();
+        }
+
+        // --- CERITA SYSTEM (CHANNEL TANPA JUDUL) ---
+        function submitCerita() {
+            const isi = document.getElementById('cerita-isi').value.trim();
+            if (!isi) {
+                showBubble('Isi cerita wajib diisi! ⚠️');
+                return;
+            }
+
+            let ceritaList = JSON.parse(localStorage.getItem('sea_tycoon_cerita') || '[]');
+            ceritaList.push({
+                id: Date.now(),
+                from: currentUser.username,
+                cerita: isi,
+                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                reactions: { '❤️': 0, '🔥': 0, '😢': 0, '👏': 0, '✨': 0 },
+                userReacted: {}
+            });
+            localStorage.setItem('sea_tycoon_cerita', JSON.stringify(ceritaList));
+            document.getElementById('cerita-isi').value = '';
+            showBubble('Cerita berhasil dibagikan ke saluran! ✨');
+            openMenu('lihat-cerita');
+        }
+
+        function renderCeritaFeed() {
+            const wrapper = document.getElementById('cerita-feed-wrapper');
+            let ceritaList = JSON.parse(localStorage.getItem('sea_tycoon_cerita') || '[]');
+
+            if (ceritaList.length === 0) {
+                wrapper.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px;">Belum ada cerita di saluran ini.</div>`;
+                return;
+            }
+
+            let html = '';
+            ceritaList.reverse().forEach(item => {
+                let reactionsHtml = '';
+                const emojis = ['❤️', '🔥', '😢', '👏', '✨'];
+                emojis.forEach(emoji => {
+                    let count = item.reactions[emoji] || 0;
+                    let hasReacted = item.userReacted && item.userReacted[currentUser.username] === emoji;
+                    reactionsHtml += `
+                        <button class="react-btn ${hasReacted ? 'reacted' : ''}" onclick="reactCerita('${item.id}', '${emoji}')">
+                            ${emoji} <span>${count}</span>
+                        </button>
+                    `;
+                });
+
+                html += `
+                    <div class="channel-card">
+                        <div class="channel-header-info">
+                            <span>Dari : <b>@${item.from}</b></span>
+                            <span>${item.time}</span>
+                        </div>
+                        <div class="channel-body-text">${item.cerita}</div>
+                        <div class="reactions-wrapper">
+                            ${reactionsHtml}
+                        </div>
+                    </div>
+                `;
+            });
+            wrapper.innerHTML = html;
+        }
+
+        function reactCerita(id, emoji) {
+            let ceritaList = JSON.parse(localStorage.getItem('sea_tycoon_cerita') || '[]');
+            let item = ceritaList.find(c => c.id == id);
+            if (!item) return;
+
+            if (!item.userReacted) item.userReacted = {};
+            let prevReact = item.userReacted[currentUser.username];
+
+            if (prevReact === emoji) {
+                item.reactions[emoji]--;
+                delete item.userReacted[currentUser.username];
+            } else {
+                if (prevReact) {
+                    item.reactions[prevReact]--;
+                }
+                item.reactions[emoji] = (item.reactions[emoji] || 0) + 1;
+                item.userReacted[currentUser.username] = emoji;
+            }
+
+            localStorage.setItem('sea_tycoon_cerita', JSON.stringify(ceritaList));
+            renderCeritaFeed();
+        }
+
+        // --- REQUEST & LAGU HANDLERS ---
         function submitUserRequest() {
             const message = document.getElementById('req-message').value.trim();
             const fileInput = document.getElementById('req-image');
