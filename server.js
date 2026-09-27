@@ -1,53 +1,58 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const axios = require('axios');
 const path = require('path');
 
 const app = express();
 
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const MONGO_URI = process.env.MONGO_URI;
-mongoose.connect(MONGO_URI)
-    .then(() => console.log('MongoDB Terhubung!'))
-    .catch(err => console.error('Koneksi MongoDB Gagal:', err));
+// Menyediakan file statis dari folder public (tempat index.html berada)
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Endpoint Backend untuk Chat AI
+// Endpoint Route untuk Chat AI
 app.post('/api/chat-ai', async (req, res) => {
     try {
-        let { message } = req.body;
-        if (!message) return res.status(400).json({ success: false, message: 'Pesan tidak boleh kosong!' });
+        const userMessage = req.body.message;
+        
+        if (!userMessage) {
+            return res.status(400).json({ 
+                success: false, 
+                reply: 'Pesan tidak boleh kosong!' 
+            });
+        }
 
-        // Menggunakan kembali endpoint unliai yang respons teksnya lebih stabil
-        const apiResponse = await axios.get(`https://api.ikyyxd.my.id/ai/unliai?teks=${encodeURIComponent(message)}`, {
-            headers: {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-            }
-        });
+        // Melakukan request ke API IkyyXd Public AI dengan encode URL pada pesan pengguna
+        const encodedMessage = encodeURIComponent(userMessage);
+        const apiUrl = `https://api.ikyyxd.my.id/ai/publicai?apikey=kyzz&q=${encodedMessage}`;
+        
+        const { data } = await axios.get(apiUrl);
 
-        const resultData = apiResponse.data;
-
-        if (resultData && resultData.status && resultData.result) {
-            const aiReply = resultData.result.response || resultData.result || "Maaf, AI sedang tidak merespons.";
-            return res.json({ success: true, reply: aiReply });
+        // Memeriksa struktur respons dari API sesuai dokumentasi
+        if (data && data.status && data.result) {
+            return res.json({
+                success: true,
+                reply: data.result
+            });
         } else {
-            return res.json({ success: true, reply: "Maaf, AI sedang sibuk atau mengalami gangguan." });
+            return res.json({
+                success: false,
+                reply: 'Maaf, respons dari server AI tidak valid.'
+            });
         }
 
     } catch (error) {
-        console.error('Error Chat AI:', error.message);
-        res.status(500).json({ success: false, message: 'Terjadi kesalahan pada server AI.' });
+        console.error('Error saat menghubungi API AI:', error.message);
+        return res.status(500).json({
+            success: false,
+            reply: 'Terjadi kesalahan sistem atau kendala jaringan pada server AI.'
+        });
     }
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-
+// Menjalankan server pada port yang disediakan environment (Railway) atau port 3000
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server aktif dan berjalan di port ${PORT}`);
+    console.log(`Server Sea Tycoon berhasil berjalan di port ${PORT}`);
 });
