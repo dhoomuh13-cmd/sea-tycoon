@@ -160,7 +160,7 @@
         .auth-switch span { color: #38bdf8; font-weight: 600; cursor: pointer; }
         .forgot-password-link { text-align: right; margin-top: -6px; margin-bottom: 14px; font-size: 12px; color: #38bdf8; cursor: pointer; font-weight: 600; display: block; }
 
-        /* --- CHAT AI INTERAKTIF (TIDAK TERTUTUP NAVIGASI) --- */
+        /* --- CHAT AI INTERAKTIF --- */
         #page-chat-ai.page-container {
             padding: 0;
             justify-content: flex-start;
@@ -186,7 +186,6 @@
             background: var(--card-bg); color: var(--text-color); border: 1px solid var(--border-color); border-bottom-left-radius: 4px;
         }
         
-        /* Area Ketik Persis Di Atas Navigasi Bawah */
         .chat-input-area {
             position: absolute; bottom: 75px; left: 0; width: 100%;
             padding: 10px 16px; background: var(--bg-topbar); border-top: 1px solid var(--border-color); 
@@ -304,8 +303,10 @@
         <div class="sidebar-item owner-menu" onclick="openMenu('add-lagu')">🎶 Add Lagu</div>
         <div class="sidebar-item owner-menu" onclick="openMenu('add-kenangan')">📸 Add Kenangan</div>
 
-        <div class="menu-category">Fitur Fun</div>
-        <div class="sidebar-item" onclick="showBubble('Fitur Susun Kata segera hadir! 🧩')">🧩 Susun Kata</div>
+        <div class="menu-category">Fitur Fun & Kenangan</div>
+        <div class="sidebar-item" onclick="openMenu('add-kenangan')">📸 Tempat Kenangan</div>
+        <div class="sidebar-item" onclick="openMenu('susun-kata')">🧩 Tebak Kata</div>
+        <div class="sidebar-item" onclick="openMenu('tempat-cerita')">📖 Tempat Cerita</div>
         <div class="sidebar-item" onclick="showBubble('Fitur Info Gempa segera hadir! 🌍')">🌍 Info Gempa</div>
 
         <div class="menu-category">Eksplorasi</div>
@@ -362,7 +363,7 @@
             </div>
         </div>
 
-        <!-- Chat AI (Terhubung ke server.js di backend) -->
+        <!-- Chat AI -->
         <div id="page-chat-ai" class="page-container">
             <div class="chat-container-box">
                 <div class="chat-messages-scroll" id="chat-messages-list">
@@ -391,6 +392,55 @@
                     <input type="file" id="req-image" accept="image/*" style="padding: 8px;">
                 </div>
                 <button class="action-btn" onclick="submitUserRequest()">Kirim Request ke Owner</button>
+            </div>
+        </div>
+
+        <!-- Tempat Kenangan -->
+        <div id="page-add-kenangan" class="page-container">
+            <div class="form-card">
+                <h2>Tempat Kenangan 📸</h2>
+                <p>Simpan momen dan memori spesialmu di sini.</p>
+                <div class="input-group">
+                    <label>Judul Kenangan</label>
+                    <input type="text" placeholder="Contoh: Liburan ke Pantai...">
+                </div>
+                <div class="input-group">
+                    <label>Catatan / Cerita Momen</label>
+                    <textarea rows="3" placeholder="Tuliskan kenangan indah di sini..."></textarea>
+                </div>
+                <button class="action-btn" onclick="showBubble('Fitur Tempat Kenangan segera aktif!')">Simpan Kenangan</button>
+            </div>
+        </div>
+
+        <!-- Tebak Kata -->
+        <div id="page-susun-kata" class="page-container">
+            <div class="form-card" style="text-align: center;">
+                <h2>Tebak Kata 🧩</h2>
+                <p>Asah otakmu dengan menebak susunan kata yang acak.</p>
+                <div style="background: var(--bg-main); padding: 20px; border-radius: 12px; margin: 15px 0; border: 1px solid var(--border-color);">
+                    <h3 style="letter-spacing: 4px; color: #38bdf8;" id="scramble-word-display">R T A K I</h3>
+                </div>
+                <div class="input-group">
+                    <input type="text" placeholder="Jawaban kamu..." style="text-align: center;">
+                </div>
+                <button class="action-btn" onclick="showBubble('Fitur Tebak Kata segera aktif!')">Jawab</button>
+            </div>
+        </div>
+
+        <!-- Tempat Cerita -->
+        <div id="page-tempat-cerita" class="page-container">
+            <div class="form-card">
+                <h2>Tempat Cerita 📖</h2>
+                <p>Baca atau bagikan kisah menarikmu bersama pembaca lain.</p>
+                <div class="input-group">
+                    <label>Judul Cerita</label>
+                    <input type="text" placeholder="Judul cerita...">
+                </div>
+                <div class="input-group">
+                    <label>Isi Cerita</label>
+                    <textarea rows="4" placeholder="Tuliskan ceritamu di sini..."></textarea>
+                </div>
+                <button class="action-btn" onclick="showBubble('Fitur Tempat Cerita segera aktif!')">Publikasikan Cerita</button>
             </div>
         </div>
 
@@ -694,6 +744,21 @@
                 title.innerText = 'Req Fitur / Lagu';
                 topLeftBtn.innerText = '✕';
                 bottomNav.classList.remove('hidden');
+            } else if (menu === 'add-kenangan') {
+                document.getElementById('page-add-kenangan').classList.add('active');
+                title.innerText = 'Tempat Kenangan';
+                topLeftBtn.innerText = '✕';
+                bottomNav.classList.remove('hidden');
+            } else if (menu === 'susun-kata') {
+                document.getElementById('page-susun-kata').classList.add('active');
+                title.innerText = 'Tebak Kata';
+                topLeftBtn.innerText = '✕';
+                bottomNav.classList.remove('hidden');
+            } else if (menu === 'tempat-cerita') {
+                document.getElementById('page-tempat-cerita').classList.add('active');
+                title.innerText = 'Tempat Cerita';
+                topLeftBtn.innerText = '✕';
+                bottomNav.classList.remove('hidden');
             } else if (menu === 'owner-notif-user') {
                 if (currentUser.role !== 'Owner') { showBubble('Akses ditolak!'); return; }
                 document.getElementById('page-owner-notif-user').classList.add('active');
@@ -747,7 +812,6 @@
             document.getElementById('bubble-modal').classList.remove('active');
         }
 
-        // --- FUNGSI KIRIM CHAT KE BACKEND server.js ---
         function loadChatHistory() {
             if (!currentUser) return;
             const chatKey = `sea_tycoon_chat_${currentUser.username}`;
@@ -790,7 +854,6 @@
             scrollToBottomChat();
 
             try {
-                // Memanggil endpoint backend server.js milikmu
                 const response = await fetch('/api/chat-ai', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
