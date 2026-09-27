@@ -27,12 +27,17 @@ app.post('/api/download-tiktok', async (req, res) => {
         let { url } = req.body;
         if (!url) return res.status(400).json({ success: false, message: 'URL tidak boleh kosong!' });
 
-        // Langsung lempar URL apa adanya ke API downloader
         const targetUrl = url.trim();
-        const apiResponse = await axios.get(`https://api.ikyyxd.my.id/download/tiktokkv2?url=${encodeURIComponent(targetUrl)}`);
+        
+        // Memanggil API dengan menyertakan User-Agent agar tidak diblokir oleh server API
+        const apiResponse = await axios.get(`https://api.ikyyxd.my.id/download/tiktokkv2?url=${encodeURIComponent(targetUrl)}`, {
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+            }
+        });
+
         const resultData = apiResponse.data;
 
-        // Pastikan respons dari API valid memiliki properti result
         if (resultData && resultData.result) {
             const result = resultData.result;
             const videoUrl = Array.isArray(result.video) ? result.video[0] : result.video;
