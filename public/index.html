@@ -26,7 +26,7 @@
             display: flex;
             align-items: center;
             padding: 16px 20px;
-            background: rgba(15, 23, 42, 0.8);
+            background: rgba(15, 23, 42, 0.9);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid #1e293b;
             position: fixed;
@@ -34,7 +34,7 @@
             z-index: 100;
         }
         .menu-btn {
-            background: none; border: none; color: #f8fafc; font-size: 24px; cursor: pointer; margin-right: 15px;
+            background: none; border: none; color: #f8fafc; font-size: 22px; cursor: pointer; margin-right: 15px; display: flex; align-items: center; justify-content: center;
         }
         .app-title { font-size: 18px; font-weight: 600; }
 
@@ -57,7 +57,11 @@
 
         /* Main Content Area */
         .main-content {
-            flex: 1; padding: 80px 15px 90px; overflow-y: auto; max-width: 600px; margin: 0 auto; width: 100%; display: flex; flex-direction: column;
+            flex: 1; padding: 80px 15px 20px; overflow-y: auto; max-width: 600px; margin: 0 auto; width: 100%; display: flex; flex-direction: column;
+        }
+        /* Tambahan padding bawah khusus halaman beranda agar tidak tertutup nav */
+        .main-content.has-nav {
+            padding-bottom: 90px; 
         }
 
         /* Beranda Menu Buttons Grid */
@@ -115,7 +119,7 @@
             background: #1e293b; color: #f8fafc; align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid #334155;
         }
         .chat-input-area {
-            display: flex; gap: 10px; background: #1e293b; padding: 10px; border-radius: 16px; border: 1px solid #334155; position: sticky; bottom: 75px;
+            display: flex; gap: 10px; background: #1e293b; padding: 10px; border-radius: 16px; border: 1px solid #334155; margin-top: 10px;
         }
         .chat-input-area input {
             flex: 1; background: #0f172a; border: 1px solid #475569; border-radius: 12px; padding: 10px 14px; color: #fff; font-size: 14px; outline: none;
@@ -126,7 +130,7 @@
         }
         .send-btn:hover { background: #0ea5e9; }
         .typing-indicator {
-            display: none; align-self: flex-start; background: #1e293b; padding: 10px 14px; border-radius: 12px; font-size: 12px; color: #94a3b8; border: 1px solid #334155;
+            display: none; align-self: flex-start; background: #1e293b; padding: 10px 14px; border-radius: 12px; font-size: 12px; color: #94a3b8; border: 1px solid #334155; margin-bottom: 8px;
         }
 
         /* Bubble Chat Notification Modal */
@@ -151,11 +155,17 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes popUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
-        /* Bottom Nav (4 Menu Items with Chat AI in Center) */
+        /* Bottom Nav */
         .bottom-nav {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
             width: 92%; max-width: 440px; background: #1e293b; display: flex; justify-content: space-around;
             padding: 10px 8px; border-radius: 35px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); border: 1px solid #334155; z-index: 90;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .bottom-nav.hidden {
+            transform: translate(-50%, 100px);
+            opacity: 0;
+            pointer-events: none;
         }
         .nav-item { color: #94a3b8; text-decoration: none; font-size: 12px; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; padding: 8px 12px; border-radius: 20px; transition: 0.3s; }
         .nav-item.active, .nav-item:hover { color: #0f172a; background: #38bdf8; font-weight: 600; }
@@ -164,7 +174,8 @@
 <body>
 
     <div class="top-bar">
-        <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+        <!-- Tombol dinamis: Berubah jadi ikon silang (✕) jika di dalam ruangan khusus, dan hamburger (☰) jika di Beranda -->
+        <button class="menu-btn" id="top-left-btn" onclick="handleTopButton()">☰</button>
         <div class="app-title" id="page-title">Sea Tycoon</div>
     </div>
 
@@ -188,7 +199,7 @@
     </div>
 
     <!-- Main Content -->
-    <div class="main-content" id="content-area">
+    <div class="main-content has-nav" id="content-area">
         
         <!-- Halaman Beranda (Default) -->
         <div id="page-home" class="home-container">
@@ -257,8 +268,8 @@
         </div>
     </div>
 
-    <!-- Bottom Nav (Beranda, Kotak Masuk, Chat AI di Tengah, Profile) -->
-    <div class="bottom-nav">
+    <!-- Bottom Nav -->
+    <div class="bottom-nav" id="bottom-nav">
         <a class="nav-item active" id="nav-beranda" onclick="switchTab(this, 'Beranda')">🏠<span>Beranda</span></a>
         <a class="nav-item" id="nav-kotak" onclick="switchTab(this, 'Kotak Masuk')">📥<span>Kotak Masuk</span></a>
         <a class="nav-item" id="nav-chat" onclick="switchTab(this, 'Chat AI')">🤖<span>Chat AI</span></a>
@@ -266,6 +277,17 @@
     </div>
 
     <script>
+        let currentView = 'home'; // Menyimpan status halaman aktif ('home', 'tiktok', 'chat-ai')
+
+        function handleTopButton() {
+            if (currentView === 'home') {
+                toggleSidebar();
+            } else {
+                // Jika sedang di dalam ruangan fitur (Chat/Downloader), tombol ini berfungsi sebagai "Kembali ke Beranda"
+                openMenu('home');
+            }
+        }
+
         function toggleSidebar() {
             document.getElementById('sidebar').classList.toggle('open');
             document.getElementById('overlay').classList.toggle('active');
@@ -275,10 +297,14 @@
             if(document.getElementById('sidebar').classList.contains('open')) {
                 toggleSidebar();
             }
+            currentView = menu;
             const homePage = document.getElementById('page-home');
             const tiktokPage = document.getElementById('page-tiktok');
             const chatPage = document.getElementById('page-chat');
             const title = document.getElementById('page-title');
+            const bottomNav = document.getElementById('bottom-nav');
+            const contentArea = document.getElementById('content-area');
+            const topLeftBtn = document.getElementById('top-left-btn');
 
             homePage.style.display = 'none';
             tiktokPage.style.display = 'none';
@@ -287,14 +313,23 @@
             if (menu === 'home') {
                 homePage.style.display = 'block';
                 title.innerText = 'Sea Tycoon';
+                bottomNav.classList.remove('hidden');
+                contentArea.classList.add('has-nav');
+                topLeftBtn.innerText = '☰'; // Tombol Menu Sidebar
                 setActiveNav('Beranda');
             } else if (menu === 'tiktok') {
                 tiktokPage.style.display = 'block';
                 title.innerText = 'TikTok Downloader';
+                bottomNav.classList.add('hidden'); // Sembunyikan navigasi bawah
+                contentArea.classList.remove('has-nav');
+                topLeftBtn.innerText = '✕'; // Tombol Kembali / Silang
                 setActiveNav('');
             } else if (menu === 'chat-ai') {
                 chatPage.style.display = 'flex';
                 title.innerText = 'Chat AI Assistant';
+                bottomNav.classList.add('hidden'); // Sembunyikan navigasi bawah
+                contentArea.classList.remove('has-nav');
+                topLeftBtn.innerText = '✕'; // Tombol Kembali / Silang
                 setActiveNav('Chat AI');
             }
         }
