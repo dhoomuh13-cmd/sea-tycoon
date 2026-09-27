@@ -88,7 +88,7 @@
             justify-content: space-between;
             padding: 0 16px;
             background: var(--bg-topbar);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--border-color);
             width: 100%;
             height: 60px;
@@ -98,68 +98,74 @@
         .top-left { display: flex; align-items: center; gap: 15px; }
         .top-right { display: flex; align-items: center; gap: 10px; }
         .menu-btn { background: none; border: none; color: var(--text-color); font-size: 22px; cursor: pointer; }
-        .app-title { font-size: 18px; font-weight: 600; }
+        .app-title { font-size: 17px; font-weight: 700; letter-spacing: 0.5px; }
 
         .top-icon-btn {
-            width: 38px; height: 38px; border-radius: 50%; background: var(--card-bg);
-            border: 1px solid var(--border-color); color: var(--text-color); font-size: 16px; display: flex; align-items: center;
-            justify-content: center; cursor: pointer; position: relative;
+            width: 38px; height: 38px; border-radius: 12px; background: var(--card-bg);
+            border: 1px solid var(--border-color); color: var(--text-color); font-size: 15px; display: flex; align-items: center;
+            justify-content: center; cursor: pointer; position: relative; transition: 0.2s;
         }
+        .top-icon-btn:hover { border-color: #38bdf8; }
         .badge-dot {
-            position: absolute; top: 4px; right: 4px; width: 10px; height: 10px;
+            position: absolute; top: 4px; right: 4px; width: 9px; height: 9px;
             background: #ef4444; border-radius: 50%; border: 2px solid var(--bg-main); display: none;
         }
 
         /* Sidebar */
         .sidebar {
-            position: fixed; top: 0; left: -280px; width: 280px; height: 100%;
-            background: var(--sidebar-bg); box-shadow: 5px 0 25px rgba(0,0,0,0.5);
-            transition: left 0.3s ease-in-out; z-index: 1000; padding: 20px;
+            position: fixed; top: 0; left: -290px; width: 290px; height: 100%;
+            background: var(--sidebar-bg); box-shadow: 10px 0 30px rgba(0,0,0,0.5);
+            transition: left 0.35s cubic-bezier(0.16, 1, 0.3, 1); z-index: 1000; padding: 20px;
             display: flex; flex-direction: column; border-right: 1px solid var(--border-color);
             overflow-y: auto;
         }
         .sidebar.open { left: 0; }
         .sidebar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 18px; font-weight: bold; }
-        .close-btn { background: none; border: none; color: var(--text-muted); font-size: 22px; cursor: pointer; }
-        .menu-category { font-size: 12px; text-transform: uppercase; color: var(--text-muted); margin: 15px 0 8px; font-weight: 700; letter-spacing: 1px; }
+        .close-btn { background: none; border: none; color: var(--text-muted); font-size: 20px; cursor: pointer; }
+        .menu-category { font-size: 11px; text-transform: uppercase; color: var(--text-muted); margin: 16px 0 8px; font-weight: 800; letter-spacing: 1.2px; }
         
         .sidebar-item { 
-            padding: 12px 16px; color: var(--text-color); text-decoration: none; border-radius: 14px; 
+            padding: 12px 14px; color: var(--text-color); text-decoration: none; border-radius: 14px; 
             margin-bottom: 6px; background: var(--card-bg); border: 1px solid var(--border-color);
-            font-size: 14px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 10px; 
+            font-size: 13px; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 12px; 
+            transition: 0.2s;
         }
-        .sidebar-item:hover { background: var(--accent-gradient); color: #0f172a; border-color: transparent; }
+        .sidebar-item:hover { background: var(--accent-gradient); color: #0f172a; border-color: transparent; transform: translateX(4px); }
         .owner-menu { border-color: #f59e0b !important; display: none; }
 
-        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; backdrop-filter: blur(3px); }
+        .overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 999; backdrop-filter: blur(4px); transition: 0.3s; }
         .overlay.active { display: block; }
 
-        /* Main Content & Page Transition Effect */
+        /* Main Content & Smooth Premium Page Animation */
         .main-content { flex: 1; width: 100%; display: flex; flex-direction: column; overflow: hidden; position: relative; }
         .page-container { 
             display: none; width: 100%; height: 100%; padding: 20px; overflow-y: auto; 
             flex-direction: column; align-items: center; text-align: center; 
-            opacity: 0; transform: translateY(15px); transition: opacity 0.4s ease, transform 0.4s ease;
+            opacity: 0; transform: scale(0.97) translateY(12px); 
+            transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .page-container.active { display: flex; opacity: 1; transform: translateY(0); }
+        .page-container.active { display: flex; opacity: 1; transform: scale(1) translateY(0); }
 
         .auth-card, .downloader-card, .form-card {
-            background: var(--card-bg); padding: 24px; border-radius: 20px; border: 1px solid var(--border-color);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3); text-align: left; width: 100%; max-width: 450px; margin: auto;
+            background: var(--card-bg); padding: 24px; border-radius: 22px; border: 1px solid var(--border-color);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.35); text-align: left; width: 100%; max-width: 450px; margin: auto;
         }
-        .auth-card h2, .downloader-card h2, .form-card h2 { font-size: 20px; margin-bottom: 8px; text-align: center; }
+        .auth-card h2, .downloader-card h2, .form-card h2 { font-size: 20px; margin-bottom: 6px; text-align: center; font-weight: 700; }
         .auth-card p, .downloader-card p, .form-card p { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; text-align: center; }
         
         .input-group { position: relative; margin-bottom: 14px; width: 100%; }
-        .input-group label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; }
+        .input-group label { display: block; font-size: 11px; font-weight: 800; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.8px; }
         .input-group input, .input-group textarea {
             width: 100%; padding: 12px 16px; background: var(--bg-main); border: 1px solid var(--border-color);
-            border-radius: 12px; color: var(--text-color); font-size: 14px; outline: none; resize: none;
+            border-radius: 14px; color: var(--text-color); font-size: 14px; outline: none; resize: none; transition: 0.2s;
         }
+        .input-group input:focus, .input-group textarea:focus { border-color: #38bdf8; }
+        
         .action-btn {
             width: 100%; padding: 14px; background: var(--accent-gradient); border: none; border-radius: 14px;
-            color: #0f172a; font-weight: bold; font-size: 15px; cursor: pointer; margin-top: 10px;
+            color: #0f172a; font-weight: 700; font-size: 14px; cursor: pointer; margin-top: 10px; transition: 0.2s;
         }
+        .action-btn:hover { opacity: 0.92; transform: translateY(-1px); }
         .auth-switch { text-align: center; margin-top: 16px; font-size: 13px; color: var(--text-muted); }
         .auth-switch span { color: #38bdf8; font-weight: 600; cursor: pointer; }
         .forgot-password-link { text-align: right; margin-top: -6px; margin-bottom: 14px; font-size: 12px; color: #38bdf8; cursor: pointer; font-weight: 600; display: block; }
@@ -175,26 +181,28 @@
         }
         .home-big-btn {
             flex: 1;
-            padding: 16px 12px;
+            padding: 18px 14px;
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 18px;
+            border-radius: 20px;
             color: var(--text-color);
             font-weight: 700;
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            transition: 0.2s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transition: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
+        .home-big-btn span { font-size: 24px; }
         .home-big-btn:hover {
             background: var(--accent-gradient);
             color: #0f172a;
             border-color: transparent;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(56, 189, 248, 0.25);
         }
 
         /* Saluran Style (Lihat Kenangan & Lihat Cerita) */
@@ -205,18 +213,19 @@
             flex-direction: column;
             gap: 16px;
             margin: 0 auto;
-            padding-bottom: 90px;
+            padding-bottom: 30px;
         }
         .channel-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 20px;
+            border-radius: 22px;
             padding: 16px;
             text-align: left;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             display: flex;
             flex-direction: column;
             gap: 10px;
+            position: relative;
         }
         .channel-header-info {
             display: flex;
@@ -228,28 +237,48 @@
             padding-bottom: 8px;
         }
         .channel-header-info b { color: var(--text-color); font-size: 13px; }
-        .channel-title { font-size: 15px; font-weight: bold; color: #38bdf8; }
+        .channel-title { font-size: 15px; font-weight: 700; color: #38bdf8; }
         .channel-body-text { font-size: 14px; line-height: 1.5; color: var(--text-color); white-space: pre-wrap; }
         
-        /* Full Image Without Cropping & Clickable */
+        /* Multi Photos Support & Full Screen Preview */
+        .channel-images-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 8px;
+            margin-top: 4px;
+        }
         .channel-img-wrapper {
             width: 100%;
-            border-radius: 12px;
+            border-radius: 14px;
             overflow: hidden;
             background: #000;
             border: 1px solid var(--border-color);
             cursor: pointer;
-            margin-top: 4px;
+            aspect-ratio: 1 / 1;
+            position: relative;
         }
         .channel-img-wrapper img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
             display: block;
-            object-fit: contain;
-            max-height: 400px;
             transition: transform 0.3s ease;
         }
-        .channel-img-wrapper img:hover { transform: scale(1.02); }
+        .channel-img-wrapper:hover img { transform: scale(1.04); }
+
+        /* Delete Button for Kenangan/Cerita */
+        .delete-post-btn {
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .delete-post-btn:hover { background: #ef4444; color: #fff; }
 
         /* Reactions Box */
         .reactions-wrapper {
@@ -273,83 +302,84 @@
             gap: 4px;
             transition: 0.2s;
         }
-        .react-btn:hover { background: rgba(56, 189, 248, 0.2); border-color: #38bdf8; }
-        .react-btn.reacted { background: var(--accent-gradient); color: #0f172a; border-color: transparent; font-weight: bold; }
+        .react-btn:hover { background: rgba(56, 189, 248, 0.15); border-color: #38bdf8; }
+        .react-btn.reacted { background: var(--accent-gradient); color: #0f172a; border-color: transparent; font-weight: 700; }
 
         /* Image Lightbox Modal */
         .lightbox-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85); z-index: 3000; justify-content: center; align-items: center; backdrop-filter: blur(5px);
+            background: rgba(0,0,0,0.9); z-index: 3000; justify-content: center; align-items: center; backdrop-filter: blur(6px);
             padding: 20px;
         }
         .lightbox-modal.active { display: flex; }
-        .lightbox-content { max-width: 100%; max-height: 90vh; border-radius: 12px; object-fit: contain; }
+        .lightbox-content { max-width: 100%; max-height: 90vh; border-radius: 14px; object-fit: contain; }
 
         /* Tempat Lagu Styling */
-        .song-list-container { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 15px; margin: 0 auto; padding-bottom: 90px; }
-        .song-card { background: var(--card-bg); border: 1px solid var(--border-color); padding: 18px; border-radius: 18px; box-shadow: 0 8px 20px rgba(0,0,0,0.3); text-align: left; display: flex; flex-direction: column; gap: 12px; }
-        .song-info h3 { font-size: 16px; margin-bottom: 4px; }
+        .song-list-container { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 15px; margin: 0 auto; padding-bottom: 30px; }
+        .song-card { background: var(--card-bg); border: 1px solid var(--border-color); padding: 18px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); text-align: left; display: flex; flex-direction: column; gap: 12px; }
+        .song-info h3 { font-size: 15px; margin-bottom: 2px; font-weight: 700; }
         .song-info span { font-size: 12px; color: var(--text-muted); }
         .song-player-controls { display: flex; align-items: center; gap: 12px; width: 100%; }
-        .play-song-btn { background: var(--accent-gradient); border: none; color: #0f172a; width: 40px; height: 40px; border-radius: 50%; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .play-song-btn { background: var(--accent-gradient); border: none; color: #0f172a; width: 38px; height: 38px; border-radius: 50%; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .volume-control { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-muted); margin-left: auto; }
-        .volume-control input[type=range] { width: 80px; accent-color: #38bdf8; cursor: pointer; }
+        .volume-control input[type=range] { width: 75px; accent-color: #38bdf8; cursor: pointer; }
 
         /* Modals */
         .inbox-modal, .owner-notif-modal, .settings-modal, .bubble-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(4px);
+            background: rgba(0,0,0,0.65); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px);
         }
         .inbox-modal.active, .owner-notif-modal.active, .settings-modal.active, .bubble-modal.active { display: flex; }
         
         .modal-box {
             background: var(--card-bg); border: 1px solid var(--border-color); padding: 24px; border-radius: 24px;
-            max-width: 420px; width: 92%; max-height: 85vh; overflow-y: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            max-width: 420px; width: 92%; max-height: 85vh; overflow-y: auto; box-shadow: 0 25px 50px rgba(0,0,0,0.5);
             display: flex; flex-direction: column; gap: 16px; text-align: left;
         }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 18px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; font-weight: 700; font-size: 17px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
         
         .inbox-list { display: flex; flex-direction: column; gap: 12px; }
         .inbox-item-bubble {
             display: flex; align-items: flex-start; gap: 12px; background: var(--bg-main); border: 1px solid var(--border-color);
-            padding: 14px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            padding: 14px; border-radius: 18px; box-shadow: 0 6px 20px rgba(0,0,0,0.2);
         }
         .inbox-avatar-circle {
-            width: 42px; height: 42px; border-radius: 50%; background: var(--accent-gradient); color: #0f172a;
-            font-weight: bold; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;
+            width: 40px; height: 40px; border-radius: 50%; background: var(--accent-gradient); color: #0f172a;
+            font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0;
         }
         .inbox-content-box { flex: 1; display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
-        .inbox-content-box b { color: var(--text-color); font-size: 14px; }
+        .inbox-content-box b { color: var(--text-color); font-size: 13px; }
         .inbox-content-box span { color: var(--text-muted); font-size: 11px; }
         .inbox-img-preview { margin-top: 6px; max-width: 100%; max-height: 120px; border-radius: 8px; object-fit: cover; border: 1px solid var(--border-color); }
-        .reply-box-owner { margin-top: 8px; background: rgba(56, 189, 248, 0.1); border-left: 3px solid #38bdf8; padding: 6px 10px; border-radius: 4px; font-size: 12px; }
+        .reply-box-owner { margin-top: 8px; background: rgba(56, 189, 248, 0.1); border-left: 3px solid #38bdf8; padding: 6px 10px; border-radius: 6px; font-size: 12px; }
 
         /* Profile */
-        .profile-card { background: var(--card-bg); padding: 30px; border-radius: 20px; border: 1px solid var(--border-color); width: 100%; max-width: 400px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.3); margin: auto; }
-        .profile-avatar { width: 80px; height: 80px; border-radius: 50%; background: var(--accent-gradient); margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 32px; color: #0f172a; font-weight: bold; }
-        .profile-info { margin-bottom: 20px; text-align: left; background: var(--bg-main); padding: 15px; border-radius: 12px; border: 1px solid var(--border-color); }
-        .profile-info p { font-size: 14px; margin-bottom: 8px; }
-        .profile-info span { color: var(--text-muted); font-size: 12px; display: block; }
-        .logout-btn { background: #ef4444; color: white; border: none; padding: 12px; width: 100%; border-radius: 12px; font-weight: bold; cursor: pointer; }
+        .profile-card { background: var(--card-bg); padding: 30px; border-radius: 22px; border: 1px solid var(--border-color); width: 100%; max-width: 400px; text-align: center; box-shadow: 0 12px 30px rgba(0,0,0,0.3); margin: auto; }
+        .profile-avatar { width: 76px; height: 76px; border-radius: 50%; background: var(--accent-gradient); margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 30px; color: #0f172a; font-weight: 800; }
+        .profile-info { margin-bottom: 20px; text-align: left; background: var(--bg-main); padding: 15px; border-radius: 14px; border: 1px solid var(--border-color); }
+        .profile-info p { font-size: 13px; margin-bottom: 6px; }
+        .profile-info span { color: var(--text-muted); font-size: 12px; display: block; font-weight: 600; }
+        .logout-btn { background: #ef4444; color: white; border: none; padding: 12px; width: 100%; border-radius: 14px; font-weight: 700; cursor: pointer; transition: 0.2s; }
+        .logout-btn:hover { opacity: 0.9; }
 
         /* Settings */
         .setting-group { display: flex; flex-direction: column; gap: 8px; text-align: left; }
-        .setting-label { font-size: 13px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
+        .setting-label { font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; }
         .setting-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-        .theme-btn, .notif-btn { padding: 10px; border-radius: 12px; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-color); font-size: 13px; font-weight: 600; cursor: pointer; }
+        .theme-btn, .notif-btn { padding: 10px; border-radius: 12px; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-color); font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.2s; }
         .theme-btn.active, .notif-btn.active { background: var(--accent-gradient); color: #0f172a; border-color: transparent; }
-        .bubble-btn { background: var(--accent-gradient); color: #0f172a; border: none; padding: 10px 24px; border-radius: 12px; font-weight: bold; cursor: pointer; }
+        .bubble-btn { background: var(--accent-gradient); color: #0f172a; border: none; padding: 10px 24px; border-radius: 12px; font-weight: 700; cursor: pointer; }
 
-        /* Bottom Nav */
+        /* Bottom Nav with Smooth Auto-Hide Effect */
         .bottom-nav {
             position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%);
             width: 92%; max-width: 440px; background: var(--bottom-nav-bg); display: flex; justify-content: space-around;
-            padding: 8px; border-radius: 35px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); border: 1px solid var(--border-color); z-index: 100;
-            transition: transform 0.3s ease, opacity 0.3s ease;
+            padding: 8px; border-radius: 35px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45); border: 1px solid var(--border-color); z-index: 100;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .bottom-nav.hidden { transform: translate(-50%, 100px); opacity: 0; pointer-events: none; }
-        .nav-item { color: var(--text-muted); text-decoration: none; font-size: 12px; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; padding: 6px 12px; border-radius: 20px; transition: 0.3s; }
-        .nav-item.active, .nav-item:hover { color: #0f172a; background: var(--accent-gradient); font-weight: 600; }
+        .bottom-nav.hidden { transform: translate(-50%, 120px); opacity: 0; pointer-events: none; }
+        .nav-item { color: var(--text-muted); text-decoration: none; font-size: 11px; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; padding: 6px 12px; border-radius: 20px; transition: 0.3s; font-weight: 600; }
+        .nav-item.active, .nav-item:hover { color: #0f172a; background: var(--accent-gradient); }
     </style>
 </head>
 <body class="theme-default">
@@ -374,29 +404,28 @@
     <!-- Sidebar -->
     <div id="sidebar" class="sidebar">
         <div class="sidebar-header">
-            <span>Menu Utama</span>
+            <span>Menu Navigasi</span>
             <button class="close-btn" onclick="toggleSidebar()">✕</button>
         </div>
         
         <div class="menu-category">Fitur Utama</div>
         <div class="sidebar-item" onclick="openMenu('home')">🏠 Beranda</div>
         <div class="sidebar-item" onclick="openMenu('tiktok')">🎵 TikTok Downloader</div>
-        <div class="sidebar-item" onclick="openMenu('req-fitur')">💡 Req Fitur/Lagu</div>
+        <div class="sidebar-item" onclick="openMenu('req-fitur')">💡 Req Fitur / Lagu</div>
 
         <div class="menu-category owner-menu-label" style="display:none;">Panel Owner</div>
-        <div class="sidebar-item owner-menu" onclick="showBubble('Selamat datang di Panel Kontrol Owner! 👑')">👑 Kontrol Panel Owner</div>
-        <div class="sidebar-item owner-menu" onclick="openMenu('owner-notif-user')">🔔 Notif User</div>
-        <div class="sidebar-item owner-menu" onclick="openMenu('add-lagu')">🎶 Add Lagu</div>
+        <div class="sidebar-item owner-menu" onclick="showBubble('Panel Kontrol Owner Aktif 👑')">👑 Kontrol Panel Owner</div>
+        <div class="sidebar-item owner-menu" onclick="openMenu('owner-notif-user')">🔔 Notif User & Request</div>
+        <div class="sidebar-item owner-menu" onclick="openMenu('add-lagu')">🎶 Tambah Lagu</div>
 
-        <div class="menu-category">Fitur Fun & Saluran</div>
-        <div class="sidebar-item" onclick="openMenu('lihat-kenangan')">📸 Lihat Kenangan</div>
-        <div class="sidebar-item" onclick="openMenu('add-kenangan')">➕ Kirim Kenangan</div>
-        <div class="sidebar-item" onclick="openMenu('lihat-cerita')">📖 Lihat Cerita</div>
+        <div class="menu-category">Fitur Saluran Eksklusif</div>
+        <div class="sidebar-item" onclick="openMenu('lihat-kenangan')">📸 Lihat Saluran Kenangan</div>
+        <div class="sidebar-item" onclick="openMenu('add-kenangan')">➕ Kirim Kenangan (Multi Foto)</div>
+        <div class="sidebar-item" onclick="openMenu('lihat-cerita')">📖 Lihat Saluran Cerita</div>
         <div class="sidebar-item" onclick="openMenu('add-cerita')">➕ Kirim Cerita</div>
         <div class="sidebar-item" onclick="openMenu('susun-kata')">🧩 Tebak Kata</div>
-        <div class="sidebar-item" onclick="showBubble('Fitur Info Gempa segera hadir! 🌍')">🌍 Info Gempa</div>
 
-        <div class="menu-category">Eksplorasi</div>
+        <div class="menu-category">Eksplorasi Lainnya</div>
         <div class="sidebar-item" onclick="openMenu('tempat-lagu')">🎵 Tempat Lagu</div>
     </div>
 
@@ -407,7 +436,7 @@
         <div id="page-auth" class="page-container">
             <div class="auth-card">
                 <h2 id="auth-title">Selamat Datang! 🚀</h2>
-                <p id="auth-subtitle">Masuk dengan email pribadi & password</p>
+                <p id="auth-subtitle">Masuk dengan email & password akunmu</p>
                 
                 <div id="form-main-inputs">
                     <div class="input-group" id="group-username" style="display:none;">
@@ -436,17 +465,17 @@
         <div id="page-home" class="page-container">
             <div style="margin: auto 0; width: 100%; display: flex; flex-direction: column; align-items: center;">
                 <h2>Selamat Datang, <span id="welcome-username" style="color: #38bdf8;">User</span>!</h2>
-                <p style="color: var(--text-muted); margin-top: 10px; max-width: 320px;">Gunakan menu navigasi di bawah atau tombol di bawah ini untuk melihat kenangan dan cerita.</p>
+                <p style="color: var(--text-muted); margin-top: 8px; max-width: 330px; font-size: 13px;">Gunakan menu di bawah atau tombol pilihan cepat di bawah ini untuk masuk ke saluran kenangan & cerita.</p>
                 
                 <!-- Dua Tombol Utama Sesuai Lingkaran Merah -->
                 <div class="home-action-buttons">
                     <button class="home-big-btn" onclick="openMenu('lihat-kenangan')">
-                        📸
-                        <span>Lihat Kenangan</span>
+                        <span>📸</span>
+                        Lihat Kenangan
                     </button>
                     <button class="home-big-btn" onclick="openMenu('lihat-cerita')">
-                        📖
-                        <span>Lihat Cerita</span>
+                        <span>📖</span>
+                        Lihat Cerita
                     </button>
                 </div>
             </div>
@@ -457,44 +486,44 @@
             <div class="downloader-card">
                 <h2>TikTok Downloader</h2>
                 <p>Unduh video TikTok tanpa watermark dengan mudah.</p>
-                <input type="text" id="tiktok-url" placeholder="Tempel link video TikTok di sini..." style="width:100%; padding:12px; border-radius:12px; background:var(--bg-main); border:1px solid var(--border-color); color:var(--text-color); margin-bottom:15px; outline:none;">
-                <button class="action-btn" onclick="showBubble('Fitur download sedang diproses...')">Download</button>
+                <input type="text" id="tiktok-url" placeholder="Tempel link video TikTok di sini..." style="width:100%; padding:12px; border-radius:14px; background:var(--bg-main); border:1px solid var(--border-color); color:var(--text-color); margin-bottom:15px; outline:none; font-size:13px;">
+                <button class="action-btn" onclick="showBubble('Proses unduh video sedang berjalan...')">Download Video</button>
             </div>
         </div>
 
         <!-- Req Fitur -->
         <div id="page-req-fitur" class="page-container">
             <div class="form-card">
-                <h2>Req Fitur / Lagu 💡</h2>
-                <p>Kirimkan request atau laporkan kendala sistem.</p>
+                <h2>Req Fitur / Kendala 💡</h2>
+                <p>Kirimkan masukan atau request fitur baru kepada Owner.</p>
                 <div class="input-group">
-                    <label>Pesan / Detail</label>
+                    <label>Pesan & Detail Request</label>
                     <textarea id="req-message" rows="4" placeholder="Tuliskan detail request..."></textarea>
                 </div>
                 <div class="input-group">
                     <label>Lampirkan Foto (Opsional)</label>
-                    <input type="file" id="req-image" accept="image/*" style="padding: 8px;">
+                    <input type="file" id="req-image" accept="image/*" style="padding: 8px; font-size: 12px;">
                 </div>
-                <button class="action-btn" onclick="submitUserRequest()">Kirim Request ke Owner</button>
+                <button class="action-btn" onclick="submitUserRequest()">Kirim Request</button>
             </div>
         </div>
 
-        <!-- Kirim Kenangan (Form) -->
+        <!-- Kirim Kenangan (Multi Foto) -->
         <div id="page-add-kenangan" class="page-container">
             <div class="form-card">
                 <h2>Kirim Kenangan 📸</h2>
-                <p>Bagikan memori spesialmu ke saluran kenangan.</p>
+                <p>Bagikan memori spesialmu dengan dukungan banyak foto.</p>
                 <div class="input-group">
                     <label>Judul Kenangan</label>
-                    <input type="text" id="kenangan-judul" placeholder="Contoh: Liburan ke Pantai...">
+                    <input type="text" id="kenangan-judul" placeholder="Contoh: Liburan Akhir Pekan...">
                 </div>
                 <div class="input-group">
-                    <label>Kenangan / Cerita Momen</label>
-                    <textarea id="kenangan-isi" rows="3" placeholder="Tuliskan kenangan indah di sini..."></textarea>
+                    <label>Catatan / Kenangan Momen</label>
+                    <textarea id="kenangan-isi" rows="3" placeholder="Tuliskan cerita kenangan indahmu..."></textarea>
                 </div>
                 <div class="input-group">
-                    <label>Kirim Foto (Support & Klik Full)</label>
-                    <input type="file" id="kenangan-img" accept="image/*" style="padding: 8px;">
+                    <label>Pilih Foto (Bisa banyak foto sekaligus!)</label>
+                    <input type="file" id="kenangan-imgs" accept="image/*" multiple style="padding: 8px; font-size: 12px;">
                 </div>
                 <button class="action-btn" onclick="submitKenangan()">Publikasikan Kenangan</button>
             </div>
@@ -502,18 +531,18 @@
 
         <!-- Lihat Kenangan (Saluran Channel) -->
         <div id="page-lihat-kenangan" class="page-container">
-            <div style="width: 100%; max-width: 480px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
-                <h2 style="font-size: 18px;">Saluran Kenangan 📸</h2>
-                <button class="action-btn" style="width: auto; padding: 8px 14px; font-size: 13px; margin: 0;" onclick="openMenu('add-kenangan')">+ Buat Kenangan</button>
+            <div style="width: 100%; max-width: 480px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                <h2 style="font-size: 17px; font-weight: 700;">Saluran Kenangan 📸</h2>
+                <button class="action-btn" style="width: auto; padding: 8px 14px; font-size: 12px; margin: 0;" onclick="openMenu('add-kenangan')">+ Buat Kenangan</button>
             </div>
             <div class="channel-feed-container" id="kenangan-feed-wrapper"></div>
         </div>
 
-        <!-- Kirim Cerita (Form Tanpa Judul) -->
+        <!-- Kirim Cerita (Tanpa Judul) -->
         <div id="page-add-cerita" class="page-container">
             <div class="form-card">
                 <h2>Kirim Cerita 📖</h2>
-                <p>Bagikan ceritamu secara langsung tanpa judul.</p>
+                <p>Bagikan ceritamu secara langsung dengan username aktif.</p>
                 <div class="input-group">
                     <label>Isi Cerita</label>
                     <textarea id="cerita-isi" rows="5" placeholder="Tuliskan ceritamu di sini..."></textarea>
@@ -524,9 +553,9 @@
 
         <!-- Lihat Cerita (Saluran Channel) -->
         <div id="page-lihat-cerita" class="page-container">
-            <div style="width: 100%; max-width: 480px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
-                <h2 style="font-size: 18px;">Saluran Cerita 📖</h2>
-                <button class="action-btn" style="width: auto; padding: 8px 14px; font-size: 13px; margin: 0;" onclick="openMenu('add-cerita')">+ Buat Cerita</button>
+            <div style="width: 100%; max-width: 480px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                <h2 style="font-size: 17px; font-weight: 700;">Saluran Cerita 📖</h2>
+                <button class="action-btn" style="width: auto; padding: 8px 14px; font-size: 12px; margin: 0;" onclick="openMenu('add-cerita')">+ Buat Cerita</button>
             </div>
             <div class="channel-feed-container" id="cerita-feed-wrapper"></div>
         </div>
@@ -535,33 +564,37 @@
         <div id="page-susun-kata" class="page-container">
             <div class="form-card" style="text-align: center;">
                 <h2>Tebak Kata 🧩</h2>
-                <p>Asah otakmu dengan menebak susunan kata yang acak.</p>
-                <div style="background: var(--bg-main); padding: 20px; border-radius: 12px; margin: 15px 0; border: 1px solid var(--border-color);">
+                <p>Asah otakmu dengan menebak susunan kata acak.</p>
+                <div style="background: var(--bg-main); padding: 20px; border-radius: 14px; margin: 15px 0; border: 1px solid var(--border-color);">
                     <h3 style="letter-spacing: 4px; color: #38bdf8;" id="scramble-word-display">R T A K I</h3>
                 </div>
                 <div class="input-group">
                     <input type="text" placeholder="Jawaban kamu..." style="text-align: center;">
                 </div>
-                <button class="action-btn" onclick="showBubble('Fitur Tebak Kata segera aktif!')">Jawab</button>
+                <button class="action-btn" onclick="showBubble('Fitur permainan segera aktif sepenuhnya!')">Kirim Jawaban</button>
             </div>
         </div>
 
         <!-- Notif User (Owner) -->
         <div id="page-owner-notif-user" class="page-container">
             <div style="width: 100%; max-width: 550px; margin-bottom: 20px; text-align: left;">
-                <h2 style="font-size: 20px;">Notif User & Request 🔔</h2>
+                <h2 style="font-size: 18px; font-weight: 700;">Notif User & Request 🔔</h2>
             </div>
-            <div id="owner-requests-wrapper" style="width: 100%; max-width: 550px; display: flex; flex-direction: column; gap: 15px; padding-bottom: 80px;"></div>
+            <div id="owner-requests-wrapper" style="width: 100%; max-width: 550px; display: flex; flex-direction: column; gap: 15px; padding-bottom: 30px;"></div>
         </div>
 
         <!-- Add Lagu -->
         <div id="page-add-lagu" class="page-container">
             <div class="form-card">
-                <h2>Add Lagu Baru 🎶</h2>
-                <label style="font-size: 12px; font-weight: bold; color: var(--text-muted);">Judul Lagu</label>
-                <input type="text" id="input-song-title" placeholder="Judul lagu..." style="width:100%; padding:12px; background:var(--bg-main); border:1px solid var(--border-color); border-radius:12px; color:var(--text-color); margin-bottom:12px; outline:none;">
-                <label style="font-size: 12px; font-weight: bold; color: var(--text-muted);">URL File Audio (.mp3)</label>
-                <input type="text" id="input-song-url" placeholder="https://..." style="width:100%; padding:12px; background:var(--bg-main); border:1px solid var(--border-color); border-radius:12px; color:var(--text-color); margin-bottom:15px; outline:none;">
+                <h2>Tambah Lagu Baru 🎶</h2>
+                <div class="input-group">
+                    <label>Judul Lagu</label>
+                    <input type="text" id="input-song-title" placeholder="Judul lagu...">
+                </div>
+                <div class="input-group">
+                    <label>URL Audio (.mp3)</label>
+                    <input type="text" id="input-song-url" placeholder="https://...">
+                </div>
                 <button class="action-btn" onclick="saveNewSong()">Simpan Lagu</button>
             </div>
         </div>
@@ -569,7 +602,7 @@
         <!-- Tempat Lagu -->
         <div id="page-tempat-lagu" class="page-container">
             <div style="width: 100%; max-width: 500px; margin-bottom: 20px; text-align: left;">
-                <h2 style="font-size: 20px;">Tempat Lagu 🎵</h2>
+                <h2 style="font-size: 18px; font-weight: 700;">Tempat Lagu 🎵</h2>
             </div>
             <div class="song-list-container" id="song-list-wrapper"></div>
         </div>
@@ -578,10 +611,10 @@
         <div id="page-profile" class="page-container">
             <div class="profile-card">
                 <div class="profile-avatar" id="profile-initial">U</div>
-                <h3 id="profile-name" style="margin-bottom: 5px; font-size: 18px;">Username</h3>
+                <h3 id="profile-name" style="margin-bottom: 4px; font-size: 17px; font-weight: 700;">Username</h3>
                 <p id="profile-role-badge" style="font-size: 12px; color: #38bdf8; font-weight: bold; margin-bottom: 15px;">Member</p>
                 <div class="profile-info">
-                    <p><strong>Email:</strong></p>
+                    <p><strong>Email Akun:</strong></p>
                     <span id="profile-email">user@email.com</span>
                 </div>
                 <button class="logout-btn" onclick="logoutUser()">Keluar Akun</button>
@@ -604,11 +637,11 @@
     <div id="settings-modal" class="settings-modal" onclick="toggleSettingsModal()">
         <div class="modal-box" onclick="event.stopPropagation()">
             <div class="modal-header">
-                <span>Pengaturan</span>
+                <span>Pengaturan Tema</span>
                 <button class="close-btn" onclick="toggleSettingsModal()">✕</button>
             </div>
             <div class="setting-group">
-                <span class="setting-label">Pilihan Tema</span>
+                <span class="setting-label">Pilihan Tampilan</span>
                 <div class="setting-options">
                     <button class="theme-btn active" id="theme-default" onclick="setTheme('default')">Default</button>
                     <button class="theme-btn" id="theme-gelap" onclick="setTheme('gelap')">Gelap</button>
@@ -621,8 +654,8 @@
     </div>
 
     <div id="bubble-modal" class="bubble-modal" onclick="closeBubble()">
-        <div class="modal-box" style="text-align: center; max-width: 320px;" onclick="event.stopPropagation()">
-            <p id="bubble-text" style="margin-bottom: 15px; font-size: 14px;">Pemberitahuan...</p>
+        <div class="modal-box" style="text-align: center; max-width: 300px;" onclick="event.stopPropagation()">
+            <p id="bubble-text" style="margin-bottom: 15px; font-size: 13px; font-weight: 600;">Notifikasi...</p>
             <button class="bubble-btn" onclick="closeBubble()">Mengerti</button>
         </div>
     </div>
@@ -632,7 +665,7 @@
         <img id="lightbox-img" class="lightbox-content" src="">
     </div>
 
-    <!-- Bottom Nav -->
+    <!-- Bottom Nav (Auto Hide di Saluran) -->
     <div class="bottom-nav" id="bottom-nav">
         <a class="nav-item active" id="nav-beranda" onclick="switchTab('Beranda')">🏠<span>Beranda</span></a>
         <a class="nav-item" id="nav-tiktok" onclick="switchTab('TikTok')">🎵<span>TikTok</span></a>
@@ -677,7 +710,7 @@
 
             if (state === 'login') {
                 title.innerText = "Selamat Datang Kembali! 👋";
-                subtitle.innerText = "Masuk dengan email pribadi & password";
+                subtitle.innerText = "Masuk dengan email & password akunmu";
                 btnAction.innerText = "Masuk";
                 switchContainer.innerHTML = `<span onclick="setAuthState('register')">Belum punya akun? Daftar sekarang</span>`;
             } else if (state === 'register') {
@@ -709,7 +742,7 @@
                     localStorage.setItem('sea_tycoon_db', JSON.stringify(dbUsers));
                     showBubble('Password berhasil diubah! Silakan masuk ✨');
                 } else {
-                    showBubble('Email tidak ditemukan. ❌');
+                    showBubble('Email tidak ditemukan dalam sistem. ❌');
                 }
             } else {
                 showBubble('Password baru tidak valid! ⚠️');
@@ -824,74 +857,69 @@
             const title = document.getElementById('page-title');
             const topLeftBtn = document.getElementById('top-left-btn');
 
+            // Auto Hide Bottom Nav untuk Halaman Saluran (Kenangan & Cerita)
+            if (menu === 'lihat-kenangan' || menu === 'lihat-cerita') {
+                bottomNav.classList.add('hidden');
+            } else {
+                bottomNav.classList.remove('hidden');
+            }
+
             if (menu === 'home') {
                 document.getElementById('page-home').classList.add('active');
                 title.innerText = 'Sea Tycoon';
                 topLeftBtn.innerText = '☰';
-                bottomNav.classList.remove('hidden');
                 setActiveNav('Beranda');
             } else if (menu === 'tiktok') {
                 document.getElementById('page-tiktok').classList.add('active');
                 title.innerText = 'TikTok Downloader';
                 topLeftBtn.innerText = '✕';
-                bottomNav.classList.remove('hidden');
                 setActiveNav('TikTok');
             } else if (menu === 'req-fitur') {
                 document.getElementById('page-req-fitur').classList.add('active');
-                title.innerText = 'Req Fitur / Lagu';
+                title.innerText = 'Req Fitur / Kendala';
                 topLeftBtn.innerText = '✕';
-                bottomNav.classList.remove('hidden');
             } else if (menu === 'add-kenangan') {
                 document.getElementById('page-add-kenangan').classList.add('active');
                 title.innerText = 'Kirim Kenangan';
                 topLeftBtn.innerText = '✕';
-                bottomNav.classList.remove('hidden');
             } else if (menu === 'lihat-kenangan') {
                 document.getElementById('page-lihat-kenangan').classList.add('active');
                 title.innerText = 'Saluran Kenangan';
                 topLeftBtn.innerText = '✕';
-                bottomNav.classList.remove('hidden');
                 renderKenanganFeed();
             } else if (menu === 'add-cerita') {
                 document.getElementById('page-add-cerita').classList.add('active');
                 title.innerText = 'Kirim Cerita';
                 topLeftBtn.innerText = '✕';
-                bottomNav.classList.remove('hidden');
             } else if (menu === 'lihat-cerita') {
                 document.getElementById('page-lihat-cerita').classList.add('active');
                 title.innerText = 'Saluran Cerita';
                 topLeftBtn.innerText = '✕';
-                bottomNav.classList.remove('hidden');
                 renderCeritaFeed();
             } else if (menu === 'susun-kata') {
                 document.getElementById('page-susun-kata').classList.add('active');
                 title.innerText = 'Tebak Kata';
                 topLeftBtn.innerText = '✕';
-                bottomNav.classList.remove('hidden');
             } else if (menu === 'owner-notif-user') {
                 if (currentUser.role !== 'Owner') { showBubble('Akses ditolak!'); return; }
                 document.getElementById('page-owner-notif-user').classList.add('active');
                 title.innerText = 'Notif User (Owner)';
                 topLeftBtn.innerText = '✕';
-                bottomNav.classList.remove('hidden');
                 renderOwnerRequests();
             } else if (menu === 'add-lagu') {
                 if (currentUser.role !== 'Owner') { showBubble('Akses ditolak!'); return; }
                 document.getElementById('page-add-lagu').classList.add('active');
-                title.innerText = 'Add Lagu (Owner)';
+                title.innerText = 'Tambah Lagu (Owner)';
                 topLeftBtn.innerText = '✕';
-                bottomNav.classList.remove('hidden');
             } else if (menu === 'tempat-lagu') {
                 document.getElementById('page-tempat-lagu').classList.add('active');
                 title.innerText = 'Tempat Lagu';
                 topLeftBtn.innerText = '✕';
-                bottomNav.classList.remove('hidden');
                 renderSongList();
             } else if (menu === 'profile') {
                 document.getElementById('page-profile').classList.add('active');
-                title.innerText = 'Profile';
+                title.innerText = 'Profile User';
                 topLeftBtn.innerText = '✕';
-                bottomNav.classList.remove('hidden');
                 setActiveNav('Profile');
             }
         }
@@ -928,44 +956,56 @@
             document.getElementById('lightbox-modal').classList.remove('active');
         }
 
-        // --- KENANGAN SYSTEM (CHANNEL) ---
+        // --- KENANGAN SYSTEM (MULTI FOTO + HAPUS) ---
         function submitKenangan() {
             const judul = document.getElementById('kenangan-judul').value.trim();
             const isi = document.getElementById('kenangan-isi').value.trim();
-            const fileInput = document.getElementById('kenangan-img');
+            const fileInput = document.getElementById('kenangan-imgs');
 
             if (!judul || !isi) {
-                showBubble('Judul dan Kenangan wajib diisi! ⚠️');
+                showBubble('Judul dan kenangan wajib diisi! ⚠️');
                 return;
             }
 
-            const processSave = (imgData) => {
-                let kenanganList = JSON.parse(localStorage.getItem('sea_tycoon_kenangan') || '[]');
-                kenanganList.push({
-                    id: Date.now(),
-                    from: currentUser.username,
-                    judul: judul,
-                    kenangan: isi,
-                    image: imgData || null,
-                    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-                    reactions: { '😂': 0, '❤️': 0, '👍': 0, '🔥': 0, '👏': 0 },
-                    userReacted: {}
-                });
-                localStorage.setItem('sea_tycoon_kenangan', JSON.stringify(kenanganList));
-                document.getElementById('kenangan-judul').value = '';
-                document.getElementById('kenangan-isi').value = '';
-                fileInput.value = '';
-                showBubble('Kenangan berhasil dibagikan ke saluran! ✨');
-                openMenu('lihat-kenangan');
-            };
+            const files = fileInput.files;
+            let imagesArray = [];
 
-            if (fileInput.files.length > 0) {
-                const reader = new FileReader();
-                reader.onload = (e) => processSave(e.target.result);
-                reader.readAsDataURL(fileInput.files[0]);
+            if (files.length > 0) {
+                let processedCount = 0;
+                for (let i = 0; i < files.length; i++) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        imagesArray.push(e.target.result);
+                        processedCount++;
+                        if (processedCount === files.length) {
+                            saveKenanganData(judul, isi, imagesArray);
+                        }
+                    };
+                    reader.readAsDataURL(files[i]);
+                }
             } else {
-                processSave(null);
+                saveKenanganData(judul, isi, []);
             }
+        }
+
+        function saveKenanganData(judul, isi, images) {
+            let kenanganList = JSON.parse(localStorage.getItem('sea_tycoon_kenangan') || '[]');
+            kenanganList.push({
+                id: Date.now(),
+                from: currentUser.username,
+                judul: judul,
+                kenangan: isi,
+                images: images,
+                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                reactions: { '😂': 0, '❤️': 0, '👍': 0, '🔥': 0, '👏': 0 },
+                userReacted: {}
+            });
+            localStorage.setItem('sea_tycoon_kenangan', JSON.stringify(kenanganList));
+            document.getElementById('kenangan-judul').value = '';
+            document.getElementById('kenangan-isi').value = '';
+            document.getElementById('kenangan-imgs').value = '';
+            showBubble('Kenangan berhasil dibagikan ke saluran! ✨');
+            openMenu('lihat-kenangan');
         }
 
         function renderKenanganFeed() {
@@ -991,19 +1031,33 @@
                     `;
                 });
 
+                let imagesHtml = '';
+                if (item.images && item.images.length > 0) {
+                    imagesHtml += `<div class="channel-images-grid">`;
+                    item.images.forEach(imgSrc => {
+                        imagesHtml += `
+                            <div class="channel-img-wrapper" onclick="openLightbox('${imgSrc}')">
+                                <img src="${imgSrc}" alt="Foto Kenangan">
+                            </div>
+                        `;
+                    });
+                    imagesHtml += `</div>`;
+                }
+
+                let canDelete = (currentUser.role === 'Owner' || item.from === currentUser.username);
+
                 html += `
                     <div class="channel-card">
                         <div class="channel-header-info">
                             <span>Dari : <b>@${item.from}</b></span>
-                            <span>${item.time}</span>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span>${item.time}</span>
+                                ${canDelete ? `<button class="delete-post-btn" onclick="deleteKenangan('${item.id}')">Hapus</button>` : ''}
+                            </div>
                         </div>
                         <div class="channel-title">Judul : ${item.judul}</div>
                         <div class="channel-body-text">Kenangan : ${item.kenangan}</div>
-                        ${item.image ? `
-                            <div class="channel-img-wrapper" onclick="openLightbox('${item.image}')">
-                                <img src="${item.image}" alt="Kenangan Image">
-                            </div>
-                        ` : ''}
+                        ${imagesHtml}
                         <div class="reactions-wrapper">
                             ${reactionsHtml}
                         </div>
@@ -1025,9 +1079,7 @@
                 item.reactions[emoji]--;
                 delete item.userReacted[currentUser.username];
             } else {
-                if (prevReact) {
-                    item.reactions[prevReact]--;
-                }
+                if (prevReact) item.reactions[prevReact]--;
                 item.reactions[emoji] = (item.reactions[emoji] || 0) + 1;
                 item.userReacted[currentUser.username] = emoji;
             }
@@ -1036,7 +1088,16 @@
             renderKenanganFeed();
         }
 
-        // --- CERITA SYSTEM (CHANNEL TANPA JUDUL) ---
+        function deleteKenangan(id) {
+            if (!confirm("Apakah Anda yakin ingin menghapus kenangan ini?")) return;
+            let kenanganList = JSON.parse(localStorage.getItem('sea_tycoon_kenangan') || '[]');
+            kenanganList = kenanganList.filter(k => k.id != id);
+            localStorage.setItem('sea_tycoon_kenangan', JSON.stringify(kenanganList));
+            showBubble('Kenangan berhasil dihapus! 🗑️');
+            renderKenanganFeed();
+        }
+
+        // --- CERITA SYSTEM (TANPA JUDUL + HAPUS) ---
         function submitCerita() {
             const isi = document.getElementById('cerita-isi').value.trim();
             if (!isi) {
@@ -1082,11 +1143,16 @@
                     `;
                 });
 
+                let canDelete = (currentUser.role === 'Owner' || item.from === currentUser.username);
+
                 html += `
                     <div class="channel-card">
                         <div class="channel-header-info">
                             <span>Dari : <b>@${item.from}</b></span>
-                            <span>${item.time}</span>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span>${item.time}</span>
+                                ${canDelete ? `<button class="delete-post-btn" onclick="deleteCerita('${item.id}')">Hapus</button>` : ''}
+                            </div>
                         </div>
                         <div class="channel-body-text">${item.cerita}</div>
                         <div class="reactions-wrapper">
@@ -1110,14 +1176,21 @@
                 item.reactions[emoji]--;
                 delete item.userReacted[currentUser.username];
             } else {
-                if (prevReact) {
-                    item.reactions[prevReact]--;
-                }
+                if (prevReact) item.reactions[prevReact]--;
                 item.reactions[emoji] = (item.reactions[emoji] || 0) + 1;
                 item.userReacted[currentUser.username] = emoji;
             }
 
             localStorage.setItem('sea_tycoon_cerita', JSON.stringify(ceritaList));
+            renderCeritaFeed();
+        }
+
+        function deleteCerita(id) {
+            if (!confirm("Apakah Anda yakin ingin menghapus cerita ini?")) return;
+            let ceritaList = JSON.parse(localStorage.getItem('sea_tycoon_cerita') || '[]');
+            ceritaList = ceritaList.filter(c => c.id != id);
+            localStorage.setItem('sea_tycoon_cerita', JSON.stringify(ceritaList));
+            showBubble('Cerita berhasil dihapus! 🗑️');
             renderCeritaFeed();
         }
 
@@ -1198,7 +1271,7 @@
             let requests = JSON.parse(localStorage.getItem('sea_tycoon_requests') || '[]');
 
             if (requests.length === 0) {
-                wrapper.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px;">Belum ada request.</div>`;
+                wrapper.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px;">Belum ada request masuk.</div>`;
                 return;
             }
 
@@ -1210,13 +1283,13 @@
                             <h3>👤 @${req.username}</h3>
                             <span>${req.time} | ${req.email}</span>
                         </div>
-                        <p style="font-size: 14px; margin-top: 5px;">${req.message}</p>
-                        ${req.image ? `<img src="${req.image}" style="max-width: 100%; max-height: 180px; border-radius: 10px; margin-top: 8px; object-fit: cover;">` : ''}
+                        <p style="font-size: 13px; margin-top: 4px;">${req.message}</p>
+                        ${req.image ? `<img src="${req.image}" style="max-width: 100%; max-height: 160px; border-radius: 10px; margin-top: 6px; object-fit: cover;">` : ''}
                         
-                        ${req.reply ? `<div class="reply-box-owner" style="margin-top: 10px;">👑 <b>Balasan:</b> ${req.reply}</div>` : `
-                            <div style="display: flex; gap: 8px; margin-top: 10px;">
-                                <input type="text" id="reply-input-${req.id}" placeholder="Balas user..." style="flex:1; padding:10px; background:var(--bg-main); border:1px solid var(--border-color); border-radius:10px; color:var(--text-color); font-size:13px; outline:none;">
-                                <button onclick="ownerReplyRequest('${req.id}')" style="padding: 10px 16px; background: var(--accent-gradient); border: none; border-radius: 10px; font-weight: bold; color: #0f172a; cursor: pointer;">Kirim</button>
+                        ${req.reply ? `<div class="reply-box-owner" style="margin-top: 8px;">👑 <b>Balasan:</b> ${req.reply}</div>` : `
+                            <div style="display: flex; gap: 8px; margin-top: 8px;">
+                                <input type="text" id="reply-input-${req.id}" placeholder="Balas user..." style="flex:1; padding:10px; background:var(--bg-main); border:1px solid var(--border-color); border-radius:10px; color:var(--text-color); font-size:12px; outline:none;">
+                                <button onclick="ownerReplyRequest('${req.id}')" style="padding: 10px 16px; background: var(--accent-gradient); border: none; border-radius: 10px; font-weight: 700; color: #0f172a; cursor: pointer; font-size: 12px;">Kirim</button>
                             </div>
                         `}
                     </div>
@@ -1227,14 +1300,14 @@
 
         function ownerReplyRequest(reqId) {
             const replyText = document.getElementById(`reply-input-${reqId}`).value.trim();
-            if (!replyText) { showBubble('Tuliskan balasan! ⚠️'); return; }
+            if (!replyText) { showBubble('Tuliskan balasan terlebih dahulu! ⚠️'); return; }
 
             let requests = JSON.parse(localStorage.getItem('sea_tycoon_requests') || '[]');
             let index = requests.findIndex(r => r.id == reqId);
             if (index !== -1) {
                 requests[index].reply = replyText;
                 localStorage.setItem('sea_tycoon_requests', JSON.stringify(requests));
-                showBubble('Balasan terkirim! ✨');
+                showBubble('Balasan terkirim ke user! ✨');
                 renderOwnerRequests();
             }
         }
@@ -1242,7 +1315,7 @@
         function saveNewSong() {
             const title = document.getElementById('input-song-title').value.trim();
             const url = document.getElementById('input-song-url').value.trim();
-            if (!title || !url) { showBubble('Judul dan URL wajib diisi! ⚠️'); return; }
+            if (!title || !url) { showBubble('Judul dan URL lagu wajib diisi! ⚠️'); return; }
 
             let songs = JSON.parse(localStorage.getItem('sea_tycoon_songs') || '[]');
             songs.push({ title, artist: 'Owner', url, id: Date.now() });
@@ -1255,7 +1328,7 @@
             const wrapper = document.getElementById('song-list-wrapper');
             let songs = JSON.parse(localStorage.getItem('sea_tycoon_songs') || '[]');
             if (songs.length === 0) {
-                wrapper.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px;">Belum ada lagu.</div>`;
+                wrapper.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px;">Belum ada daftar lagu.</div>`;
                 return;
             }
 
@@ -1265,12 +1338,12 @@
                     <div class="song-card">
                         <div class="song-info">
                             <h3>🎵 ${song.title}</h3>
-                            <span>Dari: ${song.artist}</span>
+                            <span>Kurator: ${song.artist}</span>
                         </div>
                         <audio id="audio-${song.id}" src="${song.url}"></audio>
                         <div class="song-player-controls">
                             <button class="play-song-btn" id="btn-play-${song.id}" onclick="togglePlaySong('${song.id}')">▶</button>
-                            <span id="status-${song.id}" style="font-size: 12px; color: var(--text-muted);">Siap diputar</span>
+                            <span id="status-${song.id}" style="font-size: 11px; color: var(--text-muted);">Siap diputar</span>
                             <div class="volume-control">
                                 🔊 <input type="range" min="0" max="1" step="0.1" value="1" oninput="changeVolume('${song.id}', this.value)">
                             </div>
@@ -1290,7 +1363,7 @@
                 audio.play().then(() => {
                     btn.innerText = '⏸';
                     status.innerText = 'Memutar...';
-                }).catch(() => showBubble('Gagal memutar audio. Pastikan URL valid! ⚠️'));
+                }).catch(() => showBubble('Gagal memutar audio. Pastikan URL benar! ⚠️'));
             } else {
                 audio.pause();
                 btn.innerText = '▶';
