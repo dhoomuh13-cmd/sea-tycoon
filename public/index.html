@@ -741,13 +741,24 @@
             </div>
         </div>
 
-        <!-- TikTok Downloader -->
+        <!-- TikTok Downloader (Updated & Working) -->
         <div id="page-tiktok" class="page-container">
             <div class="downloader-card">
                 <h2>TikTok Downloader</h2>
-                <p>Unduh video TikTok tanpa watermark dengan mudah.</p>
-                <input type="text" id="tiktok-url" placeholder="Tempel link video TikTok di sini..." style="width:100%; padding:12px 16px; border-radius:50px; background:var(--bg-main); border:1px solid var(--border-color); color:var(--text-color); margin-bottom:15px; outline:none; font-size:13px;">
-                <button class="action-btn" onclick="showBubble('Proses unduh video sedang berjalan...')">Download Video</button>
+                <p>Unduh video TikTok tanpa watermark dengan cepat dan mudah.</p>
+                <div class="input-group">
+                    <label>Link Video TikTok</label>
+                    <input type="text" id="tiktok-url" placeholder="Tempel link video TikTok di sini (misal: https://v.tiktok.com/...)">
+                </div>
+                <button class="action-btn" id="tiktok-download-btn" onclick="downloadTikTokVideo()">Download Tanpa Watermark</button>
+                
+                <!-- Hasil Download TikTok -->
+                <div id="tiktok-result-container" style="margin-top: 20px; display: none; flex-direction: column; gap: 12px; text-align: left;">
+                    <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 5px 0;">
+                    <h3 style="font-size: 14px; color: #38bdf8; text-align: center;">Hasil Video Ditemukan!</h3>
+                    <div id="tiktok-video-preview" style="width: 100%; border-radius: 12px; overflow: hidden; background: #000; border: 1px solid var(--border-color);"></div>
+                    <a id="tiktok-download-link" href="#" target="_blank" class="action-btn" style="text-align: center; text-decoration: none; display: block; margin-top: 5px;">Simpan Video MP4 (No Watermark)</a>
+                </div>
             </div>
         </div>
 
@@ -1258,6 +1269,51 @@
                     topLeftBtn.innerText = '✕';
                     setActiveNav('Profile');
                 });
+            }
+        }
+
+        /* FITUR TIKTOK DOWNLOADER YANG BERFUNGSI MENGAMBIL VIDEO TANPA WATERMARK */
+        async function downloadTikTokVideo() {
+            const urlInput = document.getElementById('tiktok-url').value.trim();
+            const resultContainer = document.getElementById('tiktok-result-container');
+            const previewBox = document.getElementById('tiktok-video-preview');
+            const downloadLink = document.getElementById('tiktok-download-link');
+            const downloadBtn = document.getElementById('tiktok-download-btn');
+
+            if (!urlInput) {
+                showBubble('Silakan masukkan link video TikTok terlebih dahulu! ⚠️');
+                return;
+            }
+
+            downloadBtn.innerText = "Memproses Unduhan...";
+            downloadBtn.disabled = true;
+            resultContainer.style.display = 'none';
+
+            try {
+                // Menggunakan endpoint publik stabil untuk memproses unduhan TikTok tanpa watermark
+                const apiUrl = `https://tikwm.com/api/?url=${encodeURIComponent(urlInput)}`;
+                const response = await fetch(apiUrl);
+                const resJson = await response.json();
+
+                if (resJson && resJson.code === 0 && resJson.data) {
+                    const videoData = resJson.data;
+                    const noWatermarkUrl = videoData.play; // Link video tanpa watermark langsung dari server API
+
+                    previewBox.innerHTML = `
+                        <video controls style="width: 100%; max-height: 280px; display: block;" src="${noWatermarkUrl}"></video>
+                    `;
+                    downloadLink.href = noWatermarkUrl;
+                    resultContainer.style.display = 'flex';
+                    showBubble('Video TikTok berhasil diproses tanpa watermark! ✨');
+                } else {
+                    showBubble('Gagal mengambil video. Pastikan link TikTok valid dan publik! ❌');
+                }
+            } catch (error) {
+                console.error(error);
+                showBubble('Terjadi kesalahan jaringan saat mengunduh video. ⚠️');
+            } finally {
+                downloadBtn.innerText = "Download Tanpa Watermark";
+                downloadBtn.disabled = false;
             }
         }
 
@@ -1899,7 +1955,7 @@
                         ${req.reply ? `<div class="reply-box-owner" style="margin-top: 8px;">👑 <b>Balasan:</b> ${req.reply}</div>` : `
                             <div style="display: flex; gap: 8px; margin-top: 8px;">
                                 <input type="text" id="reply-input-${req.id}" placeholder="Balas user..." style="flex:1; padding:10px 14px; background:var(--bg-main); border:1px solid var(--border-color); border-radius:50px; color:var(--text-color); font-size:12px; outline:none;">
-                                <button onclick="ownerReplyRequest('${req.id}')" style="padding: 10px 18px; background: var(--accent-gradient); border: none; border-radius: 50px; font-weight: 800; color: #0f172a; cursor: pointer; font-size: 12px;">Kirim</button>
+                                <button onclick="sendOwnerReply('${req.id}')" style="background:var(--accent-gradient); border:none; color:#0f172a; padding:10px 18px; border-radius:50px; font-weight:800; font-size:12px; cursor:pointer;">Kirim</button>
                             </div>
                         `}
                     </div>
@@ -1908,16 +1964,20 @@
             wrapper.innerHTML = html;
         }
 
-        function ownerReplyRequest(reqId) {
-            const replyText = document.getElementById(`reply-input-${reqId}`).value.trim();
-            if (!replyText) { showBubble('Tuliskan balasan terlebih dahulu! ⚠️'); return; }
+        function sendOwnerReply(reqId) {
+            const input = document.getElementById(`reply-input-${reqId}`);
+            const replyText = input.value.trim();
+            if (!replyText) {
+                showBubble('Pesan balasan wajib diisi! ⚠️');
+                return;
+            }
 
             let requests = JSON.parse(localStorage.getItem('sea_tycoon_requests') || '[]');
-            let index = requests.findIndex(r => r.id == reqId);
-            if (index !== -1) {
-                requests[index].reply = replyText;
+            let req = requests.find(r => r.id == reqId);
+            if (req) {
+                req.reply = replyText;
                 localStorage.setItem('sea_tycoon_requests', JSON.stringify(requests));
-                showBubble('Balasan terkirim ke user! ✨');
+                showBubble('Balasan berhasil dikirim ke user! ✨');
                 renderOwnerRequests();
             }
         }
@@ -1925,37 +1985,45 @@
         function saveNewSong() {
             const title = document.getElementById('input-song-title').value.trim();
             const url = document.getElementById('input-song-url').value.trim();
-            if (!title || !url) { showBubble('Judul dan URL lagu wajib diisi! ⚠️'); return; }
+
+            if (!title || !url) {
+                showBubble('Judul lagu dan URL audio wajib diisi! ⚠️');
+                return;
+            }
 
             let songs = JSON.parse(localStorage.getItem('sea_tycoon_songs') || '[]');
-            songs.push({ title, artist: 'Owner', url, id: Date.now() });
+            songs.push({ id: Date.now(), title: title, url: url });
             localStorage.setItem('sea_tycoon_songs', JSON.stringify(songs));
-            showBubble('Lagu berhasil ditambahkan! 🎶');
+
+            document.getElementById('input-song-title').value = '';
+            document.getElementById('input-song-url').value = '';
+            showBubble('Lagu berhasil ditambahkan ke daftar! 🎵');
             openMenu('tempat-lagu');
         }
 
         function renderSongList() {
             const wrapper = document.getElementById('song-list-wrapper');
             let songs = JSON.parse(localStorage.getItem('sea_tycoon_songs') || '[]');
+
             if (songs.length === 0) {
-                wrapper.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px;">Belum ada daftar lagu.</div>`;
+                wrapper.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px;">Belum ada lagu yang tersedia.</div>`;
                 return;
             }
 
             let html = '';
-            songs.forEach((song) => {
+            songs.forEach(song => {
                 html += `
                     <div class="song-card">
                         <div class="song-info">
-                            <h3>🎵 ${song.title}</h3>
-                            <span>Kurator: ${song.artist}</span>
+                            <h3>${song.title}</h3>
+                            <span>Audio Stream Player</span>
                         </div>
-                        <audio id="audio-${song.id}" src="${song.url}"></audio>
                         <div class="song-player-controls">
-                            <button class="play-song-btn" id="btn-play-${song.id}" onclick="togglePlaySong('${song.id}')">▶</button>
-                            <span id="status-${song.id}" style="font-size: 11px; color: var(--text-muted);">Siap diputar</span>
+                            <button class="play-song-btn" id="play-btn-${song.id}" onclick="togglePlaySong('${song.id}', '${song.url}')">▶</button>
+                            <audio id="audio-${song.id}" src="${song.url}" preload="none"></audio>
                             <div class="volume-control">
-                                🔊 <input type="range" min="0" max="1" step="0.1" value="1" oninput="changeVolume('${song.id}', this.value)">
+                                <span>Vol:</span>
+                                <input type="range" min="0" max="1" step="0.1" value="1" onchange="changeVolume('${song.id}', this.value)">
                             </div>
                         </div>
                     </div>
@@ -1964,26 +2032,43 @@
             wrapper.innerHTML = html;
         }
 
-        function togglePlaySong(id) {
+        let activeAudio = null;
+        let activePlayBtn = null;
+
+        function togglePlaySong(id, url) {
             const audio = document.getElementById(`audio-${id}`);
-            const btn = document.getElementById(`btn-play-${id}`);
-            const status = document.getElementById(`status-${id}`);
+            const btn = document.getElementById(`play-btn-${id}`);
+
+            if (activeAudio && activeAudio !== audio) {
+                activeAudio.pause();
+                if (activePlayBtn) activePlayBtn.innerText = '▶';
+            }
 
             if (audio.paused) {
                 audio.play().then(() => {
                     btn.innerText = '⏸';
-                    status.innerText = 'Memutar...';
-                }).catch(() => showBubble('Gagal memutar audio. Pastikan URL benar! ⚠️'));
+                    activeAudio = audio;
+                    activePlayBtn = btn;
+                }).catch(e => {
+                    showBubble('Gagal memutar audio dari URL tersebut! ⚠️');
+                });
             } else {
                 audio.pause();
                 btn.innerText = '▶';
-                status.innerText = 'Jeda';
+                activeAudio = null;
+                activePlayBtn = null;
             }
-            audio.onended = () => { btn.innerText = '▶'; status.innerText = 'Selesai'; };
+
+            audio.onended = () => {
+                btn.innerText = '▶';
+                activeAudio = null;
+                activePlayBtn = null;
+            };
         }
 
         function changeVolume(id, val) {
-            document.getElementById(`audio-${id}`).volume = val;
+            const audio = document.getElementById(`audio-${id}`);
+            if (audio) audio.volume = val;
         }
     </script>
 </body>
