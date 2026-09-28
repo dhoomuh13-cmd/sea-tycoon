@@ -265,7 +265,7 @@
             box-shadow: 0 15px 30px rgba(56, 189, 248, 0.25);
         }
 
-        /* Saluran Style */
+        /* Saluran / Post Card Style */
         .channel-feed-container {
             width: 100%;
             max-width: 480px;
@@ -297,7 +297,7 @@
             padding-bottom: 8px;
         }
         .channel-header-info b { color: var(--text-color); font-size: 13px; }
-        .channel-title { font-size: 15px; font-weight: 700; color: #38bdf8; }
+        .channel-title { font-size: 16px; font-weight: 800; color: #38bdf8; }
         .channel-body-text { font-size: 14px; line-height: 1.5; color: var(--text-color); white-space: pre-wrap; }
         
         .channel-images-grid {
@@ -352,82 +352,6 @@
         }
         .delete-post-btn:hover { background: #ef4444; color: #fff; }
 
-        .reactions-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 4px;
-            padding-top: 8px;
-            border-top: 1px dashed var(--border-color);
-        }
-        .react-btn {
-            background: var(--bg-main);
-            border: 1px solid var(--border-color);
-            border-radius: 50px;
-            padding: 6px 12px;
-            font-size: 12px;
-            color: var(--text-color);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            transition: 0.2s;
-        }
-        .react-btn:hover, .react-btn:active { background: rgba(56, 189, 248, 0.15); border-color: #38bdf8; transform: scale(0.95); }
-        .react-btn.reacted { background: var(--accent-gradient); color: #0f172a; border-color: transparent; font-weight: 700; }
-
-        .comments-section {
-            margin-top: 8px;
-            padding-top: 10px;
-            border-top: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        .comments-list {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            max-height: 150px;
-            overflow-y: auto;
-        }
-        .comment-bubble {
-            background: var(--bg-main);
-            border: 1px solid var(--border-color);
-            padding: 8px 12px;
-            border-radius: 14px;
-            font-size: 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-        .comment-bubble b { color: #38bdf8; font-size: 12px; }
-        .comment-input-row {
-            display: flex;
-            gap: 6px;
-            margin-top: 4px;
-        }
-        .comment-input-row input {
-            flex: 1;
-            padding: 8px 14px;
-            background: var(--bg-main);
-            border: 1px solid var(--border-color);
-            border-radius: 50px;
-            color: var(--text-color);
-            font-size: 12px;
-            outline: none;
-        }
-        .comment-input-row button {
-            background: var(--accent-gradient);
-            border: none;
-            color: #0f172a;
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-weight: 800;
-            font-size: 12px;
-            cursor: pointer;
-        }
-
         .lightbox-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.9); z-index: 3000; justify-content: center; align-items: center; backdrop-filter: blur(6px);
@@ -436,20 +360,19 @@
         .lightbox-modal.active { display: flex; }
         .lightbox-content { max-width: 100%; max-height: 90vh; border-radius: 16px; object-fit: contain; }
 
+        /* Tempat Lagu Styles */
         .song-list-container { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 15px; margin: 0 auto; padding-bottom: 30px; }
         .song-card { background: var(--card-bg); border: 1px solid var(--border-color); padding: 18px; border-radius: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); text-align: left; display: flex; flex-direction: column; gap: 12px; }
-        .song-info h3 { font-size: 15px; margin-bottom: 2px; font-weight: 700; }
-        .song-info span { font-size: 12px; color: var(--text-muted); }
-        .song-player-controls { display: flex; align-items: center; gap: 12px; width: 100%; }
+        .song-player-controls { display: flex; align-items: center; gap: 12px; width: 100%; margin-top: 4px; }
         .play-song-btn { background: var(--accent-gradient); border: none; color: #0f172a; width: 40px; height: 40px; border-radius: 50%; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
         .volume-control { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-muted); margin-left: auto; }
         .volume-control input[type=range] { width: 75px; accent-color: #38bdf8; cursor: pointer; }
 
-        .inbox-modal, .owner-notif-modal, .settings-modal, .bubble-modal {
+        .inbox-modal, .settings-modal, .bubble-modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.65); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px);
         }
-        .inbox-modal.active, .owner-notif-modal.active, .settings-modal.active, .bubble-modal.active { display: flex; }
+        .inbox-modal.active, .settings-modal.active, .bubble-modal.active { display: flex; }
         
         .modal-box {
             background: var(--card-bg); border: 1px solid var(--border-color); padding: 24px; border-radius: 24px;
@@ -470,8 +393,6 @@
         .inbox-content-box { flex: 1; display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
         .inbox-content-box b { color: var(--text-color); font-size: 13px; }
         .inbox-content-box span { color: var(--text-muted); font-size: 11px; }
-        .inbox-img-preview { margin-top: 6px; max-width: 100%; max-height: 120px; border-radius: 12px; object-fit: cover; border: 1px solid var(--border-color); }
-        .reply-box-owner { margin-top: 8px; background: rgba(56, 189, 248, 0.1); border-left: 3px solid #38bdf8; padding: 6px 10px; border-radius: 8px; font-size: 12px; }
 
         /* Profile Styles */
         .profile-container-card {
@@ -553,16 +474,14 @@
         }
         .profile-info-row span { font-size: 11px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; }
         .profile-info-row b { font-size: 13px; color: var(--text-color); }
-        
         .logout-btn { background: #ef4444; color: white; border: none; padding: 12px; width: 100%; border-radius: 50px; font-weight: 700; cursor: pointer; transition: 0.2s; margin-top: 6px; }
-        .logout-btn:hover { opacity: 0.9; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3); }
 
         /* Settings */
         .setting-group { display: flex; flex-direction: column; gap: 8px; text-align: left; }
         .setting-label { font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; }
         .setting-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-        .theme-btn, .notif-btn { padding: 10px; border-radius: 14px; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-color); font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.2s; }
-        .theme-btn.active, .notif-btn.active { background: var(--accent-gradient); color: #0f172a; border-color: transparent; }
+        .theme-btn { padding: 10px; border-radius: 14px; border: 1px solid var(--border-color); background: var(--bg-main); color: var(--text-color); font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.2s; }
+        .theme-btn.active { background: var(--accent-gradient); color: #0f172a; border-color: transparent; }
         .bubble-btn { background: var(--accent-gradient); color: #0f172a; border: none; padding: 10px 24px; border-radius: 50px; font-weight: 800; cursor: pointer; }
 
         /* Bottom Nav */
@@ -579,9 +498,7 @@
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1); font-weight: 800; 
         }
         .nav-item.active, .nav-item:hover, .nav-item:active { 
-            color: #0f172a; 
-            background: var(--accent-gradient); 
-            transform: scale(0.95);
+            color: #0f172a; background: var(--accent-gradient); transform: scale(0.95);
             box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
         }
     </style>
@@ -603,14 +520,12 @@
         </div>
     </div>
 
-    <!-- Marquee Banner & Info Update Shortcut Bar -->
+    <!-- Marquee Banner -->
     <div class="header-banner-container" id="main-header-banner" style="display: none;">
         <div class="marquee-wrapper">
             <span class="marquee-text">📢 SELAMAT DATANG DI SEA TYCOON KALIAN BISA MENCOBA FITUR PREMIUM DARI KAMI DAN MENDAPATKAN UPDATE SETIAP HARI ✨</span>
         </div>
-        <button class="info-update-shortcut-btn" onclick="openInfoUpdateWithLoader()">
-            Info Update
-        </button>
+        <button class="info-update-shortcut-btn" onclick="openInfoUpdateWithLoader()">Info Update</button>
     </div>
 
     <div id="overlay" class="overlay" onclick="toggleSidebar()"></div>
@@ -625,12 +540,12 @@
         <div class="menu-category">Fitur Utama</div>
         <div class="sidebar-item" onclick="openMenu('home')">Beranda</div>
         <div class="sidebar-item" onclick="openMenu('tiktok')">TikTok Downloader</div>
-        <div class="sidebar-item" onclick="openMenu('req-fitur')">Req Fitur / Lagu</div>
+        <div class="sidebar-item" onclick="openMenu('req-fitur')">Req Fitur / Kendala</div>
 
         <div class="menu-category owner-menu-label" style="display:none;">Panel Owner</div>
         <div class="sidebar-item owner-menu" onclick="showBubble('Panel Kontrol Owner Aktif 👑')">Kontrol Panel Owner</div>
         <div class="sidebar-item owner-menu" onclick="openMenu('owner-notif-user')">Notif User & Request</div>
-        <div class="sidebar-item owner-menu" onclick="openMenu('add-lagu')">Tambah Lagu</div>
+        <div class="sidebar-item owner-menu" onclick="openMenu('add-lagu')">Tambah Lagu (Owner)</div>
         <div class="sidebar-item owner-menu" onclick="openMenu('add-info-update')">Buat Info Update Baru</div>
 
         <div class="menu-category">Fitur Saluran Eksklusif</div>
@@ -648,7 +563,6 @@
     <!-- Main Content -->
     <div class="main-content" id="content-area">
         
-        <!-- Smooth Loading Overlay -->
         <div id="page-loader" class="page-loader">
             <div class="spinner"></div>
             <span style="font-size: 13px; font-weight: 600; color: #38bdf8;" id="loader-text">Memuat Halaman...</span>
@@ -659,7 +573,6 @@
             <div class="auth-card">
                 <h2 id="auth-title">Selamat Datang!</h2>
                 <p id="auth-subtitle">Masuk dengan email & password akunmu</p>
-                
                 <div id="form-main-inputs">
                     <div class="input-group auth-reg-only" id="group-fullname" style="display:none;">
                         <label>Nama Lengkap</label>
@@ -679,7 +592,6 @@
                     </div>
                     <span id="forgot-pw-trigger" class="forgot-password-link" onclick="showForgotPasswordView()">Lupa Password?</span>
                 </div>
-
                 <button class="action-btn" id="auth-btn-action" onclick="handleAuthSubmit()">Masuk</button>
                 <div class="auth-switch" id="auth-switch-container">
                     <span onclick="toggleAuthMode()">Belum punya akun? Daftar sekarang</span>
@@ -692,17 +604,10 @@
             <div style="margin: auto 0; width: 100%; display: flex; flex-direction: column; align-items: center;">
                 <h2>Selamat Datang, <span id="welcome-username" style="color: #38bdf8;">User</span>!</h2>
                 <p style="color: var(--text-muted); margin-top: 8px; max-width: 330px; font-size: 13px;">Gunakan menu di bawah atau tombol pilihan cepat untuk masuk ke saluran info update, kenangan & cerita.</p>
-                
                 <div class="home-action-buttons">
-                    <button class="home-big-btn" onclick="openInfoUpdateWithLoader()">
-                        Info Update
-                    </button>
-                    <button class="home-big-btn" onclick="openMenu('lihat-kenangan')">
-                        Kenangan
-                    </button>
-                    <button class="home-big-btn" onclick="openMenu('lihat-cerita')">
-                        Cerita
-                    </button>
+                    <button class="home-big-btn" onclick="openInfoUpdateWithLoader()">Info Update</button>
+                    <button class="home-big-btn" onclick="openMenu('lihat-kenangan')">Kenangan</button>
+                    <button class="home-big-btn" onclick="openMenu('lihat-cerita')">Cerita</button>
                 </div>
             </div>
         </div>
@@ -730,7 +635,7 @@
                     <textarea id="info-isi" rows="4" placeholder="Tuliskan detail info update..."></textarea>
                 </div>
                 <div class="input-group">
-                    <label>Lampirkan Foto (Bisa banyak foto)</label>
+                    <label>Lampirkan Foto (Bisa banyak)</label>
                     <input type="file" id="info-imgs" accept="image/*" multiple style="padding: 8px; font-size: 12px;">
                 </div>
                 <div class="input-group">
@@ -741,18 +646,16 @@
             </div>
         </div>
 
-        <!-- TikTok Downloader (Updated & Working) -->
+        <!-- TikTok Downloader -->
         <div id="page-tiktok" class="page-container">
             <div class="downloader-card">
                 <h2>TikTok Downloader</h2>
                 <p>Unduh video TikTok tanpa watermark dengan cepat dan mudah.</p>
                 <div class="input-group">
                     <label>Link Video TikTok</label>
-                    <input type="text" id="tiktok-url" placeholder="Tempel link video TikTok di sini (misal: https://v.tiktok.com/...)">
+                    <input type="text" id="tiktok-url" placeholder="Tempel link video TikTok di sini...">
                 </div>
                 <button class="action-btn" id="tiktok-download-btn" onclick="downloadTikTokVideo()">Download Tanpa Watermark</button>
-                
-                <!-- Hasil Download TikTok -->
                 <div id="tiktok-result-container" style="margin-top: 20px; display: none; flex-direction: column; gap: 12px; text-align: left;">
                     <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 5px 0;">
                     <h3 style="font-size: 14px; color: #38bdf8; text-align: center;">Hasil Video Ditemukan!</h3>
@@ -854,26 +757,38 @@
             <div id="owner-requests-wrapper" style="width: 100%; max-width: 550px; display: flex; flex-direction: column; gap: 15px; padding-bottom: 30px;"></div>
         </div>
 
-        <!-- Add Lagu -->
+        <!-- Tambah Lagu (Owner) - Sesuai Urutan Permintaan -->
         <div id="page-add-lagu" class="page-container">
             <div class="form-card">
-                <h2>Tambah Lagu Baru</h2>
+                <h2>Tambah Lagu (Owner)</h2>
+                <p>Unggah lagu lengkap dengan judul, keterangan, foto/video, dan file audio (.mp3).</p>
+                
                 <div class="input-group">
-                    <label>Judul Lagu</label>
-                    <input type="text" id="input-song-title" placeholder="Judul lagu...">
+                    <label>Judul</label>
+                    <input type="text" id="input-song-title" placeholder="Masukkan judul lagu...">
                 </div>
                 <div class="input-group">
-                    <label>URL Audio (.mp3)</label>
-                    <input type="text" id="input-song-url" placeholder="https://...">
+                    <label>Keterangan</label>
+                    <textarea id="input-song-desc" rows="3" placeholder="Tuliskan keterangan atau deskripsi lagu..."></textarea>
                 </div>
-                <button class="action-btn" onclick="saveNewSong()">Simpan Lagu</button>
+                <div class="input-group">
+                    <label>Gambar / Video (Opsional)</label>
+                    <input type="file" id="input-song-media" accept="image/*,video/*" multiple style="padding: 8px; font-size: 12px;">
+                </div>
+                <div class="input-group">
+                    <label>Audio (.mp3 / File Musik)</label>
+                    <input type="file" id="input-song-audio" accept="audio/*" style="padding: 8px; font-size: 12px;">
+                </div>
+
+                <button class="action-btn" onclick="saveNewSongComplete()">Publikasikan ke Tempat Lagu</button>
             </div>
         </div>
 
         <!-- Tempat Lagu -->
         <div id="page-tempat-lagu" class="page-container">
-            <div style="width: 100%; max-width: 500px; margin-bottom: 20px; text-align: left;">
+            <div style="width: 100%; max-width: 500px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
                 <h2 style="font-size: 18px; font-weight: 700;">Tempat Lagu</h2>
+                <button class="action-btn owner-only-action" id="btn-add-song-top" style="width: auto; padding: 8px 16px; font-size: 12px; margin: 0; display: none;" onclick="openMenu('add-lagu')">+ Tambah Lagu</button>
             </div>
             <div class="song-list-container" id="song-list-wrapper"></div>
         </div>
@@ -886,13 +801,11 @@
                     <h3 id="profile-name" style="font-size: 18px; font-weight: 700;">Nama Lengkap</h3>
                     <span id="profile-role-badge" style="font-size: 11px; color: #38bdf8; font-weight: bold; background: rgba(56, 189, 248, 0.12); padding: 3px 10px; border-radius: 50px;">Member Aktif</span>
                 </div>
-
                 <div class="profile-tabs-header">
                     <button class="profile-tab-btn active" onclick="switchProfileTab('info')">Profil</button>
                     <button class="profile-tab-btn" onclick="switchProfileTab('password')">Password</button>
                     <button class="profile-tab-btn" onclick="switchProfileTab('security')">Keamanan</button>
                 </div>
-
                 <div class="profile-tab-content active" id="ptab-info">
                     <div class="profile-info-row">
                         <span>Nama Lengkap</span>
@@ -907,7 +820,6 @@
                         <b id="profile-display-email">-</b>
                     </div>
                 </div>
-
                 <div class="profile-tab-content" id="ptab-password">
                     <div class="input-group" style="margin-bottom: 8px;">
                         <label>Password Baru</label>
@@ -915,7 +827,6 @@
                     </div>
                     <button class="action-btn" style="margin-top: 4px;" onclick="updateProfilePassword()">Perbarui Password</button>
                 </div>
-
                 <div class="profile-tab-content" id="ptab-security">
                     <div class="profile-info-row">
                         <span>Status Sesi</span>
@@ -923,7 +834,6 @@
                     </div>
                     <p style="font-size: 12px; color: var(--text-muted); text-align: left;">Pastikan Anda selalu keluar akun jika menggunakan perangkat umum.</p>
                 </div>
-
                 <button class="logout-btn" onclick="logoutUser()">Keluar Akun</button>
             </div>
         </div>
@@ -1253,7 +1163,7 @@
                 topLeftBtn.innerText = '✕';
                 renderOwnerRequests();
             } else if (menu === 'add-lagu') {
-                if (currentUser.role !== 'Owner') { showBubble('Akses ditolak!'); return; }
+                if (currentUser.role !== 'Owner') { showBubble('Akses ditolak! Hanya Owner.'); return; }
                 document.getElementById('page-add-lagu').classList.add('active');
                 title.innerText = 'Tambah Lagu (Owner)';
                 topLeftBtn.innerText = '✕';
@@ -1480,8 +1390,7 @@
             let html = '';
             infoList.reverse().forEach(item => {
                 let reactionsHtml = '';
-                const emojis = ['👍', '❤️', '🔥', '🚀', '👏'];
-                emojis.forEach(emoji => {
+                ['👍', '❤️', '🔥', '🚀', '👏'].forEach(emoji => {
                     let count = item.reactions[emoji] || 0;
                     let hasReacted = item.userReacted && item.userReacted[currentUser.fullname] === emoji;
                     reactionsHtml += `
@@ -1540,17 +1449,158 @@
                         <div class="channel-title">${item.judul}</div>
                         <div class="channel-body-text">${item.isi}</div>
                         ${mediaHtml}
-                        <div class="reactions-wrapper">
-                            ${reactionsHtml}
-                        </div>
-                        <div class="comments-section">
-                            <span style="font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase;">Ulasan & Balasan User:</span>
-                            <div class="comments-list">
-                                ${commentsHtml}
+                    </div>
+                `;
+            });
+            wrapper.innerHTML = html;
+        }
+
+        // Fungsi Tambah Lagu Lengkap: Urutan (Judul -> Keterangan -> Gambar/Video -> Audio)
+        function saveNewSongComplete() {
+            if (currentUser.role !== 'Owner') {
+                showBubble('Akses ditolak! Hanya Owner yang dapat menambah lagu. 👑');
+                return;
+            }
+
+            const title = document.getElementById('input-song-title').value.trim();
+            const desc = document.getElementById('input-song-desc').value.trim();
+            const mediaInput = document.getElementById('input-song-media');
+            const audioInput = document.getElementById('input-song-audio');
+
+            if (!title || !desc || audioInput.files.length === 0) {
+                showBubble('Judul, Keterangan, dan File Audio (.mp3) wajib diisi! ⚠️');
+                return;
+            }
+
+            let imagesArray = [];
+            let videoData = null;
+            let audioData = null;
+
+            const finalSaveSong = () => {
+                let songs = JSON.parse(localStorage.getItem('sea_tycoon_songs') || '[]');
+                songs.push({
+                    id: Date.now(),
+                    title: title,
+                    desc: desc,
+                    images: imagesArray,
+                    video: videoData,
+                    audio: audioData,
+                    time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                });
+                localStorage.setItem('sea_tycoon_songs', JSON.stringify(songs));
+
+                // Reset form
+                document.getElementById('input-song-title').value = '';
+                document.getElementById('input-song-desc').value = '';
+                document.getElementById('input-song-media').value = '';
+                document.getElementById('input-song-audio').value = '';
+
+                showBubble('Lagu beserta media berhasil dipublikasikan ke Tempat Lagu! ✨');
+                openMenu('tempat-lagu');
+            };
+
+            // Reader untuk Audio
+            const audioReader = new FileReader();
+            audioReader.onload = (e) => {
+                audioData = e.target.result;
+
+                // Cek jika ada Media (Gambar/Video)
+                if (mediaInput.files.length > 0) {
+                    const file = mediaInput.files[0];
+                    const reader = new FileReader();
+                    reader.onload = (evt) => {
+                        if (file.type.startsWith('video')) {
+                            videoData = evt.target.result;
+                        } else {
+                            // Bisa multiple foto
+                            for(let i=0; i<mediaInput.files.length; i++) {
+                                // Untuk kesederhanaan file pertama/multiple
+                            }
+                            // Kita proses multiple gambar dengan helper
+                            processSongImages(mediaInput.files, (arr) => {
+                                imagesArray = arr;
+                                finalSaveSong();
+                            });
+                            return;
+                        }
+                        finalSaveSong();
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    finalSaveSong();
+                }
+            };
+            audioReader.readAsDataURL(audioInput.files[0]);
+        }
+
+        function processSongImages(files, callback) {
+            let arr = [];
+            let count = 0;
+            for (let i = 0; i < files.length; i++) {
+                const r = new FileReader();
+                r.onload = (e) => {
+                    arr.push(e.target.result);
+                    count++;
+                    if(count === files.length) callback(arr);
+                };
+                r.readAsDataURL(files[i]);
+            }
+        }
+
+        function renderSongList() {
+            const wrapper = document.getElementById('song-list-wrapper');
+            let songs = JSON.parse(localStorage.getItem('sea_tycoon_songs') || '[]');
+
+            if (songs.length === 0) {
+                wrapper.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px;">Belum ada lagu yang tersedia di Tempat Lagu.</div>`;
+                return;
+            }
+
+            let html = '';
+            songs.reverse().forEach(song => {
+                let mediaHtml = '';
+                if (song.images && song.images.length > 0) {
+                    mediaHtml += `<div class="channel-images-grid" style="margin-top: 6px;">`;
+                    song.images.forEach(img => {
+                        mediaHtml += `
+                            <div class="channel-img-wrapper" onclick="openLightbox('${img}')">
+                                <img src="${img}" alt="Media Lagu">
                             </div>
-                            <div class="comment-input-row">
-                                <input type="text" id="comment-input-${item.id}" placeholder="Tulis balasan atau ulasan...">
-                                <button onclick="sendInfoComment('${item.id}')">Kirim</button>
+                        `;
+                    });
+                    mediaHtml += `</div>`;
+                }
+                if (song.video) {
+                    mediaHtml += `
+                        <div class="channel-video-wrapper" style="margin-top: 6px;">
+                            <video controls src="${song.video}"></video>
+                        </div>
+                    `;
+                }
+
+                let canDelete = (currentUser.role === 'Owner');
+
+                html += `
+                    <div class="song-card">
+                        <div class="channel-header-info">
+                            <span>Diposting oleh : <b>@Owner Official</b></span>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span>${song.time || ''}</span>
+                                ${canDelete ? `<button class="delete-post-btn" onclick="deleteSong('${song.id}')">Hapus</button>` : ''}
+                            </div>
+                        </div>
+                        <div class="channel-title">${song.title}</div>
+                        <div class="channel-body-text">${song.desc}</div>
+                        ${mediaHtml}
+                        
+                        <!-- Audio di bawah gambar/video -->
+                        <div class="song-player-controls" style="margin-top: 10px; border-top: 1px dashed var(--border-color); padding-top: 10px;">
+                            <button class="play-song-btn" id="play-btn-${song.id}" onclick="togglePlaySong('${song.id}', '${song.audio}')">▶</button>
+                            <span style="font-size: 13px; font-weight: 700; color: #38bdf8;">Putar Audio Musik</span>
+                            <audio id="audio-${song.id}" src="${song.audio}" preload="none"></audio>
+                            <div class="volume-control">
+                                <span>Vol:</span>
+                                <input type="range" min="0" max="1" step="0.1" value="1" onchange="changeVolume('${song.id}', this.value)">
                             </div>
                         </div>
                     </div>
@@ -1559,72 +1609,65 @@
             wrapper.innerHTML = html;
         }
 
-        function reactInfoUpdate(id, emoji) {
-            let infoList = JSON.parse(localStorage.getItem('sea_tycoon_info_updates') || '[]');
-            let item = infoList.find(i => i.id == id);
-            if (!item) return;
+        function deleteSong(id) {
+            if (!confirm("Hapus lagu ini dari Tempat Lagu?")) return;
+            let songs = JSON.parse(localStorage.getItem('sea_tycoon_songs') || '[]');
+            songs = songs.filter(s => s.id != id);
+            localStorage.setItem('sea_tycoon_songs', JSON.stringify(songs));
+            showBubble('Lagu berhasil dihapus! 🗑️');
+            renderSongList();
+        }
 
-            if (!item.userReacted) item.userReacted = {};
-            let prevReact = item.userReacted[currentUser.fullname];
+        let activeAudio = null;
+        let activePlayBtn = null;
 
-            if (prevReact === emoji) {
-                item.reactions[emoji]--;
-                delete item.userReacted[currentUser.fullname];
-            } else {
-                if (prevReact) item.reactions[prevReact]--;
-                item.reactions[emoji] = (item.reactions[emoji] || 0) + 1;
-                item.userReacted[currentUser.fullname] = emoji;
+        function togglePlaySong(id, audioSrc) {
+            const audio = document.getElementById(`audio-${id}`);
+            const btn = document.getElementById(`play-btn-${id}`);
+
+            if (activeAudio && activeAudio !== audio) {
+                activeAudio.pause();
+                if (activePlayBtn) activePlayBtn.innerText = '▶';
             }
 
-            localStorage.setItem('sea_tycoon_info_updates', JSON.stringify(infoList));
-            renderInfoUpdateFeed();
+            if (audio.paused) {
+                audio.play().then(() => {
+                    btn.innerText = '⏸';
+                    activeAudio = audio;
+                    activePlayBtn = btn;
+                }).catch(e => {
+                    showBubble('Gagal memutar audio! Pastikan file audio valid. ⚠️');
+                });
+            } else {
+                audio.pause();
+                btn.innerText = '▶';
+                activeAudio = null;
+                activePlayBtn = null;
+            }
+
+            audio.onended = () => {
+                btn.innerText = '▶';
+                activeAudio = null;
+                activePlayBtn = null;
+            };
         }
 
-        function sendInfoComment(id) {
-            const input = document.getElementById(`comment-input-${id}`);
-            const text = input.value.trim();
-            if (!text) return;
-
-            let infoList = JSON.parse(localStorage.getItem('sea_tycoon_info_updates') || '[]');
-            let item = infoList.find(i => i.id == id);
-            if (!item) return;
-
-            if (!item.comments) item.comments = [];
-            item.comments.push({
-                username: currentUser.fullname,
-                text: text,
-                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-            });
-
-            localStorage.setItem('sea_tycoon_info_updates', JSON.stringify(infoList));
-            input.value = '';
-            renderInfoUpdateFeed();
-        }
-
-        function deleteInfoUpdate(id) {
-            if (!confirm("Hapus info update ini?")) return;
-            let infoList = JSON.parse(localStorage.getItem('sea_tycoon_info_updates') || '[]');
-            infoList = infoList.filter(i => i.id != id);
-            localStorage.setItem('sea_tycoon_info_updates', JSON.stringify(infoList));
-            showBubble('Info Update berhasil dihapus! 🗑️');
-            renderInfoUpdateFeed();
+        function changeVolume(id, val) {
+            const audio = document.getElementById(`audio-${id}`);
+            if (audio) audio.volume = val;
         }
 
         function submitKenangan() {
             const judul = document.getElementById('kenangan-judul').value.trim();
             const isi = document.getElementById('kenangan-isi').value.trim();
             const fileInput = document.getElementById('kenangan-imgs');
-
             if (!judul || !isi) {
                 showBubble('Judul dan kenangan wajib diisi! ⚠️');
                 return;
             }
-
-            const files = fileInput.files;
             let imagesArray = [];
-
-            if (files.length > 0) {
-                processImagesAndSave(files, () => saveKenanganData(judul, isi, imagesArray), imagesArray);
+            if (fileInput.files.length > 0) {
+                processSongImages(fileInput.files, (arr) => saveKenanganData(judul, isi, arr));
             } else {
                 saveKenanganData(judul, isi, []);
             }
@@ -1646,48 +1689,28 @@
             document.getElementById('kenangan-judul').value = '';
             document.getElementById('kenangan-isi').value = '';
             document.getElementById('kenangan-imgs').value = '';
-            showBubble('Kenangan berhasil dibagikan ke saluran! ✨');
+            showBubble('Kenangan berhasil dibagikan! ✨');
             openMenu('lihat-kenangan');
         }
 
         function renderKenanganFeed() {
             const wrapper = document.getElementById('kenangan-feed-wrapper');
             let kenanganList = JSON.parse(localStorage.getItem('sea_tycoon_kenangan') || '[]');
-
             if (kenanganList.length === 0) {
-                wrapper.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px;">Belum ada kenangan di saluran ini.</div>`;
+                wrapper.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px;">Belum ada kenangan.</div>`;
                 return;
             }
-
             let html = '';
             kenanganList.reverse().forEach(item => {
-                let reactionsHtml = '';
-                const emojis = ['😂', '❤️', '👍', '🔥', '👏'];
-                emojis.forEach(emoji => {
-                    let count = item.reactions[emoji] || 0;
-                    let hasReacted = item.userReacted && item.userReacted[currentUser.fullname] === emoji;
-                    reactionsHtml += `
-                        <button class="react-btn ${hasReacted ? 'reacted' : ''}" onclick="reactKenangan('${item.id}', '${emoji}')">
-                            ${emoji} <span>${count}</span>
-                        </button>
-                    `;
-                });
-
                 let imagesHtml = '';
                 if (item.images && item.images.length > 0) {
                     imagesHtml += `<div class="channel-images-grid">`;
-                    item.images.forEach(imgSrc => {
-                        imagesHtml += `
-                            <div class="channel-img-wrapper" onclick="openLightbox('${imgSrc}')">
-                                <img src="${imgSrc}" alt="Foto Kenangan">
-                            </div>
-                        `;
+                    item.images.forEach(img => {
+                        imagesHtml += `<div class="channel-img-wrapper" onclick="openLightbox('${img}')"><img src="${img}"></div>`;
                     });
                     imagesHtml += `</div>`;
                 }
-
                 let canDelete = (currentUser.role === 'Owner' || item.from === currentUser.fullname);
-
                 html += `
                     <div class="channel-card">
                         <div class="channel-header-info">
@@ -1700,92 +1723,46 @@
                         <div class="channel-title">Judul : ${item.judul}</div>
                         <div class="channel-body-text">Kenangan : ${item.kenangan}</div>
                         ${imagesHtml}
-                        <div class="reactions-wrapper">
-                            ${reactionsHtml}
-                        </div>
                     </div>
                 `;
             });
             wrapper.innerHTML = html;
         }
 
-        function reactKenangan(id, emoji) {
-            let kenanganList = JSON.parse(localStorage.getItem('sea_tycoon_kenangan') || '[]');
-            let item = kenanganList.find(k => k.id == id);
-            if (!item) return;
-
-            if (!item.userReacted) item.userReacted = {};
-            let prevReact = item.userReacted[currentUser.fullname];
-
-            if (prevReact === emoji) {
-                item.reactions[emoji]--;
-                delete item.userReacted[currentUser.fullname];
-            } else {
-                if (prevReact) item.reactions[prevReact]--;
-                item.reactions[emoji] = (item.reactions[emoji] || 0) + 1;
-                item.userReacted[currentUser.fullname] = emoji;
-            }
-
-            localStorage.setItem('sea_tycoon_kenangan', JSON.stringify(kenanganList));
-            renderKenanganFeed();
-        }
-
         function deleteKenangan(id) {
-            if (!confirm("Apakah Anda yakin ingin menghapus kenangan ini?")) return;
-            let kenanganList = JSON.parse(localStorage.getItem('sea_tycoon_kenangan') || '[]');
-            kenanganList = kenanganList.filter(k => k.id != id);
-            localStorage.setItem('sea_tycoon_kenangan', JSON.stringify(kenanganList));
-            showBubble('Kenangan berhasil dihapus! 🗑️');
+            if (!confirm("Hapus kenangan ini?")) return;
+            let list = JSON.parse(localStorage.getItem('sea_tycoon_kenangan') || '[]');
+            list = list.filter(k => k.id != id);
+            localStorage.setItem('sea_tycoon_kenangan', JSON.stringify(list));
             renderKenanganFeed();
         }
 
         function submitCerita() {
             const isi = document.getElementById('cerita-isi').value.trim();
-            if (!isi) {
-                showBubble('Isi cerita wajib diisi! ⚠️');
-                return;
-            }
-
-            let ceritaList = JSON.parse(localStorage.getItem('sea_tycoon_cerita') || '[]');
-            ceritaList.push({
+            if (!isi) { showBubble('Isi cerita wajib diisi! ⚠️'); return; }
+            let list = JSON.parse(localStorage.getItem('sea_tycoon_cerita') || '[]');
+            list.push({
                 id: Date.now(),
                 from: currentUser.fullname,
                 cerita: isi,
-                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-                reactions: { '❤️': 0, '🔥': 0, '😢': 0, '👏': 0, '✨': 0 },
-                userReacted: {}
+                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
             });
-            localStorage.setItem('sea_tycoon_cerita', JSON.stringify(ceritaList));
+            localStorage.setItem('sea_tycoon_cerita', JSON.stringify(list));
             document.getElementById('cerita-isi').value = '';
-            showBubble('Cerita berhasil dibagikan ke saluran! ✨');
+            showBubble('Cerita berhasil dibagikan! ✨');
             openMenu('lihat-cerita');
         }
 
         function renderCeritaFeed() {
             const wrapper = document.getElementById('cerita-feed-wrapper');
-            let ceritaList = JSON.parse(localStorage.getItem('sea_tycoon_cerita') || '[]');
-
-            if (ceritaList.length === 0) {
-                wrapper.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px;">Belum ada cerita di saluran ini.</div>`;
+            let list = JSON.parse(localStorage.getItem('sea_tycoon_cerita') || '[]');
+            if (list.length === 0) {
+                wrapper.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px;">Belum ada cerita.</div>`;
                 return;
             }
-
             let html = '';
-            ceritaList.reverse().forEach(item => {
-                let reactionsHtml = '';
-                const emojis = ['❤️', '🔥', '😢', '👏', '✨'];
-                emojis.forEach(emoji => {
-                    let count = item.reactions[emoji] || 0;
-                    let hasReacted = item.userReacted && item.userReacted[currentUser.fullname] === emoji;
-                    reactionsHtml += `
-                        <button class="react-btn ${hasReacted ? 'reacted' : ''}" onclick="reactCerita('${item.id}', '${emoji}')">
-                            ${emoji} <span>${count}</span>
-                        </button>
-                    `;
-                });
-
+            list.reverse().forEach(item => {
                 let canDelete = (currentUser.role === 'Owner' || item.from === currentUser.fullname);
-
                 html += `
                     <div class="channel-card">
                         <div class="channel-header-info">
@@ -1796,54 +1773,27 @@
                             </div>
                         </div>
                         <div class="channel-body-text">${item.cerita}</div>
-                        <div class="reactions-wrapper">
-                            ${reactionsHtml}
-                        </div>
                     </div>
                 `;
             });
             wrapper.innerHTML = html;
         }
 
-        function reactCerita(id, emoji) {
-            let ceritaList = JSON.parse(localStorage.getItem('sea_tycoon_cerita') || '[]');
-            let item = ceritaList.find(c => c.id == id);
-            if (!item) return;
-
-            if (!item.userReacted) item.userReacted = {};
-            let prevReact = item.userReacted[currentUser.fullname];
-
-            if (prevReact === emoji) {
-                item.reactions[emoji]--;
-                delete item.userReacted[currentUser.fullname];
-            } else {
-                if (prevReact) item.reactions[prevReact]--;
-                item.reactions[emoji] = (item.reactions[emoji] || 0) + 1;
-                item.userReacted[currentUser.fullname] = emoji;
-            }
-
-            localStorage.setItem('sea_tycoon_cerita', JSON.stringify(ceritaList));
-            renderCeritaFeed();
-        }
-
         function deleteCerita(id) {
-            if (!confirm("Apakah Anda yakin ingin menghapus cerita ini?")) return;
-            let ceritaList = JSON.parse(localStorage.getItem('sea_tycoon_cerita') || '[]');
-            ceritaList = ceritaList.filter(c => c.id != id);
-            localStorage.setItem('sea_tycoon_cerita', JSON.stringify(ceritaList));
-            showBubble('Cerita berhasil dihapus! 🗑️');
+            if (!confirm("Hapus cerita ini?")) return;
+            let list = JSON.parse(localStorage.getItem('sea_tycoon_cerita') || '[]');
+            list = list.filter(c => c.id != id);
+            localStorage.setItem('sea_tycoon_cerita', JSON.stringify(list));
             renderCeritaFeed();
         }
 
         function submitUserRequest() {
             const message = document.getElementById('req-message').value.trim();
             const fileInput = document.getElementById('req-image');
-
             if (!message && fileInput.files.length === 0) {
                 showBubble('Pesan request wajib diisi! ⚠️');
                 return;
             }
-
             const processSubmit = (imgData) => {
                 let requests = JSON.parse(localStorage.getItem('sea_tycoon_requests') || '[]');
                 requests.push({
@@ -1861,7 +1811,6 @@
                 showBubble('Request berhasil dikirim ke Owner! ✨');
                 checkInboxBadge();
             };
-
             if (fileInput.files.length > 0) {
                 const reader = new FileReader();
                 reader.onload = (e) => processSubmit(e.target.result);
@@ -1876,69 +1825,55 @@
             let globalInbox = JSON.parse(localStorage.getItem('sea_tycoon_global_inbox') || '[]');
             let requests = JSON.parse(localStorage.getItem('sea_tycoon_requests') || '[]');
             let userReqs = requests.filter(r => r.username === currentUser.fullname);
-
             let html = '';
-
-            if (globalInbox.length > 0) {
-                globalInbox.reverse().forEach(info => {
-                    html += `
-                        <div class="inbox-item-bubble" style="border-color: #38bdf8;">
-                            <div class="inbox-avatar-circle" style="background: var(--accent-gradient);">📢</div>
-                            <div class="inbox-content-box">
-                                <b>${info.title}</b>
-                                <p>${info.message}</p>
-                                <span>${info.time}</span>
-                            </div>
+            globalInbox.reverse().forEach(info => {
+                html += `
+                    <div class="inbox-item-bubble" style="border-color: #38bdf8;">
+                        <div class="inbox-avatar-circle">📢</div>
+                        <div class="inbox-content-box">
+                            <b>${info.title}</b>
+                            <p>${info.message}</p>
+                            <span>${info.time}</span>
                         </div>
-                    `;
-                });
-            }
-
-            if (userReqs.length > 0) {
-                userReqs.reverse().forEach(req => {
-                    html += `
-                        <div class="inbox-item-bubble">
-                            <div class="inbox-avatar-circle">📤</div>
-                            <div class="inbox-content-box">
-                                <b>Request Anda:</b>
-                                <p>${req.message}</p>
-                                ${req.image ? `<img src="${req.image}" class="inbox-img-preview">` : ''}
-                                <span>${req.time}</span>
-                                ${req.reply ? `<div class="reply-box-owner">👑 <b>Balasan Owner:</b> ${req.reply}</div>` : `<span style="color: #f59e0b;">Menunggu balasan...</span>`}
-                            </div>
+                    </div>
+                `;
+            });
+            userReqs.reverse().forEach(req => {
+                html += `
+                    <div class="inbox-item-bubble">
+                        <div class="inbox-avatar-circle">📤</div>
+                        <div class="inbox-content-box">
+                            <b>Request Anda:</b>
+                            <p>${req.message}</p>
+                            ${req.image ? `<img src="${req.image}" style="max-height:100px; border-radius:8px;">` : ''}
+                            <span>${req.time}</span>
+                            ${req.reply ? `<div style="background:rgba(56,189,248,0.1); padding:6px; border-radius:6px; margin-top:4px;">👑 <b>Balasan:</b> ${req.reply}</div>` : `<span style="color:#f59e0b;">Menunggu balasan...</span>`}
                         </div>
-                    `;
-                });
-            }
-
-            if (html === '') {
-                html = `<div style="text-align: center; color: var(--text-muted); padding: 20px;">Belum ada pesan di kotak masuk.</div>`;
-            }
-
+                    </div>
+                `;
+            });
+            if (html === '') html = `<div style="text-align: center; color: var(--text-muted); padding: 20px;">Belum ada pesan.</div>`;
             wrapper.innerHTML = html;
             localStorage.setItem('sea_tycoon_inbox_read', 'true');
             checkInboxBadge();
         }
 
         function checkInboxBadge() {
+            if (!currentUser) return;
             let globalInbox = JSON.parse(localStorage.getItem('sea_tycoon_global_inbox') || '[]');
             let requests = JSON.parse(localStorage.getItem('sea_tycoon_requests') || '[]');
-            if (!currentUser) return;
             let userReqs = requests.filter(r => r.username === currentUser.fullname && r.reply);
             let hasUnreadGlobal = globalInbox.length > 0 && localStorage.getItem('sea_tycoon_inbox_read') !== 'true';
-
             document.getElementById('inbox-badge-dot').style.display = (userReqs.length > 0 || hasUnreadGlobal) ? 'block' : 'none';
         }
 
         function renderOwnerRequests() {
             const wrapper = document.getElementById('owner-requests-wrapper');
             let requests = JSON.parse(localStorage.getItem('sea_tycoon_requests') || '[]');
-
             if (requests.length === 0) {
-                wrapper.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px;">Belum ada request masuk.</div>`;
+                wrapper.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px;">Belum ada request.</div>`;
                 return;
             }
-
             let html = '';
             requests.reverse().forEach(req => {
                 html += `
@@ -1948,9 +1883,8 @@
                             <span>${req.time} | ${req.email}</span>
                         </div>
                         <p style="font-size: 13px; margin-top: 4px;">${req.message}</p>
-                        ${req.image ? `<img src="${req.image}" style="max-width: 100%; max-height: 160px; border-radius: 12px; margin-top: 6px; object-fit: cover;">` : ''}
-                        
-                        ${req.reply ? `<div class="reply-box-owner" style="margin-top: 8px;">👑 <b>Balasan:</b> ${req.reply}</div>` : `
+                        ${req.image ? `<img src="${req.image}" style="max-width: 100%; max-height: 160px; border-radius: 12px; margin-top: 6px;">` : ''}
+                        ${req.reply ? `<div style="background:rgba(56,189,248,0.1); padding:6px; border-radius:6px; margin-top:6px;">👑 <b>Balasan:</b> ${req.reply}</div>` : `
                             <div style="display: flex; gap: 8px; margin-top: 8px;">
                                 <input type="text" id="reply-input-${req.id}" placeholder="Balas user..." style="flex:1; padding:10px 14px; background:var(--bg-main); border:1px solid var(--border-color); border-radius:50px; color:var(--text-color); font-size:12px; outline:none;">
                                 <button onclick="sendOwnerReply('${req.id}')" style="background:var(--accent-gradient); border:none; color:#0f172a; padding:10px 18px; border-radius:50px; font-weight:800; font-size:12px; cursor:pointer;">Kirim</button>
@@ -1965,108 +1899,15 @@
         function sendOwnerReply(reqId) {
             const input = document.getElementById(`reply-input-${reqId}`);
             const replyText = input.value.trim();
-            if (!replyText) {
-                showBubble('Pesan balasan wajib diisi! ⚠️');
-                return;
-            }
-
+            if (!replyText) { showBubble('Pesan balasan wajib diisi! ⚠️'); return; }
             let requests = JSON.parse(localStorage.getItem('sea_tycoon_requests') || '[]');
             let req = requests.find(r => r.id == reqId);
             if (req) {
                 req.reply = replyText;
                 localStorage.setItem('sea_tycoon_requests', JSON.stringify(requests));
-                showBubble('Balasan berhasil dikirim ke user! ✨');
+                showBubble('Balasan terkirim! ✨');
                 renderOwnerRequests();
             }
-        }
-
-        function saveNewSong() {
-            const title = document.getElementById('input-song-title').value.trim();
-            const url = document.getElementById('input-song-url').value.trim();
-
-            if (!title || !url) {
-                showBubble('Judul lagu dan URL audio wajib diisi! ⚠️');
-                return;
-            }
-
-            let songs = JSON.parse(localStorage.getItem('sea_tycoon_songs') || '[]');
-            songs.push({ id: Date.now(), title: title, url: url });
-            localStorage.setItem('sea_tycoon_songs', JSON.stringify(songs));
-
-            document.getElementById('input-song-title').value = '';
-            document.getElementById('input-song-url').value = '';
-            showBubble('Lagu berhasil ditambahkan ke daftar! 🎵');
-            openMenu('tempat-lagu');
-        }
-
-        function renderSongList() {
-            const wrapper = document.getElementById('song-list-wrapper');
-            let songs = JSON.parse(localStorage.getItem('sea_tycoon_songs') || '[]');
-
-            if (songs.length === 0) {
-                wrapper.innerHTML = `<div style="text-align: center; color: var(--text-muted); padding: 40px;">Belum ada lagu yang tersedia.</div>`;
-                return;
-            }
-
-            let html = '';
-            songs.forEach(song => {
-                html += `
-                    <div class="song-card">
-                        <div class="song-info">
-                            <h3>${song.title}</h3>
-                            <span>Audio Stream Player</span>
-                        </div>
-                        <div class="song-player-controls">
-                            <button class="play-song-btn" id="play-btn-${song.id}" onclick="togglePlaySong('${song.id}', '${song.url}')">▶</button>
-                            <audio id="audio-${song.id}" src="${song.url}" preload="none"></audio>
-                            <div class="volume-control">
-                                <span>Vol:</span>
-                                <input type="range" min="0" max="1" step="0.1" value="1" onchange="changeVolume('${song.id}', this.value)">
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-            wrapper.innerHTML = html;
-        }
-
-        let activeAudio = null;
-        let activePlayBtn = null;
-
-        function togglePlaySong(id, url) {
-            const audio = document.getElementById(`audio-${id}`);
-            const btn = document.getElementById(`play-btn-${id}`);
-
-            if (activeAudio && activeAudio !== audio) {
-                activeAudio.pause();
-                if (activePlayBtn) activePlayBtn.innerText = '▶';
-            }
-
-            if (audio.paused) {
-                audio.play().then(() => {
-                    btn.innerText = '⏸';
-                    activeAudio = audio;
-                    activePlayBtn = btn;
-                }).catch(e => {
-                    showBubble('Gagal memutar audio dari URL tersebut! ⚠️');
-                });
-            } else {
-                audio.pause();
-                btn.innerText = '▶';
-                activeAudio = null;
-                activePlayBtn = null;
-            }
-
-            audio.onended = () => {
-                btn.innerText = '▶';
-                activeAudio = null;
-                activePlayBtn = null;
-            };
-        }
-
-        function changeVolume(id, val) {
-            const audio = document.getElementById(`audio-${id}`);
-            if (audio) audio.volume = val;
         }
     </script>
 </body>
