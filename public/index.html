@@ -1290,14 +1290,13 @@
             resultContainer.style.display = 'none';
 
             try {
-                // Menggunakan endpoint publik stabil untuk memproses unduhan TikTok tanpa watermark
                 const apiUrl = `https://tikwm.com/api/?url=${encodeURIComponent(urlInput)}`;
                 const response = await fetch(apiUrl);
                 const resJson = await response.json();
 
                 if (resJson && resJson.code === 0 && resJson.data) {
                     const videoData = resJson.data;
-                    const noWatermarkUrl = videoData.play; // Link video tanpa watermark langsung dari server API
+                    const noWatermarkUrl = videoData.play;
 
                     previewBox.innerHTML = `
                         <video controls style="width: 100%; max-height: 280px; display: block;" src="${noWatermarkUrl}"></video>
