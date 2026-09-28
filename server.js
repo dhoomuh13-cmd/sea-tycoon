@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 // Menyediakan file statis dari folder public (tempat index.html berada)
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Endpoint Route untuk Chat AI
+// Endpoint Route untuk Chat AI[span_4](start_span)[span_4](end_span)
 app.post('/api/chat-ai', async (req, res) => {
     try {
         const userMessage = req.body.message;
@@ -23,13 +23,11 @@ app.post('/api/chat-ai', async (req, res) => {
             });
         }
 
-        // Melakukan request ke API IkyyXd Public AI dengan encode URL pada pesan pengguna
         const encodedMessage = encodeURIComponent(userMessage);
-        const apiUrl = `https://api.ikyyxd.my.id/ai/publicai?apikey=kyzz&q=${encodedMessage}`;
+        const apiUrl = `https://api.ikyyxd.my.id/ai/publicai?apikey=kyzz&q=${encodedMessage}`;[span_5](start_span)[span_5](end_span)
         
         const { data } = await axios.get(apiUrl);
 
-        // Memeriksa struktur respons dari API sesuai dokumentasi
         if (data && data.status && data.result) {
             return res.json({
                 success: true,
@@ -51,8 +49,46 @@ app.post('/api/chat-ai', async (req, res) => {
     }
 });
 
-// Menjalankan server pada port yang disediakan environment (Railway) atau port 3000
+// Endpoint Route untuk TikTok Downloader (Sesuai dokumentasi gambar)[span_6](start_span)[span_6](end_span)
+app.post('/api/download/tiktok', async (req, res) => {
+    try {
+        const videoUrl = req.body.url;
+        
+        if (!videoUrl) {
+            return res.status(400).json({ 
+                success: false, 
+                message: 'URL TikTok tidak boleh kosong!' 
+            });
+        }
+
+        const encodedUrl = encodeURIComponent(videoUrl);
+        const apiUrl = `https://api.ikyyxd.my.id/download/tiktok?apikey=kyzz&url=${encodedUrl}`;[span_7](start_span)[span_7](end_span)
+        
+        const { data } = await axios.get(apiUrl);
+
+        if (data && data.status) {
+            return res.json({
+                success: true,
+                result: data.result
+            });
+        } else {
+            return res.json({
+                success: false,
+                message: 'Gagal mengambil data dari TikTok downloader.'
+            });
+        }
+
+    } catch (error) {
+        console.error('Error saat menghubungi API TikTok:', error.message);
+        return res.status(500).json({
+            success: false,
+            message: 'Terjadi kesalahan sistem pada server downloader.'
+        });
+    }
+});
+
+// Menjalankan server pada port yang disediakan environment (Railway) atau port 3000[span_8](start_span)[span_8](end_span)
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server Sea Tycoon berhasil berjalan di port ${PORT}`);
+    console.log(`Server Sea Tycoon berhasil berjalan di port ${PORT}`);[span_9](start_span)[span_9](end_span)
 });
