@@ -7,28 +7,43 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700;800&display=swap');
+        
         body {
             font-family: 'Quicksand', sans-serif;
-            background: linear-gradient(135deg, #4ea8de 0%, #90e0ef 50%, #caf0f8 100%);
+            background: linear-gradient(135deg, #57b7f8 0%, #90e0ef 60%, #caf0f8 100%);
+            overflow-x: hidden;
         }
         
-        /* Efek garis-garis buku/kertas */
+        /* Efek kertas bergaris untuk loading */
         .paper-bg {
             background-color: #ffffff;
             background-image: linear-gradient(#e5e7eb 1px, transparent 1px);
-            background-size: 100% 24px;
+            background-size: 100% 26px;
         }
 
-        /* Animasi Berdenyut untuk Teks */
+        /* Animasi Awan Terbang ke Samping */
+        @keyframes floatClouds {
+            0% { transform: translateX(-100px); }
+            100% { transform: translateX(400px); }
+        }
+        .cloud-anim-1 {
+            animation: floatClouds 18s linear infinite;
+        }
+        .cloud-anim-2 {
+            animation: floatClouds 24s linear infinite;
+            animation-delay: -5s;
+        }
+
+        /* Animasi Goyang Halus */
         @keyframes floatText {
             0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-4px) scale(1.03); }
+            50% { transform: translateY(-5px) scale(1.02); }
         }
         .animate-float {
             animation: floatText 2.5s ease-in-out infinite;
         }
 
-        /* Animasi Transisi Hilang */
+        /* Transisi Selesai Loading */
         .fade-out {
             opacity: 0;
             pointer-events: none;
@@ -36,43 +51,52 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-x-hidden">
+<body class="min-h-screen flex flex-col items-center justify-center p-4 relative">
 
     <!-- ========================================== -->
-    <!-- LAYAR LOADING (KERTAS BERGARIS) -->
+    <!-- LATAR BELAKANG AWAN TERBANG -->
     <!-- ========================================== -->
-    <div id="loading-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-[#60b6f0]">
+    <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute top-20 left-[-50px] bg-white/70 w-28 h-12 rounded-full blur-[1px] cloud-anim-1"></div>
+        <div class="absolute top-48 left-[-80px] bg-white/60 w-36 h-14 rounded-full blur-[1px] cloud-anim-2"></div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 1. LAYAR LOADING (KERTAS BERGARIS) -->
+    <!-- ========================================== -->
+    <div id="loading-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-gradient-to-b from-[#57b7f8] to-[#90e0ef]">
         
-        <!-- Logo di atas layar loading -->
-        <div class="text-center mb-6">
-            <h1 class="text-3xl sm:text-4xl font-extrabold text-[#ff4f8b] drop-shadow-md">
-                Don't <span class="text-[#3b82f6]">Block</span> Me
-            </h1>
-            <div class="flex justify-center gap-2 mt-3">
-                <div class="bg-white/80 px-4 py-1 rounded-full shadow-sm text-xs font-bold text-slate-600">☁️ Awan</div>
+        <!-- Maskot & Logo di atas loading -->
+        <div class="relative mb-6 text-center">
+            <div class="flex justify-center gap-12 mb-[-12px] relative z-10">
+                <span class="text-3xl animate-bounce">🧸</span>
+                <span class="text-3xl animate-bounce" style="animation-delay: 0.2s;">🐼</span>
+            </div>
+            <div class="bg-white/80 backdrop-blur-md px-6 py-2 rounded-3xl shadow-lg border border-white">
+                <h1 class="text-3xl font-extrabold text-[#ff4f8b]">
+                    Don't <span class="text-[#3b82f6]">Block</span> Me
+                </h1>
             </div>
         </div>
 
-        <!-- Kartu Kertas Loading -->
-        <div class="w-full max-w-xs paper-bg rounded-2xl p-8 shadow-2xl relative border border-slate-200 transform rotate-1">
+        <!-- Kartu Kertas Catatan Loading -->
+        <div class="w-full max-w-xs paper-bg rounded-[28px] p-8 shadow-2xl relative border-2 border-slate-100 transform rotate-1">
+            <!-- Selotip Pink -->
+            <div class="absolute -top-3 -left-4 w-14 h-6 bg-pink-300/90 rotate-[-12deg] shadow-sm rounded-sm"></div>
             
-            <!-- Selotip Pink di Pojok Kiri Atas Kertas -->
-            <div class="absolute -top-3 -left-4 w-14 h-6 bg-pink-300/80 rotate-[-12deg] shadow-sm rounded-sm"></div>
+            <div class="absolute top-4 right-4 text-pink-500 text-xl">❤️</div>
+            <div class="absolute bottom-4 left-4 text-yellow-400 text-xl">⭐</div>
 
-            <!-- Hiasan Bintang & Hati di Kertas -->
-            <div class="absolute top-4 right-4 text-pink-500 text-lg">❤️</div>
-            <div class="absolute bottom-4 left-4 text-yellow-400 text-lg">⭐</div>
-
-            <!-- Konten Teks Loading -->
             <div class="text-center my-6">
                 <p class="text-2xl font-extrabold text-slate-700 tracking-wide">
                     loading<span id="loading-dots">...</span>
                 </p>
-                <!-- Indikator Titik Warna-warni -->
-                <div class="flex justify-center items-center gap-2 mt-4">
-                    <span class="w-3 h-3 bg-blue-400 rounded-full animate-bounce"></span>
-                    <span class="w-3 h-3 bg-pink-400 rounded-full animate-bounce" style="animation-delay: 0.2s;"></span>
-                    <span class="w-3 h-3 bg-yellow-400 rounded-full animate-bounce" style="animation-delay: 0.4s;"></span>
+                <!-- Titik Loading Warna-warni -->
+                <div class="flex justify-center items-center gap-2.5 mt-5">
+                    <span class="w-3.5 h-3.5 bg-blue-400 rounded-full animate-bounce"></span>
+                    <span class="w-3.5 h-3.5 bg-pink-400 rounded-full animate-bounce" style="animation-delay: 0.2s;"></span>
+                    <span class="w-3.5 h-3.5 bg-yellow-400 rounded-full animate-bounce" style="animation-delay: 0.4s;"></span>
                 </div>
             </div>
         </div>
@@ -80,29 +104,29 @@
 
 
     <!-- ========================================== -->
-    <!-- HALAMAN UTAMA (MUNCUL SETELAH LOADING SELESAI) -->
+    <!-- 2. HALAMAN UTAMA (SETELAH LOADING SELESAI) -->
     <!-- ========================================== -->
-    <div id="main-content" class="w-full max-w-sm text-center relative pt-8 opacity-0 transition-opacity duration-700">
+    <div id="main-content" class="w-full max-w-sm text-center relative pt-8 z-10 opacity-0 transition-opacity duration-700">
         
-        <!-- Maskot Beruang & Panda di Atas Card Judul -->
-        <div class="absolute -top-1 left-2 text-4xl animate-bounce z-20">🧸</div>
-        <div class="absolute top-1 right-2 text-4xl animate-bounce z-20" style="animation-delay: 0.2s;">🐼</div>
+        <!-- Maskot Beruang & Panda di Kiri-Kanan Judul -->
+        <div class="absolute -top-2 left-1 text-4xl animate-bounce z-20">🧸</div>
+        <div class="absolute top-0 right-1 text-4xl animate-bounce z-20" style="animation-delay: 0.2s;">🐼</div>
 
-        <!-- Header / Logo -->
-        <div class="relative mb-5 bg-white/70 backdrop-blur-md pt-5 pb-4 rounded-[32px] shadow-lg border border-white">
+        <!-- Header / Logo Utama -->
+        <div class="relative mb-5 bg-white/80 backdrop-blur-md pt-5 pb-4 rounded-[32px] shadow-xl border-2 border-white">
             <h1 class="text-4xl sm:text-5xl font-extrabold text-[#ff4f8b] tracking-wide leading-tight drop-shadow-sm">
                 Don't <br>
                 <span class="text-[#3b82f6]">Block</span> Me
             </h1>
             
-            <!-- Subtitle Banner -->
-            <div class="inline-block mt-3 bg-white px-5 py-1 rounded-full shadow-sm border border-blue-100">
-                <p class="text-xs sm:text-sm font-bold text-slate-600 tracking-wider">Cari Teman Palsumu</p>
+            <!-- Subtitle Badge -->
+            <div class="inline-block mt-3 bg-white px-5 py-1.5 rounded-full shadow-sm border border-pink-100">
+                <p class="text-xs sm:text-sm font-extrabold text-slate-600 tracking-wider">Cari Teman Palsumu</p>
             </div>
         </div>
 
         <!-- Tombol Pilihan Bahasa -->
-        <div class="bg-white rounded-full p-3 shadow-md flex items-center justify-between mb-5 px-5 border-2 border-pink-100 cursor-pointer hover:border-pink-300 transition">
+        <div class="bg-white rounded-full p-3 shadow-md flex items-center justify-between mb-5 px-6 border-2 border-pink-100 cursor-pointer hover:border-pink-300 transition">
             <div class="flex items-center gap-2.5">
                 <span class="text-xl">🌐</span>
                 <span class="font-bold text-slate-700 text-sm">Indonesia</span>
@@ -113,54 +137,54 @@
         </div>
 
         <!-- Card Konten Utama -->
-        <div class="bg-white rounded-[32px] p-6 shadow-xl border-[3px] border-dashed border-pink-200 relative">
+        <div class="bg-white rounded-[32px] p-6 shadow-2xl border-[3px] border-dashed border-pink-200 relative">
             
             <!-- Ikon Hati Melayang -->
             <div class="absolute -top-3 -right-2 bg-white p-2 rounded-full shadow-md border border-pink-100">
                 <span class="text-xl">💖</span>
             </div>
 
-            <!-- Teks Animasi Bergerak -->
+            <!-- Teks Animasi Bergerak di Tengah -->
             <div class="flex justify-center items-center mb-4">
-                <div class="bg-gradient-to-r from-pink-50 via-sky-50 to-yellow-50 px-5 py-3 rounded-2xl border border-pink-100 shadow-inner animate-float">
+                <div class="bg-gradient-to-r from-pink-50 via-sky-50 to-yellow-50 px-6 py-3 rounded-2xl border border-pink-100 shadow-inner animate-float">
                     <p class="text-xs font-bold tracking-widest text-pink-500 uppercase">Dev • DhooCep</p>
                     <p class="text-base font-extrabold text-slate-800 tracking-wide mt-0.5">BlockDay ✨</p>
                 </div>
             </div>
             
-            <!-- Teks Ajakan -->
-            <h2 class="text-lg sm:text-xl font-extrabold text-slate-800 leading-snug">
+            <!-- Teks Ajakan Besar & Jelas -->
+            <h2 class="text-xl font-extrabold text-slate-800 leading-snug">
                 buat kuismu <br> 
                 <span class="text-[#ff4f8b] text-2xl">&</span> <br> 
-                <span class="bg-yellow-200 px-2.5 py-0.5 rounded-md inline-block mt-1 text-slate-900 shadow-xs">blokir</span> teman palsumu
+                <span class="bg-yellow-200 px-3 py-0.5 rounded-md inline-block mt-1 text-slate-900 shadow-xs">blokir</span> teman palsumu
             </h2>
 
             <!-- Tombol Aksi Utama -->
-            <button onclick="mulaiKuis()" class="mt-6 w-full bg-gradient-to-r from-[#ff4f8b] to-[#ff2a6d] hover:from-[#e03e77] hover:to-[#d91b5c] text-white font-extrabold py-3.5 px-6 rounded-2xl shadow-lg shadow-pink-200 transition-all transform active:scale-95">
+            <button onclick="mulaiKuis()" class="mt-6 w-full bg-gradient-to-r from-[#ff4f8b] to-[#ff2a6d] hover:from-[#e03e77] hover:to-[#d91b5c] text-white font-extrabold py-3.5 px-6 rounded-2xl shadow-lg shadow-pink-200 transition-all transform active:scale-95 text-base">
                 Mulai Buat Kuis 🚀
             </button>
         </div>
 
         <!-- Footer Kecil -->
-        <div class="mt-4 text-xs text-slate-500 font-medium">
+        <div class="mt-4 text-xs text-slate-500 font-semibold">
             ✨ Terhubung dengan MongoDB
         </div>
 
     </div>
 
     <script>
-        // Durasi loading selama 6 detik (masuk rentang 5-10 detik yang diminta)
+        // Durasi loading 6 detik (masuk rentang 5-10 detik) sebelum masuk halaman utama
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 const loadingScreen = document.getElementById('loading-screen');
                 const mainContent = document.getElementById('main-content');
 
-                // Hilangkan layar loading dengan mulus
+                // Hilangkan layar loading
                 loadingScreen.classList.add('fade-out');
                 
                 // Munculkan halaman utama
                 mainContent.classList.remove('opacity-0');
-            }, 6000); // 6000 milidetik = 6 detik
+            }, 6000); 
         });
 
         function mulaiKuis() {
