@@ -4,15 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Don't Block Me - Cari Teman Palsumu</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&display=swap');
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background: linear-gradient(135deg, #4ea8de 0%, #90e0ef 60%, #caf0f8 100%);
             overflow-x: hidden;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            position: relative;
         }
         
         .paper-bg {
@@ -25,18 +32,20 @@
             0%, 100% { transform: translateY(0) scale(1); }
             50% { transform: translateY(-5px) scale(1.02); }
         }
-        .animate-pop {
-            animation: bounceGlow 2s ease-in-out infinite;
-        }
+        .animate-pop { animation: bounceGlow 2s ease-in-out infinite; }
 
         @keyframes wiggle {
             0%, 100% { transform: rotate(0deg) scale(1.03); }
             25% { transform: rotate(-3deg) scale(1.03); }
             75% { transform: rotate(3deg) scale(1.03); }
         }
-        .animate-wiggle {
-            animation: wiggle 0.4s ease-in-out;
+        .animate-wiggle { animation: wiggle 0.4s ease-in-out; }
+
+        @keyframes bounceCustom {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
+        .animate-bounce-custom { animation: bounceCustom 1s infinite; }
 
         .gradient-text-1 {
             background: linear-gradient(135deg, #ff4f8b 0%, #ff70a6 100%);
@@ -49,279 +58,355 @@
             -webkit-text-fill-color: transparent;
         }
 
+        .fade-out {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s ease-in-out;
+        }
+
         .screen {
-            display: none;
+            position: absolute;
             width: 100%;
             max-width: 24rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            display: none;
         }
 
         .screen.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+            position: relative;
             display: block;
         }
+
+        /* Pure CSS Styling persis Tailwind */
+        .fixed-screen { position: fixed; inset: 0; z-index: 50; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px; }
+        .bg-loading { background: linear-gradient(to bottom, #4ea8de, #90e0ef); }
+        .bg-transition { background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(4px); transition: opacity 0.3s; }
+        
+        .card-box { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border-radius: 32px; padding: 24px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); border: 2px solid #fed7aa; position: relative; width: 100%; text-align: center; }
+        .btn-main { width: 100%; background: linear-gradient(135deg, #ff4f8b 0%, #ff2a6d 100%); color: white; font-weight: 900; padding: 16px; border-radius: 16px; box-shadow: 0 10px 15px -3px rgba(255, 79, 139, 0.4); border: none; cursor: pointer; font-size: 1rem; transition: transform 0.1s; }
+        .btn-main:active { transform: scale(0.95); }
+        
+        .btn-blue { background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%); box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4); }
+        .btn-green { background: linear-gradient(135deg, #10b981 0%, #059669 100%); box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.4); }
+
+        .input-text { width: 100%; background: #f8fafc; border: 2px solid #fbcfe8; border-radius: 16px; padding: 16px; font-weight: 800; color: #1e293b; outline: none; font-size: 1rem; }
+        .input-text:focus { border-color: #ff4f8b; }
+
+        .back-btn { position: absolute; top: -48px; left: 0; width: 40px; height: 40px; background: white; border-radius: 50%; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; font-weight: 900; color: #334155; border: 1px solid #fbcfe8; cursor: pointer; z-index: 30; }
+        
+        .dot-load { width: 14px; height: 14px; border-radius: 50%; display: inline-block; animation: bounceCustom 1s infinite; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-4 relative">
+<body>
 
     <!-- ========================================== -->
-    <!-- HALAMAN UTAMA (Langsung Muncul) -->
+    <!-- 1. LAYAR LOADING AWAL (DIPERCEPAT & AMAN) -->
     <!-- ========================================== -->
-    <div id="main-screen" class="screen active text-center pt-4">
-        <div class="absolute -top-2 left-1 text-4xl animate-bounce z-20">🧸</div>
-        <div class="absolute top-0 right-1 text-4xl animate-bounce z-20" style="animation-delay: 0.2s;">🐼</div>
+    <div id="loading-screen" class="fixed-screen bg-loading" style="z-index: 9999;">
+        <div style="position: relative; margin-bottom: 24px; text-align: center;">
+            <div style="display: flex; justify-content: center; gap: 48px; margin-bottom: -12px; position: relative; z-index: 10;">
+                <span style="font-size: 2rem;" class="animate-bounce-custom">🧸</span>
+                <span style="font-size: 2rem; animation-delay: 0.2s;" class="animate-bounce-custom">🐼</span>
+            </div>
+            <div style="background: rgba(255,255,255,0.9); backdrop-filter: blur(8px); padding: 10px 24px; border-radius: 24px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border: 2px solid white;">
+                <h1 style="font-size: 1.8rem; font-weight: 900;">
+                    <span class="gradient-text-1">Don't</span> <span class="gradient-text-2">Block</span> <span class="gradient-text-1">Me</span>
+                </h1>
+            </div>
+        </div>
 
-        <div class="relative mb-5 w-full bg-white/90 backdrop-blur-md pt-5 pb-4 rounded-[32px] shadow-xl border-2 border-white">
-            <h1 class="text-4xl sm:text-5xl font-black tracking-wide leading-tight drop-shadow-sm">
+        <div class="paper-bg" style="width: 100%; max-width: 320px; border-radius: 28px; padding: 32px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); position: relative; border: 2px solid #f1f5f9; transform: rotate(1deg);">
+            <div style="position: absolute; top: -12px; left: -16px; width: 56px; height: 24px; background: rgba(252, 165, 165, 0.9); transform: rotate(-12deg);"></div>
+            <div style="position: absolute; top: 16px; right: 16px; color: #ec4899; font-size: 1.2rem;">❤</div>
+            <div style="position: absolute; bottom: 16px; left: 16px; color: #facc15; font-size: 1.2rem;">⭐</div>
+
+            <div style="text-align: center; margin: 24px 0;">
+                <p style="font-size: 1.5rem; font-weight: 900; color: #1e293b;">loading<span>...</span></p>
+                <div style="display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 20px;">
+                    <span class="dot-load" style="background: #3b82f6;"></span>
+                    <span class="dot-load" style="background: #ec4899; animation-delay: 0.2s;"></span>
+                    <span class="dot-load" style="background: #facc15; animation-delay: 0.4s;"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 2. LOADING TRANSISI GELEMBUNG -->
+    <!-- ========================================== -->
+    <div id="transition-loading" class="fixed-screen bg-transition" style="display: none; opacity: 0;">
+        <div style="background: white; padding: 32px; border-radius: 32px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); border: 2px solid #fce7f3; display: flex; flex-direction: column; align-items: center;" class="animate-pop">
+            <span style="font-size: 3rem; margin-bottom: 12px;" class="animate-bounce-custom">💬</span>
+            <p id="transition-text" style="font-size: 1.1rem; font-weight: 900; color: #1e293b;">Memuat...</p>
+            <div style="display: flex; gap: 8px; margin-top: 16px;">
+                <span style="width: 12px; height: 12px; background: #ec4899; border-radius: 50%;" class="animate-bounce-custom"></span>
+                <span style="width: 12px; height: 12px; background: #3b82f6; border-radius: 50%; animation-delay: 0.2s;" class="animate-bounce-custom"></span>
+                <span style="width: 12px; height: 12px; background: #facc15; border-radius: 50%; animation-delay: 0.4s;" class="animate-bounce-custom"></span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 3. HALAMAN UTAMA -->
+    <!-- ========================================== -->
+    <div id="main-screen" class="screen text-center" style="padding-top: 16px;">
+        <div style="position: absolute; top: -8px; left: 4px; font-size: 2.5rem; z-index: 20;" class="animate-bounce-custom">🧸</div>
+        <div style="position: absolute; top: 0; right: 4px; font-size: 2.5rem; z-index: 20; animation-delay: 0.2s;" class="animate-bounce-custom">🐼</div>
+
+        <div style="position: relative; margin-bottom: 20px; width: 100%; background: rgba(255,255,255,0.9); backdrop-filter: blur(12px); padding: 20px 0 16px 0; border-radius: 32px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border: 2px solid white;">
+            <h1 style="font-size: 2.5rem; font-weight: 900; line-height: 1.1;">
                 <span class="gradient-text-1">Don't</span> <br>
                 <span class="gradient-text-2">Block</span> <span class="gradient-text-1">Me</span>
             </h1>
-            <div class="inline-block mt-3 bg-white px-5 py-1.5 rounded-full shadow-sm border border-pink-100">
-                <p class="text-xs sm:text-sm font-extrabold text-slate-600 tracking-wider">Cari Teman Palsumu</p>
+            <div style="display: inline-block; margin-top: 12px; background: white; padding: 6px 20px; border-radius: 9999px; box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05); border: 1px solid #fce7f3;">
+                <p style="font-size: 0.85rem; font-weight: 800; color: #475569;">Cari Teman Palsumu</p>
             </div>
         </div>
 
-        <div class="bg-white rounded-[32px] p-6 shadow-2xl border-[3px] border-dashed border-pink-200 relative w-full">
-            <div class="absolute -top-3 -right-2 bg-white p-2 rounded-full shadow-md border border-pink-100">
-                <span class="text-xl">💖</span>
+        <div class="card-box" style="border: 3px dashed #fed7aa;">
+            <div style="position: absolute; top: -12px; right: -8px; background: white; padding: 8px; border-radius: 50%; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); border: 1px solid #fce7f3;">
+                <span style="font-size: 1.2rem;">💖</span>
             </div>
-            <div class="flex justify-center items-center mb-4">
-                <div class="bg-gradient-to-r from-pink-50 via-sky-50 to-yellow-50 px-6 py-3 rounded-2xl border border-pink-100 shadow-inner animate-pop">
-                    <p class="text-xs font-black tracking-widest text-pink-600 uppercase">Dev • DhooCep</p>
-                    <p class="text-base font-black text-slate-900 tracking-wide mt-0.5">BlockDay ✨</p>
+            <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 16px;">
+                <div style="background: linear-gradient(135deg, #fdf2f8 0%, #e0f2fe 50%, #fefce8 100%); padding: 12px 24px; border-radius: 16px; border: 1px solid #fce7f3;" class="animate-pop">
+                    <p style="font-size: 0.75rem; font-weight: 900; letter-spacing: 0.1em; color: #db2777;">DEV • DHOOCEP</p>
+                    <p style="font-size: 1rem; font-weight: 900; color: #0f172a; margin-top: 2px;">BlockDay ✨</p>
                 </div>
             </div>
             
-            <h2 class="text-xl sm:text-2xl font-black text-slate-900 leading-snug tracking-tight">
+            <h2 style="font-size: 1.25rem; font-weight: 900; color: #0f172a; line-height: 1.4;">
                 buat kuismu <br> 
-                <span class="text-[#ff4f8b] text-3xl font-black">&</span> <br> 
-                <span class="bg-yellow-300 px-3 py-0.5 rounded-lg inline-block mt-1 text-slate-900 shadow-sm font-black transform -rotate-1">blokir</span> teman palsumu
+                <span style="color: #ff4f8b; font-size: 1.8rem; font-weight: 900;">&</span> <br> 
+                <span style="background: #fde047; padding: 2px 12px; border-radius: 8px; display: inline-block; margin-top: 4px; color: #0f172a; font-weight: 900; transform: rotate(-1deg);">blokir</span> teman palsumu
             </h2>
 
-            <button onclick="goToScreen('name-screen')" class="mt-6 w-full bg-gradient-to-r from-[#ff4f8b] to-[#ff2a6d] hover:from-[#e03e77] hover:to-[#d91b5c] text-white font-black py-4 px-6 rounded-2xl shadow-lg shadow-pink-300 transition-all transform active:scale-95 text-base tracking-wide">
+            <button onclick="triggerTransition('name-screen', 'Menyiapkan Kuis...')" class="btn-main" style="margin-top: 24px;">
                 Mulai Buat Kuis 🚀
             </button>
         </div>
-        <div class="mt-4 text-xs text-slate-700 font-extrabold">✨ Terhubung dengan MongoDB</div>
+        <div style="margin-top: 16px; font-size: 0.75rem; color: #334155; font-weight: 800;">✨ Terhubung dengan MongoDB</div>
     </div>
 
 
     <!-- ========================================== -->
-    <!-- HALAMAN MASUKKAN NAMA -->
+    <!-- 4. HALAMAN MASUKKAN NAMA -->
     <!-- ========================================== -->
-    <div id="name-screen" class="screen text-center pt-2">
-        <button onclick="goToScreen('main-screen')" class="absolute -top-12 left-0 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center font-black text-slate-700 border border-pink-100 active:scale-95 transition z-30">❮</button>
+    <div id="name-screen" class="screen text-center" style="padding-top: 8px;">
+        <button onclick="goToScreen('main-screen')" class="back-btn">❮</button>
 
-        <div class="relative mb-4 w-full bg-white/90 backdrop-blur-md pt-3 pb-3 rounded-[28px] shadow-lg border border-white">
-            <h1 class="text-2xl font-black">
+        <div style="position: relative; margin-bottom: 16px; width: 100%; background: rgba(255,255,255,0.9); backdrop-filter: blur(12px); padding: 12px 0; border-radius: 28px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border: 2px solid white;">
+            <h1 style="font-size: 1.5rem; font-weight: 900;">
                 <span class="gradient-text-1">Don't</span> <span class="gradient-text-2">Block</span> <span class="gradient-text-1">Me</span>
             </h1>
         </div>
 
-        <div class="relative w-full my-3 flex justify-center items-center">
-            <div class="bg-pink-100/95 border-2 border-pink-200 px-6 py-4 rounded-[28px] shadow-md relative transform -rotate-2 max-w-[240px]">
-                <p class="text-xs font-extrabold text-slate-600 tracking-wider">siapa</p>
-                <p class="text-2xl font-black text-[#ff4f8b] tracking-wide">namamu?</p>
+        <div style="position: relative; width: 100%; margin: 12px 0; display: flex; justify-content: center; align-items: center;">
+            <div style="background: rgba(252, 231, 243, 0.95); border: 2px solid #fbcfe8; padding: 16px 24px; border-radius: 28px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); transform: rotate(-2deg); max-width: 240px;">
+                <p style="font-size: 0.75rem; font-weight: 800; color: #475569;">siapa</p>
+                <p style="font-size: 1.5rem; font-weight: 900; color: #ff4f8b;">namamu?</p>
             </div>
         </div>
 
-        <div class="bg-white rounded-[28px] p-5 shadow-xl border-2 border-pink-100 w-full relative mt-2">
-            <div class="relative flex items-center">
-                <input type="text" id="username-input" maxlength="15" oninput="updateCharCount(this)" placeholder="nama..." class="w-full bg-slate-50 border-2 border-pink-100 focus:border-pink-400 focus:outline-none rounded-2xl py-4 px-4 font-extrabold text-slate-800 placeholder-slate-400 text-base shadow-inner">
-                <span id="char-count" class="absolute right-4 text-xs font-bold text-slate-400">0/15</span>
+        <div class="card-box" style="border: 2px solid #fbcfe8; padding: 20px; margin-top: 8px;">
+            <div style="position: relative; display: flex; align-items: center;">
+                <input type="text" id="username-input" maxlength="15" oninput="updateCharCount(this)" placeholder="nama..." class="input-text">
+                <span id="char-count" style="position: absolute; right: 16px; font-size: 0.75rem; font-weight: 700; color: #94a3b8;">0/15</span>
             </div>
 
-            <button onclick="submitName()" class="mt-4 w-full bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white font-black py-4 px-6 rounded-2xl shadow-lg shadow-blue-200 transition-all transform active:scale-95 text-base tracking-wide flex items-center justify-center gap-2">
-                <span>lanjut</span> <span class="text-lg">➔</span>
+            <button onclick="submitName()" class="btn-main btn-blue" style="margin-top: 16px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <span>lanjut</span> <span style="font-size: 1.1rem;">➔</span>
             </button>
         </div>
     </div>
 
 
     <!-- ========================================== -->
-    <!-- HALAMAN PILIH GENDER -->
+    <!-- 5. HALAMAN PILIH GENDER -->
     <!-- ========================================== -->
-    <div id="gender-screen" class="screen text-center pt-2">
-        <button onclick="goToScreen('name-screen')" class="absolute -top-12 left-0 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center font-black text-slate-700 border border-pink-100 active:scale-95 transition z-30">❮</button>
+    <div id="gender-screen" class="screen text-center" style="padding-top: 8px;">
+        <button onclick="goToScreen('name-screen')" class="back-btn">❮</button>
 
-        <div class="relative mb-3 w-full bg-white/90 backdrop-blur-md pt-3 pb-3 rounded-[28px] shadow-lg border border-white">
-            <h1 class="text-2xl font-black">
+        <div style="position: relative; margin-bottom: 12px; width: 100%; background: rgba(255,255,255,0.9); backdrop-filter: blur(12px); padding: 12px 0; border-radius: 28px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); border: 2px solid white;">
+            <h1 style="font-size: 1.5rem; font-weight: 900;">
                 <span class="gradient-text-1">Don't</span> <span class="gradient-text-2">Block</span> <span class="gradient-text-1">Me</span>
             </h1>
         </div>
 
-        <div class="my-2">
-            <p id="greeting-text" class="text-base font-black text-slate-800 drop-shadow-md">hai, dika 👋</p>
+        <div style="margin: 8px 0;">
+            <p id="greeting-text" style="font-size: 1rem; font-weight: 900; color: #1e293b;">hai, dika 👋</p>
         </div>
 
-        <div class="bg-white rounded-[24px] py-3.5 px-6 shadow-md border-2 border-white mb-4 inline-block mx-auto">
-            <p class="text-xl font-black text-slate-900 tracking-tight">pilih</p>
-            <p class="text-xl font-black text-[#00b4d8] tracking-tight underline decoration-orange-400 decoration-3 underline-offset-4">jenis kelaminmu</p>
+        <div style="background: white; border-radius: 24px; padding: 14px 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 2px solid white; margin-bottom: 16px; display: inline-block;">
+            <p style="font-size: 1.2rem; font-weight: 900; color: #0f172a;">pilih</p>
+            <p style="font-size: 1.2rem; font-weight: 900; color: #00b4d8; text-decoration: underline; text-decoration-color: #fb923c; text-underline-offset: 4px;">jenis kelaminmu</p>
         </div>
 
-        <div class="grid grid-cols-2 gap-4 w-full">
-            <div id="card-male" onclick="selectGender('male')" class="bg-white rounded-[28px] p-4 shadow-xl border-2 border-pink-100 flex flex-col items-center cursor-pointer transition transform active:scale-95 hover:border-pink-300">
-                <div class="w-full h-32 flex items-center justify-center bg-amber-50/60 rounded-2xl mb-2">
-                    <span class="text-4xl">👦</span>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; width: 100%;">
+            <div id="card-male" onclick="selectGender('male')" class="card-box" style="padding: 16px; border: 2px solid #fbcfe8; cursor: pointer; display: flex; flex-direction: column; align-items: center;">
+                <div style="width: 100%; height: 120px; display: flex; align-items: center; justify-content: center; background: rgba(254, 243, 199, 0.6); border-radius: 16px; margin-bottom: 8px;">
+                    <span style="font-size: 2.5rem;">👦</span>
                 </div>
-                <span class="font-black text-slate-800 text-sm">Laki-laki</span>
+                <span style="font-weight: 900; color: #1e293b; font-size: 0.9rem;">Laki-laki</span>
             </div>
 
-            <div id="card-female" onclick="selectGender('female')" class="bg-white rounded-[28px] p-4 shadow-xl border-2 border-pink-100 flex flex-col items-center cursor-pointer transition transform active:scale-95 hover:border-pink-300">
-                <div class="w-full h-32 flex items-center justify-center bg-pink-50/60 rounded-2xl mb-2">
-                    <span class="text-4xl">👧</span>
+            <div id="card-female" onclick="selectGender('female')" class="card-box" style="padding: 16px; border: 2px solid #fbcfe8; cursor: pointer; display: flex; flex-direction: column; align-items: center;">
+                <div style="width: 100%; height: 120px; display: flex; align-items: center; justify-content: center; background: rgba(253, 242, 248, 0.6); border-radius: 16px; margin-bottom: 8px;">
+                    <span style="font-size: 2.5rem;">👧</span>
                 </div>
-                <span class="font-black text-slate-800 text-sm">Perempuan</span>
+                <span style="font-weight: 900; color: #1e293b; font-size: 0.9rem;">Perempuan</span>
             </div>
         </div>
     </div>
 
 
     <!-- ========================================== -->
-    <!-- HALAMAN PEMBUATAN KUIS (1 - 15 PERTANYAAN) -->
+    <!-- 6. HALAMAN PEMBUATAN KUIS -->
     <!-- ========================================== -->
-    <div id="quiz-creator-screen" class="screen text-center pt-2">
-        <button onclick="goToScreen('gender-screen')" class="absolute -top-12 left-0 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center font-black text-slate-700 border border-pink-100 active:scale-95 transition z-30">❮</button>
+    <div id="quiz-creator-screen" class="screen text-center" style="padding-top: 8px;">
+        <button onclick="goToScreen('gender-screen')" class="back-btn">❮</button>
 
-        <div class="w-full flex items-center justify-between mb-3 px-1">
-            <div class="bg-white px-4 py-1.5 rounded-full shadow-md border border-pink-100">
-                <span id="question-counter" class="text-xs font-black text-[#ff4f8b]">Pertanyaan 1 dari 15</span>
+        <div style="width: 100%; display: flex; justify-content: center; margin-bottom: 12px;">
+            <div style="background: white; padding: 6px 16px; border-radius: 9999px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); border: 1px solid #fbcfe8;">
+                <span id="question-counter" style="font-size: 0.75rem; font-weight: 900; color: #ff4f8b;">Pertanyaan 1 dari 15</span>
             </div>
         </div>
 
-        <div class="paper-bg rounded-[32px] p-5 shadow-2xl border-2 border-slate-200 relative w-full mb-4 text-left">
-            <div class="pl-4">
-                <div class="flex justify-center mb-2">
-                    <div class="bg-yellow-300 px-4 py-0.5 rounded-lg shadow-sm border border-yellow-400 transform -rotate-1">
-                        <span id="badge-question-num" class="text-xs font-black text-slate-900 uppercase">Pertanyaan 1</span>
-                    </div>
+        <div class="paper-bg" style="border-radius: 32px; padding: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); border: 2px solid #cbd5e1; margin-bottom: 16px; text-align: left;">
+            <div style="display: flex; justify-content: center; margin-bottom: 8px;">
+                <div style="background: #fde047; padding: 2px 16px; border-radius: 8px; border: 1px solid #facc15; transform: rotate(-1deg);">
+                    <span id="badge-question-num" style="font-size: 0.75rem; font-weight: 900; color: #0f172a; text-transform: uppercase;">Pertanyaan 1</span>
                 </div>
-                <h2 id="question-title" class="text-base sm:text-lg font-black text-slate-900 text-center leading-snug tracking-tight mb-2">
-                    <span id="creator-name-label" class="text-[#ff4f8b]">dika</span> paling banyak menghabiskan uang untuk apa?
-                </h2>
             </div>
+            <h2 id="question-title" style="font-size: 1rem; font-weight: 900; color: #0f172a; text-align: center; line-height: 1.4; margin-top: 4px;">
+                <span id="creator-name-label" style="color: #ff4f8b;">dika</span> paling banyak menghabiskan uang untuk apa?
+            </h2>
         </div>
 
-        <div class="flex flex-col gap-3 w-full">
-            <div onclick="selectQuizAnswer(1)" id="opt-1" class="bg-white rounded-[24px] p-3 shadow-lg border-2 border-white flex items-center gap-3.5 cursor-pointer transition transform active:scale-95 hover:border-pink-300">
-                <div class="w-10 h-10 rounded-2xl bg-slate-100 flex items-center justify-center text-xl">🍔</div>
-                <p id="opt-text-1" class="font-black text-slate-900 text-sm text-left">Camilan / makanan</p>
+        <div style="display: flex; flex-direction: column; gap: 12px; width: 100%;">
+            <div onclick="selectQuizAnswer(1)" id="opt-1" class="card-box" style="padding: 14px 16px; border: 2px solid white; display: flex; align-items: center; gap: 14px; cursor: pointer; text-align: left;">
+                <div style="width: 40px; height: 40px; border-radius: 16px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;">🍔</div>
+                <p id="opt-text-1" style="font-weight: 900; color: #0f172a; font-size: 0.9rem;">Camilan / makanan</p>
             </div>
-            <div onclick="selectQuizAnswer(2)" id="opt-2" class="bg-white rounded-[24px] p-3 shadow-lg border-2 border-white flex items-center gap-3.5 cursor-pointer transition transform active:scale-95 hover:border-pink-300">
-                <div class="w-10 h-10 rounded-2xl bg-slate-100 flex items-center justify-center text-xl">👟</div>
-                <p id="opt-text-2" class="font-black text-slate-900 text-sm text-left">Baju / sepatu</p>
+            <div onclick="selectQuizAnswer(2)" id="opt-2" class="card-box" style="padding: 14px 16px; border: 2px solid white; display: flex; align-items: center; gap: 14px; cursor: pointer; text-align: left;">
+                <div style="width: 40px; height: 40px; border-radius: 16px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;">👟</div>
+                <p id="opt-text-2" style="font-weight: 900; color: #0f172a; font-size: 0.9rem;">Baju / sepatu</p>
             </div>
-            <div onclick="selectQuizAnswer(3)" id="opt-3" class="bg-white rounded-[24px] p-3 shadow-lg border-2 border-white flex items-center gap-3.5 cursor-pointer transition transform active:scale-95 hover:border-pink-300">
-                <div class="w-10 h-10 rounded-2xl bg-slate-100 flex items-center justify-center text-xl">🎮</div>
-                <p id="opt-text-3" class="font-black text-slate-900 text-sm text-left">Game / hiburan</p>
+            <div onclick="selectQuizAnswer(3)" id="opt-3" class="card-box" style="padding: 14px 16px; border: 2px solid white; display: flex; align-items: center; gap: 14px; cursor: pointer; text-align: left;">
+                <div style="width: 40px; height: 40px; border-radius: 16px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;">🎮</div>
+                <p id="opt-text-3" style="font-weight: 900; color: #0f172a; font-size: 0.9rem;">Game / hiburan</p>
             </div>
-            <div onclick="selectQuizAnswer(4)" id="opt-4" class="bg-white rounded-[24px] p-3 shadow-lg border-2 border-white flex items-center gap-3.5 cursor-pointer transition transform active:scale-95 hover:border-pink-300">
-                <div class="w-10 h-10 rounded-2xl bg-slate-100 flex items-center justify-center text-xl">🎧</div>
-                <p id="opt-text-4" class="font-black text-slate-900 text-sm text-left">Teknologi / aksesori</p>
+            <div onclick="selectQuizAnswer(4)" id="opt-4" class="card-box" style="padding: 14px 16px; border: 2px solid white; display: flex; align-items: center; gap: 14px; cursor: pointer; text-align: left;">
+                <div style="width: 40px; height: 40px; border-radius: 16px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;">🎧</div>
+                <p id="opt-text-4" style="font-weight: 900; color: #0f172a; font-size: 0.9rem;">Teknologi / aksesori</p>
             </div>
         </div>
     </div>
 
 
     <!-- ========================================== -->
-    <!-- HALAMAN "YUHUU! KUISMU SUDAH SIAP!" -->
+    <!-- 7. HALAMAN SIAP -->
     <!-- ========================================== -->
-    <div id="ready-screen" class="screen text-center pt-2">
-        <div class="bg-white/95 backdrop-blur-md rounded-[32px] p-6 shadow-2xl border-2 border-pink-200 relative w-full overflow-hidden">
-            <div class="absolute -top-3 left-4 text-2xl animate-bounce">🎉</div>
-            <div class="absolute top-2 right-4 text-2xl animate-bounce" style="animation-delay: 0.2s;">✨</div>
+    <div id="ready-screen" class="screen text-center" style="padding-top: 8px;">
+        <div class="card-box" style="border: 2px solid #fbcfe8; padding: 24px; overflow: hidden;">
+            <div style="position: absolute; top: 8px; left: 16px; font-size: 1.5rem;" class="animate-bounce-custom">🎉</div>
+            <div style="position: absolute; top: 8px; right: 16px; font-size: 1.5rem; animation-delay: 0.2s;" class="animate-bounce-custom">✨</div>
 
-            <h1 class="text-3xl sm:text-4xl font-black tracking-wide text-slate-900 mt-2">
-                YUHUU!
-            </h1>
-            <div class="w-36 h-3 bg-yellow-300 mx-auto -mt-2 rounded-full transform -rotate-1 shadow-sm mb-4"></div>
+            <h1 style="font-size: 2rem; font-weight: 900; color: #0f172a; margin-top: 8px;">YUHUU!</h1>
+            <div style="width: 140px; height: 12px; background: #fde047; margin: -4px auto 16px auto; border-radius: 9999px; transform: rotate(-1deg);"></div>
 
-            <p class="text-base font-black text-slate-800 mb-4">
-                kuismu sudah <span class="bg-cyan-200 px-2 py-0.5 rounded-lg">siap</span> !
+            <p style="font-size: 1rem; font-weight: 900; color: #1e293b; margin-bottom: 16px;">
+                kuismu sudah <span style="background: #a5f3fc; padding: 2px 8px; border-radius: 6px;">siap</span> !
             </p>
 
-            <div class="paper-bg p-5 rounded-[24px] border-2 border-slate-200 shadow-inner mb-6 relative">
-                <div class="absolute top-3 left-3 w-3 h-3 bg-pink-400 rounded-full"></div>
-                <div class="flex justify-center text-3xl mb-2">🤎🧋</div>
-                <p class="text-xs sm:text-sm font-extrabold text-slate-700 leading-relaxed">
-                    kirim ke temanmu dan lihat siapa yang <span class="text-[#ff4f8b] font-black underline">benar-benar</span> kenal kamu! 😎
+            <div class="paper-bg" style="padding: 20px; border-radius: 24px; border: 2px solid #cbd5e1; margin-bottom: 24px; position: relative; text-align: center;">
+                <div style="position: absolute; top: 12px; left: 12px; width: 10px; height: 10px; background: #ec4899; border-radius: 50%;"></div>
+                <div style="font-size: 2rem; margin-bottom: 8px;">🤎🧋</div>
+                <p style="font-size: 0.85rem; font-weight: 800; color: #334155; line-height: 1.4;">
+                    kirim ke temanmu dan lihat siapa yang <span style="color: #ff4f8b; font-weight: 900; text-decoration: underline;">benar-benar</span> kenal kamu! 😎
                 </p>
             </div>
 
-            <button onclick="goToScreen('share-screen')" class="w-full bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white font-black py-4 px-6 rounded-2xl shadow-lg shadow-blue-300 transition-all transform active:scale-95 text-base tracking-wide flex items-center justify-center gap-2">
+            <button onclick="triggerTransition('share-screen', 'Membuka Menu Bagikan...')" class="btn-main btn-blue" style="margin-top: 0; display: flex; align-items: center; justify-content: center; gap: 8px;">
                 <span>📤</span> <span>BAGIKAN SEKARANG!</span>
             </button>
         </div>
-        <p class="mt-3 text-xs font-bold text-slate-700">Makin banyak teman yang main, makin seru! 🎮</p>
+        <p style="margin-top: 12px; font-size: 0.75rem; font-weight: 800; color: #334155;">Makin banyak teman yang main, makin seru! 🎮</p>
     </div>
 
 
     <!-- ========================================== -->
-    <!-- HALAMAN "BAGIKAN LINK KUIS" -->
+    <!-- 8. HALAMAN BAGIKAN LINK -->
     <!-- ========================================== -->
-    <div id="share-screen" class="screen text-center pt-2">
-        <button onclick="goToScreen('ready-screen')" class="absolute -top-12 left-0 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center font-black text-slate-700 border border-pink-100 active:scale-95 transition z-30">❮</button>
+    <div id="share-screen" class="screen text-center" style="padding-top: 8px;">
+        <button onclick="goToScreen('ready-screen')" class="back-btn">❮</button>
 
-        <div class="bg-white/95 backdrop-blur-md rounded-[32px] p-5 shadow-2xl border-2 border-pink-100 relative w-full text-center">
-            
-            <div class="absolute top-2 left-3 text-pink-400 text-lg">♡</div>
-            <div class="absolute top-2 right-4 text-blue-400 text-xl">☆</div>
-            <div class="w-full flex justify-center mb-1">
-                <div class="relative w-24 h-20 bg-amber-200/60 rounded-t-full flex items-center justify-center overflow-hidden border-2 border-amber-300 shadow-inner">
-                    <span class="text-4xl absolute -bottom-1">🐻📱</span>
+        <div class="card-box" style="border: 2px solid #fbcfe8; padding: 20px; text-align: center;">
+            <div style="position: absolute; top: 8px; left: 12px; color: #ec4899; font-size: 1.1rem;">♡</div>
+            <div style="position: absolute; top: 8px; right: 16px; color: #3b82f6; font-size: 1.2rem;">☆</div>
+            <div style="width: 100%; display: flex; justify-content: center; margin-bottom: 4px;">
+                <div style="width: 96px; height: 80px; background: rgba(253, 230, 138, 0.6); border-top-left-radius: 9999px; border-top-right-radius: 9999px; display: flex; align-items: center; justify-content: center; border: 2px solid #fde047; position: relative; overflow: hidden;">
+                    <span style="font-size: 2.5rem; position: absolute; bottom: -4px;">🐻📱</span>
                 </div>
             </div>
 
-            <h2 class="text-lg sm:text-xl font-black text-[#1e293b] tracking-tight leading-tight mt-1">
-                bagikan <span class="text-blue-600 underline decoration-blue-400">link</span> kuismu <span class="text-sm">🔗</span>
+            <h2 style="font-size: 1.15rem; font-weight: 900; color: #1e293b; line-height: 1.2; margin-top: 4px;">
+                bagikan <span style="color: #2563eb; text-decoration: underline; text-decoration-color: #60a5fa;">link</span> kuismu 🔗
             </h2>
-            <div class="flex justify-center items-center gap-1.5 my-1 text-sky-400">
+            <div style="display: flex; justify-content: center; align-items: center; gap: 6px; margin: 4px 0; color: #38bdf8; font-size: 0.9rem;">
                 <span>💨</span> <span>&</span> <span>💨</span>
             </div>
-            <h2 class="text-lg sm:text-xl font-black text-[#1e293b] tracking-tight leading-tight">
-                cari teman <span class="bg-pink-200 px-2 py-0.5 rounded-md text-[#ff4f8b]">palsumu</span> <span class="text-sm">🎭🤭</span>
+            <h2 style="font-size: 1.15rem; font-weight: 900; color: #1e293b; line-height: 1.2;">
+                cari teman <span style="background: #fce7f3; padding: 2px 8px; border-radius: 6px; color: #ff4f8b;">palsumu</span> 🎭🤭
             </h2>
 
-            <div class="bg-slate-50 border-2 border-slate-200 rounded-2xl p-2.5 flex items-center justify-between my-3 shadow-inner">
-                <div class="flex items-center gap-2 overflow-hidden px-1">
-                    <span class="text-blue-500 text-base">🔗</span>
-                    <span id="share-link-text" class="text-xs font-extrabold text-slate-600 truncate">https://block.youtest.me/user/share/dika</span>
+            <div style="background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 16px; padding: 10px; display: flex; align-items: center; justify-content: space-between; margin: 12px 0;">
+                <div style="display: flex; align-items: center; gap: 8px; overflow: hidden; padding-left: 4px;">
+                    <span style="color: #3b82f6;">🔗</span>
+                    <span id="share-link-text" style="font-size: 0.75rem; font-weight: 800; color: #475569; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 170px;">https://block.youtest.me/user/share/dika</span>
                 </div>
-                <button onclick="copyLink()" class="bg-yellow-200 hover:bg-yellow-300 text-slate-900 font-black text-xs px-3 py-2 rounded-xl shadow-sm border border-yellow-300 flex items-center gap-1 transition active:scale-95 shrink-0">
-                    <span>📋</span> Salin
-                </button>
+                <button onclick="copyLink()" style="background: #fde047; border: 1px solid #facc15; font-weight: 900; font-size: 0.75rem; padding: 8px 12px; border-radius: 12px; cursor: pointer; color: #0f172a; flex-shrink: 0;">📋 Salin</button>
             </div>
 
-            <button onclick="shareWhatsApp()" class="w-full bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 text-white font-black py-3.5 px-4 rounded-2xl shadow-lg shadow-emerald-200 transition-all transform active:scale-95 text-sm tracking-wide flex items-center justify-center gap-2 mb-3">
-                <span class="text-lg">💚</span> <span>Bagikan lewat WhatsApp</span>
+            <button onclick="shareWhatsApp()" class="btn-main btn-green" style="margin-top: 0; margin-bottom: 12px; padding: 14px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <span style="font-size: 1.2rem;">💚</span> <span>Bagikan lewat WhatsApp</span>
             </button>
 
-            <div class="grid grid-cols-2 gap-2.5 mb-4">
-                <div onclick="shareSocial('Instagram')" class="bg-white hover:bg-slate-50 border-2 border-slate-100 rounded-2xl py-2.5 px-3 flex items-center gap-2.5 shadow-md cursor-pointer transition active:scale-95">
-                    <span class="text-xl">📸</span>
-                    <span class="font-black text-slate-800 text-xs">Instagram</span>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px;">
+                <div onclick="shareSocial('Instagram')" class="card-box" style="padding: 10px 12px; border: 2px solid #f1f5f9; display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                    <span style="font-size: 1.2rem;">📸</span>
+                    <span style="font-weight: 900; color: #1e293b; font-size: 0.75rem;">Instagram</span>
                 </div>
-                <div onclick="shareSocial('Snapchat')" class="bg-white hover:bg-slate-50 border-2 border-slate-100 rounded-2xl py-2.5 px-3 flex items-center gap-2.5 shadow-md cursor-pointer transition active:scale-95">
-                    <span class="text-xl">👻</span>
-                    <span class="font-black text-slate-800 text-xs">Snapchat</span>
+                <div onclick="shareSocial('Snapchat')" class="card-box" style="padding: 10px 12px; border: 2px solid #f1f5f9; display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                    <span style="font-size: 1.2rem;">👻</span>
+                    <span style="font-weight: 900; color: #1e293b; font-size: 0.75rem;">Snapchat</span>
                 </div>
-                <div onclick="shareSocial('Facebook')" class="bg-white hover:bg-slate-50 border-2 border-slate-100 rounded-2xl py-2.5 px-3 flex items-center gap-2.5 shadow-md cursor-pointer transition active:scale-95">
-                    <span class="text-xl">📘</span>
-                    <span class="font-black text-slate-800 text-xs">Facebook</span>
+                <div onclick="shareSocial('Facebook')" class="card-box" style="padding: 10px 12px; border: 2px solid #f1f5f9; display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                    <span style="font-size: 1.2rem;">📘</span>
+                    <span style="font-weight: 900; color: #1e293b; font-size: 0.75rem;">Facebook</span>
                 </div>
-                <div onclick="shareSocial('Messenger')" class="bg-white hover:bg-slate-50 border-2 border-slate-100 rounded-2xl py-2.5 px-3 flex items-center gap-2.5 shadow-md cursor-pointer transition active:scale-95">
-                    <span class="text-xl">💬</span>
-                    <span class="font-black text-slate-800 text-xs">Messenger</span>
+                <div onclick="shareSocial('Messenger')" class="card-box" style="padding: 10px 12px; border: 2px solid #f1f5f9; display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                    <span style="font-size: 1.2rem;">💬</span>
+                    <span style="font-weight: 900; color: #1e293b; font-size: 0.75rem;">Messenger</span>
                 </div>
-                <div onclick="shareSocial('Telegram')" class="bg-white hover:bg-slate-50 border-2 border-slate-100 rounded-2xl py-2.5 px-3 flex items-center gap-2.5 shadow-md cursor-pointer transition active:scale-95">
-                    <span class="text-xl">✈️</span>
-                    <span class="font-black text-slate-800 text-xs">Telegram</span>
+                <div onclick="shareSocial('Telegram')" class="card-box" style="padding: 10px 12px; border: 2px solid #f1f5f9; display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                    <span style="font-size: 1.2rem;">✈️</span>
+                    <span style="font-weight: 900; color: #1e293b; font-size: 0.75rem;">Telegram</span>
                 </div>
-                <div onclick="shareSocial('Aplikasi Lain')" class="bg-white hover:bg-slate-50 border-2 border-slate-100 rounded-2xl py-2.5 px-3 flex items-center gap-2.5 shadow-md cursor-pointer transition active:scale-95">
-                    <span class="text-xl">🔗</span>
-                    <span class="font-black text-slate-800 text-xs">Aplikasi Lain</span>
+                <div onclick="shareSocial('Aplikasi Lain')" class="card-box" style="padding: 10px 12px; border: 2px solid #f1f5f9; display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                    <span style="font-size: 1.2rem;">🔗</span>
+                    <span style="font-weight: 900; color: #1e293b; font-size: 0.75rem;">Aplikasi Lain</span>
                 </div>
             </div>
 
-            <button onclick="alert('Fitur Cek Skor akan segera dibahas berikutnya!')" class="w-full bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white font-black py-3.5 px-6 rounded-2xl shadow-lg shadow-blue-200 transition-all transform active:scale-95 text-sm tracking-wide flex items-center justify-center gap-2">
+            <button onclick="alert('Fitur Cek Skor akan segera dibahas berikutnya!')" class="btn-main btn-blue" style="margin-top: 0; padding: 14px; display: flex; align-items: center; justify-content: center; gap: 8px;">
                 <span>🏆</span> <span>Cek Skor</span>
             </button>
         </div>
@@ -351,6 +436,32 @@
             { q: "seberapa jujur kamu dalam menjawab kuis ini?", opts: ["Jujur banget dong!", "Lumayan jujur sih", "Agak rahasia ya", "Asal jawab aja wkwk"]
         ];
 
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loading-screen');
+                loadingScreen.classList.add('fade-out');
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                    document.getElementById('main-screen').classList.add('active');
+                }, 600);
+            }, 1500); 
+        });
+
+        function triggerTransition(targetScreenId, loadingText) {
+            const transOverlay = document.getElementById('transition-loading');
+            document.getElementById('transition-text').innerText = loadingText;
+            transOverlay.style.display = 'flex';
+            setTimeout(() => { transOverlay.style.opacity = '1'; }, 10);
+
+            setTimeout(() => {
+                transOverlay.style.opacity = '0';
+                setTimeout(() => {
+                    transOverlay.style.display = 'none';
+                    goToScreen(targetScreenId);
+                }, 300);
+            }, 800);
+        }
+
         function goToScreen(screenId) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(screenId).classList.add('active');
@@ -371,7 +482,7 @@
             document.getElementById('greeting-text').innerText = `hai, ${userName} 👋`;
             document.getElementById('creator-name-label').innerText = userName.toLowerCase();
             document.getElementById('share-link-text').innerText = `https://block.youtest.me/user/share/${userName.toLowerCase()}`;
-            goToScreen('gender-screen');
+            triggerTransition('gender-screen', `Halo ${userName}, pilih gendermu...`);
         }
 
         function selectGender(gender) {
@@ -379,34 +490,54 @@
             const cardFemale = document.getElementById('card-female');
 
             if (gender === 'male') {
-                cardMale.classList.add('animate-wiggle', 'border-blue-400', 'bg-blue-50/40');
-                cardFemale.classList.remove('animate-wiggle', 'border-pink-400', 'bg-pink-50/40');
+                cardMale.classList.add('animate-wiggle');
+                cardMale.style.borderColor = '#3b82f6';
+                cardFemale.classList.remove('animate-wiggle');
+                cardFemale.style.borderColor = '#fbcfe8';
             } else {
-                cardFemale.classList.add('animate-wiggle', 'border-pink-400', 'bg-pink-50/40');
-                cardMale.classList.remove('animate-wiggle', 'border-blue-400', 'bg-blue-50/40');
+                cardFemale.classList.add('animate-wiggle');
+                cardFemale.style.borderColor = '#ec4899';
+                cardMale.classList.remove('animate-wiggle');
+                cardMale.style.borderColor = '#fbcfe8';
             }
 
             setTimeout(() => {
                 currentQuestion = 1;
                 loadQuestionData();
-                goToScreen('quiz-creator-screen');
-            }, 300);
+                triggerTransition('quiz-creator-screen', 'Menyiapkan 15 Pertanyaan Kuis...');
+            }, 400);
         }
 
         function selectQuizAnswer(optionNum) {
             const selectedCard = document.getElementById(`opt-${optionNum}`);
-            selectedCard.classList.add('animate-wiggle', 'border-pink-400', 'bg-pink-50/50');
+            selectedCard.classList.add('animate-wiggle');
+            selectedCard.style.borderColor = '#ec4899';
 
             setTimeout(() => {
                 selectedCard.classList.remove('animate-wiggle');
 
                 if (currentQuestion < totalQuestions) {
                     currentQuestion++;
-                    loadQuestionData();
+                    showQuizTransition(`Menuju Pertanyaan ${currentQuestion} dari ${totalQuestions}...`);
                 } else {
-                    goToScreen('ready-screen');
+                    triggerTransition('ready-screen', 'Menyusun Kuismu...');
                 }
-            }, 300);
+            }, 400);
+        }
+
+        function showQuizTransition(text) {
+            const transOverlay = document.getElementById('transition-loading');
+            document.getElementById('transition-text').innerText = text;
+            transOverlay.style.display = 'flex';
+            setTimeout(() => { transOverlay.style.opacity = '1'; }, 10);
+
+            setTimeout(() => {
+                transOverlay.style.opacity = '0';
+                setTimeout(() => {
+                    transOverlay.style.display = 'none';
+                    loadQuestionData();
+                }, 300);
+            }, 600);
         }
 
         function loadQuestionData() {
@@ -414,11 +545,11 @@
             document.getElementById('badge-question-num').innerText = `Pertanyaan ${currentQuestion}`;
 
             const currentQuizObj = quizDatabase[(currentQuestion - 1) % quizDatabase.length];
-            document.getElementById('question-title').innerHTML = `<span class="text-[#ff4f8b]">${userName.toLowerCase()}</span> ${currentQuizObj.q}`;
+            document.getElementById('question-title').innerHTML = `<span style="color: #ff4f8b;">${userName.toLowerCase()}</span> ${currentQuizObj.q}`;
 
             for (let i = 1; i <= 4; i++) {
                 document.getElementById(`opt-text-${i}`).innerText = currentQuizObj.opts[i - 1];
-                document.getElementById(`opt-${i}`).classList.remove('border-pink-400', 'bg-pink-50/50');
+                document.getElementById(`opt-${i}`).style.borderColor = 'white';
             }
         }
 
