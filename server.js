@@ -1,6 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const path = require('path');
+const mongoose = require('mongoose'); // Library untuk koneksi ke MongoDB
 
 const app = express();
 
@@ -10,6 +11,57 @@ app.use(express.urlencoded({ extended: true }));
 
 // Menyediakan file statis dari folder public (tempat index.html berada)
 app.use(express.static(path.join(__dirname, 'public')));
+
+// ==========================================
+// KONEKSI MONGODB
+// ==========================================
+// Mengambil URI dari Environment Variables Railway (MONGODB_URI)
+const mongoURI = process.env.MONGODB_URI;
+
+mongoose.connect(mongoURI)
+.then(() => console.log('Berhasil terhubung ke MongoDB!'))
+.catch(err => console.error('Koneksi MongoDB gagal:', err));
+
+// Skema Data untuk Info Update / Saluran Kenangan
+const updateSchema = new mongoose.Schema({
+    title: String,
+    content: String,
+    imageUrl: String,
+    createdAt: { type: Date, default: Date.now }
+});
+const UpdateModel = mongoose.model('Update', updateSchema);
+
+// ==========================================
+// ENDPOINT DATABASE (Agar data tampil ke semua user)
+// ==========================================
+
+// 1. Endpoint untuk mengambil semua data update/kenangan
+app.get('/api/updates', async (req, res) => {
+    try {
+        const updates = await UpdateModel.find().sort({ createdAt: -1 });
+        res.json({ success: true, data: updates });
+    } catch (error) {
+        console.error('Error mengambil update:', error.message);
+        res.status(500).json({ success: false, message: 'Gagal mengambil data update.' });
+    }
+});
+
+// 2. Endpoint untuk menambah data update/kenangan baru
+app.post('/api/updates', async (req, res) => {
+    try {
+        const { title, content, imageUrl } = req.body;
+        const newUpdate = new UpdateModel({ title, content, imageUrl });
+        await newUpdate.save();
+        res.json({ success: true, message: 'Data berhasil disimpan ke database!' });
+    } catch (error) {
+        console.error('Error menyimpan update:', error.message);
+        res.status(500).json({ success: false, message: 'Gagal menyimpan data.' });
+    }
+});
+
+// ==========================================
+// ENDPOINT FITUR LAINNYA (AI & TikTok)
+// ==========================================
 
 // Endpoint Route untuk Chat AI
 app.post('/api/chat-ai', async (req, res) => {
