@@ -11,6 +11,15 @@
             font-family: 'Quicksand', sans-serif;
             background: linear-gradient(135deg, #e0f2fe 0%, #b9e3fc 100%);
         }
+        
+        /* Animasi Berdenyut / Goyang untuk Teks Kreatif */
+        @keyframes floatText {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-4px) scale(1.03); }
+        }
+        .animate-float {
+            animation: floatText 2.5s ease-in-out infinite;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-x-hidden">
@@ -18,11 +27,9 @@
     <!-- Container Utama -->
     <div class="w-full max-w-sm text-center relative pt-8">
         
-        <!-- ========================================== -->
-        <!-- MASKOT BERUANG KIRI & KANAN (PASTI MUNCUL) -->
-        <!-- ========================================== -->
-        <div class="absolute -top-2 left-2 text-4xl animate-bounce z-20">🧸</div>
-        <div class="absolute top-2 right-2 text-4xl animate-bounce z-20" style="animation-delay: 0.2s;">🐼</div>
+        <!-- Maskot Beruang & Panda di Atas Card Judul -->
+        <div class="absolute -top-1 left-2 text-4xl animate-bounce z-20">🧸</div>
+        <div class="absolute top-1 right-2 text-4xl animate-bounce z-20" style="animation-delay: 0.2s;">🐼</div>
 
         <!-- Header / Logo -->
         <div class="relative mb-5 bg-white/70 backdrop-blur-md pt-5 pb-4 rounded-[32px] shadow-lg border border-white">
@@ -56,12 +63,11 @@
                 <span class="text-xl">💖</span>
             </div>
 
-            <!-- Ilustrasi Karakter di Dalam Card (Menggunakan Emoji Estetik & Kotak Rapi) -->
+            <!-- Teks Animasi Bergerak Pengganti Gambar (Dev DhooCep BlockDay) -->
             <div class="flex justify-center items-center mb-4">
-                <div class="bg-pink-50 px-6 py-3 rounded-2xl border border-pink-100 shadow-inner flex items-center gap-3">
-                    <span class="text-3xl">📱</span>
-                    <span class="text-2xl">🤝</span>
-                    <span class="text-3xl">💻</span>
+                <div class="bg-gradient-to-r from-pink-50 via-sky-50 to-yellow-50 px-5 py-3 rounded-2xl border border-pink-100 shadow-inner animate-float">
+                    <p class="text-xs font-bold tracking-widest text-pink-500 uppercase">Dev • DhooCep</p>
+                    <p class="text-base font-extrabold text-slate-800 tracking-wide mt-0.5">BlockDay ✨</p>
                 </div>
             </div>
             
