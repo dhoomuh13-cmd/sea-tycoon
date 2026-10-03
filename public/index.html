@@ -959,7 +959,7 @@
                     showBubble('Email tidak ditemukan dalam sistem. ❌');
                 }
             } else {
-                showBubble('Password baru tidak valid! ⚠️');
+                showBubble('Password baru tidak valid! ⚠️️');
             }
         }
 
@@ -1512,11 +1512,6 @@
                         if (file.type.startsWith('video')) {
                             videoData = evt.target.result;
                         } else {
-                            // Bisa multiple foto
-                            for(let i=0; i<mediaInput.files.length; i++) {
-                                // Untuk kesederhanaan file pertama/multiple
-                            }
-                            // Kita proses multiple gambar dengan helper
                             processSongImages(mediaInput.files, (arr) => {
                                 imagesArray = arr;
                                 finalSaveSong();
@@ -1791,7 +1786,7 @@
             const message = document.getElementById('req-message').value.trim();
             const fileInput = document.getElementById('req-image');
             if (!message && fileInput.files.length === 0) {
-                showBubble('Pesan request wajib diisi! ⚠️');
+                showBubble('Pesan request wajib diisi! ⚠️️');
                 return;
             }
             const processSubmit = (imgData) => {
