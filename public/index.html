@@ -42,11 +42,22 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Animasi Transisi Menu Bahasa & Loading */
+        /* Transisi & Animasi */
         .fade-out {
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.6s ease-in-out;
+        }
+
+        .screen-hidden {
+            display: none;
+            opacity: 0;
+        }
+
+        .screen-active {
+            display: flex;
+            opacity: 1;
+            transition: opacity 0.4s ease-in-out;
         }
 
         .menu-hidden {
@@ -70,8 +81,6 @@
     <!-- 1. LAYAR LOADING (KERTAS BERGARIS) -->
     <!-- ========================================== -->
     <div id="loading-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-gradient-to-b from-[#4ea8de] to-[#90e0ef]">
-        
-        <!-- Logo di atas loading -->
         <div class="relative mb-6 text-center">
             <div class="flex justify-center gap-12 mb-[-12px] relative z-10">
                 <span class="text-3xl animate-bounce">🧸</span>
@@ -84,11 +93,8 @@
             </div>
         </div>
 
-        <!-- Kartu Kertas Catatan Loading -->
         <div class="w-full max-w-xs paper-bg rounded-[28px] p-8 shadow-2xl relative border-2 border-slate-100 transform rotate-1">
-            <!-- Selotip Pink -->
             <div class="absolute -top-3 -left-4 w-14 h-6 bg-pink-300/90 rotate-[-12deg] shadow-sm rounded-sm"></div>
-            
             <div class="absolute top-4 right-4 text-pink-500 text-xl">❤️</div>
             <div class="absolute bottom-4 left-4 text-yellow-400 text-xl">⭐</div>
 
@@ -96,7 +102,6 @@
                 <p class="text-2xl font-black text-slate-800 tracking-wide">
                     loading<span id="loading-dots">...</span>
                 </p>
-                <!-- Titik Loading Warna-warni -->
                 <div class="flex justify-center items-center gap-2.5 mt-5">
                     <span class="w-3.5 h-3.5 bg-blue-500 rounded-full animate-bounce shadow-sm"></span>
                     <span class="w-3.5 h-3.5 bg-pink-500 rounded-full animate-bounce shadow-sm" style="animation-delay: 0.2s;"></span>
@@ -108,30 +113,27 @@
 
 
     <!-- ========================================== -->
-    <!-- 2. HALAMAN UTAMA (SETELAH LOADING SELESAI) -->
+    <!-- 2. HALAMAN UTAMA (MENU AWAL) -->
     <!-- ========================================== -->
-    <div id="main-content" class="w-full max-w-sm text-center relative pt-8 z-10 opacity-0 transition-opacity duration-700">
+    <div id="main-screen" class="w-full max-w-sm text-center relative pt-8 z-10 screen-hidden flex-col items-center">
         
-        <!-- Maskot Beruang & Panda di Kiri-Kanan Judul -->
         <div class="absolute -top-2 left-1 text-4xl animate-bounce z-20">🧸</div>
         <div class="absolute top-0 right-1 text-4xl animate-bounce z-20" style="animation-delay: 0.2s;">🐼</div>
 
         <!-- Header / Logo Utama -->
-        <div class="relative mb-5 bg-white/90 backdrop-blur-md pt-5 pb-4 rounded-[32px] shadow-xl border-2 border-white">
+        <div class="relative mb-5 w-full bg-white/90 backdrop-blur-md pt-5 pb-4 rounded-[32px] shadow-xl border-2 border-white">
             <h1 class="text-4xl sm:text-5xl font-black tracking-wide leading-tight drop-shadow-sm">
                 <span class="gradient-text-1">Don't</span> <br>
                 <span class="gradient-text-2">Block</span> <span class="gradient-text-1">Me</span>
             </h1>
             
-            <!-- Subtitle Badge -->
             <div class="inline-block mt-3 bg-white px-5 py-1.5 rounded-full shadow-sm border border-pink-100">
                 <p id="txt-subtitle" class="text-xs sm:text-sm font-extrabold text-slate-600 tracking-wider">Cari Teman Palsumu</p>
             </div>
         </div>
 
         <!-- TOMBOL & MENU DROPDOWN PILIHAN BAHASA -->
-        <div class="relative mb-5">
-            <!-- Tombol Utama Pilihan Bahasa -->
+        <div class="relative mb-5 w-full">
             <div onclick="toggleLangMenu()" class="bg-white rounded-full p-3.5 shadow-md flex items-center justify-between px-6 border-2 border-pink-100 cursor-pointer hover:border-pink-300 transition active:scale-95">
                 <div class="flex items-center gap-2.5">
                     <span class="text-xl">🌐</span>
@@ -142,7 +144,6 @@
                 </div>
             </div>
 
-            <!-- Pop-up Menu Pilihan Bahasa (Muncul Saat Diklik) -->
             <div id="lang-menu" class="absolute top-16 left-0 right-0 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border-2 border-pink-100 p-2 z-30 menu-hidden flex flex-col gap-1.5">
                 <div onclick="changeLanguage('Indonesia', 'Cari Teman Palsumu', 'buat kuismu', 'blokir teman palsumu', 'Mulai Buat Kuis 🚀')" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-pink-50 cursor-pointer transition">
                     <span class="font-extrabold text-slate-800 text-sm">🇮🇩 Indonesia (Utama)</span>
@@ -151,21 +152,15 @@
                 <div onclick="changeLanguage('English', 'Find Your Fake Friends', 'create your quiz', 'block your fake friends', 'Start Creating Quiz 🚀')" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-pink-50 cursor-pointer transition">
                     <span class="font-extrabold text-slate-700 text-sm">🇬🇧 English</span>
                 </div>
-                <div onclick="changeLanguage('Melayu', 'Cari Kawan Palsu Anda', 'buat kuiz anda', 'sekat kawan palsu', 'Mula Buat Kuiz 🚀')" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-pink-50 cursor-pointer transition">
-                    <span class="font-extrabold text-slate-700 text-sm">🇲🇾 Melayu</span>
-                </div>
             </div>
         </div>
 
         <!-- Card Konten Utama -->
-        <div class="bg-white rounded-[32px] p-6 shadow-2xl border-[3px] border-dashed border-pink-200 relative">
-            
-            <!-- Ikon Hati Melayang -->
+        <div class="bg-white rounded-[32px] p-6 shadow-2xl border-[3px] border-dashed border-pink-200 relative w-full">
             <div class="absolute -top-3 -right-2 bg-white p-2 rounded-full shadow-md border border-pink-100">
                 <span class="text-xl">💖</span>
             </div>
 
-            <!-- Teks Animasi Bergerak di Tengah -->
             <div class="flex justify-center items-center mb-4">
                 <div class="bg-gradient-to-r from-pink-50 via-sky-50 to-yellow-50 px-6 py-3 rounded-2xl border border-pink-100 shadow-inner animate-pop">
                     <p class="text-xs font-black tracking-widest text-pink-600 uppercase">Dev • DhooCep</p>
@@ -173,39 +168,94 @@
                 </div>
             </div>
             
-            <!-- Teks Ajakan Dinamis Sesuai Bahasa -->
             <h2 id="txt-content" class="text-xl sm:text-2xl font-black text-slate-900 leading-snug tracking-tight">
                 buat kuismu <br> 
                 <span class="text-[#ff4f8b] text-3xl font-black">&</span> <br> 
                 <span class="bg-yellow-300 px-3 py-0.5 rounded-lg inline-block mt-1 text-slate-900 shadow-sm font-black transform -rotate-1">blokir</span> teman palsumu
             </h2>
 
-            <!-- Tombol Aksi Utama -->
-            <button id="btn-start" onclick="mulaiKuis()" class="mt-6 w-full bg-gradient-to-r from-[#ff4f8b] to-[#ff2a6d] hover:from-[#e03e77] hover:to-[#d91b5c] text-white font-black py-4 px-6 rounded-2xl shadow-lg shadow-pink-300 transition-all transform active:scale-95 text-base tracking-wide">
+            <!-- Tombol Mulai Kuis (Berpindah ke Halaman Masukkan Nama) -->
+            <button onclick="goToNameScreen()" class="mt-6 w-full bg-gradient-to-r from-[#ff4f8b] to-[#ff2a6d] hover:from-[#e03e77] hover:to-[#d91b5c] text-white font-black py-4 px-6 rounded-2xl shadow-lg shadow-pink-300 transition-all transform active:scale-95 text-base tracking-wide">
                 Mulai Buat Kuis 🚀
             </button>
         </div>
 
-        <!-- Footer Kecil -->
         <div class="mt-4 text-xs text-slate-700 font-extrabold drop-shadow-xs">
             ✨ Terhubung dengan MongoDB
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 3. HALAMAN MASUKKAN NAMA (SESUAI GAMBAR BARU) -->
+    <!-- ========================================== -->
+    <div id="name-screen" class="w-full max-w-sm text-center relative pt-4 z-10 screen-hidden flex-col items-center">
+        
+        <!-- Bar Atas: Tombol Kembali & Bendera Bahasa -->
+        <div class="w-full flex items-center justify-between mb-4 px-2">
+            <button onclick="goBackToMain()" class="w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center font-black text-slate-700 border border-pink-100 active:scale-95 transition">
+                ❮
+            </button>
+            <div class="bg-white px-3.5 py-1.5 rounded-full shadow-md border border-pink-100 flex items-center gap-1.5">
+                <span class="text-base">🇮🇩</span>
+                <span class="w-2 h-2 bg-pink-500 rounded-full"></span>
+            </div>
+        </div>
+
+        <!-- Logo Kecil & Maskot Atas -->
+        <div class="relative mb-3 w-full bg-white/90 backdrop-blur-md pt-3 pb-3 rounded-[28px] shadow-lg border border-white">
+            <div class="absolute -top-3 left-4 text-3xl animate-bounce">🧸</div>
+            <div class="absolute -top-3 right-4 text-3xl animate-bounce" style="animation-delay: 0.2s;">🐼</div>
+            <div class="absolute -top-2 right-12 text-2xl">🐻</div>
+            <h1 class="text-2xl font-black">
+                <span class="gradient-text-1">Don't</span> <span class="gradient-text-2">Block</span> <span class="gradient-text-1">Me</span>
+            </h1>
+        </div>
+
+        <!-- Balon Percakapan "siapa namamu?" & Maskot Panda di Samping -->
+        <div class="relative w-full my-4 flex flex-col items-center">
+            <!-- Balon Teks Pink -->
+            <div class="bg-pink-100/90 border-2 border-pink-200 px-6 py-3.5 rounded-[28px] shadow-sm relative w-11/12 max-w-[280px]">
+                <p class="text-xs font-extrabold text-slate-600 tracking-wider">siapa</p>
+                <p class="text-2xl font-black text-[#ff4f8b] tracking-wide">namamu?</p>
+                <!-- Ekor Balon Teks -->
+                <div class="absolute -bottom-3 right-16 w-4 h-4 bg-pink-100 border-r-2 border-b-2 border-pink-200 transform rotate-45"></div>
+            </div>
+
+            <!-- Maskot Panda di Pojok Kanan Atas Input -->
+            <div class="absolute -bottom-2 right-4 text-4xl z-20 animate-bounce">🐼</div>
+        </div>
+
+        <!-- Kotak Input Nama -->
+        <div class="bg-white rounded-[24px] p-4 shadow-xl border-2 border-pink-100 w-full relative mt-2">
+            <div class="relative flex items-center">
+                <input type="text" id="username-input" maxlength="15" oninput="updateCharCount(this)" placeholder="nama..." class="w-full bg-slate-50 border-2 border-pink-100 focus:border-pink-400 focus:outline-none rounded-2xl py-3.5 px-4 font-extrabold text-slate-800 placeholder-slate-400 text-base shadow-inner">
+                <span id="char-count" class="absolute right-4 text-xs font-bold text-slate-400">0/15</span>
+            </div>
+
+            <!-- Tombol Lanjut -->
+            <button onclick="submitName()" class="mt-4 w-full bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white font-black py-3.5 px-6 rounded-2xl shadow-lg shadow-blue-200 transition-all transform active:scale-95 text-base tracking-wide flex items-center justify-center gap-2">
+                <span>lanjut</span> <span class="text-lg">➔</span>
+            </button>
         </div>
 
     </div>
 
+
     <script>
-        // Durasi loading selama 6 detik
+        // Durasi loading 6 detik, lalu masuk ke menu utama
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 const loadingScreen = document.getElementById('loading-screen');
-                const mainContent = document.getElementById('main-content');
+                const mainScreen = document.getElementById('main-screen');
 
                 loadingScreen.classList.add('fade-out');
-                mainContent.classList.remove('opacity-0');
+                mainScreen.classList.remove('screen-hidden');
+                mainScreen.classList.add('screen-active');
             }, 6000); 
         });
 
-        // Fungsi Buka/Tutup Menu Bahasa
+        // Buka/Tutup Menu Bahasa
         function toggleLangMenu() {
             const menu = document.getElementById('lang-menu');
             const arrow = document.getElementById('lang-arrow');
@@ -221,29 +271,58 @@
             }
         }
 
-        // Fungsi Mengganti Bahasa Secara Interaktif
+        // Ganti Bahasa
         function changeLanguage(langName, subtitleText, actionText1, actionText2, buttonText) {
             document.getElementById('selected-lang').innerText = langName;
             document.getElementById('txt-subtitle').innerText = subtitleText;
             
-            // Ubah teks konten utama dengan mempertahankan elemen warna & gaya
             const contentEl = document.getElementById('txt-content');
             if (langName === 'English') {
                 contentEl.innerHTML = `create your quiz <br> <span class="text-[#ff4f8b] text-3xl font-black">&</span> <br> <span class="bg-yellow-300 px-3 py-0.5 rounded-lg inline-block mt-1 text-slate-900 shadow-sm font-black transform -rotate-1">block</span> your fake friends`;
-            } else if (langName === 'Melayu') {
-                contentEl.innerHTML = `buat kuiz anda <br> <span class="text-[#ff4f8b] text-3xl font-black">&</span> <br> <span class="bg-yellow-300 px-3 py-0.5 rounded-lg inline-block mt-1 text-slate-900 shadow-sm font-black transform -rotate-1">sekat</span> kawan palsu`;
             } else {
                 contentEl.innerHTML = `buat kuismu <br> <span class="text-[#ff4f8b] text-3xl font-black">&</span> <br> <span class="bg-yellow-300 px-3 py-0.5 rounded-lg inline-block mt-1 text-slate-900 shadow-sm font-black transform -rotate-1">blokir</span> teman palsumu`;
             }
-
-            document.getElementById('btn-start').innerText = buttonText;
-
-            // Tutup menu otomatis setelah dipilih
             toggleLangMenu();
         }
 
-        function mulaiKuis() {
-            alert('Tombol mulai diklik! Siap masuk ke halaman pembuatan kuis.');
+        // Berpindah ke Halaman Masukkan Nama
+        function goToNameScreen() {
+            const mainScreen = document.getElementById('main-screen');
+            const nameScreen = document.getElementById('name-screen');
+
+            mainScreen.classList.remove('screen-active');
+            mainScreen.classList.add('screen-hidden');
+
+            nameScreen.classList.remove('screen-hidden');
+            nameScreen.classList.add('screen-active');
+        }
+
+        // Kembali ke Menu Utama
+        function goBackToMain() {
+            const mainScreen = document.getElementById('main-screen');
+            const nameScreen = document.getElementById('name-screen');
+
+            nameScreen.classList.remove('screen-active');
+            nameScreen.classList.add('screen-hidden');
+
+            mainScreen.classList.remove('screen-hidden');
+            mainScreen.classList.add('screen-active');
+        }
+
+        // Hitung Karakter Input Nama (0/15)
+        function updateCharCount(input) {
+            const count = input.value.length;
+            document.getElementById('char-count').innerText = `${count}/15`;
+        }
+
+        // Aksi Ketika Klik Lanjut
+        function submitName() {
+            const name = document.getElementById('username-input').value.trim();
+            if (!name) {
+                alert('Silakan masukkan nama kamu terlebih dahulu!');
+                return;
+            }
+            alert(`Halo ${name}! Siap membuat kuis dan melacak teman palsumu.`);
         }
     </script>
 </body>
