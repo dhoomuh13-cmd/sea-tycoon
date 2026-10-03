@@ -29,7 +29,6 @@
             animation: bounceGlow 2s ease-in-out infinite;
         }
 
-        /* Efek Goyang / Wiggle saat card gender / pilihan kuis ditekan */
         @keyframes wiggle {
             0%, 100% { transform: rotate(0deg) scale(1.03); }
             25% { transform: rotate(-3deg) scale(1.03); }
@@ -37,6 +36,25 @@
         }
         .animate-wiggle {
             animation: wiggle 0.4s ease-in-out;
+        }
+
+        /* Efek Animasi Hasil Benar / Salah untuk Teman */
+        @keyframes correctPop {
+            0% { transform: scale(0.8); background-color: #ffffff; }
+            50% { transform: scale(1.05); background-color: #d1fae5; border-color: #10b981; }
+            100% { transform: scale(1); background-color: #ecfdf5; border-color: #10b981; }
+        }
+        .ans-correct {
+            animation: correctPop 0.5s ease-out forwards;
+        }
+
+        @keyframes wrongShake {
+            0%, 100% { transform: translateX(0); background-color: #ffffff; }
+            20%, 60% { transform: translateX(-6px); background-color: #fee2e2; border-color: #ef4444; }
+            40%, 80% { transform: translateX(6px); background-color: #fee2e2; border-color: #ef4444; }
+        }
+        .ans-wrong {
+            animation: wrongShake 0.5s ease-out forwards;
         }
 
         .gradient-text-1 {
@@ -108,13 +126,11 @@
 
         <div class="w-full max-w-xs paper-bg rounded-[28px] p-8 shadow-2xl relative border-2 border-slate-100 transform rotate-1">
             <div class="absolute -top-3 -left-4 w-14 h-6 bg-pink-300/90 rotate-[-12deg] shadow-sm rounded-sm"></div>
-            <div class="absolute top-4 right-4 text-pink-500 text-xl">❤️</div>
+            <div class="absolute top-4 right-4 text-pink-500 text-xl">❤️️</div>
             <div class="absolute bottom-4 left-4 text-yellow-400 text-xl">⭐</div>
 
             <div class="text-center my-6">
-                <p class="text-2xl font-black text-slate-800 tracking-wide">
-                    loading<span>...</span>
-                </p>
+                <p class="text-2xl font-black text-slate-800 tracking-wide">loading<span>...</span></p>
                 <div class="flex justify-center items-center gap-2.5 mt-5">
                     <span class="w-3.5 h-3.5 bg-blue-500 rounded-full animate-bounce shadow-sm"></span>
                     <span class="w-3.5 h-3.5 bg-pink-500 rounded-full animate-bounce shadow-sm" style="animation-delay: 0.2s;"></span>
@@ -126,7 +142,7 @@
 
 
     <!-- ========================================== -->
-    <!-- 2. LOADING TRANSISI GELEMBUNG ANTAR HALAMAN -->
+    <!-- 2. LOADING TRANSISI GELEMBUNG -->
     <!-- ========================================== -->
     <div id="transition-loading" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-black/30 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
         <div class="bg-white px-8 py-6 rounded-[32px] shadow-2xl border-2 border-pink-100 flex flex-col items-center animate-pop">
@@ -142,7 +158,7 @@
 
 
     <!-- ========================================== -->
-    <!-- 3. HALAMAN UTAMA (MENU AWAL) -->
+    <!-- 3. HALAMAN UTAMA -->
     <!-- ========================================== -->
     <div id="main-screen" class="screen active text-center pt-4">
         <div class="absolute -top-2 left-1 text-4xl animate-bounce z-20">🧸</div>
@@ -158,28 +174,6 @@
             </div>
         </div>
 
-        <div class="relative mb-5 w-full">
-            <div onclick="toggleLangMenu()" class="bg-white rounded-full p-3.5 shadow-md flex items-center justify-between px-6 border-2 border-pink-100 cursor-pointer hover:border-pink-300 transition active:scale-95">
-                <div class="flex items-center gap-2.5">
-                    <span class="text-xl">🌐</span>
-                    <span id="selected-lang" class="font-extrabold text-slate-800 text-sm">Indonesia</span>
-                </div>
-                <div id="lang-arrow" class="bg-[#ff4f8b] text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-black shadow-sm transition-transform duration-300">
-                    ▼
-                </div>
-            </div>
-
-            <div id="lang-menu" class="absolute top-16 left-0 right-0 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border-2 border-pink-100 p-2 z-30 menu-hidden flex flex-col gap-1.5">
-                <div onclick="changeLanguage('Indonesia', 'Cari Teman Palsumu')" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-pink-50 cursor-pointer transition">
-                    <span class="font-extrabold text-slate-800 text-sm">🇮🇩 Indonesia (Utama)</span>
-                    <span class="text-pink-500 font-bold text-xs">✓</span>
-                </div>
-                <div onclick="changeLanguage('English', 'Find Your Fake Friends')" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-pink-50 cursor-pointer transition">
-                    <span class="font-extrabold text-slate-700 text-sm">🇬🇧 English</span>
-                </div>
-            </div>
-        </div>
-
         <div class="bg-white rounded-[32px] p-6 shadow-2xl border-[3px] border-dashed border-pink-200 relative w-full">
             <div class="absolute -top-3 -right-2 bg-white p-2 rounded-full shadow-md border border-pink-100">
                 <span class="text-xl">💖</span>
@@ -191,7 +185,7 @@
                 </div>
             </div>
             
-            <h2 id="txt-content" class="text-xl sm:text-2xl font-black text-slate-900 leading-snug tracking-tight">
+            <h2 class="text-xl sm:text-2xl font-black text-slate-900 leading-snug tracking-tight">
                 buat kuismu <br> 
                 <span class="text-[#ff4f8b] text-3xl font-black">&</span> <br> 
                 <span class="bg-yellow-300 px-3 py-0.5 rounded-lg inline-block mt-1 text-slate-900 shadow-sm font-black transform -rotate-1">blokir</span> teman palsumu
@@ -209,20 +203,9 @@
     <!-- 4. HALAMAN MASUKKAN NAMA -->
     <!-- ========================================== -->
     <div id="name-screen" class="screen text-center pt-2">
-        <button onclick="goToScreen('main-screen')" class="absolute -top-12 left-0 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center font-black text-slate-700 border border-pink-100 active:scale-95 transition z-30">
-            ❮
-        </button>
-
-        <div class="w-full flex items-center justify-end mb-3 px-1">
-            <div class="bg-white px-3.5 py-1.5 rounded-full shadow-md border border-pink-100 flex items-center gap-1.5">
-                <span class="text-base">🇮🇩</span>
-                <span class="w-2 h-2 bg-pink-500 rounded-full"></span>
-            </div>
-        </div>
+        <button onclick="goToScreen('main-screen')" class="absolute -top-12 left-0 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center font-black text-slate-700 border border-pink-100 active:scale-95 transition z-30">❮</button>
 
         <div class="relative mb-4 w-full bg-white/90 backdrop-blur-md pt-3 pb-3 rounded-[28px] shadow-lg border border-white">
-            <div class="absolute -top-3 left-6 text-3xl animate-bounce">🧸</div>
-            <div class="absolute -top-3 right-6 text-3xl animate-bounce" style="animation-delay: 0.2s;">🐼</div>
             <h1 class="text-2xl font-black">
                 <span class="gradient-text-1">Don't</span> <span class="gradient-text-2">Block</span> <span class="gradient-text-1">Me</span>
             </h1>
@@ -232,9 +215,7 @@
             <div class="bg-pink-100/95 border-2 border-pink-200 px-6 py-4 rounded-[28px] shadow-md relative transform -rotate-2 max-w-[240px]">
                 <p class="text-xs font-extrabold text-slate-600 tracking-wider">siapa</p>
                 <p class="text-2xl font-black text-[#ff4f8b] tracking-wide">namamu?</p>
-                <div class="absolute -bottom-3 right-8 w-4 h-4 bg-pink-100 border-r-2 border-b-2 border-pink-200 transform rotate-45"></div>
             </div>
-            <div class="absolute right-4 bottom-0 text-4xl z-20 animate-bounce">🐼</div>
         </div>
 
         <div class="bg-white rounded-[28px] p-5 shadow-xl border-2 border-pink-100 w-full relative mt-2">
@@ -254,21 +235,10 @@
     <!-- 5. HALAMAN PILIH GENDER -->
     <!-- ========================================== -->
     <div id="gender-screen" class="screen text-center pt-2">
-        <button onclick="goToScreen('name-screen')" class="absolute -top-12 left-0 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center font-black text-slate-700 border border-pink-100 active:scale-95 transition z-30">
-            ❮
-        </button>
-
-        <div class="w-full flex items-center justify-end mb-3 px-1">
-            <div class="bg-white px-3.5 py-1.5 rounded-full shadow-md border border-pink-100 flex items-center gap-1.5">
-                <span class="text-base">🇮🇩</span>
-                <span class="w-2 h-2 bg-pink-500 rounded-full"></span>
-            </div>
-        </div>
+        <button onclick="goToScreen('name-screen')" class="absolute -top-12 left-0 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center font-black text-slate-700 border border-pink-100 active:scale-95 transition z-30">❮</button>
 
         <div class="relative mb-3 w-full bg-white/90 backdrop-blur-md pt-3 pb-3 rounded-[28px] shadow-lg border border-white">
-            <div class="absolute -top-3 left-6 text-3xl animate-bounce">🧸</div>
-            <div class="absolute -top-3 right-6 text-3xl animate-bounce" style="animation-delay: 0.2s;">🐼</div>
-            <h1 class="text-2xl font-black drop-shadow-sm">
+            <h1 class="text-2xl font-black">
                 <span class="gradient-text-1">Don't</span> <span class="gradient-text-2">Block</span> <span class="gradient-text-1">Me</span>
             </h1>
         </div>
@@ -278,57 +248,23 @@
         </div>
 
         <div class="bg-white rounded-[24px] py-3.5 px-6 shadow-md border-2 border-white mb-4 inline-block mx-auto">
-            <p class="text-xl font-black text-slate-900 tracking-tight drop-shadow-sm">pilih</p>
-            <p class="text-xl font-black text-[#00b4d8] tracking-tight drop-shadow-sm underline decoration-orange-400 decoration-3 underline-offset-4">jenis kelaminmu</p>
-        </div>
-
-        <div class="flex justify-between px-6 mb-2">
-            <span class="text-pink-400 text-lg animate-pulse">✨</span>
-            <span class="text-yellow-400 text-lg animate-pulse">✨</span>
+            <p class="text-xl font-black text-slate-900 tracking-tight">pilih</p>
+            <p class="text-xl font-black text-[#00b4d8] tracking-tight underline decoration-orange-400 decoration-3 underline-offset-4">jenis kelaminmu</p>
         </div>
 
         <div class="grid grid-cols-2 gap-4 w-full">
             <div id="card-male" onclick="selectGender('male')" class="bg-white rounded-[28px] p-4 shadow-xl border-2 border-pink-100 flex flex-col items-center cursor-pointer transition transform active:scale-95 hover:border-pink-300">
-                <div class="w-full h-32 flex items-center justify-center bg-amber-50/60 rounded-2xl mb-2 overflow-hidden relative">
-                    <svg viewBox="0 0 200 200" class="w-28 h-28 drop-shadow-md">
-                        <circle cx="65" cy="55" r="25" fill="#b07d62"/>
-                        <circle cx="65" cy="55" r="14" fill="#f5d6cb"/>
-                        <circle cx="135" cy="55" r="25" fill="#b07d62"/>
-                        <circle cx="135" cy="55" r="14" fill="#f5d6cb"/>
-                        <circle cx="100" cy="100" r="48" fill="#c68b59"/>
-                        <circle cx="72" cy="115" r="12" fill="#ffb4a2" opacity="0.8"/>
-                        <circle cx="128" cy="115" r="12" fill="#ffb4a2" opacity="0.8"/>
-                        <path d="M 75 92 Q 82 86 89 92" stroke="#4a3525" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-                        <path d="M 111 92 Q 118 86 125 92" stroke="#4a3525" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-                        <ellipse cx="100" cy="104" rx="7" ry="5" fill="#4a3525"/>
-                        <path d="M 94 114 Q 100 120 106 114" stroke="#4a3525" stroke-width="3" fill="none" stroke-linecap="round"/>
-                        <path d="M 70 145 Q 100 135 130 145 L 140 185 Q 100 195 60 185 Z" fill="#c68b59"/>
-                        <path d="M 85 155 Q 100 145 115 155" stroke="#4a3525" stroke-width="3" fill="none" stroke-linecap="round"/>
-                    </svg>
+                <div class="w-full h-32 flex items-center justify-center bg-amber-50/60 rounded-2xl mb-2">
+                    <span class="text-4xl">👦</span>
                 </div>
-                <span class="font-black text-slate-800 text-sm drop-shadow-sm">Laki-laki</span>
+                <span class="font-black text-slate-800 text-sm">Laki-laki</span>
             </div>
 
             <div id="card-female" onclick="selectGender('female')" class="bg-white rounded-[28px] p-4 shadow-xl border-2 border-pink-100 flex flex-col items-center cursor-pointer transition transform active:scale-95 hover:border-pink-300">
-                <div class="w-full h-32 flex items-center justify-center bg-pink-50/60 rounded-2xl mb-2 overflow-hidden relative">
-                    <svg viewBox="0 0 200 200" class="w-28 h-28 drop-shadow-md">
-                        <circle cx="65" cy="55" r="24" fill="#2b2d42"/>
-                        <circle cx="135" cy="55" r="24" fill="#2b2d42"/>
-                        <circle cx="100" cy="100" r="48" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
-                        <ellipse cx="80" cy="95" rx="14" ry="11" fill="#2b2d42" transform="rotate(-15 80 95)"/>
-                        <ellipse cx="120" cy="95" rx="14" ry="11" fill="#2b2d42" transform="rotate(15 120 95)"/>
-                        <circle cx="77" cy="93" r="4" fill="#ffffff"/>
-                        <circle cx="123" cy="93" r="4" fill="#ffffff"/>
-                        <circle cx="68" cy="112" r="10" fill="#ffb4a2" opacity="0.85"/>
-                        <circle cx="132" cy="112" r="10" fill="#ffb4a2" opacity="0.85"/>
-                        <ellipse cx="100" cy="103" rx="6" ry="4" fill="#2b2d42"/>
-                        <path d="M 94 110 Q 100 116 106 110" stroke="#2b2d42" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                        <path d="M 97 113 Q 100 121 103 113 Z" fill="#ff4f8b"/>
-                        <path d="M 70 145 Q 100 135 130 145 L 140 185 Q 100 195 60 185 Z" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
-                        <path d="M 85 155 Q 100 148 115 155" stroke="#2b2d42" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                    </svg>
+                <div class="w-full h-32 flex items-center justify-center bg-pink-50/60 rounded-2xl mb-2">
+                    <span class="text-4xl">👧</span>
                 </div>
-                <span class="font-black text-slate-800 text-sm drop-shadow-sm">Perempuan</span>
+                <span class="font-black text-slate-800 text-sm">Perempuan</span>
             </div>
         </div>
     </div>
@@ -338,28 +274,15 @@
     <!-- 6. HALAMAN PEMBUATAN KUIS (1 - 15 PERTANYAAN) -->
     <!-- ========================================== -->
     <div id="quiz-creator-screen" class="screen text-center pt-2">
-        <button onclick="goToScreen('gender-screen')" class="absolute -top-12 left-0 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center font-black text-slate-700 border border-pink-100 active:scale-95 transition z-30">
-            ❮
-        </button>
+        <button onclick="goToScreen('gender-screen')" class="absolute -top-12 left-0 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center font-black text-slate-700 border border-pink-100 active:scale-95 transition z-30">❮</button>
 
         <div class="w-full flex items-center justify-between mb-3 px-1">
             <div class="bg-white px-4 py-1.5 rounded-full shadow-md border border-pink-100">
                 <span id="question-counter" class="text-xs font-black text-[#ff4f8b]">Pertanyaan 1 dari 15</span>
             </div>
-            <div class="bg-white px-3.5 py-1.5 rounded-full shadow-md border border-pink-100 flex items-center gap-1.5">
-                <span class="text-base">🇮🇩</span>
-            </div>
         </div>
 
-        <div class="paper-bg rounded-[32px] p-5 shadow-2xl border-2 border-slate-200 relative w-full mb-4 text-left overflow-hidden">
-            <div class="absolute left-2 top-0 bottom-0 flex flex-col justify-around py-3 opacity-60">
-                <div class="w-2.5 h-2.5 bg-slate-400 rounded-full"></div>
-                <div class="w-2.5 h-2.5 bg-slate-400 rounded-full"></div>
-                <div class="w-2.5 h-2.5 bg-slate-400 rounded-full"></div>
-                <div class="w-2.5 h-2.5 bg-slate-400 rounded-full"></div>
-                <div class="w-2.5 h-2.5 bg-slate-400 rounded-full"></div>
-            </div>
-
+        <div class="paper-bg rounded-[32px] p-5 shadow-2xl border-2 border-slate-200 relative w-full mb-4 text-left">
             <div class="pl-4">
                 <div class="flex justify-center mb-2">
                     <div class="bg-yellow-300 px-4 py-0.5 rounded-lg shadow-sm border border-yellow-400 transform -rotate-1">
@@ -374,35 +297,95 @@
 
         <div class="flex flex-col gap-3 w-full">
             <div onclick="selectQuizAnswer(1)" id="opt-1" class="bg-white rounded-[24px] p-3 shadow-lg border-2 border-white flex items-center gap-3.5 cursor-pointer transition transform active:scale-95 hover:border-pink-300">
-                <div class="w-12 h-12 rounded-2xl overflow-hidden bg-slate-100 flex-shrink-0 shadow-inner flex items-center justify-center text-2xl">🍔</div>
-                <div class="flex-grow text-left">
-                    <p id="opt-text-1" class="font-black text-slate-900 text-sm">Camilan / makanan</p>
-                    <div class="w-16 h-1.5 bg-yellow-300 rounded-full mt-1"></div>
-                </div>
+                <div class="w-10 h-10 rounded-2xl bg-slate-100 flex items-center justify-center text-xl">🍔</div>
+                <p id="opt-text-1" class="font-black text-slate-900 text-sm text-left">Camilan / makanan</p>
             </div>
-
             <div onclick="selectQuizAnswer(2)" id="opt-2" class="bg-white rounded-[24px] p-3 shadow-lg border-2 border-white flex items-center gap-3.5 cursor-pointer transition transform active:scale-95 hover:border-pink-300">
-                <div class="w-12 h-12 rounded-2xl overflow-hidden bg-slate-100 flex-shrink-0 shadow-inner flex items-center justify-center text-2xl">👟</div>
-                <div class="flex-grow text-left">
-                    <p id="opt-text-2" class="font-black text-slate-900 text-sm">Baju / sepatu</p>
-                    <div class="w-16 h-1.5 bg-cyan-300 rounded-full mt-1"></div>
-                </div>
+                <div class="w-10 h-10 rounded-2xl bg-slate-100 flex items-center justify-center text-xl">👟</div>
+                <p id="opt-text-2" class="font-black text-slate-900 text-sm text-left">Baju / sepatu</p>
             </div>
-
             <div onclick="selectQuizAnswer(3)" id="opt-3" class="bg-white rounded-[24px] p-3 shadow-lg border-2 border-white flex items-center gap-3.5 cursor-pointer transition transform active:scale-95 hover:border-pink-300">
-                <div class="w-12 h-12 rounded-2xl overflow-hidden bg-slate-100 flex-shrink-0 shadow-inner flex items-center justify-center text-2xl">🎮</div>
-                <div class="flex-grow text-left">
-                    <p id="opt-text-3" class="font-black text-slate-900 text-sm">Game / hiburan</p>
-                    <div class="w-16 h-1.5 bg-emerald-300 rounded-full mt-1"></div>
-                </div>
+                <div class="w-10 h-10 rounded-2xl bg-slate-100 flex items-center justify-center text-xl">🎮</div>
+                <p id="opt-text-3" class="font-black text-slate-900 text-sm text-left">Game / hiburan</p>
+            </div>
+            <div onclick="selectQuizAnswer(4)" id="opt-4" class="bg-white rounded-[24px] p-3 shadow-lg border-2 border-white flex items-center gap-3.5 cursor-pointer transition transform active:scale-95 hover:border-pink-300">
+                <div class="w-10 h-10 rounded-2xl bg-slate-100 flex items-center justify-center text-xl">🎧</div>
+                <p id="opt-text-4" class="font-black text-slate-900 text-sm text-left">Teknologi / aksesori</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 7. HALAMAN "YUHUU! KUISMU SUDAH SIAP!" (REFERENSI GAMBAR) -->
+    <!-- ========================================== -->
+    <div id="ready-screen" class="screen text-center pt-2">
+        <div class="bg-white/95 backdrop-blur-md rounded-[32px] p-6 shadow-2xl border-2 border-pink-200 relative w-full overflow-hidden">
+            <div class="absolute -top-3 left-4 text-2xl animate-bounce">🎉</div>
+            <div class="absolute top-2 right-4 text-2xl animate-bounce" style="animation-delay: 0.2s;">✨</div>
+
+            <h1 class="text-3xl sm:text-4xl font-black tracking-wide text-slate-900 mt-2">
+                YUHUU!
+            </h1>
+            <div class="w-36 h-3 bg-yellow-300 mx-auto -mt-2 rounded-full transform -rotate-1 shadow-sm mb-4"></div>
+
+            <p class="text-base font-black text-slate-800 mb-4">
+                kuismu sudah <span class="bg-cyan-200 px-2 py-0.5 rounded-lg">siap</span> !
+            </p>
+
+            <div class="paper-bg p-5 rounded-[24px] border-2 border-slate-200 shadow-inner mb-6 relative">
+                <div class="absolute top-3 left-3 w-3 h-3 bg-pink-400 rounded-full"></div>
+                <div class="flex justify-center text-3xl mb-2">🤎🧋</div>
+                <p class="text-xs sm:text-sm font-extrabold text-slate-700 leading-relaxed">
+                    kirim ke temanmu dan lihat siapa yang <span class="text-[#ff4f8b] font-black underline">benar-benar</span> kenal kamu! 😎
+                </p>
             </div>
 
-            <div onclick="selectQuizAnswer(4)" id="opt-4" class="bg-white rounded-[24px] p-3 shadow-lg border-2 border-white flex items-center gap-3.5 cursor-pointer transition transform active:scale-95 hover:border-pink-300">
-                <div class="w-12 h-12 rounded-2xl overflow-hidden bg-slate-100 flex-shrink-0 shadow-inner flex items-center justify-center text-2xl">🎧</div>
-                <div class="flex-grow text-left">
-                    <p id="opt-text-4" class="font-black text-slate-900 text-sm">Teknologi / aksesori</p>
-                    <div class="w-16 h-1.5 bg-pink-300 rounded-full mt-1"></div>
+            <button onclick="shareQuizLink()" class="w-full bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white font-black py-4 px-6 rounded-2xl shadow-lg shadow-blue-300 transition-all transform active:scale-95 text-base tracking-wide flex items-center justify-center gap-2">
+                <span>📤</span> <span>BAGIKAN SEKARANG!</span>
+            </button>
+        </div>
+        <p class="mt-3 text-xs font-bold text-slate-700">Makin banyak teman yang main, makin seru! 🎮</p>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 8. HALAMAN SIMULASI TEMAN MENJAWAB KUIS (DENGAN EFEK BENAR / SALAH) -->
+    <!-- ========================================== -->
+    <div id="friend-play-screen" class="screen text-center pt-2">
+        <div class="w-full bg-white px-4 py-2 rounded-full shadow-md border border-pink-100 mb-3">
+            <span class="text-xs font-black text-blue-600">🎮 Mode Tebak Kuis Teman</span>
+        </div>
+
+        <div class="paper-bg rounded-[32px] p-5 shadow-2xl border-2 border-slate-200 relative w-full mb-4 text-left">
+            <div class="pl-2">
+                <div class="flex justify-center mb-2">
+                    <div class="bg-pink-200 px-4 py-0.5 rounded-lg shadow-sm border border-pink-300">
+                        <span id="friend-q-num" class="text-xs font-black text-slate-900 uppercase">Pertanyaan 1</span>
+                    </div>
                 </div>
+                <h2 id="friend-q-title" class="text-sm sm:text-base font-black text-slate-900 text-center leading-snug mb-2">
+                    Tebak jawaban dari Dika!
+                </h2>
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-3 w-full">
+            <div onclick="answerFriendQuiz(1)" id="f-opt-1" class="bg-white rounded-[24px] p-3 shadow-lg border-2 border-white flex items-center gap-3 cursor-pointer transition">
+                <div class="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center text-sm font-bold">A</div>
+                <p id="f-opt-text-1" class="font-black text-slate-900 text-sm text-left">Opsi 1</p>
+            </div>
+            <div onclick="answerFriendQuiz(2)" id="f-opt-2" class="bg-white rounded-[24px] p-3 shadow-lg border-2 border-white flex items-center gap-3 cursor-pointer transition">
+                <div class="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center text-sm font-bold">B</div>
+                <p id="f-opt-text-2" class="font-black text-slate-900 text-sm text-left">Opsi 2</p>
+            </div>
+            <div onclick="answerFriendQuiz(3)" id="f-opt-3" class="bg-white rounded-[24px] p-3 shadow-lg border-2 border-white flex items-center gap-3 cursor-pointer transition">
+                <div class="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center text-sm font-bold">C</div>
+                <p id="f-opt-text-3" class="font-black text-slate-900 text-sm text-left">Opsi 3</p>
+            </div>
+            <div onclick="answerFriendQuiz(4)" id="f-opt-4" class="bg-white rounded-[24px] p-3 shadow-lg border-2 border-white flex items-center gap-3 cursor-pointer transition">
+                <div class="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center text-sm font-bold">D</div>
+                <p id="f-opt-text-4" class="font-black text-slate-900 text-sm text-left">Opsi 4</p>
             </div>
         </div>
     </div>
@@ -411,55 +394,34 @@
     <script>
         let userName = "";
         let currentQuestion = 1;
-        const totalQuestions = 15; // Total 15 pertanyaan
+        const totalQuestions = 15;
 
-        // Daftar 15 pertanyaan seru
+        // Daftar 15 pertanyaan
         const quizDatabase = [
-            { q: "paling banyak menghabiskan uang untuk apa?", opts: ["Camilan / makanan", "Baju / sepatu", "Game / hiburan", "Teknologi / aksesori"] },
-            { q: "kalau hari libur, kebiasaan utamanya ngapain?", opts: ["Tidur seharian", "Jalan-jalan keluar", "Main game online", "Nonton film/drakor"] },
-            { q: "sifat apa yang paling tidak disukai dari orang lain?", opts: ["Suka bohong", "Pamer / sok tahu", "Suka ingkar janji", "Cuek banget"] },
-            { q: "hal apa yang paling gampang bikin ketawa?", opts: ["Meme lucu", "Temen keseleo/jatuh", "Cerita gaje", "Gak tau, gampang ngakak"] },
-            { q: "kalau lagi badmood, biasanya pelariannya ke mana?", opts: ["Makan banyak", "Tidur pulas", "Dengerin musik keras", "Diam di kamar"] },
-            { q: "minuman favorit kalau lagi nongkrong apa?", opts: ["Es kopi / boba", "Teh manis dingin", "Air mineral aja", "Soda / jus buah"] },
-            { q: "paling takut sama hal apa di dunia ini?", opts: ["Ketinggian / gelap", "Gagal masa depan", "Kehilangan sahabat", "Kecoa terbang"] },
-            { q: "tipe teman seperti apa yang bakal langsung diblokir?", opts: ["Buka aib temen", "Suka pinjam duit", "Bikin emosi mulu", "Baperan parah"] },
-            { q: "paling hobi ngelakuin apa pas tengah malam?", opts: ["Scrolling sosmed", "Ngemil sembunyi-sembunyi", "Main game maraton", "Mikirin masa lalu"] },
-            { q: "kalau dikasih uang kaget 10 juta, mau beli apa?", opts: ["Pamer traktir temen", "Ditabung semua", "Beli HP/gadget baru", "Belanja baju branded"] },
-            { q: "hal paling memalukan apa yang pernah dialami?", opts: ["Salah panggil orang", "Jatuh di tempat umum", "Salah chat orang", "Lupa lirik lagu"] },
-            { q: "sosmed aplikasi apa yang paling kecanduan dibuka?", opts: ["TikTok", "Instagram", "WhatsApp", "YouTube / Game"] },
-            { q: "pilih mana: kucing imut atau anjing setia?", opts: ["Tim Kucing Lucu", "Tim Anjing Setia", "Dua-duanya suka", "Takut hewan berbulu"] },
-            { q: "kalau jadi superhero, kekuatan apa yang dipilih?", opts: ["Bisa menghilang", "Bisa terbang bebas", "Membaca pikiran orang", "Waktu bisa diputar"] },
-            { q: "seberapa jujur kamu dalam menjawab kuis ini?", opts: ["Jujur banget dong!", "Lumayan jujur sih", "Agak rahasia ya", "Asal jawab aja wkwk"] }
+            { q: "paling banyak menghabiskan uang untuk apa?", opts: ["Camilan / makanan", "Baju / sepatu", "Game / hiburan", "Teknologi / aksesori"], correct: 1 },
+            { q: "kalau hari libur, kebiasaan utamanya ngapain?", opts: ["Tidur seharian", "Jalan-jalan keluar", "Main game online", "Nonton film/drakor"], correct: 3 },
+            { q: "sifat apa yang paling tidak disukai dari orang lain?", opts: ["Suka bohong", "Pamer / sok tahu", "Suka ingkar janji", "Cuek banget"], correct: 1 },
+            { q: "hal apa yang paling gampang bikin ketawa?", opts: ["Meme lucu", "Temen keseleo/jatuh", "Cerita gaje", "Gak tau, gampang ngakak"], correct: 1 },
+            { q: "kalau lagi badmood, biasanya pelariannya ke mana?", opts: ["Makan banyak", "Tidur pulas", "Dengerin musik keras", "Diam di kamar"], correct: 2 },
+            { q: "minuman favorit kalau lagi nongkrong apa?", opts: ["Es kopi / boba", "Teh manis dingin", "Air mineral aja", "Soda / jus buah"], correct: 1 },
+            { q: "paling takut sama hal apa di dunia ini?", opts: ["Ketinggian / gelap", "Gagal masa depan", "Kehilangan sahabat", "Kecoa terbang"], correct: 3 },
+            { q: "tipe teman seperti apa yang bakal langsung diblokir?", opts: ["Buka aib temen", "Suka pinjam duit", "Bikin emosi mulu", "Baperan parah"], correct: 1 },
+            { q: "paling hobi ngelakuin apa pas tengah malam?", opts: ["Scrolling sosmed", "Ngemil sembunyi-sembunyi", "Main game maraton", "Mikirin masa lalu"], correct: 1 },
+            { q: "kalau dikasih uang kaget 10 juta, mau beli apa?", opts: ["Pamer traktir temen", "Ditabung semua", "Beli HP/gadget baru", "Belanja baju branded"], correct: 3 },
+            { q: "hal paling memalukan apa yang pernah dialami?", opts: ["Salah panggil orang", "Jatuh di tempat umum", "Salah chat orang", "Lupa lirik lagu"], correct: 3 },
+            { q: "sosmed aplikasi apa yang paling kecanduan dibuka?", opts: ["TikTok", "Instagram", "WhatsApp", "YouTube / Game"], correct: 1 },
+            { q: "pilih mana: kucing imut atau anjing setia?", opts: ["Tim Kucing Lucu", "Tim Anjing Setia", "Dua-duanya suka", "Takut hewan berbulu"], correct: 1 },
+            { q: "kalau jadi superhero, kekuatan apa yang dipilih?", opts: ["Bisa menghilang", "Bisa terbang bebas", "Membaca pikiran orang", "Waktu bisa diputar"], correct: 2 },
+            { q: "seberapa jujur kamu dalam menjawab kuis ini?", opts: ["Jujur banget dong!", "Lumayan jujur sih", "Agak rahasia ya", "Asal jawab aja wkwk"], correct: 1 }
         ];
 
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 document.getElementById('loading-screen').classList.add('fade-out');
                 document.getElementById('main-screen').classList.add('active');
-            }, 6000); 
+            }, 5000); 
         });
 
-        function toggleLangMenu() {
-            const menu = document.getElementById('lang-menu');
-            const arrow = document.getElementById('lang-arrow');
-            if (menu.classList.contains('menu-hidden')) {
-                menu.classList.remove('menu-hidden');
-                menu.classList.add('menu-show');
-                arrow.style.transform = 'rotate(180deg)';
-            } else {
-                menu.classList.remove('menu-show');
-                menu.classList.add('menu-hidden');
-                arrow.style.transform = 'rotate(0deg)';
-            }
-        }
-
-        function changeLanguage(langName, subtitleText) {
-            document.getElementById('selected-lang').innerText = langName;
-            document.getElementById('txt-subtitle').innerText = subtitleText;
-            toggleLangMenu();
-        }
-
-        // Transisi Gelembung
         function triggerTransition(targetScreenId, loadingText) {
             const transOverlay = document.getElementById('transition-loading');
             document.getElementById('transition-text').innerText = loadingText;
@@ -472,7 +434,7 @@
                     transOverlay.classList.add('hidden');
                     goToScreen(targetScreenId);
                 }, 300);
-            }, 1000);
+            }, 900);
         }
 
         function goToScreen(screenId) {
@@ -492,10 +454,8 @@
                 alert('Silakan masukkan nama kamu terlebih dahulu!');
                 return;
             }
-            
             document.getElementById('greeting-text').innerText = `hai, ${userName} 👋`;
             document.getElementById('creator-name-label').innerText = userName.toLowerCase();
-
             triggerTransition('gender-screen', `Halo ${userName}, pilih gendermu...`);
         }
 
@@ -514,8 +474,8 @@
             setTimeout(() => {
                 currentQuestion = 1;
                 loadQuestionData();
-                triggerTransition('quiz-creator-screen', 'Mempersiapkan 15 Pertanyaan Kuis...');
-            }, 500);
+                triggerTransition('quiz-creator-screen', 'Menyiapkan 15 Pertanyaan Kuis...');
+            }, 400);
         }
 
         function selectQuizAnswer(optionNum) {
@@ -529,10 +489,8 @@
                     currentQuestion++;
                     showQuizTransition(`Menuju Pertanyaan ${currentQuestion} dari ${totalQuestions}...`);
                 } else {
-                    showQuizTransition("Kuis 15 Soal Berhasil Dibuat! 🎉");
-                    setTimeout(() => {
-                        alert(`Hore ${userName}! Kuis kamu sudah lengkap 15 pertanyaan dan siap dibagikan ke teman-temanmu!`);
-                    }, 1000);
+                    // SELESAI 15 PERTANYAAN -> Masuk ke halaman "YUHUU! Kuis mu sudah siap!"
+                    triggerTransition('ready-screen', 'Menyusun Kuismu...');
                 }
             }, 400);
         }
@@ -549,7 +507,7 @@
                     transOverlay.classList.add('hidden');
                     loadQuestionData();
                 }, 300);
-            }, 700);
+            }, 600);
         }
 
         function loadQuestionData() {
@@ -563,6 +521,71 @@
                 document.getElementById(`opt-text-${i}`).innerText = currentQuizObj.opts[i - 1];
                 document.getElementById(`opt-${i}`).classList.remove('border-pink-400', 'bg-pink-50/50');
             }
+        }
+
+        // FUNGSI BAGIKAN LINK (SIMULASI MASUK KE MODE TEMAN)
+        function shareQuizLink() {
+            if (navigator.share) {
+                navigator.share({
+                    title: "Don't Block Me!",
+                    text: `Coba tebak seberapa kenal kamu sama ${userName}! Mainkan kuismu di sini:`,
+                    url: window.location.href,
+                }).catch(() => {});
+            } else {
+                alert(`Link kuis ${userName} berhasil disalin! (Simulasi: Masuk ke mode tebakan teman)`);
+            }
+            
+            // Masuk ke mode simulasi teman menjawab kuis dengan efek benar/salah
+            currentFriendQuestion = 0;
+            loadFriendQuestion();
+            triggerTransition('friend-play-screen', 'Membuka Kuis Teman...');
+        }
+
+        // VARIABEL SIMULASI TEMAN
+        let currentFriendQuestion = 0;
+        const totalFriendQuestions = 3; // Contoh simulasi 3 soal pertama
+
+        function loadFriendQuestion() {
+            const qObj = quizDatabase[currentFriendQuestion];
+            document.getElementById('friend-q-num').innerText = `Pertanyaan ${currentFriendQuestion + 1} dari ${totalQuestions}`;
+            document.getElementById('friend-q-title').innerHTML = `Tebak: <span class="text-[#ff4f8b]">${userName}</span> ${qObj.q}`;
+
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById(`f-opt-text-${i}`).innerText = qObj.opts[i - 1];
+                const btn = document.getElementById(`f-opt-${i}`);
+                btn.className = "bg-white rounded-[24px] p-3 shadow-lg border-2 border-white flex items-center gap-3 cursor-pointer transition";
+                btn.style.pointerEvents = "auto";
+            }
+        }
+
+        function answerFriendQuiz(optIndex) {
+            const qObj = quizDatabase[currentFriendQuestion];
+            const isCorrect = (optIndex === qObj.correct);
+
+            // Matikan klik sementara agar animasi berjalan mulus
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById(`f-opt-${i}`).style.pointerEvents = "none";
+            }
+
+            const clickedCard = document.getElementById(`f-opt-${optIndex}`);
+            const correctCard = document.getElementById(`f-opt-${qObj.correct}`);
+
+            if (isCorrect) {
+                clickedCard.classList.add('ans-correct');
+            } else {
+                clickedCard.classList.add('ans-wrong');
+                correctCard.classList.add('ans-correct'); // Tunjukkan jawaban yang benar
+            }
+
+            setTimeout(() => {
+                currentFriendQuestion++;
+                if (currentFriendQuestion < totalFriendQuestions) {
+                    loadFriendQuestion();
+                } else {
+                    alert(`Yeay! Kamu telah menyelesaikan tebakan kuis ${userName}. Bagikan skormu!`);
+                    triggerTransition('ready-screen', 'Kembali ke Beranda...');
+                }
+            }, 1200);
         }
     </script>
 </body>
