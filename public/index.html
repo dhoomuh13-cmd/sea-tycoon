@@ -16,21 +16,16 @@
 <body class="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-x-hidden">
 
     <!-- Container Utama -->
-    <div class="w-full max-w-sm text-center relative">
+    <div class="w-full max-w-sm text-center relative pt-8">
         
         <!-- ========================================== -->
-        <!-- MASKOT BERUANG DI ATAS JUDUL (SAMA PERSIS) -->
+        <!-- MASKOT BERUANG KIRI & KANAN (PASTI MUNCUL) -->
         <!-- ========================================== -->
-        <div class="flex justify-between items-end px-4 mb-[-15px] relative z-10">
-            <!-- Beruang Coklat Kiri -->
-            <img src="https://i.ibb.co.id/51v663g/bear-left.png" alt="Beruang Coklat" class="w-20 h-20 object-contain drop-shadow-md" onerror="this.src='https://img.icons8.com/color/96/teddy-bear.png'">
-            
-            <!-- Beruang Putih Kanan -->
-            <img src="https://i.ibb.co.id/0y3Q8wN/bear-right.png" alt="Beruang Putih" class="w-20 h-20 object-contain drop-shadow-md" onerror="this.src='https://img.icons8.com/color/96/standing-polar-bear.png'">
-        </div>
+        <div class="absolute -top-2 left-2 text-4xl animate-bounce z-20">🧸</div>
+        <div class="absolute top-2 right-2 text-4xl animate-bounce z-20" style="animation-delay: 0.2s;">🐼</div>
 
         <!-- Header / Logo -->
-        <div class="relative mb-5 bg-white/40 backdrop-blur-sm pt-4 pb-3 rounded-3xl shadow-sm border border-white/60">
+        <div class="relative mb-5 bg-white/70 backdrop-blur-md pt-5 pb-4 rounded-[32px] shadow-lg border border-white">
             <h1 class="text-4xl sm:text-5xl font-extrabold text-[#ff4f8b] tracking-wide leading-tight drop-shadow-sm">
                 Don't <br>
                 <span class="text-[#3b82f6]">Block</span> Me
@@ -43,7 +38,7 @@
         </div>
 
         <!-- Tombol Pilihan Bahasa -->
-        <div class="bg-white rounded-full p-2.5 shadow-md flex items-center justify-between mb-5 px-5 border-2 border-pink-100 cursor-pointer hover:border-pink-300 transition">
+        <div class="bg-white rounded-full p-3 shadow-md flex items-center justify-between mb-5 px-5 border-2 border-pink-100 cursor-pointer hover:border-pink-300 transition">
             <div class="flex items-center gap-2.5">
                 <span class="text-xl">🌐</span>
                 <span class="font-bold text-slate-700 text-sm">Indonesia</span>
@@ -57,15 +52,16 @@
         <div class="bg-white rounded-[32px] p-6 shadow-xl border-[3px] border-dashed border-pink-200 relative">
             
             <!-- Ikon Hati Melayang -->
-            <div class="absolute -top-3 -right-2 bg-white p-2 rounded-full shadow-md border border-pink-100 animate-bounce">
+            <div class="absolute -top-3 -right-2 bg-white p-2 rounded-full shadow-md border border-pink-100">
                 <span class="text-xl">💖</span>
             </div>
 
-            <!-- Ilustrasi Karakter di Dalam Card -->
-            <div class="flex justify-center items-center mb-3">
-                <div class="bg-pink-50/50 p-3 rounded-2xl border border-pink-100 shadow-inner">
-                    <!-- Gambar ilustrasi dua beruang main HP -->
-                    <img src="https://img.icons8.com/color/144/cute-creature.png" alt="Ilustrasi Kuis" class="w-28 h-20 object-contain">
+            <!-- Ilustrasi Karakter di Dalam Card (Menggunakan Emoji Estetik & Kotak Rapi) -->
+            <div class="flex justify-center items-center mb-4">
+                <div class="bg-pink-50 px-6 py-3 rounded-2xl border border-pink-100 shadow-inner flex items-center gap-3">
+                    <span class="text-3xl">📱</span>
+                    <span class="text-2xl">🤝</span>
+                    <span class="text-3xl">💻</span>
                 </div>
             </div>
             
