@@ -63,45 +63,9 @@
 <body class="min-h-screen flex flex-col items-center justify-center p-4 relative">
 
     <!-- ========================================== -->
-    <!-- 1. LAYAR LOADING AWAL (Bisa dilewati manual) -->
+    <!-- HALAMAN UTAMA (Langsung Muncul) -->
     <!-- ========================================== -->
-    <div id="loading-screen" class="screen active text-center">
-        <div class="relative mb-6 text-center">
-            <div class="flex justify-center gap-12 mb-[-12px] relative z-10">
-                <span class="text-3xl animate-bounce">🧸</span>
-                <span class="text-3xl animate-bounce" style="animation-delay: 0.2s;">🐼</span>
-            </div>
-            <div class="bg-white/90 backdrop-blur-md px-6 py-2.5 rounded-3xl shadow-lg border border-white">
-                <h1 class="text-3xl font-black tracking-wide">
-                    <span class="gradient-text-1">Don't</span> <span class="gradient-text-2">Block</span> <span class="gradient-text-1">Me</span>
-                </h1>
-            </div>
-        </div>
-
-        <div class="w-full max-w-xs paper-bg rounded-[28px] p-8 shadow-2xl relative border-2 border-slate-100 transform rotate-1 mx-auto">
-            <div class="absolute -top-3 -left-4 w-14 h-6 bg-pink-300/90 rotate-[-12deg] shadow-sm rounded-sm"></div>
-            <div class="absolute top-4 right-4 text-pink-500 text-xl">❤</div>
-            <div class="absolute bottom-4 left-4 text-yellow-400 text-xl">⭐</div>
-
-            <div class="text-center my-4">
-                <p class="text-2xl font-black text-slate-800 tracking-wide">siap?</p>
-                <div class="flex justify-center items-center gap-2.5 mt-4 mb-6">
-                    <span class="w-3.5 h-3.5 bg-blue-500 rounded-full animate-bounce shadow-sm"></span>
-                    <span class="w-3.5 h-3.5 bg-pink-500 rounded-full animate-bounce shadow-sm" style="animation-delay: 0.2s;"></span>
-                    <span class="w-3.5 h-3.5 bg-yellow-400 rounded-full animate-bounce shadow-sm" style="animation-delay: 0.4s;"></span>
-                </div>
-                <button onclick="goToScreen('main-screen')" class="w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white font-black py-3 px-6 rounded-2xl shadow-lg shadow-pink-300 active:scale-95 transition text-sm tracking-wide">
-                    MASUK SEKARANG 🚀
-                </button>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- ========================================== -->
-    <!-- 2. HALAMAN UTAMA -->
-    <!-- ========================================== -->
-    <div id="main-screen" class="screen text-center pt-4">
+    <div id="main-screen" class="screen active text-center pt-4">
         <div class="absolute -top-2 left-1 text-4xl animate-bounce z-20">🧸</div>
         <div class="absolute top-0 right-1 text-4xl animate-bounce z-20" style="animation-delay: 0.2s;">🐼</div>
 
@@ -141,7 +105,7 @@
 
 
     <!-- ========================================== -->
-    <!-- 3. HALAMAN MASUKKAN NAMA -->
+    <!-- HALAMAN MASUKKAN NAMA -->
     <!-- ========================================== -->
     <div id="name-screen" class="screen text-center pt-2">
         <button onclick="goToScreen('main-screen')" class="absolute -top-12 left-0 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center font-black text-slate-700 border border-pink-100 active:scale-95 transition z-30">❮</button>
@@ -173,7 +137,7 @@
 
 
     <!-- ========================================== -->
-    <!-- 4. HALAMAN PILIH GENDER -->
+    <!-- HALAMAN PILIH GENDER -->
     <!-- ========================================== -->
     <div id="gender-screen" class="screen text-center pt-2">
         <button onclick="goToScreen('name-screen')" class="absolute -top-12 left-0 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center font-black text-slate-700 border border-pink-100 active:scale-95 transition z-30">❮</button>
@@ -212,7 +176,7 @@
 
 
     <!-- ========================================== -->
-    <!-- 5. HALAMAN PEMBUATAN KUIS (1 - 15 PERTANYAAN) -->
+    <!-- HALAMAN PEMBUATAN KUIS (1 - 15 PERTANYAAN) -->
     <!-- ========================================== -->
     <div id="quiz-creator-screen" class="screen text-center pt-2">
         <button onclick="goToScreen('gender-screen')" class="absolute -top-12 left-0 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center font-black text-slate-700 border border-pink-100 active:scale-95 transition z-30">❮</button>
@@ -258,7 +222,7 @@
 
 
     <!-- ========================================== -->
-    <!-- 6. HALAMAN "YUHUU! KUISMU SUDAH SIAP!" -->
+    <!-- HALAMAN "YUHUU! KUISMU SUDAH SIAP!" -->
     <!-- ========================================== -->
     <div id="ready-screen" class="screen text-center pt-2">
         <div class="bg-white/95 backdrop-blur-md rounded-[32px] p-6 shadow-2xl border-2 border-pink-200 relative w-full overflow-hidden">
@@ -291,7 +255,7 @@
 
 
     <!-- ========================================== -->
-    <!-- 7. HALAMAN "BAGIKAN LINK KUIS" -->
+    <!-- HALAMAN "BAGIKAN LINK KUIS" -->
     <!-- ========================================== -->
     <div id="share-screen" class="screen text-center pt-2">
         <button onclick="goToScreen('ready-screen')" class="absolute -top-12 left-0 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center font-black text-slate-700 border border-pink-100 active:scale-95 transition z-30">❮</button>
