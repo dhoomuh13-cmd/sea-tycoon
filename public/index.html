@@ -6,11 +6,11 @@
     <title>Don't Block Me - Cari Teman Palsumu</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&display=swap');
         
         body {
-            font-family: 'Quicksand', sans-serif;
-            background: linear-gradient(135deg, #57b7f8 0%, #90e0ef 60%, #caf0f8 100%);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #4ea8de 0%, #90e0ef 60%, #caf0f8 100%);
             overflow-x: hidden;
         }
         
@@ -21,26 +21,25 @@
             background-size: 100% 26px;
         }
 
-        /* Animasi Awan Terbang ke Samping */
-        @keyframes floatClouds {
-            0% { transform: translateX(-100px); }
-            100% { transform: translateX(400px); }
-        }
-        .cloud-anim-1 {
-            animation: floatClouds 18s linear infinite;
-        }
-        .cloud-anim-2 {
-            animation: floatClouds 24s linear infinite;
-            animation-delay: -5s;
-        }
-
-        /* Animasi Goyang Halus */
-        @keyframes floatText {
+        /* Animasi Teks Bergerak / Berdenyut (Gaya Estetik) */
+        @keyframes bounceGlow {
             0%, 100% { transform: translateY(0) scale(1); }
             50% { transform: translateY(-5px) scale(1.02); }
         }
-        .animate-float {
-            animation: floatText 2.5s ease-in-out infinite;
+        .animate-pop {
+            animation: bounceGlow 2s ease-in-out infinite;
+        }
+
+        /* Efek Teks Gradasi Warna-Warni ala iPhone */
+        .gradient-text-1 {
+            background: linear-gradient(135deg, #ff4f8b 0%, #ff70a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-text-2 {
+            background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         /* Transisi Selesai Loading */
@@ -54,28 +53,19 @@
 <body class="min-h-screen flex flex-col items-center justify-center p-4 relative">
 
     <!-- ========================================== -->
-    <!-- LATAR BELAKANG AWAN TERBANG -->
-    <!-- ========================================== -->
-    <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
-        <div class="absolute top-20 left-[-50px] bg-white/70 w-28 h-12 rounded-full blur-[1px] cloud-anim-1"></div>
-        <div class="absolute top-48 left-[-80px] bg-white/60 w-36 h-14 rounded-full blur-[1px] cloud-anim-2"></div>
-    </div>
-
-
-    <!-- ========================================== -->
     <!-- 1. LAYAR LOADING (KERTAS BERGARIS) -->
     <!-- ========================================== -->
-    <div id="loading-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-gradient-to-b from-[#57b7f8] to-[#90e0ef]">
+    <div id="loading-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-gradient-to-b from-[#4ea8de] to-[#90e0ef]">
         
-        <!-- Maskot & Logo di atas loading -->
+        <!-- Logo di atas loading -->
         <div class="relative mb-6 text-center">
             <div class="flex justify-center gap-12 mb-[-12px] relative z-10">
                 <span class="text-3xl animate-bounce">🧸</span>
                 <span class="text-3xl animate-bounce" style="animation-delay: 0.2s;">🐼</span>
             </div>
-            <div class="bg-white/80 backdrop-blur-md px-6 py-2 rounded-3xl shadow-lg border border-white">
-                <h1 class="text-3xl font-extrabold text-[#ff4f8b]">
-                    Don't <span class="text-[#3b82f6]">Block</span> Me
+            <div class="bg-white/90 backdrop-blur-md px-6 py-2.5 rounded-3xl shadow-lg border border-white">
+                <h1 class="text-3xl font-black tracking-wide">
+                    <span class="gradient-text-1">Don't</span> <span class="gradient-text-2">Block</span> <span class="gradient-text-1">Me</span>
                 </h1>
             </div>
         </div>
@@ -89,14 +79,14 @@
             <div class="absolute bottom-4 left-4 text-yellow-400 text-xl">⭐</div>
 
             <div class="text-center my-6">
-                <p class="text-2xl font-extrabold text-slate-700 tracking-wide">
+                <p class="text-2xl font-black text-slate-800 tracking-wide">
                     loading<span id="loading-dots">...</span>
                 </p>
                 <!-- Titik Loading Warna-warni -->
                 <div class="flex justify-center items-center gap-2.5 mt-5">
-                    <span class="w-3.5 h-3.5 bg-blue-400 rounded-full animate-bounce"></span>
-                    <span class="w-3.5 h-3.5 bg-pink-400 rounded-full animate-bounce" style="animation-delay: 0.2s;"></span>
-                    <span class="w-3.5 h-3.5 bg-yellow-400 rounded-full animate-bounce" style="animation-delay: 0.4s;"></span>
+                    <span class="w-3.5 h-3.5 bg-blue-500 rounded-full animate-bounce shadow-sm"></span>
+                    <span class="w-3.5 h-3.5 bg-pink-500 rounded-full animate-bounce shadow-sm" style="animation-delay: 0.2s;"></span>
+                    <span class="w-3.5 h-3.5 bg-yellow-400 rounded-full animate-bounce shadow-sm" style="animation-delay: 0.4s;"></span>
                 </div>
             </div>
         </div>
@@ -113,10 +103,10 @@
         <div class="absolute top-0 right-1 text-4xl animate-bounce z-20" style="animation-delay: 0.2s;">🐼</div>
 
         <!-- Header / Logo Utama -->
-        <div class="relative mb-5 bg-white/80 backdrop-blur-md pt-5 pb-4 rounded-[32px] shadow-xl border-2 border-white">
-            <h1 class="text-4xl sm:text-5xl font-extrabold text-[#ff4f8b] tracking-wide leading-tight drop-shadow-sm">
-                Don't <br>
-                <span class="text-[#3b82f6]">Block</span> Me
+        <div class="relative mb-5 bg-white/90 backdrop-blur-md pt-5 pb-4 rounded-[32px] shadow-xl border-2 border-white">
+            <h1 class="text-4xl sm:text-5xl font-black tracking-wide leading-tight drop-shadow-sm">
+                <span class="gradient-text-1">Don't</span> <br>
+                <span class="gradient-text-2">Block</span> <span class="gradient-text-1">Me</span>
             </h1>
             
             <!-- Subtitle Badge -->
@@ -129,9 +119,9 @@
         <div class="bg-white rounded-full p-3 shadow-md flex items-center justify-between mb-5 px-6 border-2 border-pink-100 cursor-pointer hover:border-pink-300 transition">
             <div class="flex items-center gap-2.5">
                 <span class="text-xl">🌐</span>
-                <span class="font-bold text-slate-700 text-sm">Indonesia</span>
+                <span class="font-extrabold text-slate-800 text-sm">Indonesia</span>
             </div>
-            <div class="bg-[#ff4f8b] text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold shadow-sm">
+            <div class="bg-[#ff4f8b] text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-black shadow-sm">
                 ▼
             </div>
         </div>
@@ -144,42 +134,42 @@
                 <span class="text-xl">💖</span>
             </div>
 
-            <!-- Teks Animasi Bergerak di Tengah -->
+            <!-- Teks Animasi Bergerak di Tengah (Dev DhooCep BlockDay) -->
             <div class="flex justify-center items-center mb-4">
-                <div class="bg-gradient-to-r from-pink-50 via-sky-50 to-yellow-50 px-6 py-3 rounded-2xl border border-pink-100 shadow-inner animate-float">
-                    <p class="text-xs font-bold tracking-widest text-pink-500 uppercase">Dev • DhooCep</p>
-                    <p class="text-base font-extrabold text-slate-800 tracking-wide mt-0.5">BlockDay ✨</p>
+                <div class="bg-gradient-to-r from-pink-50 via-sky-50 to-yellow-50 px-6 py-3 rounded-2xl border border-pink-100 shadow-inner animate-pop">
+                    <p class="text-xs font-black tracking-widest text-pink-600 uppercase">Dev • DhooCep</p>
+                    <p class="text-base font-black text-slate-900 tracking-wide mt-0.5">BlockDay ✨</p>
                 </div>
             </div>
             
-            <!-- Teks Ajakan Besar & Jelas -->
-            <h2 class="text-xl font-extrabold text-slate-800 leading-snug">
+            <!-- Teks Ajakan Besar, Tebal, Estetik ala iPhone -->
+            <h2 class="text-xl sm:text-2xl font-black text-slate-900 leading-snug tracking-tight">
                 buat kuismu <br> 
-                <span class="text-[#ff4f8b] text-2xl">&</span> <br> 
-                <span class="bg-yellow-200 px-3 py-0.5 rounded-md inline-block mt-1 text-slate-900 shadow-xs">blokir</span> teman palsumu
+                <span class="text-[#ff4f8b] text-3xl font-black">&</span> <br> 
+                <span class="bg-yellow-300 px-3 py-0.5 rounded-lg inline-block mt-1 text-slate-900 shadow-sm font-black transform -rotate-1">blokir</span> teman palsumu
             </h2>
 
             <!-- Tombol Aksi Utama -->
-            <button onclick="mulaiKuis()" class="mt-6 w-full bg-gradient-to-r from-[#ff4f8b] to-[#ff2a6d] hover:from-[#e03e77] hover:to-[#d91b5c] text-white font-extrabold py-3.5 px-6 rounded-2xl shadow-lg shadow-pink-200 transition-all transform active:scale-95 text-base">
+            <button onclick="mulaiKuis()" class="mt-6 w-full bg-gradient-to-r from-[#ff4f8b] to-[#ff2a6d] hover:from-[#e03e77] hover:to-[#d91b5c] text-white font-black py-4 px-6 rounded-2xl shadow-lg shadow-pink-300 transition-all transform active:scale-95 text-base tracking-wide">
                 Mulai Buat Kuis 🚀
             </button>
         </div>
 
         <!-- Footer Kecil -->
-        <div class="mt-4 text-xs text-slate-500 font-semibold">
+        <div class="mt-4 text-xs text-slate-700 font-extrabold drop-shadow-xs">
             ✨ Terhubung dengan MongoDB
         </div>
 
     </div>
 
     <script>
-        // Durasi loading 6 detik (masuk rentang 5-10 detik) sebelum masuk halaman utama
+        // Durasi loading selama 6 detik (masuk rentang 5-10 detik)
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 const loadingScreen = document.getElementById('loading-screen');
                 const mainContent = document.getElementById('main-content');
 
-                // Hilangkan layar loading
+                // Hilangkan layar loading dengan mulus
                 loadingScreen.classList.add('fade-out');
                 
                 // Munculkan halaman utama
