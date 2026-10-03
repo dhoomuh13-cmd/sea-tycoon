@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Don't Block Me - Cari Teman Palsumu</title>
+    <title>Don't Block Me - Buat Kuis</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&display=swap');
@@ -29,14 +29,13 @@
             animation: bounceGlow 2s ease-in-out infinite;
         }
 
-        /* Efek Goyang / Wiggle saat card gender ditekan */
         @keyframes wiggle {
-            0%, 100% { transform: rotate(0deg) scale(1.03); }
-            25% { transform: rotate(-3deg) scale(1.03); }
-            75% { transform: rotate(3deg) scale(1.03); }
+            0%, 100% { transform: rotate(0deg) scale(1.02); }
+            25% { transform: rotate(-2.5deg) scale(1.02); }
+            75% { transform: rotate(2.5deg) scale(1.02); }
         }
         .animate-wiggle {
-            animation: wiggle 0.4s ease-in-out;
+            animation: wiggle 0.35s ease-in-out;
         }
 
         .gradient-text-1 {
@@ -59,7 +58,7 @@
         .screen {
             position: absolute;
             width: 100%;
-            max-width: 24rem;
+            max-width: 26rem;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             opacity: 0;
             transform: translateY(20px);
@@ -91,7 +90,7 @@
 <body class="min-h-screen flex flex-col items-center justify-center p-4 relative">
 
     <!-- ========================================== -->
-    <!-- 1. LAYAR LOADING AWAL -->
+    <!-- 1. LOADING AWAL -->
     <!-- ========================================== -->
     <div id="loading-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-gradient-to-b from-[#4ea8de] to-[#90e0ef]">
         <div class="relative mb-6 text-center">
@@ -108,17 +107,12 @@
 
         <div class="w-full max-w-xs paper-bg rounded-[28px] p-8 shadow-2xl relative border-2 border-slate-100 transform rotate-1">
             <div class="absolute -top-3 -left-4 w-14 h-6 bg-pink-300/90 rotate-[-12deg] shadow-sm rounded-sm"></div>
-            <div class="absolute top-4 right-4 text-pink-500 text-xl">❤️</div>
-            <div class="absolute bottom-4 left-4 text-yellow-400 text-xl">⭐</div>
-
-            <div class="text-center my-6">
-                <p class="text-2xl font-black text-slate-800 tracking-wide">
-                    loading<span>...</span>
-                </p>
+            <div class="text-center my-4">
+                <p class="text-2xl font-black text-slate-800 tracking-wide">loading...</p>
                 <div class="flex justify-center items-center gap-2.5 mt-5">
-                    <span class="w-3.5 h-3.5 bg-blue-500 rounded-full animate-bounce shadow-sm"></span>
-                    <span class="w-3.5 h-3.5 bg-pink-500 rounded-full animate-bounce shadow-sm" style="animation-delay: 0.2s;"></span>
-                    <span class="w-3.5 h-3.5 bg-yellow-400 rounded-full animate-bounce shadow-sm" style="animation-delay: 0.4s;"></span>
+                    <span class="w-3.5 h-3.5 bg-blue-500 rounded-full animate-bounce"></span>
+                    <span class="w-3.5 h-3.5 bg-pink-500 rounded-full animate-bounce" style="animation-delay: 0.2s;"></span>
+                    <span class="w-3.5 h-3.5 bg-yellow-400 rounded-full animate-bounce" style="animation-delay: 0.4s;"></span>
                 </div>
             </div>
         </div>
@@ -126,82 +120,44 @@
 
 
     <!-- ========================================== -->
-    <!-- 2. LOADING TRANSISI GELEMBUNG ANTAR HALAMAN -->
+    <!-- 2. TRANSISI GELEMBUNG ANTAR HALAMAN -->
     <!-- ========================================== -->
     <div id="transition-loading" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-black/30 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
         <div class="bg-white px-8 py-6 rounded-[32px] shadow-2xl border-2 border-pink-100 flex flex-col items-center animate-pop">
             <span class="text-5xl animate-bounce mb-3">💬</span>
             <p id="transition-text" class="text-lg font-black text-slate-800">Memuat...</p>
-            <div class="flex gap-2 mt-4">
-                <span class="w-3 h-3 bg-pink-500 rounded-full animate-bounce"></span>
-                <span class="w-3 h-3 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 0.2s;"></span>
-                <span class="w-3 h-3 bg-yellow-400 rounded-full animate-bounce" style="animation-delay: 0.4s;"></span>
-            </div>
         </div>
     </div>
 
 
     <!-- ========================================== -->
-    <!-- 3. HALAMAN UTAMA (MENU AWAL) -->
+    <!-- 3. HALAMAN UTAMA -->
     <!-- ========================================== -->
-    <div id="main-screen" class="screen active text-center pt-4">
+    <div id="main-screen" class="screen active text-center pt-2">
         <div class="absolute -top-2 left-1 text-4xl animate-bounce z-20">🧸</div>
         <div class="absolute top-0 right-1 text-4xl animate-bounce z-20" style="animation-delay: 0.2s;">🐼</div>
 
-        <div class="relative mb-5 w-full bg-white/90 backdrop-blur-md pt-5 pb-4 rounded-[32px] shadow-xl border-2 border-white">
-            <h1 class="text-4xl sm:text-5xl font-black tracking-wide leading-tight drop-shadow-sm">
+        <div class="relative mb-4 w-full bg-white/90 backdrop-blur-md pt-5 pb-4 rounded-[32px] shadow-xl border-2 border-white">
+            <h1 class="text-4xl font-black tracking-wide leading-tight">
                 <span class="gradient-text-1">Don't</span> <br>
                 <span class="gradient-text-2">Block</span> <span class="gradient-text-1">Me</span>
             </h1>
-            <div class="inline-block mt-3 bg-white px-5 py-1.5 rounded-full shadow-sm border border-pink-100">
-                <p id="txt-subtitle" class="text-xs sm:text-sm font-extrabold text-slate-600 tracking-wider">Cari Teman Palsumu</p>
-            </div>
-        </div>
-
-        <div class="relative mb-5 w-full">
-            <div onclick="toggleLangMenu()" class="bg-white rounded-full p-3.5 shadow-md flex items-center justify-between px-6 border-2 border-pink-100 cursor-pointer hover:border-pink-300 transition active:scale-95">
-                <div class="flex items-center gap-2.5">
-                    <span class="text-xl">🌐</span>
-                    <span id="selected-lang" class="font-extrabold text-slate-800 text-sm">Indonesia</span>
-                </div>
-                <div id="lang-arrow" class="bg-[#ff4f8b] text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-black shadow-sm transition-transform duration-300">
-                    ▼
-                </div>
-            </div>
-
-            <div id="lang-menu" class="absolute top-16 left-0 right-0 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border-2 border-pink-100 p-2 z-30 menu-hidden flex flex-col gap-1.5">
-                <div onclick="changeLanguage('Indonesia', 'Cari Teman Palsumu')" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-pink-50 cursor-pointer transition">
-                    <span class="font-extrabold text-slate-800 text-sm">🇮🇩 Indonesia (Utama)</span>
-                    <span class="text-pink-500 font-bold text-xs">✓</span>
-                </div>
-                <div onclick="changeLanguage('English', 'Find Your Fake Friends')" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-pink-50 cursor-pointer transition">
-                    <span class="font-extrabold text-slate-700 text-sm">🇬🇧 English</span>
-                </div>
+            <div class="inline-block mt-2 bg-white px-5 py-1 rounded-full shadow-sm border border-pink-100">
+                <p class="text-xs font-extrabold text-slate-600">Cari Teman Palsumu</p>
             </div>
         </div>
 
         <div class="bg-white rounded-[32px] p-6 shadow-2xl border-[3px] border-dashed border-pink-200 relative w-full">
-            <div class="absolute -top-3 -right-2 bg-white p-2 rounded-full shadow-md border border-pink-100">
-                <span class="text-xl">💖</span>
-            </div>
-            <div class="flex justify-center items-center mb-4">
-                <div class="bg-gradient-to-r from-pink-50 via-sky-50 to-yellow-50 px-6 py-3 rounded-2xl border border-pink-100 shadow-inner animate-pop">
-                    <p class="text-xs font-black tracking-widest text-pink-600 uppercase">Dev • DhooCep</p>
-                    <p class="text-base font-black text-slate-900 tracking-wide mt-0.5">BlockDay ✨</p>
-                </div>
-            </div>
-            
-            <h2 id="txt-content" class="text-xl sm:text-2xl font-black text-slate-900 leading-snug tracking-tight">
+            <h2 class="text-xl font-black text-slate-900 leading-snug tracking-tight mb-4">
                 buat kuismu <br> 
-                <span class="text-[#ff4f8b] text-3xl font-black">&</span> <br> 
-                <span class="bg-yellow-300 px-3 py-0.5 rounded-lg inline-block mt-1 text-slate-900 shadow-sm font-black transform -rotate-1">blokir</span> teman palsumu
+                <span class="text-[#ff4f8b] text-3xl">&</span> <br> 
+                <span class="bg-yellow-300 px-3 py-0.5 rounded-lg inline-block text-slate-900 shadow-sm font-black transform -rotate-1">blokir</span> teman palsumu
             </h2>
 
-            <button onclick="triggerTransition('name-screen', 'Menyiapkan Kuis...')" class="mt-6 w-full bg-gradient-to-r from-[#ff4f8b] to-[#ff2a6d] hover:from-[#e03e77] hover:to-[#d91b5c] text-white font-black py-4 px-6 rounded-2xl shadow-lg shadow-pink-300 transition-all transform active:scale-95 text-base tracking-wide">
+            <button onclick="triggerTransition('name-screen', 'Menyiapkan Kuis...')" class="w-full bg-gradient-to-r from-[#ff4f8b] to-[#ff2a6d] hover:from-[#e03e77] text-white font-black py-4 px-6 rounded-2xl shadow-lg shadow-pink-300 transition-all transform active:scale-95 text-base">
                 Mulai Buat Kuis 🚀
             </button>
         </div>
-        <div class="mt-4 text-xs text-slate-700 font-extrabold">✨ Terhubung dengan MongoDB</div>
     </div>
 
 
@@ -209,41 +165,24 @@
     <!-- 4. HALAMAN MASUKKAN NAMA -->
     <!-- ========================================== -->
     <div id="name-screen" class="screen text-center pt-2">
-        <button onclick="goToScreen('main-screen')" class="absolute -top-12 left-0 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center font-black text-slate-700 border border-pink-100 active:scale-95 transition z-30">
-            ❮
-        </button>
-
-        <div class="w-full flex items-center justify-end mb-3 px-1">
-            <div class="bg-white px-3.5 py-1.5 rounded-full shadow-md border border-pink-100 flex items-center gap-1.5">
-                <span class="text-base">🇮🇩</span>
-                <span class="w-2 h-2 bg-pink-500 rounded-full"></span>
-            </div>
-        </div>
+        <button onclick="goToScreen('main-screen')" class="absolute -top-12 left-0 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center font-black text-slate-700 border border-pink-100 active:scale-95 transition z-30">❮</button>
 
         <div class="relative mb-4 w-full bg-white/90 backdrop-blur-md pt-3 pb-3 rounded-[28px] shadow-lg border border-white">
-            <div class="absolute -top-3 left-6 text-3xl animate-bounce">🧸</div>
-            <div class="absolute -top-3 right-6 text-3xl animate-bounce" style="animation-delay: 0.2s;">🐼</div>
             <h1 class="text-2xl font-black">
                 <span class="gradient-text-1">Don't</span> <span class="gradient-text-2">Block</span> <span class="gradient-text-1">Me</span>
             </h1>
         </div>
 
         <div class="relative w-full my-3 flex justify-center items-center">
-            <div class="bg-pink-100/95 border-2 border-pink-200 px-6 py-4 rounded-[28px] shadow-md relative transform -rotate-2 max-w-[240px]">
-                <p class="text-xs font-extrabold text-slate-600 tracking-wider">siapa</p>
-                <p class="text-2xl font-black text-[#ff4f8b] tracking-wide">namamu?</p>
-                <div class="absolute -bottom-3 right-8 w-4 h-4 bg-pink-100 border-r-2 border-b-2 border-pink-200 transform rotate-45"></div>
+            <div class="bg-pink-100/95 border-2 border-pink-200 px-6 py-4 rounded-[28px] shadow-md relative transform -rotate-2">
+                <p class="text-xs font-extrabold text-slate-600">siapa</p>
+                <p class="text-2xl font-black text-[#ff4f8b]">namamu?</p>
             </div>
-            <div class="absolute right-4 bottom-0 text-4xl z-20 animate-bounce">🐼</div>
         </div>
 
         <div class="bg-white rounded-[28px] p-5 shadow-xl border-2 border-pink-100 w-full relative mt-2">
-            <div class="relative flex items-center">
-                <input type="text" id="username-input" maxlength="15" oninput="updateCharCount(this)" placeholder="nama..." class="w-full bg-slate-50 border-2 border-pink-100 focus:border-pink-400 focus:outline-none rounded-2xl py-4 px-4 font-extrabold text-slate-800 placeholder-slate-400 text-base shadow-inner">
-                <span id="char-count" class="absolute right-4 text-xs font-bold text-slate-400">0/15</span>
-            </div>
-
-            <button onclick="submitName()" class="mt-4 w-full bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white font-black py-4 px-6 rounded-2xl shadow-lg shadow-blue-200 transition-all transform active:scale-95 text-base tracking-wide flex items-center justify-center gap-2">
+            <input type="text" id="username-input" maxlength="15" placeholder="nama..." class="w-full bg-slate-50 border-2 border-pink-100 focus:border-pink-400 focus:outline-none rounded-2xl py-4 px-4 font-extrabold text-slate-800 text-base shadow-inner mb-4">
+            <button onclick="submitName()" class="w-full bg-gradient-to-r from-cyan-400 to-blue-500 text-white font-black py-4 px-6 rounded-2xl shadow-lg shadow-blue-200 transition-all transform active:scale-95 text-base flex items-center justify-center gap-2">
                 <span>lanjut</span> <span class="text-lg">➔</span>
             </button>
         </div>
@@ -251,109 +190,117 @@
 
 
     <!-- ========================================== -->
-    <!-- 5. HALAMAN PILIH GENDER (BERDASARKAN GAMBAR REFERENSI) -->
+    <!-- 5. HALAMAN PILIH GENDER -->
     <!-- ========================================== -->
     <div id="gender-screen" class="screen text-center pt-2">
-        <button onclick="goToScreen('name-screen')" class="absolute -top-12 left-0 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center font-black text-slate-700 border border-pink-100 active:scale-95 transition z-30">
-            ❮
-        </button>
+        <button onclick="goToScreen('name-screen')" class="absolute -top-12 left-0 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center font-black text-slate-700 border border-pink-100 active:scale-95 transition z-30">❮</button>
 
-        <div class="w-full flex items-center justify-end mb-3 px-1">
+        <div class="relative mb-3 w-full bg-white/90 backdrop-blur-md pt-3 pb-3 rounded-[28px] shadow-lg border border-white">
+            <h1 class="text-2xl font-black"><span class="gradient-text-1">Don't</span> <span class="gradient-text-2">Block</span> <span class="gradient-text-1">Me</span></h1>
+        </div>
+
+        <div class="my-2">
+            <p id="greeting-text" class="text-base font-black text-slate-800">hai, dika 👋</p>
+        </div>
+
+        <div class="bg-white rounded-[24px] py-3 px-6 shadow-md border-2 border-white mb-3 inline-block mx-auto">
+            <p class="text-xl font-black text-slate-900">pilih</p>
+            <p class="text-xl font-black text-[#00b4d8] underline decoration-orange-400 decoration-3 underline-offset-4">jenis kelaminmu</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 w-full">
+            <div onclick="selectGender('male')" id="card-male" class="bg-white rounded-[28px] p-4 shadow-xl border-2 border-pink-100 flex flex-col items-center cursor-pointer transition transform active:scale-95 hover:border-pink-300">
+                <div class="w-full h-28 flex items-center justify-center bg-amber-50/60 rounded-2xl mb-2">
+                    <span class="text-4xl animate-bounce">🧸</span>
+                </div>
+                <span class="font-black text-slate-800 text-sm">Laki-laki</span>
+            </div>
+
+            <div onclick="selectGender('female')" id="card-female" class="bg-white rounded-[28px] p-4 shadow-xl border-2 border-pink-100 flex flex-col items-center cursor-pointer transition transform active:scale-95 hover:border-pink-300">
+                <div class="w-full h-28 flex items-center justify-center bg-pink-50/60 rounded-2xl mb-2">
+                    <span class="text-4xl animate-bounce">🐼</span>
+                </div>
+                <span class="font-black text-slate-800 text-sm">Perempuan</span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 6. HALAMAN PEMBUATAN KUIS (1 - 15 PERTANYAAN) -->
+    <!-- ========================================== -->
+    <div id="quiz-creator-screen" class="screen text-center pt-2">
+        <div class="w-full flex items-center justify-between mb-3 px-1">
+            <div class="bg-white px-4 py-1.5 rounded-full shadow-md border border-pink-100">
+                <span id="question-counter" class="text-xs font-black text-[#ff4f8b]">Pertanyaan 1 dari 15</span>[span_5](start_span)[span_5](end_span)
+            </div>
             <div class="bg-white px-3.5 py-1.5 rounded-full shadow-md border border-pink-100 flex items-center gap-1.5">
                 <span class="text-base">🇮🇩</span>
-                <span class="w-2 h-2 bg-pink-500 rounded-full"></span>
             </div>
         </div>
 
-        <!-- Header Atas Logo & Maskot Sesuai Gambar -->
-        <div class="relative mb-3 w-full bg-white/90 backdrop-blur-md pt-3 pb-3 rounded-[28px] shadow-lg border border-white">
-            <div class="absolute -top-3 left-6 text-3xl animate-bounce">🧸</div>
-            <div class="absolute -top-3 right-6 text-3xl animate-bounce" style="animation-delay: 0.2s;">🐼</div>
-            <h1 class="text-2xl font-black drop-shadow-sm">
-                <span class="gradient-text-1">Don't</span> <span class="gradient-text-2">Block</span> <span class="gradient-text-1">Me</span>
-            </h1>
-        </div>
-
-        <!-- Sapaan Nama -->
-        <div class="my-2">
-            <p id="greeting-text" class="text-base font-black text-slate-800 drop-shadow-md">hai, dika 👋</p>
-        </div>
-
-        <!-- Balon Pertanyaan Jenis Kelamin (Persis Seperti Foto) -->
-        <div class="bg-white rounded-[24px] py-3.5 px-6 shadow-md border-2 border-white mb-4 inline-block mx-auto">
-            <p class="text-xl font-black text-slate-900 tracking-tight drop-shadow-sm">pilih</p>
-            <p class="text-xl font-black text-[#00b4d8] tracking-tight drop-shadow-sm underline decoration-orange-400 decoration-3 underline-offset-4">jenis kelaminmu</p>
-        </div>
-
-        <!-- Dekorasi Bintang -->
-        <div class="flex justify-between px-6 mb-2">
-            <span class="text-pink-400 text-lg animate-pulse">✨</span>
-            <span class="text-yellow-400 text-lg animate-pulse">✨</span>
-        </div>
-
-        <!-- Pilihan Kartu Gender dengan Ilustrasi Karakter Asli yang Pasti Muncul -->
-        <div class="grid grid-cols-2 gap-4 w-full">
-            <!-- Card Laki-laki (Beruang Cokelat Peach & Goma) -->
-            <div id="card-male" onclick="selectGender('male')" class="bg-white rounded-[28px] p-4 shadow-xl border-2 border-pink-100 flex flex-col items-center cursor-pointer transition transform active:scale-95 hover:border-pink-300">
-                <div class="w-full h-32 flex items-center justify-center bg-amber-50/60 rounded-2xl mb-2 overflow-hidden relative">
-                    <!-- Ilustrasi Beruang Cokelat Asli (SVG Inline Tanpa Kendala Eksternal) -->
-                    <svg viewBox="0 0 200 200" class="w-28 h-28 drop-shadow-md">
-                        <!-- Telinga Kiri -->
-                        <circle cx="65" cy="55" r="25" fill="#b07d62"/>
-                        <circle cx="65" cy="55" r="14" fill="#f5d6cb"/>
-                        <!-- Telinga Kanan -->
-                        <circle cx="135" cy="55" r="25" fill="#b07d62"/>
-                        <circle cx="135" cy="55" r="14" fill="#f5d6cb"/>
-                        <!-- Kepala Beruang -->
-                        <circle cx="100" cy="100" r="48" fill="#c68b59"/>
-                        <!-- Pipi Merah -->
-                        <circle cx="72" cy="115" r="12" fill="#ffb4a2" opacity="0.8"/>
-                        <circle cx="128" cy="115" r="12" fill="#ffb4a2" opacity="0.8"/>
-                        <!-- Mata Merem / Santai Khas Karakter -->
-                        <path d="M 75 92 Q 82 86 89 92" stroke="#4a3525" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-                        <path d="M 111 92 Q 118 86 125 92" stroke="#4a3525" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-                        <!-- Hidung & Mulut -->
-                        <ellipse cx="100" cy="104" rx="7" ry="5" fill="#4a3525"/>
-                        <path d="M 94 114 Q 100 120 106 114" stroke="#4a3525" stroke-width="3" fill="none" stroke-linecap="round"/>
-                        <!-- Badan & Tangan -->
-                        <path d="M 70 145 Q 100 135 130 145 L 140 185 Q 100 195 60 185 Z" fill="#c68b59"/>
-                        <path d="M 85 155 Q 100 145 115 155" stroke="#4a3525" stroke-width="3" fill="none" stroke-linecap="round"/>
-                    </svg>
-                </div>
-                <span class="font-black text-slate-800 text-sm drop-shadow-sm">Laki-laki</span>
+        <!-- Kartu Catatan Pertanyaan (Persis Gambar Referensi) -->
+        <div class="paper-bg rounded-[32px] p-5 shadow-2xl border-2 border-slate-200 relative w-full mb-4 text-left overflow-hidden">
+            <div class="absolute left-2 top-0 bottom-0 flex flex-col justify-around py-3 opacity-60">
+                <div class="w-2.5 h-2.5 bg-slate-400 rounded-full"></div>
+                <div class="w-2.5 h-2.5 bg-slate-400 rounded-full"></div>
+                <div class="w-2.5 h-2.5 bg-slate-400 rounded-full"></div>
+                <div class="w-2.5 h-2.5 bg-slate-400 rounded-full"></div>
+                <div class="w-2.5 h-2.5 bg-slate-400 rounded-full"></div>
             </div>
 
-            <!-- Card Perempuan (Panda Putih Karakter Imut) -->
-            <div id="card-female" onclick="selectGender('female')" class="bg-white rounded-[28px] p-4 shadow-xl border-2 border-pink-100 flex flex-col items-center cursor-pointer transition transform active:scale-95 hover:border-pink-300">
-                <div class="w-full h-32 flex items-center justify-center bg-pink-50/60 rounded-2xl mb-2 overflow-hidden relative">
-                    <!-- Ilustrasi Panda Imut Asli (SVG Inline Tanpa Kendala Eksternal) -->
-                    <svg viewBox="0 0 200 200" class="w-28 h-28 drop-shadow-md">
-                        <!-- Telinga Hitam Kiri -->
-                        <circle cx="65" cy="55" r="24" fill="#2b2d42"/>
-                        <!-- Telinga Hitam Kanan -->
-                        <circle cx="135" cy="55" r="24" fill="#2b2d42"/>
-                        <!-- Kepala Putih Panda -->
-                        <circle cx="100" cy="100" r="48" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
-                        <!-- Lingkaran Hitam Mata Kiri -->
-                        <ellipse cx="80" cy="95" rx="14" ry="11" fill="#2b2d42" transform="rotate(-15 80 95)"/>
-                        <!-- Lingkaran Hitam Mata Kanan -->
-                        <ellipse cx="120" cy="95" rx="14" ry="11" fill="#2b2d42" transform="rotate(15 120 95)"/>
-                        <!-- Mata Bersinar -->
-                        <circle cx="77" cy="93" r="4" fill="#ffffff"/>
-                        <circle cx="123" cy="93" r="4" fill="#ffffff"/>
-                        <!-- Pipi Merah Merona -->
-                        <circle cx="68" cy="112" r="10" fill="#ffb4a2" opacity="0.85"/>
-                        <circle cx="132" cy="112" r="10" fill="#ffb4a2" opacity="0.85"/>
-                        <!-- Hidung & Mulut Senyum Lidah Menjulur -->
-                        <ellipse cx="100" cy="103" rx="6" ry="4" fill="#2b2d42"/>
-                        <path d="M 94 110 Q 100 116 106 110" stroke="#2b2d42" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                        <path d="M 97 113 Q 100 121 103 113 Z" fill="#ff4f8b"/>
-                        <!-- Badan & Tangan -->
-                        <path d="M 70 145 Q 100 135 130 145 L 140 185 Q 100 195 60 185 Z" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
-                        <path d="M 85 155 Q 100 148 115 155" stroke="#2b2d42" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                    </svg>
+            <div class="pl-4">
+                <div class="flex justify-center mb-2">
+                    <div class="bg-yellow-300 px-4 py-0.5 rounded-lg shadow-sm border border-yellow-400 transform -rotate-1">
+                        <span id="badge-question-num" class="text-xs font-black text-slate-900 uppercase">Pertanyaan 1</span>[span_6](start_span)[span_6](end_span)
+                    </div>
                 </div>
-                <span class="font-black text-slate-800 text-sm drop-shadow-sm">Perempuan</span>
+                <h2 id="question-title" class="text-lg sm:text-xl font-black text-slate-900 text-center leading-snug tracking-tight mb-2">
+                    <span id="creator-name-label" class="text-[#ff4f8b]">dika</span> paling banyak menghabiskan uang untuk apa?[span_7](start_span)[span_7](end_span)
+                </h2>
+            </div>
+        </div>
+
+        <!-- 4 Tombol Pilihan Jawaban Lengkap dengan Thumbnail Foto & Efek Tombol -->
+        <div class="flex flex-col gap-3 w-full">
+            <div onclick="selectQuizAnswer(1)" id="opt-1" class="bg-white rounded-[24px] p-2.5 shadow-lg border-2 border-white flex items-center gap-3.5 cursor-pointer transition transform active:scale-95 hover:border-pink-300">
+                <div class="w-14 h-14 rounded-2xl overflow-hidden bg-slate-100 flex-shrink-0 shadow-inner">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=150" class="w-full h-full object-cover" alt="Camilan">
+                </div>
+                <div class="flex-grow text-left">
+                    <p class="font-black text-slate-900 text-sm">Camilan / makanan 🍔</p>[span_8](start_span)[span_8](end_span)
+                    <div class="w-20 h-1.5 bg-yellow-300 rounded-full mt-1"></div>
+                </div>
+            </div>
+
+            <div onclick="selectQuizAnswer(2)" id="opt-2" class="bg-white rounded-[24px] p-2.5 shadow-lg border-2 border-white flex items-center gap-3.5 cursor-pointer transition transform active:scale-95 hover:border-pink-300">
+                <div class="w-14 h-14 rounded-2xl overflow-hidden bg-slate-100 flex-shrink-0 shadow-inner">
+                    <img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=150" class="w-full h-full object-cover" alt="Baju">
+                </div>
+                <div class="flex-grow text-left">
+                    <p class="font-black text-slate-900 text-sm">Baju / sepatu 👟</p>[span_9](start_span)[span_9](end_span)
+                    <div class="w-20 h-1.5 bg-cyan-300 rounded-full mt-1"></div>
+                </div>
+            </div>
+
+            <div onclick="selectQuizAnswer(3)" id="opt-3" class="bg-white rounded-[24px] p-2.5 shadow-lg border-2 border-white flex items-center gap-3.5 cursor-pointer transition transform active:scale-95 hover:border-pink-300">
+                <div class="w-14 h-14 rounded-2xl overflow-hidden bg-slate-100 flex-shrink-0 shadow-inner">
+                    <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=150" class="w-full h-full object-cover" alt="Game">
+                </div>
+                <div class="flex-grow text-left">
+                    <p class="font-black text-slate-900 text-sm">Game 🎮</p>[span_10](start_span)[span_10](end_span)
+                    <div class="w-20 h-1.5 bg-emerald-300 rounded-full mt-1"></div>
+                </div>
+            </div>
+
+            <div onclick="selectQuizAnswer(4)" id="opt-4" class="bg-white rounded-[24px] p-2.5 shadow-lg border-2 border-white flex items-center gap-3.5 cursor-pointer transition transform active:scale-95 hover:border-pink-300">
+                <div class="w-14 h-14 rounded-2xl overflow-hidden bg-slate-100 flex-shrink-0 shadow-inner">
+                    <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=150" class="w-full h-full object-cover" alt="Teknologi">
+                </div>
+                <div class="flex-grow text-left">
+                    <p class="font-black text-slate-900 text-sm">Teknologi / aksesori 🎧</p>[span_11](start_span)[span_11](end_span)
+                    <div class="w-20 h-1.5 bg-pink-300 rounded-full mt-1"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -361,35 +308,21 @@
 
     <script>
         let userName = "";
+        let currentQuestion = 1;
+        const totalQuestions = 15; // Total 15 pertanyaan[span_12](start_span)[span_12](end_span)
 
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 document.getElementById('loading-screen').classList.add('fade-out');
                 document.getElementById('main-screen').classList.add('active');
-            }, 6000); 
+            }, 3000); 
         });
 
-        function toggleLangMenu() {
-            const menu = document.getElementById('lang-menu');
-            const arrow = document.getElementById('lang-arrow');
-            if (menu.classList.contains('menu-hidden')) {
-                menu.classList.remove('menu-hidden');
-                menu.classList.add('menu-show');
-                arrow.style.transform = 'rotate(180deg)';
-            } else {
-                menu.classList.remove('menu-show');
-                menu.classList.add('menu-hidden');
-                arrow.style.transform = 'rotate(0deg)';
-            }
+        function goToScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
         }
 
-        function changeLanguage(langName, subtitleText) {
-            document.getElementById('selected-lang').innerText = langName;
-            document.getElementById('txt-subtitle').innerText = subtitleText;
-            toggleLangMenu();
-        }
-
-        // Transisi Gelembung
         function triggerTransition(targetScreenId, loadingText) {
             const transOverlay = document.getElementById('transition-loading');
             document.getElementById('transition-text').innerText = loadingText;
@@ -402,50 +335,93 @@
                     transOverlay.classList.add('hidden');
                     goToScreen(targetScreenId);
                 }, 300);
-            }, 1200);
+            }, 800);
         }
 
-        function goToScreen(screenId) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById(screenId).classList.add('active');
-        }
-
-        function updateCharCount(input) {
-            const count = input.value.length;
-            document.getElementById('char-count').innerText = `${count}/15`;
-        }
-
-        // Aksi Klik Lanjut di Halaman Nama
         function submitName() {
             const nameInput = document.getElementById('username-input');
             userName = nameInput.value.trim();
             if (!userName) {
-                alert('Silakan masukkan nama kamu terlebih dahulu!');
+                alert('Silakan masukkan nama kamu dulu ya!');
                 return;
             }
-            
-            // Set sapaan nama yang benar (tanpa typo)
             document.getElementById('greeting-text').innerText = `hai, ${userName} 👋`;
-
+            document.getElementById('creator-name-label').innerText = userName.toLowerCase();
             triggerTransition('gender-screen', `Halo ${userName}, pilih gendermu...`);
         }
 
-        // Aksi Pilih Gender (Efek Goyang Wiggle & Bayangan Font)
         function selectGender(gender) {
             const cardMale = document.getElementById('card-male');
             const cardFemale = document.getElementById('card-female');
 
             if (gender === 'male') {
                 cardMale.classList.add('animate-wiggle', 'border-blue-400', 'bg-blue-50/40');
-                cardFemale.classList.remove('animate-wiggle', 'border-pink-400', 'bg-pink-50/40');
             } else {
                 cardFemale.classList.add('animate-wiggle', 'border-pink-400', 'bg-pink-50/40');
-                cardMale.classList.remove('animate-wiggle', 'border-blue-400', 'bg-blue-50/40');
             }
 
+            // Setelah pilih gender, langsung masuk ke kuis pertanyaan 1
             setTimeout(() => {
-                triggerTransition('gender-screen', 'Menyimpan pilihan...');
-            }, 500);
+                triggerTransition('quiz-creator-screen', 'Mempersiapkan 15 Pertanyaan Kuis...[span_13](start_span)[span_13](end_span)');
+            }, 400);
+        }
+
+        // Fungsi saat user klik jawaban di kuis 1 sampai 15
+        function selectQuizAnswer(optionNum) {
+            const selectedCard = document.getElementById(`opt-${optionNum}`);
+            
+            // Wajib ada efek tombol dipencet (wiggle / goyang & perubahan warna border)
+            selectedCard.classList.add('animate-wiggle', 'border-pink-400', 'bg-pink-50/50');
+
+            setTimeout(() => {
+                selectedCard.classList.remove('animate-wiggle');
+
+                if (currentQuestion < totalQuestions) {
+                    currentQuestion++;
+                    showQuizTransition(`Menuju Pertanyaan ${currentQuestion} dari ${totalQuestions}...[span_14](start_span)[span_14](end_span)`);
+                } else {
+                    showQuizTransition("Kuis 15 Soal Berhasil Dibuat! 🎉[span_15](start_span)[span_15](end_span)");
+                    setTimeout(() => {
+                        alert(`Hore ${userName}! Kuis kamu sudah lengkap 15 pertanyaan dan siap dibagikan ke teman-temanmu[span_16](start_span)[span_16](end_span)!`);
+                    }, 1200);
+                }
+            }, 400);
+        }
+
+        function showQuizTransition(text) {
+            const transOverlay = document.getElementById('transition-loading');
+            document.getElementById('transition-text').innerText = text;
+            transOverlay.classList.remove('hidden');
+            setTimeout(() => { transOverlay.style.opacity = '1'; }, 10);
+
+            setTimeout(() => {
+                transOverlay.style.opacity = '0';
+                setTimeout(() => {
+                    transOverlay.classList.add('hidden');
+                    updateQuestionData();
+                }, 300);
+            }, 700);
+        }
+
+        function updateQuestionData() {
+            document.getElementById('question-counter').innerText = `Pertanyaan ${currentQuestion} dari ${totalQuestions}`;[span_17](start_span)[span_17](end_span)
+            document.getElementById('badge-question-num').innerText = `Pertanyaan ${currentQuestion}`;[span_18](start_span)[span_18](end_span)
+
+            const sampleQuestions = [
+                "paling banyak menghabiskan uang untuk apa?",[span_19](start_span)[span_19](end_span)
+                "paling suka makanan apa kalau malam hari?",
+                "kalau liburan paling ingin pergi ke mana?",
+                "hal apa yang paling bikin ngambek?",
+                "kebiasaan paling aneh yang sering dilakuin?"
+            ];
+
+            let qText = sampleQuestions[(currentQuestion - 1) % sampleQuestions.length];
+            document.getElementById('question-title').innerHTML = `<span class="text-[#ff4f8b]">${userName.toLowerCase()}</span> ${qText}`;[span_20](start_span)[span_20](end_span)
+
+            // Reset pilihan tombol
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById(`opt-${i}`).classList.remove('border-pink-400', 'bg-pink-50/50');
+            }
         }
     </script>
 </body>
