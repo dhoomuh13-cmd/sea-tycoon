@@ -52,7 +52,7 @@
         .fade-out {
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.6s ease-in-out;
+            transition: opacity 0.4s ease-in-out;
         }
 
         .screen {
@@ -78,7 +78,7 @@
     <!-- ========================================== -->
     <!-- 1. LAYAR LOADING AWAL -->
     <!-- ========================================== -->
-    <div id="loading-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-gradient-to-b from-[#4ea8de] to-[#90e0ef] transition-opacity duration-500">
+    <div id="loading-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-gradient-to-b from-[#4ea8de] to-[#90e0ef] transition-opacity duration-400">
         <div class="relative mb-6 text-center">
             <div class="flex justify-center gap-12 mb-[-12px] relative z-10">
                 <span class="text-3xl animate-bounce">🧸</span>
@@ -413,18 +413,19 @@
             { q: "seberapa jujur kamu dalam menjawab kuis ini?", opts: ["Jujur banget dong!", "Lumayan jujur sih", "Agak rahasia ya", "Asal jawab aja wkwk"]
         ];
 
+        // Durasi loading awal dipangkas pas 1 detik (1000ms)
         window.addEventListener('DOMContentLoaded', () => {
-            const loadingScreen = document.getElementById('loading-screen');
-            const mainScreen = document.getElementById('main-screen');
-            
-            // Mengatasi stuck dengan memastikan transisi berjalan pasti dalam waktu singkat
             setTimeout(() => {
+                const loadingScreen = document.getElementById('loading-screen');
+                const mainScreen = document.getElementById('main-screen');
+                
                 loadingScreen.classList.add('fade-out');
                 mainScreen.classList.add('active');
+                
                 setTimeout(() => {
                     loadingScreen.style.display = 'none';
-                }, 600);
-            }, 1500); 
+                }, 400);
+            }, 1000); 
         });
 
         function triggerTransition(targetScreenId, loadingText) {
