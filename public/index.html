@@ -4,44 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Don't Block Me - Cari Teman Palsumu</title>
-    <!-- Menggunakan Tailwind CSS untuk styling cepat dan akurat -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700;800&display=swap');
         body {
             font-family: 'Quicksand', sans-serif;
-            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+            background: linear-gradient(135deg, #e0f2fe 0%, #b9e3fc 100%);
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-between p-4 relative overflow-x-hidden">
-
-    <!-- Efek awan latar belakang tipis -->
-    <div class="absolute top-0 left-0 w-full h-48 bg-white/30 rounded-b-[50%] pointer-events-none -z-10"></div>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-x-hidden">
 
     <!-- Container Utama -->
-    <div class="w-full max-w-sm text-center my-auto">
+    <div class="w-full max-w-sm text-center relative">
         
-        <!-- Header / Logo & Maskot -->
-        <div class="relative mb-6 pt-4">
-            <!-- Dekorasi Bintang & Hiasan -->
-            <div class="absolute -top-2 left-6 text-yellow-400 text-xl animate-pulse">✨</div>
-            <div class="absolute top-4 right-8 text-pink-400 text-lg">🎈</div>
+        <!-- ========================================== -->
+        <!-- MASKOT BERUANG DI ATAS JUDUL (SAMA PERSIS) -->
+        <!-- ========================================== -->
+        <div class="flex justify-between items-end px-4 mb-[-15px] relative z-10">
+            <!-- Beruang Coklat Kiri -->
+            <img src="https://i.ibb.co.id/51v663g/bear-left.png" alt="Beruang Coklat" class="w-20 h-20 object-contain drop-shadow-md" onerror="this.src='https://img.icons8.com/color/96/teddy-bear.png'">
             
-            <!-- Judul Utama dengan gaya tebal dan warna khas -->
-            <h1 class="text-4xl sm:text-5xl font-extrabold text-[#ff4f8b] drop-shadow-sm tracking-wide leading-tight">
+            <!-- Beruang Putih Kanan -->
+            <img src="https://i.ibb.co.id/0y3Q8wN/bear-right.png" alt="Beruang Putih" class="w-20 h-20 object-contain drop-shadow-md" onerror="this.src='https://img.icons8.com/color/96/standing-polar-bear.png'">
+        </div>
+
+        <!-- Header / Logo -->
+        <div class="relative mb-5 bg-white/40 backdrop-blur-sm pt-4 pb-3 rounded-3xl shadow-sm border border-white/60">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-[#ff4f8b] tracking-wide leading-tight drop-shadow-sm">
                 Don't <br>
                 <span class="text-[#3b82f6]">Block</span> Me
             </h1>
             
             <!-- Subtitle Banner -->
-            <div class="inline-block mt-3 bg-white/80 backdrop-blur-md px-5 py-1.5 rounded-full shadow-sm border border-blue-100">
+            <div class="inline-block mt-3 bg-white px-5 py-1 rounded-full shadow-sm border border-blue-100">
                 <p class="text-xs sm:text-sm font-bold text-slate-600 tracking-wider">Cari Teman Palsumu</p>
             </div>
         </div>
 
         <!-- Tombol Pilihan Bahasa -->
-        <div class="bg-white rounded-full p-2.5 shadow-md flex items-center justify-between mb-6 px-5 border-2 border-pink-100 transition hover:border-pink-300 cursor-pointer">
+        <div class="bg-white rounded-full p-2.5 shadow-md flex items-center justify-between mb-5 px-5 border-2 border-pink-100 cursor-pointer hover:border-pink-300 transition">
             <div class="flex items-center gap-2.5">
                 <span class="text-xl">🌐</span>
                 <span class="font-bold text-slate-700 text-sm">Indonesia</span>
@@ -52,24 +54,26 @@
         </div>
 
         <!-- Card Konten Utama (Garis Putus-putus) -->
-        <div class="bg-white rounded-[28px] p-6 shadow-xl border-[3px] border-dashed border-pink-200 relative">
+        <div class="bg-white rounded-[32px] p-6 shadow-xl border-[3px] border-dashed border-pink-200 relative">
             
-            <!-- Ikon Hati Melayang di Sudut Card -->
-            <div class="absolute -top-3 -right-3 bg-white p-1.5 rounded-full shadow-md border border-pink-100">
+            <!-- Ikon Hati Melayang -->
+            <div class="absolute -top-3 -right-2 bg-white p-2 rounded-full shadow-md border border-pink-100 animate-bounce">
                 <span class="text-xl">💖</span>
             </div>
 
-            <!-- Ilustrasi Karakter (Placeholder Visual Lucu) -->
-            <div class="flex justify-center items-center gap-3 mb-4">
-                <div class="bg-sky-50 p-3 rounded-2xl border border-sky-100 text-3xl shadow-inner">🐼</div>
-                <div class="bg-amber-50 p-3 rounded-2xl border border-amber-100 text-3xl shadow-inner">🐻</div>
+            <!-- Ilustrasi Karakter di Dalam Card -->
+            <div class="flex justify-center items-center mb-3">
+                <div class="bg-pink-50/50 p-3 rounded-2xl border border-pink-100 shadow-inner">
+                    <!-- Gambar ilustrasi dua beruang main HP -->
+                    <img src="https://img.icons8.com/color/144/cute-creature.png" alt="Ilustrasi Kuis" class="w-28 h-20 object-contain">
+                </div>
             </div>
             
             <!-- Teks Ajakan -->
             <h2 class="text-lg sm:text-xl font-extrabold text-slate-800 leading-snug">
                 buat kuismu <br> 
                 <span class="text-[#ff4f8b] text-2xl">&</span> <br> 
-                <span class="bg-yellow-200 px-2 py-0.5 rounded-md inline-block mt-0.5 text-slate-900">blokir</span> teman palsumu
+                <span class="bg-yellow-200 px-2.5 py-0.5 rounded-md inline-block mt-1 text-slate-900 shadow-xs">blokir</span> teman palsumu
             </h2>
 
             <!-- Tombol Aksi Utama -->
@@ -79,16 +83,15 @@
         </div>
 
         <!-- Footer Kecil -->
-        <div class="mt-6 text-xs text-slate-500 font-medium">
-            🍓 Terhubung aman dengan MongoDB
+        <div class="mt-4 text-xs text-slate-500 font-medium">
+            ✨ Terhubung dengan MongoDB
         </div>
 
     </div>
 
     <script>
         function mulaiKuis() {
-            // Nanti diarahkan ke halaman pembuat kuis atau API MongoDB
-            alert('Fitur buat kuis akan segera aktif dan terhubung ke database!');
+            alert('Tombol mulai diklik! Siap masuk ke halaman pembuatan kuis.');
         }
     </script>
 </body>
