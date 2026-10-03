@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const path = require('path');
-const mongoose = require('mongoose'); // Library untuk koneksi ke MongoDB
+const mongoose = require('mongoose');
 
 const app = express();
 
@@ -13,10 +13,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // ==========================================
-// KONEKSI MONGODB
+// KONEKSI MONGODB (Langsung pakai URI)
 // ==========================================
-// Mengambil URI dari Environment Variables Railway (MONGODB_URI)
-const mongoURI = process.env.MONGODB_URI;
+const mongoURI = 'mongodb+srv://dhoomuh13_db_user:admin12345@cluster0.kkteamf.mongodb.net/?appName=Cluster0';
 
 mongoose.connect(mongoURI)
 .then(() => console.log('Berhasil terhubung ke MongoDB!'))
@@ -32,7 +31,7 @@ const updateSchema = new mongoose.Schema({
 const UpdateModel = mongoose.model('Update', updateSchema);
 
 // ==========================================
-// ENDPOINT DATABASE (Agar data tampil ke semua user)
+// ENDPOINT DATABASE
 // ==========================================
 
 // 1. Endpoint untuk mengambil semua data update/kenangan
@@ -63,7 +62,6 @@ app.post('/api/updates', async (req, res) => {
 // ENDPOINT FITUR LAINNYA (AI & TikTok)
 // ==========================================
 
-// Endpoint Route untuk Chat AI
 app.post('/api/chat-ai', async (req, res) => {
     try {
         const userMessage = req.body.message;
@@ -101,7 +99,6 @@ app.post('/api/chat-ai', async (req, res) => {
     }
 });
 
-// Endpoint Route untuk TikTok Downloader
 app.post('/api/download/tiktok', async (req, res) => {
     try {
         const videoUrl = req.body.url;
@@ -139,7 +136,6 @@ app.post('/api/download/tiktok', async (req, res) => {
     }
 });
 
-// Menjalankan server pada port yang disediakan environment (Railway) atau port 3000
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server Sea Tycoon berhasil berjalan di port ${PORT}`);
