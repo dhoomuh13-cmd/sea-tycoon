@@ -21,7 +21,7 @@
             background-size: 100% 26px;
         }
 
-        /* Animasi Teks Bergerak / Berdenyut (Gaya Estetik) */
+        /* Animasi Teks Bergerak / Berdenyut */
         @keyframes bounceGlow {
             0%, 100% { transform: translateY(0) scale(1); }
             50% { transform: translateY(-5px) scale(1.02); }
@@ -30,7 +30,7 @@
             animation: bounceGlow 2s ease-in-out infinite;
         }
 
-        /* Efek Teks Gradasi Warna-Warni ala iPhone */
+        /* Efek Gradasi Teks ala iPhone */
         .gradient-text-1 {
             background: linear-gradient(135deg, #ff4f8b 0%, #ff70a6 100%);
             -webkit-background-clip: text;
@@ -42,11 +42,25 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Transisi Selesai Loading */
+        /* Animasi Transisi Menu Bahasa & Loading */
         .fade-out {
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.6s ease-in-out;
+        }
+
+        .menu-hidden {
+            opacity: 0;
+            transform: scale(0.95) translateY(-10px);
+            pointer-events: none;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .menu-show {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            pointer-events: auto;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
     </style>
 </head>
@@ -111,18 +125,35 @@
             
             <!-- Subtitle Badge -->
             <div class="inline-block mt-3 bg-white px-5 py-1.5 rounded-full shadow-sm border border-pink-100">
-                <p class="text-xs sm:text-sm font-extrabold text-slate-600 tracking-wider">Cari Teman Palsumu</p>
+                <p id="txt-subtitle" class="text-xs sm:text-sm font-extrabold text-slate-600 tracking-wider">Cari Teman Palsumu</p>
             </div>
         </div>
 
-        <!-- Tombol Pilihan Bahasa -->
-        <div class="bg-white rounded-full p-3 shadow-md flex items-center justify-between mb-5 px-6 border-2 border-pink-100 cursor-pointer hover:border-pink-300 transition">
-            <div class="flex items-center gap-2.5">
-                <span class="text-xl">🌐</span>
-                <span class="font-extrabold text-slate-800 text-sm">Indonesia</span>
+        <!-- TOMBOL & MENU DROPDOWN PILIHAN BAHASA -->
+        <div class="relative mb-5">
+            <!-- Tombol Utama Pilihan Bahasa -->
+            <div onclick="toggleLangMenu()" class="bg-white rounded-full p-3.5 shadow-md flex items-center justify-between px-6 border-2 border-pink-100 cursor-pointer hover:border-pink-300 transition active:scale-95">
+                <div class="flex items-center gap-2.5">
+                    <span class="text-xl">🌐</span>
+                    <span id="selected-lang" class="font-extrabold text-slate-800 text-sm">Indonesia</span>
+                </div>
+                <div id="lang-arrow" class="bg-[#ff4f8b] text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-black shadow-sm transition-transform duration-300">
+                    ▼
+                </div>
             </div>
-            <div class="bg-[#ff4f8b] text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-black shadow-sm">
-                ▼
+
+            <!-- Pop-up Menu Pilihan Bahasa (Muncul Saat Diklik) -->
+            <div id="lang-menu" class="absolute top-16 left-0 right-0 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border-2 border-pink-100 p-2 z-30 menu-hidden flex flex-col gap-1.5">
+                <div onclick="changeLanguage('Indonesia', 'Cari Teman Palsumu', 'buat kuismu', 'blokir teman palsumu', 'Mulai Buat Kuis 🚀')" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-pink-50 cursor-pointer transition">
+                    <span class="font-extrabold text-slate-800 text-sm">🇮🇩 Indonesia (Utama)</span>
+                    <span class="text-pink-500 font-bold text-xs">✓</span>
+                </div>
+                <div onclick="changeLanguage('English', 'Find Your Fake Friends', 'create your quiz', 'block your fake friends', 'Start Creating Quiz 🚀')" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-pink-50 cursor-pointer transition">
+                    <span class="font-extrabold text-slate-700 text-sm">🇬🇧 English</span>
+                </div>
+                <div onclick="changeLanguage('Melayu', 'Cari Kawan Palsu Anda', 'buat kuiz anda', 'sekat kawan palsu', 'Mula Buat Kuiz 🚀')" class="flex items-center justify-between px-4 py-2.5 rounded-xl hover:bg-pink-50 cursor-pointer transition">
+                    <span class="font-extrabold text-slate-700 text-sm">🇲🇾 Melayu</span>
+                </div>
             </div>
         </div>
 
@@ -134,7 +165,7 @@
                 <span class="text-xl">💖</span>
             </div>
 
-            <!-- Teks Animasi Bergerak di Tengah (Dev DhooCep BlockDay) -->
+            <!-- Teks Animasi Bergerak di Tengah -->
             <div class="flex justify-center items-center mb-4">
                 <div class="bg-gradient-to-r from-pink-50 via-sky-50 to-yellow-50 px-6 py-3 rounded-2xl border border-pink-100 shadow-inner animate-pop">
                     <p class="text-xs font-black tracking-widest text-pink-600 uppercase">Dev • DhooCep</p>
@@ -142,15 +173,15 @@
                 </div>
             </div>
             
-            <!-- Teks Ajakan Besar, Tebal, Estetik ala iPhone -->
-            <h2 class="text-xl sm:text-2xl font-black text-slate-900 leading-snug tracking-tight">
+            <!-- Teks Ajakan Dinamis Sesuai Bahasa -->
+            <h2 id="txt-content" class="text-xl sm:text-2xl font-black text-slate-900 leading-snug tracking-tight">
                 buat kuismu <br> 
                 <span class="text-[#ff4f8b] text-3xl font-black">&</span> <br> 
                 <span class="bg-yellow-300 px-3 py-0.5 rounded-lg inline-block mt-1 text-slate-900 shadow-sm font-black transform -rotate-1">blokir</span> teman palsumu
             </h2>
 
             <!-- Tombol Aksi Utama -->
-            <button onclick="mulaiKuis()" class="mt-6 w-full bg-gradient-to-r from-[#ff4f8b] to-[#ff2a6d] hover:from-[#e03e77] hover:to-[#d91b5c] text-white font-black py-4 px-6 rounded-2xl shadow-lg shadow-pink-300 transition-all transform active:scale-95 text-base tracking-wide">
+            <button id="btn-start" onclick="mulaiKuis()" class="mt-6 w-full bg-gradient-to-r from-[#ff4f8b] to-[#ff2a6d] hover:from-[#e03e77] hover:to-[#d91b5c] text-white font-black py-4 px-6 rounded-2xl shadow-lg shadow-pink-300 transition-all transform active:scale-95 text-base tracking-wide">
                 Mulai Buat Kuis 🚀
             </button>
         </div>
@@ -163,19 +194,53 @@
     </div>
 
     <script>
-        // Durasi loading selama 6 detik (masuk rentang 5-10 detik)
+        // Durasi loading selama 6 detik
         window.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 const loadingScreen = document.getElementById('loading-screen');
                 const mainContent = document.getElementById('main-content');
 
-                // Hilangkan layar loading dengan mulus
                 loadingScreen.classList.add('fade-out');
-                
-                // Munculkan halaman utama
                 mainContent.classList.remove('opacity-0');
             }, 6000); 
         });
+
+        // Fungsi Buka/Tutup Menu Bahasa
+        function toggleLangMenu() {
+            const menu = document.getElementById('lang-menu');
+            const arrow = document.getElementById('lang-arrow');
+            
+            if (menu.classList.contains('menu-hidden')) {
+                menu.classList.remove('menu-hidden');
+                menu.classList.add('menu-show');
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                menu.classList.remove('menu-show');
+                menu.classList.add('menu-hidden');
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Fungsi Mengganti Bahasa Secara Interaktif
+        function changeLanguage(langName, subtitleText, actionText1, actionText2, buttonText) {
+            document.getElementById('selected-lang').innerText = langName;
+            document.getElementById('txt-subtitle').innerText = subtitleText;
+            
+            // Ubah teks konten utama dengan mempertahankan elemen warna & gaya
+            const contentEl = document.getElementById('txt-content');
+            if (langName === 'English') {
+                contentEl.innerHTML = `create your quiz <br> <span class="text-[#ff4f8b] text-3xl font-black">&</span> <br> <span class="bg-yellow-300 px-3 py-0.5 rounded-lg inline-block mt-1 text-slate-900 shadow-sm font-black transform -rotate-1">block</span> your fake friends`;
+            } else if (langName === 'Melayu') {
+                contentEl.innerHTML = `buat kuiz anda <br> <span class="text-[#ff4f8b] text-3xl font-black">&</span> <br> <span class="bg-yellow-300 px-3 py-0.5 rounded-lg inline-block mt-1 text-slate-900 shadow-sm font-black transform -rotate-1">sekat</span> kawan palsu`;
+            } else {
+                contentEl.innerHTML = `buat kuismu <br> <span class="text-[#ff4f8b] text-3xl font-black">&</span> <br> <span class="bg-yellow-300 px-3 py-0.5 rounded-lg inline-block mt-1 text-slate-900 shadow-sm font-black transform -rotate-1">blokir</span> teman palsumu`;
+            }
+
+            document.getElementById('btn-start').innerText = buttonText;
+
+            // Tutup menu otomatis setelah dipilih
+            toggleLangMenu();
+        }
 
         function mulaiKuis() {
             alert('Tombol mulai diklik! Siap masuk ke halaman pembuatan kuis.');
