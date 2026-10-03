@@ -592,7 +592,6 @@
         <div class="menu-category">Fitur Utama</div>
         <div class="sidebar-item" onclick="openMenu('home')">Beranda</div>
         <div class="sidebar-item" onclick="openMenu('tiktok')">TikTok Downloader</div>
-        <div class="sidebar-item" onclick="openMenu('lucky-spin')">Lucky Spin 🎡</div>
         <div class="sidebar-item" onclick="openMenu('req-fitur')">Req Fitur / Kendala</div>
 
         <div class="menu-category owner-menu-label" style="display:none;">Panel Owner</div>
@@ -669,8 +668,8 @@
                 <p style="color: var(--text-muted); margin-top: 6px; max-width: 330px; font-size: 13px;">Gunakan menu di bawah atau tombol pilihan cepat untuk masuk ke saluran info update, kenangan & cerita.</p>
                 <div class="home-action-buttons">
                     <button class="home-big-btn" onclick="openInfoUpdateWithLoader()">Info Update</button>
-                    <button class="home-big-btn" onclick="openMenu('lucky-spin')">Lucky Spin</button>
                     <button class="home-big-btn" onclick="openMenu('lihat-kenangan')">Kenangan</button>
+                    <button class="home-big-btn" onclick="openMenu('lihat-cerita')">Cerita</button>
                 </div>
             </div>
         </div>
@@ -679,7 +678,7 @@
         <div id="page-owner-add-thumbnail" class="page-container">
             <div class="form-card">
                 <h2>Add Foto Thumbnail</h2>
-                <p>Tambahkan foto baru ke tampilan awal (slider beranda) menggunakan Link JPG.</p>
+                <p>Tambahkan foto baru ke tampilan awal (slider beranda) menggunakan Link JPG[span_1](start_span)[span_1](end_span).</p>
                 <div class="input-group">
                     <label>Link JPG / Gambar</label>
                     <input type="url" id="owner-thumb-link" placeholder="https://contoh.com/gambar.jpg">
@@ -738,19 +737,6 @@
                     <div id="tiktok-video-preview" style="width: 100%; border-radius: 12px; overflow: hidden; background: #000; border: 1px solid var(--border-color);"></div>
                     <a id="tiktok-download-link" href="#" target="_blank" class="action-btn" style="text-align: center; text-decoration: none; display: block; margin-top: 5px;">Simpan Video MP4 (No Watermark)</a>
                 </div>
-            </div>
-        </div>
-
-        <!-- Lucky Spin Feature Page -->
-        <div id="page-lucky-spin" class="page-container">
-            <div class="form-card" style="text-align: center; max-width: 420px; margin: auto;">
-                <h2>Lucky Spin 🎡</h2>
-                <p>Putar roda keberuntungan untuk mendapatkan berbagai hadiah eksklusif!</p>
-                <div style="background: var(--bg-main); padding: 30px; border-radius: 20px; margin: 15px 0; border: 1px solid var(--border-color); position: relative; overflow: hidden;">
-                    <div id="spin-animation-box" style="font-size: 48px; margin: 10px 0;">🎁</div>
-                    <div id="spin-wheel-result" style="font-size: 18px; font-weight: 800; color: #38bdf8; margin-top: 10px;">Siap Memutar?</div>
-                </div>
-                <button class="action-btn" id="spin-btn" onclick="startLuckySpin()">Putar Sekarang!</button>
             </div>
         </div>
 
@@ -1033,7 +1019,7 @@
         function showForgotPasswordView() {
             let emailInput = document.getElementById('input-email').value.trim();
             if (!emailInput) {
-                showBubble('Masukkan email akun terlebih dahulu! ⚠️');
+                showBubble('Masukkan email akun terlebih dahulu! ⚠️️');
                 return;
             }
             let newPass = prompt("Masukkan password baru (minimal 6 karakter):");
@@ -1225,10 +1211,6 @@
                 title.innerText = 'TikTok Downloader';
                 topLeftBtn.innerText = '✕';
                 setActiveNav('TikTok');
-            } else if (menu === 'lucky-spin') {
-                document.getElementById('page-lucky-spin').classList.add('active');
-                title.innerText = 'Lucky Spin';
-                topLeftBtn.innerText = '✕';
             } else if (menu === 'req-fitur') {
                 document.getElementById('page-req-fitur').classList.add('active');
                 title.innerText = 'Req Fitur / Kendala';
@@ -1279,36 +1261,6 @@
                     setActiveNav('Profile');
                 });
             }
-        }
-
-        // Logic Lucky Spin Feature
-        function startLuckySpin() {
-            const resultBox = document.getElementById('spin-wheel-result');
-            const iconBox = document.getElementById('spin-animation-box');
-            const btn = document.getElementById('spin-btn');
-            
-            btn.disabled = true;
-            btn.innerText = "Berputar...";
-            
-            let prizes = ['10.000 Koin 🪙', '5.000 Koin 🪙', 'Item Spesial 🛡️', 'Coba Lagi 😢', 'Tiket VIP 🎫', '20.000 Koin 🪙'];
-            let icons = ['🪙', '💰', '🛡️', '😢', '🎫', '💎'];
-            
-            let counter = 0;
-            let interval = setInterval(() => {
-                let randIndex = Math.floor(Math.random() * prizes.length);
-                resultBox.innerText = prizes[randIndex];
-                iconBox.innerText = icons[randIndex];
-                counter++;
-                if (counter > 15) {
-                    clearInterval(interval);
-                    let finalPrizeIndex = Math.floor(Math.random() * prizes.length);
-                    resultBox.innerText = `Selamat! Anda Mendapatkan: ${prizes[finalPrizeIndex]}`;
-                    iconBox.innerText = icons[finalPrizeIndex];
-                    btn.disabled = false;
-                    btn.innerText = "Putar Lagi!";
-                    showBubble(`Lucky Spin Berhasil! Anda mendapatkan ${prizes[finalPrizeIndex]} 🎉`);
-                }
-            }, 100);
         }
 
         // Logic Slider & Add Thumbnail Owner via Link JPG
@@ -1408,7 +1360,7 @@
             const downloadBtn = document.getElementById('tiktok-download-btn');
 
             if (!urlInput) {
-                showBubble('Silakan masukkan link video TikTok terlebih dahulu! ⚠️');
+                showBubble('Silakan masukkan link video TikTok terlebih dahulu! ⚠️️');
                 return;
             }
 
