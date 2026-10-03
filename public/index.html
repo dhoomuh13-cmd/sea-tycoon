@@ -959,7 +959,7 @@
                     showBubble('Email tidak ditemukan dalam sistem. ❌');
                 }
             } else {
-                showBubble('Password baru tidak valid! ⚠️️');
+                showBubble('Password baru tidak valid! ⚠️');
             }
         }
 
@@ -1322,7 +1322,7 @@
                     images: imagesArray,
                     video: videoData,
                     time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-                    reactions: { '👍': 0, '❤️': 0, '🔥': 0, '🚀': 0, '👏': 0 },
+                    reactions: { '👍': 0, '❤️️': 0, '🔥': 0, '🚀': 0, '👏': 0 },
                     userReacted: {},
                     comments: []
                 });
@@ -1389,17 +1389,6 @@
 
             let html = '';
             infoList.reverse().forEach(item => {
-                let reactionsHtml = '';
-                ['👍', '❤️', '🔥', '🚀', '👏'].forEach(emoji => {
-                    let count = item.reactions[emoji] || 0;
-                    let hasReacted = item.userReacted && item.userReacted[currentUser.fullname] === emoji;
-                    reactionsHtml += `
-                        <button class="react-btn ${hasReacted ? 'reacted' : ''}" onclick="reactInfoUpdate('${item.id}', '${emoji}')">
-                            ${emoji} <span>${count}</span>
-                        </button>
-                    `;
-                });
-
                 let mediaHtml = '';
                 if (item.images && item.images.length > 0) {
                     mediaHtml += `<div class="channel-images-grid">`;
@@ -1421,20 +1410,6 @@
                     `;
                 }
 
-                let commentsHtml = '';
-                if (item.comments && item.comments.length > 0) {
-                    item.comments.forEach(com => {
-                        commentsHtml += `
-                            <div class="comment-bubble">
-                                <b>@${com.username}</b>
-                                <span>${com.text}</span>
-                            </div>
-                        `;
-                    });
-                } else {
-                    commentsHtml = `<span style="font-size: 11px; color: var(--text-muted); text-align: center; padding: 4px;">Belum ada ulasan/komentar.</span>`;
-                }
-
                 let canDelete = (currentUser.role === 'Owner');
 
                 html += `
@@ -1453,6 +1428,15 @@
                 `;
             });
             wrapper.innerHTML = html;
+        }
+
+        function deleteInfoUpdate(id) {
+            if (!confirm("Hapus info update ini?")) return;
+            let infoList = JSON.parse(localStorage.getItem('sea_tycoon_info_updates') || '[]');
+            infoList = infoList.filter(item => item.id != id);
+            localStorage.setItem('sea_tycoon_info_updates', JSON.stringify(infoList));
+            showBubble('Info update berhasil dihapus! 🗑️');
+            renderInfoUpdateFeed();
         }
 
         // Fungsi Tambah Lagu Lengkap: Urutan (Judul -> Keterangan -> Gambar/Video -> Audio)
@@ -1489,7 +1473,6 @@
                 });
                 localStorage.setItem('sea_tycoon_songs', JSON.stringify(songs));
 
-                // Reset form
                 document.getElementById('input-song-title').value = '';
                 document.getElementById('input-song-desc').value = '';
                 document.getElementById('input-song-media').value = '';
@@ -1499,26 +1482,23 @@
                 openMenu('tempat-lagu');
             };
 
-            // Reader untuk Audio
             const audioReader = new FileReader();
             audioReader.onload = (e) => {
                 audioData = e.target.result;
 
-                // Cek jika ada Media (Gambar/Video)
                 if (mediaInput.files.length > 0) {
                     const file = mediaInput.files[0];
                     const reader = new FileReader();
                     reader.onload = (evt) => {
                         if (file.type.startsWith('video')) {
                             videoData = evt.target.result;
+                            finalSaveSong();
                         } else {
                             processSongImages(mediaInput.files, (arr) => {
                                 imagesArray = arr;
                                 finalSaveSong();
                             });
-                            return;
                         }
-                        finalSaveSong();
                     };
                     reader.readAsDataURL(file);
                 } else {
@@ -1588,7 +1568,6 @@
                         <div class="channel-body-text">${song.desc}</div>
                         ${mediaHtml}
                         
-                        <!-- Audio di bawah gambar/video -->
                         <div class="song-player-controls" style="margin-top: 10px; border-top: 1px dashed var(--border-color); padding-top: 10px;">
                             <button class="play-song-btn" id="play-btn-${song.id}" onclick="togglePlaySong('${song.id}', '${song.audio}')">▶</button>
                             <span style="font-size: 13px; font-weight: 700; color: #38bdf8;">Putar Audio Musik</span>
@@ -1660,7 +1639,6 @@
                 showBubble('Judul dan kenangan wajib diisi! ⚠️');
                 return;
             }
-            let imagesArray = [];
             if (fileInput.files.length > 0) {
                 processSongImages(fileInput.files, (arr) => saveKenanganData(judul, isi, arr));
             } else {
@@ -1676,9 +1654,7 @@
                 judul: judul,
                 kenangan: isi,
                 images: images,
-                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-                reactions: { '😂': 0, '❤️': 0, '👍': 0, '🔥': 0, '👏': 0 },
-                userReacted: {}
+                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
             });
             localStorage.setItem('sea_tycoon_kenangan', JSON.stringify(kenanganList));
             document.getElementById('kenangan-judul').value = '';
@@ -1786,7 +1762,7 @@
             const message = document.getElementById('req-message').value.trim();
             const fileInput = document.getElementById('req-image');
             if (!message && fileInput.files.length === 0) {
-                showBubble('Pesan request wajib diisi! ⚠️️');
+                showBubble('Pesan request wajib diisi! ⚠️');
                 return;
             }
             const processSubmit = (imgData) => {
