@@ -9,10 +9,17 @@
         @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600;700;800&display=swap');
         body {
             font-family: 'Quicksand', sans-serif;
-            background: linear-gradient(135deg, #e0f2fe 0%, #b9e3fc 100%);
+            background: linear-gradient(135deg, #4ea8de 0%, #90e0ef 50%, #caf0f8 100%);
         }
         
-        /* Animasi Berdenyut / Goyang untuk Teks Kreatif */
+        /* Efek garis-garis buku/kertas */
+        .paper-bg {
+            background-color: #ffffff;
+            background-image: linear-gradient(#e5e7eb 1px, transparent 1px);
+            background-size: 100% 24px;
+        }
+
+        /* Animasi Berdenyut untuk Teks */
         @keyframes floatText {
             0%, 100% { transform: translateY(0) scale(1); }
             50% { transform: translateY(-4px) scale(1.03); }
@@ -20,12 +27,62 @@
         .animate-float {
             animation: floatText 2.5s ease-in-out infinite;
         }
+
+        /* Animasi Transisi Hilang */
+        .fade-out {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s ease-in-out;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-x-hidden">
 
-    <!-- Container Utama -->
-    <div class="w-full max-w-sm text-center relative pt-8">
+    <!-- ========================================== -->
+    <!-- LAYAR LOADING (KERTAS BERGARIS) -->
+    <!-- ========================================== -->
+    <div id="loading-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-[#60b6f0]">
+        
+        <!-- Logo di atas layar loading -->
+        <div class="text-center mb-6">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-[#ff4f8b] drop-shadow-md">
+                Don't <span class="text-[#3b82f6]">Block</span> Me
+            </h1>
+            <div class="flex justify-center gap-2 mt-3">
+                <div class="bg-white/80 px-4 py-1 rounded-full shadow-sm text-xs font-bold text-slate-600">☁️ Awan</div>
+            </div>
+        </div>
+
+        <!-- Kartu Kertas Loading -->
+        <div class="w-full max-w-xs paper-bg rounded-2xl p-8 shadow-2xl relative border border-slate-200 transform rotate-1">
+            
+            <!-- Selotip Pink di Pojok Kiri Atas Kertas -->
+            <div class="absolute -top-3 -left-4 w-14 h-6 bg-pink-300/80 rotate-[-12deg] shadow-sm rounded-sm"></div>
+
+            <!-- Hiasan Bintang & Hati di Kertas -->
+            <div class="absolute top-4 right-4 text-pink-500 text-lg">❤️</div>
+            <div class="absolute bottom-4 left-4 text-yellow-400 text-lg">⭐</div>
+
+            <!-- Konten Teks Loading -->
+            <div class="text-center my-6">
+                <p class="text-2xl font-extrabold text-slate-700 tracking-wide">
+                    loading<span id="loading-dots">...</span>
+                </p>
+                <!-- Indikator Titik Warna-warni -->
+                <div class="flex justify-center items-center gap-2 mt-4">
+                    <span class="w-3 h-3 bg-blue-400 rounded-full animate-bounce"></span>
+                    <span class="w-3 h-3 bg-pink-400 rounded-full animate-bounce" style="animation-delay: 0.2s;"></span>
+                    <span class="w-3 h-3 bg-yellow-400 rounded-full animate-bounce" style="animation-delay: 0.4s;"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- HALAMAN UTAMA (MUNCUL SETELAH LOADING SELESAI) -->
+    <!-- ========================================== -->
+    <div id="main-content" class="w-full max-w-sm text-center relative pt-8 opacity-0 transition-opacity duration-700">
         
         <!-- Maskot Beruang & Panda di Atas Card Judul -->
         <div class="absolute -top-1 left-2 text-4xl animate-bounce z-20">🧸</div>
@@ -55,7 +112,7 @@
             </div>
         </div>
 
-        <!-- Card Konten Utama (Garis Putus-putus) -->
+        <!-- Card Konten Utama -->
         <div class="bg-white rounded-[32px] p-6 shadow-xl border-[3px] border-dashed border-pink-200 relative">
             
             <!-- Ikon Hati Melayang -->
@@ -63,7 +120,7 @@
                 <span class="text-xl">💖</span>
             </div>
 
-            <!-- Teks Animasi Bergerak Pengganti Gambar (Dev DhooCep BlockDay) -->
+            <!-- Teks Animasi Bergerak -->
             <div class="flex justify-center items-center mb-4">
                 <div class="bg-gradient-to-r from-pink-50 via-sky-50 to-yellow-50 px-5 py-3 rounded-2xl border border-pink-100 shadow-inner animate-float">
                     <p class="text-xs font-bold tracking-widest text-pink-500 uppercase">Dev • DhooCep</p>
@@ -92,6 +149,20 @@
     </div>
 
     <script>
+        // Durasi loading selama 6 detik (masuk rentang 5-10 detik yang diminta)
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loading-screen');
+                const mainContent = document.getElementById('main-content');
+
+                // Hilangkan layar loading dengan mulus
+                loadingScreen.classList.add('fade-out');
+                
+                // Munculkan halaman utama
+                mainContent.classList.remove('opacity-0');
+            }, 6000); // 6000 milidetik = 6 detik
+        });
+
         function mulaiKuis() {
             alert('Tombol mulai diklik! Siap masuk ke halaman pembuatan kuis.');
         }
