@@ -29,11 +29,11 @@
             animation: bounceGlow 2s ease-in-out infinite;
         }
 
-        /* Efek Goyang / Wiggle saat dipilih */
+        /* Efek Goyang / Wiggle saat card gender ditekan */
         @keyframes wiggle {
-            0%, 100% { transform: rotate(0deg) scale(1.05); }
-            25% { transform: rotate(-3deg) scale(1.05); }
-            75% { transform: rotate(3deg) scale(1.05); }
+            0%, 100% { transform: rotate(0deg) scale(1.03); }
+            25% { transform: rotate(-3deg) scale(1.03); }
+            75% { transform: rotate(3deg) scale(1.03); }
         }
         .animate-wiggle {
             animation: wiggle 0.4s ease-in-out;
@@ -251,7 +251,7 @@
 
 
     <!-- ========================================== -->
-    <!-- 5. HALAMAN PILIH GENDER (SESUAI REFERENSI) -->
+    <!-- 5. HALAMAN PILIH GENDER (BERDASARKAN GAMBAR REFERENSI) -->
     <!-- ========================================== -->
     <div id="gender-screen" class="screen text-center pt-2">
         <button onclick="goToScreen('name-screen')" class="absolute -top-12 left-0 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center font-black text-slate-700 border border-pink-100 active:scale-95 transition z-30">
@@ -265,7 +265,7 @@
             </div>
         </div>
 
-        <!-- Header Atas Logo & Maskot -->
+        <!-- Header Atas Logo & Maskot Sesuai Gambar -->
         <div class="relative mb-3 w-full bg-white/90 backdrop-blur-md pt-3 pb-3 rounded-[28px] shadow-lg border border-white">
             <div class="absolute -top-3 left-6 text-3xl animate-bounce">🧸</div>
             <div class="absolute -top-3 right-6 text-3xl animate-bounce" style="animation-delay: 0.2s;">🐼</div>
@@ -276,37 +276,82 @@
 
         <!-- Sapaan Nama -->
         <div class="my-2">
-            <p id="greeting-text" class="text-base font-black text-slate-800 drop-shadow-sm">hai, dika 🤲</p>
+            <p id="greeting-text" class="text-base font-black text-slate-800 drop-shadow-md">hai, dika 👋</p>
         </div>
 
-        <!-- Balon Pertanyaan Jenis Kelamin -->
-        <div class="bg-white rounded-[24px] py-3 px-6 shadow-md border-2 border-white mb-4 inline-block mx-auto">
-            <p class="text-xl font-black text-slate-900 tracking-tight drop-shadow-xs">pilih</p>
-            <p class="text-xl font-black text-[#00b4d8] tracking-tight drop-shadow-xs underline decoration-orange-400 decoration-2">jenis kelaminmu</p>
+        <!-- Balon Pertanyaan Jenis Kelamin (Persis Seperti Foto) -->
+        <div class="bg-white rounded-[24px] py-3.5 px-6 shadow-md border-2 border-white mb-4 inline-block mx-auto">
+            <p class="text-xl font-black text-slate-900 tracking-tight drop-shadow-sm">pilih</p>
+            <p class="text-xl font-black text-[#00b4d8] tracking-tight drop-shadow-sm underline decoration-orange-400 decoration-3 underline-offset-4">jenis kelaminmu</p>
         </div>
 
-        <!-- Dekorasi Ikon Bintang -->
+        <!-- Dekorasi Bintang -->
         <div class="flex justify-between px-6 mb-2">
-            <span class="text-pink-500 text-lg animate-pulse">✨</span>
+            <span class="text-pink-400 text-lg animate-pulse">✨</span>
             <span class="text-yellow-400 text-lg animate-pulse">✨</span>
         </div>
 
-        <!-- Pilihan Kartu Gender (Laki-laki & Perempuan) -->
+        <!-- Pilihan Kartu Gender dengan Ilustrasi Karakter Asli yang Pasti Muncul -->
         <div class="grid grid-cols-2 gap-4 w-full">
-            <!-- Card Laki-laki -->
+            <!-- Card Laki-laki (Beruang Cokelat Peach & Goma) -->
             <div id="card-male" onclick="selectGender('male')" class="bg-white rounded-[28px] p-4 shadow-xl border-2 border-pink-100 flex flex-col items-center cursor-pointer transition transform active:scale-95 hover:border-pink-300">
-                <div class="w-full h-32 flex items-center justify-center bg-amber-50/50 rounded-2xl mb-2 overflow-hidden">
-                    <!-- Ilustrasi Beruang Cokelat (Mockup Gambar Karakter) -->
-                    <img src="https://api.iconify.design/fluent-emoji:bear-face.svg" alt="Laki-laki" class="w-24 h-24 drop-shadow-md">
+                <div class="w-full h-32 flex items-center justify-center bg-amber-50/60 rounded-2xl mb-2 overflow-hidden relative">
+                    <!-- Ilustrasi Beruang Cokelat Asli (SVG Inline Tanpa Kendala Eksternal) -->
+                    <svg viewBox="0 0 200 200" class="w-28 h-28 drop-shadow-md">
+                        <!-- Telinga Kiri -->
+                        <circle cx="65" cy="55" r="25" fill="#b07d62"/>
+                        <circle cx="65" cy="55" r="14" fill="#f5d6cb"/>
+                        <!-- Telinga Kanan -->
+                        <circle cx="135" cy="55" r="25" fill="#b07d62"/>
+                        <circle cx="135" cy="55" r="14" fill="#f5d6cb"/>
+                        <!-- Kepala Beruang -->
+                        <circle cx="100" cy="100" r="48" fill="#c68b59"/>
+                        <!-- Pipi Merah -->
+                        <circle cx="72" cy="115" r="12" fill="#ffb4a2" opacity="0.8"/>
+                        <circle cx="128" cy="115" r="12" fill="#ffb4a2" opacity="0.8"/>
+                        <!-- Mata Merem / Santai Khas Karakter -->
+                        <path d="M 75 92 Q 82 86 89 92" stroke="#4a3525" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                        <path d="M 111 92 Q 118 86 125 92" stroke="#4a3525" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                        <!-- Hidung & Mulut -->
+                        <ellipse cx="100" cy="104" rx="7" ry="5" fill="#4a3525"/>
+                        <path d="M 94 114 Q 100 120 106 114" stroke="#4a3525" stroke-width="3" fill="none" stroke-linecap="round"/>
+                        <!-- Badan & Tangan -->
+                        <path d="M 70 145 Q 100 135 130 145 L 140 185 Q 100 195 60 185 Z" fill="#c68b59"/>
+                        <path d="M 85 155 Q 100 145 115 155" stroke="#4a3525" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    </svg>
                 </div>
                 <span class="font-black text-slate-800 text-sm drop-shadow-sm">Laki-laki</span>
             </div>
 
-            <!-- Card Perempuan -->
+            <!-- Card Perempuan (Panda Putih Karakter Imut) -->
             <div id="card-female" onclick="selectGender('female')" class="bg-white rounded-[28px] p-4 shadow-xl border-2 border-pink-100 flex flex-col items-center cursor-pointer transition transform active:scale-95 hover:border-pink-300">
-                <div class="w-full h-32 flex items-center justify-center bg-pink-50/50 rounded-2xl mb-2 overflow-hidden">
-                    <!-- Ilustrasi Panda Imut (Mockup Gambar Karakter) -->
-                    <img src="https://api.iconify.design/fluent-emoji:panda.svg" alt="Perempuan" class="w-24 h-24 drop-shadow-md">
+                <div class="w-full h-32 flex items-center justify-center bg-pink-50/60 rounded-2xl mb-2 overflow-hidden relative">
+                    <!-- Ilustrasi Panda Imut Asli (SVG Inline Tanpa Kendala Eksternal) -->
+                    <svg viewBox="0 0 200 200" class="w-28 h-28 drop-shadow-md">
+                        <!-- Telinga Hitam Kiri -->
+                        <circle cx="65" cy="55" r="24" fill="#2b2d42"/>
+                        <!-- Telinga Hitam Kanan -->
+                        <circle cx="135" cy="55" r="24" fill="#2b2d42"/>
+                        <!-- Kepala Putih Panda -->
+                        <circle cx="100" cy="100" r="48" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+                        <!-- Lingkaran Hitam Mata Kiri -->
+                        <ellipse cx="80" cy="95" rx="14" ry="11" fill="#2b2d42" transform="rotate(-15 80 95)"/>
+                        <!-- Lingkaran Hitam Mata Kanan -->
+                        <ellipse cx="120" cy="95" rx="14" ry="11" fill="#2b2d42" transform="rotate(15 120 95)"/>
+                        <!-- Mata Bersinar -->
+                        <circle cx="77" cy="93" r="4" fill="#ffffff"/>
+                        <circle cx="123" cy="93" r="4" fill="#ffffff"/>
+                        <!-- Pipi Merah Merona -->
+                        <circle cx="68" cy="112" r="10" fill="#ffb4a2" opacity="0.85"/>
+                        <circle cx="132" cy="112" r="10" fill="#ffb4a2" opacity="0.85"/>
+                        <!-- Hidung & Mulut Senyum Lidah Menjulur -->
+                        <ellipse cx="100" cy="103" rx="6" ry="4" fill="#2b2d42"/>
+                        <path d="M 94 110 Q 100 116 106 110" stroke="#2b2d42" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                        <path d="M 97 113 Q 100 121 103 113 Z" fill="#ff4f8b"/>
+                        <!-- Badan & Tangan -->
+                        <path d="M 70 145 Q 100 135 130 145 L 140 185 Q 100 195 60 185 Z" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
+                        <path d="M 85 155 Q 100 148 115 155" stroke="#2b2d42" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                    </svg>
                 </div>
                 <span class="font-black text-slate-800 text-sm drop-shadow-sm">Perempuan</span>
             </div>
@@ -344,7 +389,7 @@
             toggleLangMenu();
         }
 
-        // Transisi Loading Gelembung Antar Halaman
+        // Transisi Gelembung
         function triggerTransition(targetScreenId, loadingText) {
             const transOverlay = document.getElementById('transition-loading');
             document.getElementById('transition-text').innerText = loadingText;
@@ -379,28 +424,27 @@
                 return;
             }
             
-            // Set sapaan nama di halaman gender
-            document.getElementById('greeting-text').innerText = `hai, ${userName} 🤲`;
+            // Set sapaan nama yang benar (tanpa typo)
+            document.getElementById('greeting-text').innerText = `hai, ${userName} 👋`;
 
-            // Panggil efek loading gelembung sebelum masuk ke pilihan gender
             triggerTransition('gender-screen', `Halo ${userName}, pilih gendermu...`);
         }
 
-        // Aksi Pilih Gender (Efek Goyang / Wiggle & Shadow)
+        // Aksi Pilih Gender (Efek Goyang Wiggle & Bayangan Font)
         function selectGender(gender) {
             const cardMale = document.getElementById('card-male');
             const cardFemale = document.getElementById('card-female');
 
             if (gender === 'male') {
-                cardMale.classList.add('animate-wiggle', 'border-blue-400', 'bg-blue-50/30');
-                cardFemale.classList.remove('animate-wiggle', 'border-pink-400', 'bg-pink-50/30');
+                cardMale.classList.add('animate-wiggle', 'border-blue-400', 'bg-blue-50/40');
+                cardFemale.classList.remove('animate-wiggle', 'border-pink-400', 'bg-pink-50/40');
             } else {
-                cardFemale.classList.add('animate-wiggle', 'border-pink-400', 'bg-pink-50/30');
-                cardMale.classList.remove('animate-wiggle', 'border-blue-400', 'bg-blue-50/30');
+                cardFemale.classList.add('animate-wiggle', 'border-pink-400', 'bg-pink-50/40');
+                cardMale.classList.remove('animate-wiggle', 'border-blue-400', 'bg-blue-50/40');
             }
 
             setTimeout(() => {
-                triggerTransition('gender-screen', 'Menyimpan pilihan...'); // Bisa diarahkan ke halaman kuis berikutnya nanti
+                triggerTransition('gender-screen', 'Menyimpan pilihan...');
             }, 500);
         }
     </script>
