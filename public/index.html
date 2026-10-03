@@ -1,351 +1,155 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Don't Block Me - Cari Teman Palsumu</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Don't Block Me!</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&display=swap');
-        
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background: linear-gradient(135deg, #4ea8de 0%, #90e0ef 60%, #caf0f8 100%);
-            overflow-x: hidden;
+            background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
             min-height: 100vh;
         }
-        
-        .paper-bg {
-            background-color: #ffffff;
-            background-image: linear-gradient(#e5e7eb 1px, transparent 1px);
-            background-size: 100% 26px;
-        }
-
-        @keyframes bounceGlow {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-5px) scale(1.02); }
-        }
-        .animate-pop {
-            animation: bounceGlow 2s ease-in-out infinite;
-        }
-
-        @keyframes wiggle {
-            0%, 100% { transform: rotate(0deg) scale(1.03); }
-            25% { transform: rotate(-3deg) scale(1.03); }
-            75% { transform: rotate(3deg) scale(1.03); }
-        }
-        .animate-wiggle {
-            animation: wiggle 0.4s ease-in-out;
-        }
-
-        .gradient-text-1 {
-            background: linear-gradient(135deg, #ff4f8b 0%, #ff70a6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .gradient-text-2 {
-            background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
         .screen {
             display: none;
-            width: 100%;
-            max-width: 24rem;
         }
-
         .screen.active {
-            display: block;
+            display: flex;
+        }
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-2deg) scale(1.02); }
+            75% { transform: rotate(2deg) scale(1.02); }
+        }
+        .animate-wiggle {
+            animation: wiggle 0.2s ease-in-out;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-4 relative">
+<body class="flex items-center justify-center p-4">
 
-    <!-- ========================================== -->
-    <!-- 0. LOADING SCREEN AWAL -->
-    <!-- ========================================== -->
-    <div id="loading-screen" class="screen active text-center">
-        <div class="bg-white/95 backdrop-blur-md rounded-[32px] p-8 shadow-2xl border-4 border-pink-200 relative w-full flex flex-col items-center justify-center">
-            <div class="text-6xl animate-bounce mb-4">🧸✨</div>
-            <h1 class="text-2xl font-black text-slate-900 tracking-wide mb-1">
-                <span class="gradient-text-1">Don't</span> <span class="gradient-text-2">Block</span> <span class="gradient-text-1">Me</span>
-            </h1>
-            <p class="text-xs font-bold text-slate-500 mb-6">Memuat data...</p>
-            
-            <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden p-0.5 border border-pink-100 shadow-inner">
-                <div id="loading-bar" class="bg-gradient-to-r from-pink-400 to-cyan-400 h-full rounded-full transition-all duration-300" style="width: 15%;"></div>
-            </div>
-        </div>
-    </div>
+    <!-- WRAPPER KARTU UTAMA -->
+    <div class="w-full max-w-md bg-white/95 backdrop-blur-md rounded-3xl shadow-xl p-6 border-2 border-pink-200 relative overflow-hidden">
 
-
-    <!-- ========================================== -->
-    <!-- 1. HALAMAN UTAMA -->
-    <!-- ========================================== -->
-    <div id="main-screen" class="screen text-center pt-4 relative">
-        <div class="absolute -top-2 left-1 text-4xl animate-bounce z-20">🧸</div>
-        <div class="absolute top-0 right-1 text-4xl animate-bounce z-20" style="animation-delay: 0.2s;">🐼</div>
-
-        <div class="relative mb-5 w-full bg-white/90 backdrop-blur-md pt-5 pb-4 rounded-[32px] shadow-xl border-2 border-white">
-            <h1 class="text-4xl sm:text-5xl font-black tracking-wide leading-tight drop-shadow-sm">
-                <span class="gradient-text-1">Don't</span> <br>
-                <span class="gradient-text-2">Block</span> <span class="gradient-text-1">Me</span>
-            </h1>
-            <div class="inline-block mt-3 bg-white px-5 py-1.5 rounded-full shadow-sm border border-pink-100">
-                <p class="text-xs sm:text-sm font-extrabold text-slate-600 tracking-wider">Cari Teman Palsumu</p>
-            </div>
-        </div>
-
-        <div class="bg-white rounded-[32px] p-6 shadow-2xl border-[3px] border-dashed border-pink-200 relative w-full">
-            <div class="absolute -top-3 -right-2 bg-white p-2 rounded-full shadow-md border border-pink-100">
-                <span class="text-xl">💖</span>
-            </div>
-            <div class="flex justify-center items-center mb-4">
-                <div class="bg-gradient-to-r from-pink-50 via-sky-50 to-yellow-50 px-6 py-3 rounded-2xl border border-pink-100 shadow-inner animate-pop">
-                    <p class="text-xs font-black tracking-widest text-pink-600 uppercase">Dev • DhooCep</p>
-                    <p class="text-base font-black text-slate-900 tracking-wide mt-0.5">BlockDay ✨</p>
+        <!-- 1. LOADING SCREEN -->
+        <div id="loading-screen" class="screen active flex-col items-center justify-center py-16">
+            <div class="flex items-center gap-3 mb-6">
+                <span class="text-4xl">🧸</span>
+                <div class="flex gap-1 text-2xl">
+                    <span class="animate-bounce">✨</span>
+                    <span class="animate-bounce" style="animation-delay: 0.2s;">✨</span>
                 </div>
             </div>
-            
-            <h2 class="text-xl sm:text-2xl font-black text-slate-900 leading-snug tracking-tight">
-                buat kuismu <br> 
-                <span class="text-[#ff4f8b] text-3xl font-black">&</span> <br> 
-                <span class="bg-yellow-300 px-3 py-0.5 rounded-lg inline-block mt-1 text-slate-900 shadow-sm font-black transform -rotate-1">blokir</span> teman palsumu
+            <h1 class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-blue-500 mb-2">
+                Don't Block Me
+            </h1>
+            <p class="text-sm text-gray-500 mb-6 font-medium">Memuat data...</p>
+            <div class="w-48 h-2 bg-gray-100 rounded-full overflow-hidden shadow-inner">
+                <div id="loading-bar" class="h-full bg-gradient-to-r from-pink-400 to-blue-400 w-[15%] transition-all duration-150"></div>
+            </div>
+        </div>
+
+        <!-- 2. MAIN SCREEN / INPUT NAMA -->
+        <div id="main-screen" class="screen flex-col items-center text-center py-6">
+            <div class="text-4xl mb-3">🧸✨</div>
+            <h1 class="text-2xl font-extrabold text-gray-800 mb-1">Don't Block Me</h1>
+            <p class="text-xs text-gray-500 mb-6">Buat kuismu sendiri dan lihat seberapa kenal temanmu!</p>
+
+            <div class="w-full bg-pink-50/60 border border-pink-200/60 rounded-2xl p-5 mb-4 text-left shadow-sm">
+                <label class="block text-xs font-bold text-gray-600 mb-2">NAMA KAMU</label>
+                <div class="relative">
+                    <input type="text" id="username-input" maxlength="15" placeholder="Ketik nama kamu di sini..." 
+                        oninput="updateCharCount(this)"
+                        class="w-full bg-white border border-pink-200 rounded-xl px-4 py-3 text-sm font-semibold text-gray-800 focus:outline-none focus:border-pink-400">
+                    <span id="char-count" class="absolute right-3 top-3.5 text-xs text-gray-400 font-medium">0/15</span>
+                </div>
+            </div>
+
+            <button onclick="submitName()" class="w-full bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white font-bold py-3.5 rounded-xl shadow-md shadow-pink-200 transition-all text-sm mb-4">
+                Mulai Kuis 🚀
+            </button>
+            <p class="text-[11px] text-gray-400">Dengan menekan tombol, kamu menyetujui aturan main yang seru ini!</p>
+        </div>
+
+        <!-- 3. GENDER SELECTION SCREEN -->
+        <div id="gender-screen" class="screen flex-col items-center text-center py-4">
+            <h2 id="greeting-text" class="text-lg font-extrabold text-gray-800 mb-1">hai 👋</h2>
+            <p class="text-xs text-gray-500 mb-6">Pilih gender kamu dulu ya:</p>
+
+            <div class="grid grid-cols-2 gap-4 w-full mb-6">
+                <div onclick="selectGender('male')" id="card-male" class="bg-white border-2 border-gray-100 hover:border-blue-400 rounded-2xl p-5 flex flex-col items-center cursor-pointer transition-all shadow-sm group">
+                    <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center text-3xl mb-3 group-hover:scale-110 transition-transform">👦</div>
+                    <span class="font-bold text-xs text-gray-700">Cowok</span>
+                </div>
+                <div onclick="selectGender('female')" id="card-female" class="bg-white border-2 border-gray-100 hover:border-pink-400 rounded-2xl p-5 flex flex-col items-center cursor-pointer transition-all shadow-sm group">
+                    <div class="w-16 h-16 bg-pink-50 rounded-full flex items-center justify-center text-3xl mb-3 group-hover:scale-110 transition-transform">👧</div>
+                    <span class="font-bold text-xs text-gray-700">Cewek</span>
+                </div>
+            </div>
+            <p class="text-[11px] text-gray-400">Pilihan ini bakal menyesuaikan pertanyaan seru selanjutnya!</p>
+        </div>
+
+        <!-- 4. QUIZ CREATOR SCREEN -->
+        <div id="quiz-creator-screen" class="screen flex-col py-2">
+            <div class="flex justify-between items-center mb-4">
+                <span id="badge-question-num" class="text-[11px] font-bold text-pink-500 bg-pink-50 px-3 py-1 rounded-full border border-pink-100">Pertanyaan 1</span>
+                <span id="question-counter" class="text-xs font-semibold text-gray-400">Pertanyaan 1 dari 15</span>
+            </div>
+
+            <h2 id="question-title" class="text-base font-extrabold text-gray-800 mb-5 leading-snug">
+                <!-- Dinamis dari JS -->
             </h2>
 
-            <button onclick="goToScreen('name-screen')" class="mt-6 w-full bg-gradient-to-r from-[#ff4f8b] to-[#ff2a6d] hover:from-[#e03e77] hover:to-[#d91b5c] text-white font-black py-4 px-6 rounded-2xl shadow-lg shadow-pink-300 transition-all transform active:scale-95 text-base tracking-wide cursor-pointer">
-                Mulai Buat Kuis 🚀
-            </button>
-        </div>
-        <div class="mt-4 text-xs text-slate-700 font-extrabold">✨ Terhubung dengan MongoDB</div>
-    </div>
-
-
-    <!-- ========================================== -->
-    <!-- 2. HALAMAN MASUKKAN NAMA -->
-    <!-- ========================================== -->
-    <div id="name-screen" class="screen text-center pt-2 relative">
-        <button onclick="goToScreen('main-screen')" class="absolute -top-12 left-0 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center font-black text-slate-700 border border-pink-100 active:scale-95 transition z-30 cursor-pointer">❮</button>
-
-        <div class="relative mb-4 w-full bg-white/90 backdrop-blur-md pt-3 pb-3 rounded-[28px] shadow-lg border border-white">
-            <h1 class="text-2xl font-black">
-                <span class="gradient-text-1">Don't</span> <span class="gradient-text-2">Block</span> <span class="gradient-text-1">Me</span>
-            </h1>
-        </div>
-
-        <div class="relative w-full my-3 flex justify-center items-center">
-            <div class="bg-pink-100/95 border-2 border-pink-200 px-6 py-4 rounded-[28px] shadow-md relative transform -rotate-2 max-w-[240px]">
-                <p class="text-xs font-extrabold text-slate-600 tracking-wider">siapa</p>
-                <p class="text-2xl font-black text-[#ff4f8b] tracking-wide">namamu?</p>
-            </div>
-        </div>
-
-        <div class="bg-white rounded-[28px] p-5 shadow-xl border-2 border-pink-100 w-full relative mt-2">
-            <div class="relative flex items-center">
-                <input type="text" id="username-input" maxlength="15" oninput="updateCharCount(this)" placeholder="nama..." class="w-full bg-slate-50 border-2 border-pink-100 focus:border-pink-400 focus:outline-none rounded-2xl py-4 px-4 font-extrabold text-slate-800 placeholder-slate-400 text-base shadow-inner">
-                <span id="char-count" class="absolute right-4 text-xs font-bold text-slate-400">0/15</span>
-            </div>
-
-            <button onclick="submitName()" class="mt-4 w-full bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white font-black py-4 px-6 rounded-2xl shadow-lg shadow-blue-200 transition-all transform active:scale-95 text-base tracking-wide flex items-center justify-center gap-2 cursor-pointer">
-                <span>lanjut</span> <span class="text-lg">➔</span>
-            </button>
-        </div>
-    </div>
-
-
-    <!-- ========================================== -->
-    <!-- 3. HALAMAN PILIH GENDER -->
-    <!-- ========================================== -->
-    <div id="gender-screen" class="screen text-center pt-2 relative">
-        <button onclick="goToScreen('name-screen')" class="absolute -top-12 left-0 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center font-black text-slate-700 border border-pink-100 active:scale-95 transition z-30 cursor-pointer">❮</button>
-
-        <div class="relative mb-3 w-full bg-white/90 backdrop-blur-md pt-3 pb-3 rounded-[28px] shadow-lg border border-white">
-            <h1 class="text-2xl font-black">
-                <span class="gradient-text-1">Don't</span> <span class="gradient-text-2">Block</span> <span class="gradient-text-1">Me</span>
-            </h1>
-        </div>
-
-        <div class="my-2">
-            <p id="greeting-text" class="text-base font-black text-slate-800 drop-shadow-md">hai, dika 👋</p>
-        </div>
-
-        <div class="bg-white rounded-[24px] py-3.5 px-6 shadow-md border-2 border-white mb-4 inline-block mx-auto">
-            <p class="text-xl font-black text-slate-900 tracking-tight">pilih</p>
-            <p class="text-xl font-black text-[#00b4d8] tracking-tight underline decoration-orange-400 decoration-3 underline-offset-4">jenis kelaminmu</p>
-        </div>
-
-        <div class="grid grid-cols-2 gap-4 w-full">
-            <div id="card-male" onclick="selectGender('male')" class="bg-white rounded-[28px] p-4 shadow-xl border-2 border-pink-100 flex flex-col items-center cursor-pointer transition transform active:scale-95 hover:border-pink-300">
-                <div class="w-full h-32 flex items-center justify-center bg-amber-50/60 rounded-2xl mb-2">
-                    <span class="text-4xl">👦</span>
+            <div class="space-y-2.5 mb-6">
+                <div onclick="selectQuizAnswer(1)" id="opt-1" class="bg-white border border-gray-200 hover:border-pink-400 hover:bg-pink-50/30 rounded-xl p-3.5 flex items-center justify-between cursor-pointer transition-all shadow-2xs">
+                    <span id="opt-text-1" class="text-xs font-bold text-gray-700">Pilihan A</span>
+                    <span class="text-xs text-gray-300">👉</span>
                 </div>
-                <span class="font-black text-slate-800 text-sm">Laki-laki</span>
-            </div>
-
-            <div id="card-female" onclick="selectGender('female')" class="bg-white rounded-[28px] p-4 shadow-xl border-2 border-pink-100 flex flex-col items-center cursor-pointer transition transform active:scale-95 hover:border-pink-300">
-                <div class="w-full h-32 flex items-center justify-center bg-pink-50/60 rounded-2xl mb-2">
-                    <span class="text-4xl">👧</span>
+                <div onclick="selectQuizAnswer(2)" id="opt-2" class="bg-white border border-gray-200 hover:border-pink-400 hover:bg-pink-50/30 rounded-xl p-3.5 flex items-center justify-between cursor-pointer transition-all shadow-2xs">
+                    <span id="opt-text-2" class="text-xs font-bold text-gray-700">Pilihan B</span>
+                    <span class="text-xs text-gray-300">👉</span>
                 </div>
-                <span class="font-black text-slate-800 text-sm">Perempuan</span>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- ========================================== -->
-    <!-- 4. HALAMAN PEMBUATAN KUIS (1 - 15) -->
-    <!-- ========================================== -->
-    <div id="quiz-creator-screen" class="screen text-center pt-2 relative">
-        <button onclick="goToScreen('gender-screen')" class="absolute -top-12 left-0 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center font-black text-slate-700 border border-pink-100 active:scale-95 transition z-30 cursor-pointer">❮</button>
-
-        <div class="w-full flex items-center justify-between mb-3 px-1">
-            <div class="bg-white px-4 py-1.5 rounded-full shadow-md border border-pink-100">
-                <span id="question-counter" class="text-xs font-black text-[#ff4f8b]">Pertanyaan 1 dari 15</span>
-            </div>
-        </div>
-
-        <div class="paper-bg rounded-[32px] p-5 shadow-2xl border-2 border-slate-200 relative w-full mb-4 text-left">
-            <div class="pl-4">
-                <div class="flex justify-center mb-2">
-                    <div class="bg-yellow-300 px-4 py-0.5 rounded-lg shadow-sm border border-yellow-400 transform -rotate-1">
-                        <span id="badge-question-num" class="text-xs font-black text-slate-900 uppercase">Pertanyaan 1</span>
-                    </div>
+                <div onclick="selectQuizAnswer(3)" id="opt-3" class="bg-white border border-gray-200 hover:border-pink-400 hover:bg-pink-50/30 rounded-xl p-3.5 flex items-center justify-between cursor-pointer transition-all shadow-2xs">
+                    <span id="opt-text-3" class="text-xs font-bold text-gray-700">Pilihan C</span>
+                    <span class="text-xs text-gray-300">👉</span>
                 </div>
-                <h2 id="question-title" class="text-base sm:text-lg font-black text-slate-900 text-center leading-snug tracking-tight mb-2">
-                    <span id="creator-name-label" class="text-[#ff4f8b]">dika</span> paling banyak menghabiskan uang untuk apa?
-                </h2>
+                <div onclick="selectQuizAnswer(4)" id="opt-4" class="bg-white border border-gray-200 hover:border-pink-400 hover:bg-pink-50/30 rounded-xl p-3.5 flex items-center justify-between cursor-pointer transition-all shadow-2xs">
+                    <span id="opt-text-4" class="text-xs font-bold text-gray-700">Pilihan D</span>
+                    <span class="text-xs text-gray-300">👉</span>
+                </div>
             </div>
+            <p class="text-[10px] text-center text-gray-400">Pilih jawaban yang paling sesuai sama kepribadian kamu!</p>
         </div>
 
-        <div class="flex flex-col gap-3 w-full">
-            <div onclick="selectQuizAnswer(1)" id="opt-1" class="bg-white rounded-[24px] p-3 shadow-lg border-2 border-white flex items-center gap-3.5 cursor-pointer transition transform active:scale-95 hover:border-pink-300">
-                <div class="w-10 h-10 rounded-2xl bg-slate-100 flex items-center justify-center text-xl">🍔</div>
-                <p id="opt-text-1" class="font-black text-slate-900 text-sm text-left">Camilan / makanan</p>
-            </div>
-            <div onclick="selectQuizAnswer(2)" id="opt-2" class="bg-white rounded-[24px] p-3 shadow-lg border-2 border-white flex items-center gap-3.5 cursor-pointer transition transform active:scale-95 hover:border-pink-300">
-                <div class="w-10 h-10 rounded-2xl bg-slate-100 flex items-center justify-center text-xl">👟</div>
-                <p id="opt-text-2" class="font-black text-slate-900 text-sm text-left">Baju / sepatu</p>
-            </div>
-            <div onclick="selectQuizAnswer(3)" id="opt-3" class="bg-white rounded-[24px] p-3 shadow-lg border-2 border-white flex items-center gap-3.5 cursor-pointer transition transform active:scale-95 hover:border-pink-300">
-                <div class="w-10 h-10 rounded-2xl bg-slate-100 flex items-center justify-center text-xl">🎮</div>
-                <p id="opt-text-3" class="font-black text-slate-900 text-sm text-left">Game / hiburan</p>
-            </div>
-            <div onclick="selectQuizAnswer(4)" id="opt-4" class="bg-white rounded-[24px] p-3 shadow-lg border-2 border-white flex items-center gap-3.5 cursor-pointer transition transform active:scale-95 hover:border-pink-300">
-                <div class="w-10 h-10 rounded-2xl bg-slate-100 flex items-center justify-center text-xl">🎧</div>
-                <p id="opt-text-4" class="font-black text-slate-900 text-sm text-left">Teknologi / aksesori</p>
-            </div>
-        </div>
-    </div>
+        <!-- 5. READY SCREEN (BERHASIL DIBUAT) -->
+        <div id="ready-screen" class="screen flex-col items-center text-center py-6">
+            <div class="w-16 h-16 bg-pink-50 rounded-full flex items-center justify-center text-3xl mb-3 shadow-inner">🎉</div>
+            <h2 class="text-xl font-extrabold text-gray-800 mb-1">Kuis Kamu Siap!</h2>
+            <p class="text-xs text-gray-500 mb-5">Bagikan tautan ini ke teman-temanmu dan lihat seberapa kenal mereka sama <span id="creator-name-label" class="font-bold text-pink-500">kamu</span>.</p>
 
-
-    <!-- ========================================== -->
-    <!-- 5. HALAMAN READY -->
-    <!-- ========================================== -->
-    <div id="ready-screen" class="screen text-center pt-2 relative">
-        <div class="bg-white/95 backdrop-blur-md rounded-[32px] p-6 shadow-2xl border-2 border-pink-200 relative w-full overflow-hidden">
-            <div class="absolute -top-3 left-4 text-2xl animate-bounce">🎉</div>
-            <div class="absolute top-2 right-4 text-2xl animate-bounce" style="animation-delay: 0.2s;">✨</div>
-
-            <h1 class="text-3xl sm:text-4xl font-black tracking-wide text-slate-900 mt-2">
-                YUHUU!
-            </h1>
-            <div class="w-36 h-3 bg-yellow-300 mx-auto -mt-2 rounded-full transform -rotate-1 shadow-sm mb-4"></div>
-
-            <p class="text-base font-black text-slate-800 mb-4">
-                kuismu sudah <span class="bg-cyan-200 px-2 py-0.5 rounded-lg">siap</span> !
-            </p>
-
-            <div class="paper-bg p-5 rounded-[24px] border-2 border-slate-200 shadow-inner mb-6 relative">
-                <div class="absolute top-3 left-3 w-3 h-3 bg-pink-400 rounded-full"></div>
-                <div class="flex justify-center text-3xl mb-2">🤎🧋</div>
-                <p class="text-xs sm:text-sm font-extrabold text-slate-700 leading-relaxed">
-                    kirim ke temanmu dan lihat siapa yang <span class="text-[#ff4f8b] font-black underline">benar-benar</span> kenal kamu! 😎
-                </p>
-            </div>
-
-            <button onclick="goToScreen('share-screen')" class="w-full bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white font-black py-4 px-6 rounded-2xl shadow-lg shadow-blue-300 transition-all transform active:scale-95 text-base tracking-wide flex items-center justify-center gap-2 cursor-pointer">
-                <span>📤</span> <span>BAGIKAN SEKARANG!</span>
-            </button>
-        </div>
-        <p class="mt-3 text-xs font-bold text-slate-700">Makin banyak teman yang main, makin seru! 🎮</p>
-    </div>
-
-
-    <!-- ========================================== -->
-    <!-- 6. HALAMAN SHARE LINK -->
-    <!-- ========================================== -->
-    <div id="share-screen" class="screen text-center pt-2 relative">
-        <button onclick="goToScreen('ready-screen')" class="absolute -top-12 left-0 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center font-black text-slate-700 border border-pink-100 active:scale-95 transition z-30 cursor-pointer">❮</button>
-
-        <div class="bg-white/95 backdrop-blur-md rounded-[32px] p-5 shadow-2xl border-2 border-pink-100 relative w-full text-center">
-            
-            <div class="absolute top-2 left-3 text-pink-400 text-lg">♡</div>
-            <div class="absolute top-2 right-4 text-blue-400 text-xl">☆</div>
-            <div class="w-full flex justify-center mb-1">
-                <div class="relative w-24 h-20 bg-amber-200/60 rounded-t-full flex items-center justify-center overflow-hidden border-2 border-amber-300 shadow-inner">
-                    <span class="text-4xl absolute -bottom-1">🐻📱</span>
+            <div class="w-full bg-pink-50/60 border border-pink-200/60 rounded-2xl p-4 mb-4 text-left">
+                <span class="block text-[10px] font-bold text-gray-400 mb-1">TAUTAN KUIS KAMU</span>
+                <div class="bg-white border border-pink-200 rounded-xl p-3 flex items-center justify-between">
+                    <span id="share-link-text" class="text-xs font-semibold text-gray-600 truncate mr-2">https://block.youtest.me/user/share/...</span>
+                    <button onclick="copyLink()" class="bg-pink-100 hover:bg-pink-200 text-pink-600 font-bold px-3 py-1.5 rounded-lg text-xs transition-colors shrink-0">Salin</button>
                 </div>
             </div>
 
-            <h2 class="text-lg sm:text-xl font-black text-[#1e293b] tracking-tight leading-tight mt-1">
-                bagikan <span class="text-blue-600 underline decoration-blue-400">link</span> kuismu <span class="text-sm">🔗</span>
-            </h2>
-            <div class="flex justify-center items-center gap-1.5 my-1 text-sky-400">
-                <span>💨</span> <span>&</span> <span>💨</span>
-            </div>
-            <h2 class="text-lg sm:text-xl font-black text-[#1e293b] tracking-tight leading-tight">
-                cari teman <span class="bg-pink-200 px-2 py-0.5 rounded-md text-[#ff4f8b]">palsumu</span> <span class="text-sm">🎭🤭</span>
-            </h2>
-
-            <div class="bg-slate-50 border-2 border-slate-200 rounded-2xl p-2.5 flex items-center justify-between my-3 shadow-inner">
-                <div class="flex items-center gap-2 overflow-hidden px-1">
-                    <span class="text-blue-500 text-base">🔗</span>
-                    <span id="share-link-text" class="text-xs font-extrabold text-slate-600 truncate">https://block.youtest.me/user/share/dika</span>
-                </div>
-                <button onclick="copyLink()" class="bg-yellow-200 hover:bg-yellow-300 text-slate-900 font-black text-xs px-3 py-2 rounded-xl shadow-sm border border-yellow-300 flex items-center gap-1 transition active:scale-95 shrink-0 cursor-pointer">
-                    <span>📋</span> Salin
-                </button>
-            </div>
-
-            <button onclick="shareWhatsApp()" class="w-full bg-gradient-to-r from-emerald-500 to-green-500 hover:from-emerald-600 hover:to-green-600 text-white font-black py-3.5 px-4 rounded-2xl shadow-lg shadow-emerald-200 transition-all transform active:scale-95 text-sm tracking-wide flex items-center justify-center gap-2 mb-3 cursor-pointer">
-                <span class="text-lg">💚</span> <span>Bagikan lewat WhatsApp</span>
+            <button onclick="shareWhatsApp()" class="w-full bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold py-3.5 rounded-xl shadow-md shadow-green-100 transition-all text-xs mb-3 flex items-center justify-center gap-2">
+                <span>💬</span> Bagikan ke WhatsApp
             </button>
 
-            <div class="grid grid-cols-2 gap-2.5 mb-4">
-                <div onclick="shareSocial('Instagram')" class="bg-white hover:bg-slate-50 border-2 border-slate-100 rounded-2xl py-2.5 px-3 flex items-center gap-2.5 shadow-md cursor-pointer transition active:scale-95">
-                    <span class="text-xl">📸</span>
-                    <span class="font-black text-slate-800 text-xs">Instagram</span>
-                </div>
-                <div onclick="shareSocial('Snapchat')" class="bg-white hover:bg-slate-50 border-2 border-slate-100 rounded-2xl py-2.5 px-3 flex items-center gap-2.5 shadow-md cursor-pointer transition active:scale-95">
-                    <span class="text-xl">👻</span>
-                    <span class="font-black text-slate-800 text-xs">Snapchat</span>
-                </div>
-                <div onclick="shareSocial('Facebook')" class="bg-white hover:bg-slate-50 border-2 border-slate-100 rounded-2xl py-2.5 px-3 flex items-center gap-2.5 shadow-md cursor-pointer transition active:scale-95">
-                    <span class="text-xl">📘</span>
-                    <span class="font-black text-slate-800 text-xs">Facebook</span>
-                </div>
-                <div onclick="shareSocial('Messenger')" class="bg-white hover:bg-slate-50 border-2 border-slate-100 rounded-2xl py-2.5 px-3 flex items-center gap-2.5 shadow-md cursor-pointer transition active:scale-95">
-                    <span class="text-xl">💬</span>
-                    <span class="font-black text-slate-800 text-xs">Messenger</span>
-                </div>
-                <div onclick="shareSocial('Telegram')" class="bg-white hover:bg-slate-50 border-2 border-slate-100 rounded-2xl py-2.5 px-3 flex items-center gap-2.5 shadow-md cursor-pointer transition active:scale-95">
-                    <span class="text-xl">✈️</span>
-                    <span class="font-black text-slate-800 text-xs">Telegram</span>
-                </div>
-                <div onclick="shareSocial('Aplikasi Lain')" class="bg-white hover:bg-slate-50 border-2 border-slate-100 rounded-2xl py-2.5 px-3 flex items-center gap-2.5 shadow-md cursor-pointer transition active:scale-95">
-                    <span class="text-xl">🔗</span>
-                    <span class="font-black text-slate-800 text-xs">Aplikasi Lain</span>
-                </div>
-            </div>
-
-            <button onclick="alert('Fitur Cek Skor akan segera dibahas berikutnya!')" class="w-full bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white font-black py-3.5 px-6 rounded-2xl shadow-lg shadow-blue-200 transition-all transform active:scale-95 text-sm tracking-wide flex items-center justify-center gap-2 cursor-pointer">
-                <span>🏆</span> <span>Cek Skor</span>
+            <button onclick="shareSocial('Sosial Media')" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold py-3.5 rounded-xl transition-all text-xs">
+                Bagikan ke Aplikasi Lainnya 🔗
             </button>
         </div>
+
     </div>
 
-
+    <!-- SCRIPT LOGIKA KUIS -->
     <script>
         let userName = "";
         let currentQuestion = 1;
@@ -369,23 +173,25 @@
             { q: "seberapa jujur kamu dalam menjawab kuis ini?", opts: ["Jujur banget dong!", "Lumayan jujur sih", "Agak rahasia ya", "Asal jawab aja wkwk"]
         ];
 
-        // Jalankan animasi loading bar otomatis saat web dibuka
+        // Animasi loading otomatis mulus ke 100% lalu masuk ke halaman utama
         window.addEventListener('DOMContentLoaded', () => {
-            let progress = 15;
             const bar = document.getElementById('loading-bar');
-            
-            const interval = setInterval(() => {
-                progress += Math.floor(Math.random() * 25) + 15;
+            let progress = 15;
+
+            const loadInterval = setInterval(() => {
+                progress += 15;
                 if (progress >= 100) {
                     progress = 100;
-                    clearInterval(interval);
-                    // Pindah dari loading screen ke main screen secara mulus
+                    bar.style.width = '100%';
+                    clearInterval(loadInterval);
+                    
                     setTimeout(() => {
                         goToScreen('main-screen');
                     }, 300);
+                } else {
+                    bar.style.width = progress + '%';
                 }
-                bar.style.width = progress + '%';
-            }, 180);
+            }, 150);
         });
 
         function goToScreen(screenId) {
