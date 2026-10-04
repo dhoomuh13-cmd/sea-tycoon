@@ -1,3 +1,4 @@
+const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 
@@ -29,7 +30,7 @@ mongoose.connect(MONGO_URI, {
 const userSchema = new mongoose.Schema({
     name: { type: String, required: true },
     username: { type: String, required: true, unique: true },
-    password: { type: String, required: true }, // Catatan: Untuk produksi, gunakan enkripsi seperti bcrypt
+    password: { type: String, required: true }, 
     role: { type: String, default: 'user' }, // 'owner' atau 'user'
     createdAt: { type: Date, default: Date.now }
 });
@@ -37,9 +38,9 @@ const User = mongoose.model('User', userSchema);
 
 // Skema Chat Tanya Beruang
 const bearChatSchema = new mongoose.Schema({
-    roomKey: { type: String, required: true, index: true }, // Unik per user (misal: username user)
-    sender: String,   // Nama pengirim
-    text: String,     // Isi pesan
+    roomKey: { type: String, required: true, index: true }, 
+    sender: String,   
+    text: String,     
     timestamp: { type: Date, default: Date.now }
 });
 const BearChat = mongoose.model('BearChat', bearChatSchema);
@@ -54,7 +55,6 @@ app.post('/api/register', async (req, res) => {
     try {
         const { name, username, password, role } = req.body;
         
-        // Cek apakah username sudah ada
         const existingUser = await User.findOne({ username });
         if (existingUser) {
             return res.status(400).json({ success: false, message: 'Username sudah terdaftar!' });
@@ -105,7 +105,7 @@ app.get('/api/users', async (req, res) => {
 // 3. ENDPOINT API CHAT TANYA BERUANG & KOTAK MASUK
 // ==========================================
 
-// Ambil pesan berdasarkan roomKey (kamar chat user)
+// Ambil pesan berdasarkan roomKey
 app.get('/api/bear-chats/:roomKey', async (req, res) => {
     try {
         const chats = await BearChat.find({ roomKey: req.params.roomKey }).sort({ timestamp: 1 });
@@ -127,7 +127,7 @@ app.post('/api/bear-chats', async (req, res) => {
     }
 });
 
-// Kotak Masuk Owner (Menggabungkan chat masuk agar muncul secara real-time)
+// Kotak Masuk Owner
 app.get('/api/owner/inbox', async (req, res) => {
     try {
         const inbox = await BearChat.aggregate([
