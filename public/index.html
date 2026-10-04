@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Don't Block Me - Game Cari Teman Palsumu</title>
+    <title>Don't Block Me - Buat Akun Profil</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&display=swap');
@@ -43,11 +43,23 @@
 
         @keyframes wiggle {
             0%, 100% { transform: rotate(0deg) scale(1.04); }
-            25% { transform: rotate(-4deg) scale(1.04); }
-            75% { transform: rotate(4deg) scale(1.04); }
+            25% { transform: rotate(-3deg) scale(1.04); }
+            75% { transform: rotate(3deg) scale(1.04); }
         }
         .animate-wiggle {
-            animation: wiggle 0.35s ease-in-out;
+            animation: wiggle 0.3s ease-in-out infinite;
+        }
+
+        @keyframes shakeShadow {
+            0% { transform: translate(0, 0) rotate(0deg); box-shadow: 0 10px 25px rgba(255, 79, 139, 0.3); }
+            20% { transform: translate(-4px, 2px) rotate(-1deg); box-shadow: 0 15px 35px rgba(59, 130, 246, 0.5); }
+            40% { transform: translate(4px, -2px) rotate(1deg); box-shadow: 0 5px 15px rgba(234, 179, 8, 0.5); }
+            60% { transform: translate(-3px, -1px) rotate(0deg); box-shadow: 0 20px 40px rgba(255, 79, 139, 0.4); }
+            80% { transform: translate(3px, 2px) rotate(-1deg); box-shadow: 0 10px 25px rgba(6, 182, 212, 0.5); }
+            100% { transform: translate(0, 0) rotate(0deg); box-shadow: 0 10px 25px rgba(255, 79, 139, 0.3); }
+        }
+        .animate-shake-shadow {
+            animation: shakeShadow 0.5s ease-in-out;
         }
 
         .gradient-text-1 {
@@ -110,12 +122,8 @@
         </div>
 
         <div class="w-full max-w-xs paper-bg rounded-[28px] p-8 shadow-2xl relative border-2 border-slate-100 transform rotate-1 z-10">
-            <div class="absolute -top-3 -left-4 w-14 h-6 bg-pink-300/90 rotate-[-12deg] shadow-sm rounded-sm"></div>
-            <div class="absolute top-4 right-4 text-pink-500 text-xl">❤️</div>
-            <div class="absolute bottom-4 left-4 text-yellow-400 text-xl">⭐</div>
-
             <div class="text-center my-6">
-                <p class="text-2xl font-black text-slate-800 tracking-wide">loading<span>...</span></p>
+                <p class="text-2xl font-black text-slate-800 tracking-wide">Memuat Sistem<span>...</span></p>
                 <div class="flex justify-center items-center gap-2.5 mt-5">
                     <span class="w-3.5 h-3.5 bg-blue-500 rounded-full animate-bounce shadow-sm"></span>
                     <span class="w-3.5 h-3.5 bg-pink-500 rounded-full animate-bounce shadow-sm" style="animation-delay: 0.2s;"></span>
@@ -125,16 +133,11 @@
         </div>
     </div>
 
-    <!-- 2. TRANSISI GELEMBUNG -->
+    <!-- 2. TRANSISI -->
     <div id="transition-loading" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-black/30 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300">
         <div class="bg-white px-8 py-6 rounded-[32px] shadow-2xl border-2 border-pink-100 flex flex-col items-center animate-pop">
             <span class="text-5xl animate-bounce mb-3">💬</span>
             <p id="transition-text" class="text-lg font-black text-slate-800">Memuat...</p>
-            <div class="flex gap-2 mt-4">
-                <span class="w-3 h-3 bg-pink-500 rounded-full animate-bounce"></span>
-                <span class="w-3 h-3 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 0.2s;"></span>
-                <span class="w-3 h-3 bg-yellow-400 rounded-full animate-bounce" style="animation-delay: 0.4s;"></span>
-            </div>
         </div>
     </div>
 
@@ -154,9 +157,6 @@
         </div>
 
         <div class="bg-white rounded-[32px] p-6 shadow-2xl border-[3px] border-dashed border-pink-200 relative w-full">
-            <div class="absolute -top-3 -right-2 bg-white p-2 rounded-full shadow-md border border-pink-100">
-                <span class="text-xl">💖</span>
-            </div>
             <div class="flex justify-center items-center mb-4">
                 <div class="bg-gradient-to-r from-pink-50 via-sky-50 to-yellow-50 px-6 py-3 rounded-2xl border border-pink-100 shadow-inner animate-pop">
                     <p class="text-xs font-black tracking-widest text-pink-600 uppercase">Dev • DhooCep</p>
@@ -164,22 +164,21 @@
                 </div>
             </div>
             
+            <!-- Perubahan Teks dengan Efek Goyang & Tebal -->
             <h2 class="text-xl sm:text-2xl font-black text-slate-900 leading-snug tracking-tight">
-                uji pertemanan <br> 
-                <span class="text-[#ff4f8b] text-3xl font-black">&</span> <br> 
-                <span class="bg-yellow-300 px-3 py-0.5 rounded-lg inline-block mt-1 text-slate-900 shadow-sm font-black transform -rotate-1">blokir</span> teman palsumu
+                <span class="animate-wiggle inline-block text-[#ff4f8b]">Game Block And Dho</span> <br> 
+                <span class="text-[#ff4f8b] text-2xl font-black">&</span> <br> 
+                <span class="bg-yellow-300 px-3 py-0.5 rounded-lg inline-block mt-1 text-slate-900 shadow-sm font-black transform -rotate-1 animate-wiggle">Development DhoFek</span>
             </h2>
 
-            <button onclick="playSound(); triggerTransition('name-screen', 'Menyiapkan Game...')" class="mt-6 w-full bg-gradient-to-r from-[#ff4f8b] to-[#ff2a6d] hover:from-[#e03e77] hover:to-[#d91b5c] text-white font-black py-4 px-6 rounded-2xl shadow-xl shadow-pink-300 transition-all transform active:scale-95 text-base tracking-wide cursor-pointer">
-                Mulai Tantangan 🚀
+            <button onclick="playSound(); triggerTransition('name-screen', 'Mulai Buat Akun...')" class="mt-6 w-full bg-gradient-to-r from-[#ff4f8b] to-[#ff2a6d] hover:from-[#e03e77] hover:to-[#d91b5c] text-white font-black py-4 px-6 rounded-2xl shadow-xl shadow-pink-300 transition-all transform active:scale-95 text-base tracking-wide cursor-pointer">
+                Mulai Buat Akun 🚀
             </button>
         </div>
-        <div class="mt-4 text-xs text-slate-700 font-extrabold drop-shadow">✨ Game Interaktif Tanpa Ribet</div>
     </div>
 
     <!-- 4. HALAMAN MASUKKAN NAMA -->
     <div id="name-screen" class="screen text-center pt-2 relative z-10">
-        <!-- Tombol Kembali Diposisikan Rapi di Atas -->
         <button onclick="playSound(); goToScreen('main-screen')" class="absolute -top-10 left-0 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center font-black text-slate-700 border-2 border-pink-100 active:scale-95 transition z-30 cursor-pointer">❮</button>
 
         <div class="relative mb-4 w-full bg-white/90 backdrop-blur-md pt-3 pb-3 rounded-[28px] shadow-xl border border-white">
@@ -207,7 +206,7 @@
         </div>
     </div>
 
-    <!-- 5. HALAMAN PILIH GENDER (DENGAN SVG BERUANG & PANDA ASLI) -->
+    <!-- 5. HALAMAN PILIH GENDER -->
     <div id="gender-screen" class="screen text-center pt-2 relative z-10">
         <button onclick="playSound(); goToScreen('name-screen')" class="absolute -top-10 left-0 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center font-black text-slate-700 border-2 border-pink-100 active:scale-95 transition z-30 cursor-pointer">❮</button>
 
@@ -218,7 +217,7 @@
         </div>
 
         <div class="my-2">
-            <p id="greeting-text" class="text-base font-black text-slate-800 drop-shadow-md">hai, dika 👋</p>
+            <p id="greeting-text" class="text-base font-black text-slate-800 drop-shadow-md">hai 👋</p>
         </div>
 
         <div class="bg-white rounded-[24px] py-3.5 px-6 shadow-lg border-2 border-white mb-4 inline-block mx-auto">
@@ -227,46 +226,13 @@
         </div>
 
         <div class="grid grid-cols-2 gap-4 w-full">
-            <!-- Card Laki-laki (Beruang Cokelat SVG) -->
-            <div id="card-male" onclick="playSound(); selectGender('male')" class="bg-white rounded-[28px] p-4 shadow-xl border-2 border-pink-100 flex flex-col items-center cursor-pointer transition transform active:scale-95 hover:border-pink-300">
-                <div class="w-full h-32 flex items-center justify-center bg-amber-50/60 rounded-2xl mb-2 overflow-hidden relative">
-                    <svg viewBox="0 0 200 200" class="w-28 h-28 drop-shadow-md">
-                        <circle cx="65" cy="55" r="25" fill="#b07d62"/>
-                        <circle cx="65" cy="55" r="14" fill="#f5d6cb"/>
-                        <circle cx="135" cy="55" r="25" fill="#b07d62"/>
-                        <circle cx="135" cy="55" r="14" fill="#f5d6cb"/>
-                        <circle cx="100" cy="100" r="48" fill="#c68b59"/>
-                        <circle cx="72" cy="115" r="12" fill="#ffb4a2" opacity="0.8"/>
-                        <circle cx="128" cy="115" r="12" fill="#ffb4a2" opacity="0.8"/>
-                        <path d="M 75 92 Q 82 86 89 92" stroke="#4a3525" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-                        <path d="M 111 92 Q 118 86 125 92" stroke="#4a3525" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-                        <ellipse cx="100" cy="104" rx="7" ry="5" fill="#4a3525"/>
-                        <path d="M 94 114 Q 100 120 106 114" stroke="#4a3525" stroke-width="3" fill="none" stroke-linecap="round"/>
-                        <path d="M 70 145 Q 100 135 130 145 L 140 185 Q 100 195 60 185 Z" fill="#c68b59"/>
-                    </svg>
-                </div>
+            <div id="card-male" onclick="playSound(); selectGender('Laki-laki')" class="bg-white rounded-[28px] p-4 shadow-xl border-2 border-pink-100 flex flex-col items-center cursor-pointer transition transform active:scale-95 hover:border-pink-300">
+                <div class="w-full h-28 flex items-center justify-center bg-amber-50/60 rounded-2xl mb-2 text-4xl">👦</div>
                 <span class="font-black text-slate-800 text-sm">Laki-laki</span>
             </div>
 
-            <!-- Card Perempuan (Panda Putih SVG) -->
-            <div id="card-female" onclick="playSound(); selectGender('female')" class="bg-white rounded-[28px] p-4 shadow-xl border-2 border-pink-100 flex flex-col items-center cursor-pointer transition transform active:scale-95 hover:border-pink-300">
-                <div class="w-full h-32 flex items-center justify-center bg-pink-50/60 rounded-2xl mb-2 overflow-hidden relative">
-                    <svg viewBox="0 0 200 200" class="w-28 h-28 drop-shadow-md">
-                        <circle cx="65" cy="55" r="24" fill="#2b2d42"/>
-                        <circle cx="135" cy="55" r="24" fill="#2b2d42"/>
-                        <circle cx="100" cy="100" r="48" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
-                        <ellipse cx="80" cy="95" rx="14" ry="11" fill="#2b2d42" transform="rotate(-15 80 95)"/>
-                        <ellipse cx="120" cy="95" rx="14" ry="11" fill="#2b2d42" transform="rotate(15 120 95)"/>
-                        <circle cx="77" cy="93" r="4" fill="#ffffff"/>
-                        <circle cx="123" cy="93" r="4" fill="#ffffff"/>
-                        <circle cx="68" cy="112" r="10" fill="#ffb4a2" opacity="0.85"/>
-                        <circle cx="132" cy="112" r="10" fill="#ffb4a2" opacity="0.85"/>
-                        <ellipse cx="100" cy="103" rx="6" ry="4" fill="#2b2d42"/>
-                        <path d="M 94 110 Q 100 116 106 110" stroke="#2b2d42" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-                        <path d="M 97 113 Q 100 121 103 113 Z" fill="#ff4f8b"/>
-                        <path d="M 70 145 Q 100 135 130 145 L 140 185 Q 100 195 60 185 Z" fill="#ffffff" stroke="#e2e8f0" stroke-width="2"/>
-                    </svg>
-                </div>
+            <div id="card-female" onclick="playSound(); selectGender('Perempuan')" class="bg-white rounded-[28px] p-4 shadow-xl border-2 border-pink-100 flex flex-col items-center cursor-pointer transition transform active:scale-95 hover:border-pink-300">
+                <div class="w-full h-28 flex items-center justify-center bg-pink-50/60 rounded-2xl mb-2 text-4xl">👧</div>
                 <span class="font-black text-slate-800 text-sm">Perempuan</span>
             </div>
         </div>
@@ -287,12 +253,12 @@
             <p class="text-xl font-black text-[#ff4f8b] tracking-tight underline decoration-yellow-400 decoration-3 underline-offset-4">umurmu sekarang?</p>
         </div>
 
-        <div class="bg-white rounded-[32px] p-5 shadow-2xl border-2 border-pink-100 w-full relative">
+        <!-- Wadah utama scroller dengan efek getar/goyang shadow saat tombol lanjut diklik -->
+        <div id="age-card-box" class="bg-white rounded-[32px] p-5 shadow-2xl border-2 border-pink-100 w-full relative transition-all">
             <p class="text-xs font-bold text-slate-400 mb-2">Geser / Scroll angka di bawah ini 👇</p>
             
             <div class="relative flex items-center justify-center my-4">
                 <div class="absolute w-24 h-14 bg-gradient-to-r from-pink-100 to-cyan-100 border-2 border-pink-300 rounded-2xl shadow-inner pointer-events-none z-10"></div>
-                
                 <div id="age-scroller" class="age-picker-container w-full h-36 overflow-y-scroll flex flex-col items-center py-12 snap-y snap-mandatory relative z-20" onscroll="detectScrolledAge()"></div>
             </div>
 
@@ -301,86 +267,146 @@
                 <p id="selected-age-display" class="text-2xl font-black text-[#ff4f8b]">17 Tahun</p>
             </div>
 
-            <button onclick="playSound(); submitAge()" class="w-full bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white font-black py-4 px-6 rounded-2xl shadow-xl shadow-blue-200 transition-all transform active:scale-95 text-base tracking-wide flex items-center justify-center gap-2 cursor-pointer">
-                <span>Mulai Game! 🎮</span>
+            <!-- Tombol Lanjut dengan Efek Getar Shadow & Transisi ke Preview Profil -->
+            <button onclick="playSound(); triggerAgeSubmitEffect()" class="w-full bg-gradient-to-r from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white font-black py-4 px-6 rounded-2xl shadow-xl shadow-blue-200 transition-all transform active:scale-95 text-base tracking-wide flex items-center justify-center gap-2 cursor-pointer">
+                <span>Lanjut Buat Profil ➔</span>
             </button>
         </div>
     </div>
 
-    <!-- 7. HALAMAN GAME UTAMA -->
-    <div id="game-screen" class="screen text-center pt-2 relative z-10">
-        <div class="bg-white/95 backdrop-blur-md rounded-[32px] p-6 shadow-2xl border-2 border-pink-200 relative w-full overflow-hidden">
-            <div class="absolute -top-3 left-4 text-2xl animate-bounce">🎯</div>
-            <div class="absolute top-2 right-4 text-2xl animate-bounce" style="animation-delay: 0.2s;">🔥</div>
+    <!-- 7. HALAMAN PREVIEW AKUN / PROFIL (1 DEVICE 1 AKUN PERMANEN) -->
+    <div id="profile-preview-screen" class="screen text-center pt-2 relative z-10">
+        <div class="relative mb-3 w-full bg-white/90 backdrop-blur-md pt-3 pb-3 rounded-[28px] shadow-xl border border-white">
+            <h1 class="text-2xl font-black">
+                <span class="gradient-text-1">Profil</span> <span class="gradient-text-2">Akun</span> <span class="gradient-text-1">Kamu</span>
+            </h1>
+        </div>
 
-            <h1 class="text-2xl font-black tracking-wide text-slate-900 mt-2">TANTANGAN KILAT</h1>
-            <div class="w-28 h-2.5 bg-yellow-300 mx-auto -mt-1 rounded-full transform -rotate-1 shadow-sm mb-4"></div>
-
-            <div class="paper-bg p-5 rounded-[24px] border-2 border-slate-200 shadow-inner mb-5 relative text-left">
-                <p class="text-xs font-black text-pink-600 uppercase mb-1">Pertanyaan 1 dari 3</p>
-                <p id="game-question-text" class="text-sm font-extrabold text-slate-800 leading-relaxed">
-                    Kalau <span id="game-name-label" class="text-[#ff4f8b] font-black">Kamu</span> lagi badmood, biasanya ngapain?
-                </p>
+        <div class="bg-white rounded-[32px] p-6 shadow-2xl border-2 border-pink-200 w-full relative">
+            <!-- Avatar Display -->
+            <div class="w-24 h-24 mx-auto bg-pink-100 rounded-full flex items-center justify-center text-5xl border-4 border-white shadow-md mb-3 relative">
+                <span id="preview-avatar-icon">🦊</span>
             </div>
 
-            <div class="flex flex-col gap-3">
-                <button onclick="playSound(); nextGameStep()" class="bg-white hover:bg-pink-50 border-2 border-pink-100 p-3.5 rounded-2xl font-black text-slate-800 text-xs shadow-md transition active:scale-95 text-left flex items-center gap-3 cursor-pointer">
-                    <span class="text-lg">🍔</span> <span>Makan makanan enak sampai kenyang</span>
-                </button>
-                <button onclick="playSound(); nextGameStep()" class="bg-white hover:bg-pink-50 border-2 border-pink-100 p-3.5 rounded-2xl font-black text-slate-800 text-xs shadow-md transition active:scale-95 text-left flex items-center gap-3 cursor-pointer">
-                    <span class="text-lg">🎧</span> <span>Dengerin musik kencang-kencang</span>
-                </button>
-                <button onclick="playSound(); nextGameStep()" class="bg-white hover:bg-pink-50 border-2 border-pink-100 p-3.5 rounded-2xl font-black text-slate-800 text-xs shadow-md transition active:scale-95 text-left flex items-center gap-3 cursor-pointer">
-                    <span class="text-lg">🛌</span> <span>Tidur seharian tanpa buka HP</span>
-                </button>
+            <!-- Tombol Ubah Profile (50 Karakter Pilihan) -->
+            <button onclick="playSound(); openAvatarModal()" class="mb-4 bg-gradient-to-r from-yellow-400 to-orange-400 text-slate-900 font-black text-xs py-2 px-4 rounded-xl shadow-md active:scale-95 transition cursor-pointer inline-flex items-center gap-1.5">
+                <span>✨ Ubah Profile (Pilih 50 Karakter)</span>
+            </button>
+
+            <!-- Informasi Akun -->
+            <div class="bg-slate-50 rounded-2xl p-4 text-left border border-slate-200 space-y-2 mb-5">
+                <div class="flex justify-between border-b pb-1.5">
+                    <span class="text-xs font-bold text-slate-500">Nama :</span>
+                    <span id="res-name" class="text-xs font-black text-slate-800">Dhoo</span>
+                </div>
+                <div class="flex justify-between border-b pb-1.5">
+                    <span class="text-xs font-bold text-slate-500">Umur :</span>
+                    <span id="res-age" class="text-xs font-black text-slate-800">17 Tahun</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-xs font-bold text-slate-500">Gender :</span>
+                    <span id="res-gender" class="text-xs font-black text-slate-800">Laki-laki</span>
+                </div>
             </div>
+
+            <!-- Tombol Final: Buat Akun Permanen -->
+            <button onclick="playSound(); saveAccountPermanently()" class="w-full bg-gradient-to-r from-[#ff4f8b] to-[#ff2a6d] hover:from-[#e03e77] hover:to-[#d91b5c] text-white font-black py-4 px-6 rounded-2xl shadow-xl shadow-pink-300 transition-all transform active:scale-95 text-base tracking-wide cursor-pointer">
+                Lanjut Buat Akun 🔒
+            </button>
+            <p class="text-[10px] text-slate-400 mt-2 font-bold">*Akun bersifat permanen di device ini.</p>
+        </div>
+    </div>
+
+    <!-- 8. MODAL PILIH 50 KARAKTER AVATAR -->
+    <div id="avatar-modal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-[32px] p-5 w-full max-w-sm max-h-[85vh] flex flex-col shadow-2xl border-2 border-pink-200">
+            <div class="flex justify-between items-center mb-3">
+                <h3 class="font-black text-slate-900 text-base">Pilih Avatar Karaktermu</h3>
+                <button onclick="playSound(); closeAvatarModal()" class="w-8 h-8 rounded-full bg-slate-100 font-black text-slate-600">✕</button>
+            </div>
+            <p class="text-xs text-slate-400 mb-3">Pilih salah satu dari 50 karakter kartun/emoji di bawah:</p>
+            
+            <div id="avatar-grid" class="grid grid-cols-5 gap-2 overflow-y-auto p-2 max-h-64 bg-slate-50 rounded-2xl border border-slate-100">
+                <!-- Dimasukkan via Javascript (50 Karakter) -->
+            </div>
+
+            <button onclick="playSound(); closeAvatarModal()" class="mt-4 w-full bg-slate-800 text-white font-black py-3 rounded-xl text-sm">Simpan Pilihan</button>
         </div>
     </div>
 
     <script>
-        // Web Audio API untuk Sound Effect Otomatis (Tanpa file luar)
+        // Web Audio API Sound Effect Otomatis
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         function playSound() {
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
+            if (audioCtx.state === 'suspended') { audioCtx.resume(); }
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
             osc.type = 'sine';
-            osc.frequency.setValueAtTime(500, audioCtx.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(900, audioCtx.currentTime + 0.08);
-            
-            gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+            osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(950, audioCtx.currentTime + 0.08);
+            gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
             gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
-            
             osc.connect(gain);
             gain.connect(audioCtx.destination);
-            
             osc.start();
             osc.stop(audioCtx.currentTime + 0.08);
         }
 
-        let userName = "";
-        let selectedGenderVal = "";
-        let selectedAgeVal = 17;
+        let userData = {
+            name: "",
+            gender: "Laki-laki",
+            age: 17,
+            avatar: "🦊"
+        };
+
+        // 50 List Karakter Kartun / Emoji Pilihan
+        const cartoonAvatars = [
+            "🦊", "🐼", "🐨", "🦁", "🐯", "🐰", "🐱", "🐶", "🐵", "🦄",
+            "🧝‍♂️", "🦸‍♂️", "🧙‍♂️", "🧛‍♂️", "🧜‍♂️", "🧚‍♂️", "🧞‍♂️", "🤖", "👽", "👻",
+            "🚀", "⭐", "🔥", "⚡", "💎", "👑", "🎨", "🎧", "🎮", "⚽",
+            "🧸", "🐥", "🐧", "🐸", "🐙", "🐳", "🦋", "🌻", "🍎", "🍕",
+            "🍩", "🍪", "🍭", "🍫", "🍿", "🏀", "🛹", "🎯", "🧩", "🔮"
+        ];
 
         window.addEventListener('DOMContentLoaded', () => {
+            // Cek apakah device sudah punya akun tersimpan (Permanen 1 Device 1 Akun)
+            const savedAccount = localStorage.getItem('dho_block_user_account');
+            if (savedAccount) {
+                const parsed = JSON.parse(savedAccount);
+                userData = parsed;
+                document.getElementById('res-name').innerText = userData.name;
+                document.getElementById('res-age').innerText = userData.age + " Tahun";
+                document.getElementById('res-gender').innerText = userData.gender;
+                document.getElementById('preview-avatar-icon').innerText = userData.avatar;
+                
+                setTimeout(() => {
+                    document.getElementById('loading-screen').classList.add('fade-out');
+                    goToScreen('profile-preview-screen');
+                    setTimeout(() => { document.getElementById('loading-screen').style.display = 'none'; }, 600);
+                }, 1000);
+                return;
+            }
+
             setTimeout(() => {
                 document.getElementById('loading-screen').classList.add('fade-out');
                 document.getElementById('main-screen').classList.add('active');
                 setTimeout(() => { document.getElementById('loading-screen').style.display = 'none'; }, 600);
-            }, 1500); 
+            }, 1200); 
 
+            // Render Scroller Umur (1-99)
             const scroller = document.getElementById('age-scroller');
             scroller.innerHTML = `<div class="h-10 shrink-0"></div>`;
             for (let i = 1; i <= 99; i++) {
                 scroller.innerHTML += `<div class="h-12 shrink-0 snap-center flex items-center justify-center text-2xl font-black text-slate-700 age-item" data-val="${i}">${i}</div>`;
             }
             scroller.innerHTML += `<div class="h-10 shrink-0"></div>`;
-            
-            setTimeout(() => {
-                scroller.scrollTop = (17 - 1) * 48;
-            }, 100);
+            setTimeout(() => { scroller.scrollTop = (17 - 1) * 48; }, 100);
+
+            // Render 50 Avatar ke Modal
+            const grid = document.getElementById('avatar-grid');
+            cartoonAvatars.forEach(av => {
+                grid.innerHTML += `<button onclick="playSound(); selectAvatar('${av}')" class="text-2xl p-2 bg-white rounded-xl shadow hover:bg-pink-50 active:scale-95 transition flex items-center justify-center">${av}</button>`;
+            });
         });
 
         function triggerTransition(targetScreenId, loadingText) {
@@ -395,7 +421,7 @@
                     transOverlay.classList.add('hidden');
                     goToScreen(targetScreenId);
                 }, 300);
-            }, 900);
+            }, 700);
         }
 
         function goToScreen(screenId) {
@@ -405,38 +431,24 @@
         }
 
         function updateCharCount(input) {
-            const count = input.value.length;
-            document.getElementById('char-count').innerText = `${count}/15`;
+            document.getElementById('char-count').innerText = `${input.value.length}/15`;
         }
 
         function submitName() {
             const nameInput = document.getElementById('username-input');
-            userName = nameInput.value.trim();
-            if (!userName) {
+            const val = nameInput.value.trim();
+            if (!val) {
                 alert('Silakan masukkan nama kamu terlebih dahulu!');
                 return;
             }
-            document.getElementById('greeting-text').innerText = `hai, ${userName} 👋`;
-            document.getElementById('game-name-label').innerText = userName;
-            triggerTransition('gender-screen', `Halo ${userName}, pilih gendermu...`);
+            userData.name = val;
+            document.getElementById('greeting-text').innerText = `hai, ${val} 👋`;
+            triggerTransition('gender-screen', `Halo ${val}, pilih gender...`);
         }
 
         function selectGender(gender) {
-            selectedGenderVal = gender;
-            const cardMale = document.getElementById('card-male');
-            const cardFemale = document.getElementById('card-female');
-
-            if (gender === 'male') {
-                cardMale.classList.add('animate-wiggle', 'border-blue-400', 'bg-gradient-to-br', 'from-blue-50', 'to-sky-100');
-                cardFemale.classList.remove('animate-wiggle', 'border-pink-400', 'bg-gradient-to-br', 'from-pink-50', 'to-rose-100');
-            } else {
-                cardFemale.classList.add('animate-wiggle', 'border-pink-400', 'bg-gradient-to-br', 'from-pink-50', 'to-rose-100');
-                cardMale.classList.remove('animate-wiggle', 'border-blue-400', 'bg-gradient-to-br', 'from-blue-50', 'to-sky-100');
-            }
-
-            setTimeout(() => {
-                triggerTransition('age-screen', 'Atur umurmu...');
-            }, 500);
+            userData.gender = gender;
+            setTimeout(() => { triggerTransition('age-screen', 'Atur umurmu...'); }, 300);
         }
 
         function detectScrolledAge() {
@@ -448,8 +460,8 @@
                 const itemCenter = item.offsetTop + item.clientHeight / 2;
                 const distance = Math.abs(scrollerCenter - itemCenter);
                 if (distance < 25) {
-                    selectedAgeVal = item.getAttribute('data-val');
-                    document.getElementById('selected-age-display').innerText = `${selectedAgeVal} Tahun`;
+                    userData.age = item.getAttribute('data-val');
+                    document.getElementById('selected-age-display').innerText = `${userData.age} Tahun`;
                     item.style.transform = 'scale(1.25)';
                     item.style.color = '#ff4f8b';
                 } else {
@@ -459,12 +471,42 @@
             });
         }
 
-        function submitAge() {
-            triggerTransition('game-screen', `Memuat Tantangan untuk ${userName} (${selectedAgeVal} Thn)...`);
+        // Efek Getar/Goyang & Shadow Berubah Saat Klik Lanjut Umur
+        function triggerAgeSubmitEffect() {
+            const box = document.getElementById('age-card-box');
+            box.classList.add('animate-shake-shadow');
+
+            setTimeout(() => {
+                box.classList.remove('animate-shake-shadow');
+                // Masukkan data ke preview profil
+                document.getElementById('res-name').innerText = userData.name;
+                document.getElementById('res-age').innerText = userData.age + " Tahun";
+                document.getElementById('res-gender').innerText = userData.gender;
+                document.getElementById('preview-avatar-icon').innerText = userData.avatar;
+
+                triggerTransition('profile-preview-screen', 'Menyiapkan Profil Akun...');
+            }, 550);
         }
 
-        function nextGameStep() {
-            alert(`Seru banget! Tantangan pertama selesai. Siap bagikan game ini ke teman-temanmu?`);
+        function openAvatarModal() {
+            document.getElementById('avatar-modal').classList.remove('hidden');
+        }
+
+        function closeAvatarModal() {
+            document.getElementById('avatar-modal').classList.add('hidden');
+        }
+
+        function selectAvatar(av) {
+            userData.avatar = av;
+            document.getElementById('preview-avatar-icon').innerText = av;
+            closeAvatarModal();
+        }
+
+        function saveAccountPermanently() {
+            // Simpan permanen ke localStorage (1 device 1 akun)
+            localStorage.setItem('dho_block_user_account', JSON.stringify(userData));
+            alert(`Berhasil! Akun ${userData.name} telah dibuat secara permanen di perangkat ini.`);
+            location.reload();
         }
     </script>
 </body>
