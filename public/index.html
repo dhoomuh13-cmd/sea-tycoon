@@ -145,7 +145,7 @@
 
     <!-- NOTIFIKASI UPDATE -->
     <div id="update-banner" class="fixed top-3 left-4 right-4 max-w-md mx-auto bg-gradient-to-r from-pink-500 to-indigo-600 text-white px-4 py-2.5 rounded-2xl shadow-2xl z-50 flex items-center justify-between text-xs font-black hidden border border-white/30 backdrop-blur-md">
-        <span id="update-info-text">✨ Update Chat, Group @Username & Hidden Contacts Diterapkan!</span>
+        <span id="update-info-text">✨ Update Sinkronisasi Chat Multi-Akun & Desain Tombol Kirim Diterapkan!</span>
         <button onclick="dismissUpdateBanner()" class="bg-white/20 px-2.5 py-1 rounded-xl text-[10px]">✕ OK</button>
     </div>
 
@@ -424,12 +424,12 @@
                 </div>
             </div>
 
-            <!-- Kolom Pencarian (Kontak default disembunyikan sampai dicari) -->
+            <!-- Kolom Pencarian -->
             <div class="p-3 bg-slate-50 border-b border-slate-200">
                 <input type="text" id="chat-search-input" oninput="filterChatList(this)" placeholder="🔍 Ketik nama teman atau grup..." class="w-full bg-white border border-slate-200 focus:border-blue-400 focus:outline-none rounded-2xl py-2 px-3 text-xs font-bold text-slate-800 shadow-inner">
             </div>
 
-            <!-- Daftar Kontak / Grup (Default Hidden) -->
+            <!-- Daftar Kontak / Grup -->
             <div id="chat-contact-list" class="flex-1 overflow-y-auto p-3 space-y-2">
                 <p class="text-center text-xs font-bold text-slate-400 mt-6">Ketik nama teman atau grup di kolom pencarian di atas untuk memulai chat.</p>
             </div>
@@ -449,7 +449,7 @@
                     </div>
                 </div>
 
-                <!-- Gelembung Chat (Nama pengirim di atas pesan, posisi berbeda untuk diri sendiri & orang lain) -->
+                <!-- Gelembung Chat -->
                 <div id="chat-messages-container" class="flex-1 p-3 overflow-y-auto space-y-3 bg-slate-50 text-xs"></div>
 
                 <!-- Input Pesan -->
@@ -458,14 +458,14 @@
                         📷 <input type="file" accept="image/*" onchange="sendPhotoMessage(this)" class="hidden">
                     </label>
                     <input type="text" id="chat-input-msg" placeholder="Tulis pesan..." class="flex-1 bg-slate-100 border border-slate-200 focus:outline-none focus:border-blue-400 rounded-2xl py-2 px-3 text-xs font-bold text-slate-800">
-                    <button onclick="playSoundEffect(this); sendTextMessage()" class="w-9 h-9 bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-full flex items-center justify-center font-black text-xs shadow-md active:scale-95 transition">📤</button>
+                    <button onclick="playSoundEffect(this); sendTextMessage()" class="w-9 h-9 bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-full flex items-center justify-center font-black text-xs shadow-md active:scale-95 transition cursor-pointer" title="Kirim Pesan">📤</button>
                 </div>
             </div>
 
         </div>
     </div>
 
-    <!-- HALAMAN PROFILE GRUP (DENGAN @USERNAME, GALERI, JOIN, KELUAR, HAPUS) -->
+    <!-- HALAMAN PROFILE GRUP -->
     <div id="group-profile-screen" class="screen text-center pt-4 relative z-10">
         <div class="bg-white rounded-[32px] shadow-2xl border-2 border-pink-200 w-full p-6 text-left relative transition-all">
             <div class="flex items-center justify-between mb-4 border-b pb-3">
@@ -474,7 +474,6 @@
                 <div class="w-8"></div>
             </div>
 
-            <!-- Foto Profil Grup & Atur dari Galeri -->
             <div class="flex flex-col items-center mb-4">
                 <label class="w-24 h-24 bg-pink-50 border-2 border-dashed border-pink-300 rounded-full flex items-center justify-center text-3xl cursor-pointer hover:bg-pink-100 transition relative overflow-hidden shadow-inner group" title="Ubah foto dari galeri">
                     <span id="gp-photo-display">👥</span>
@@ -490,10 +489,7 @@
                 <div class="flex justify-between"><span class="font-bold text-slate-500">Jumlah Member :</span><span id="gp-member-count" class="font-black text-pink-600">0</span></div>
             </div>
 
-            <!-- Tombol Aksi Member & Admin -->
-            <div id="gp-action-buttons" class="space-y-2">
-                <!-- Tombol Join akan muncul jika belum join -->
-            </div>
+            <div id="gp-action-buttons" class="space-y-2"></div>
         </div>
     </div>
 
@@ -624,14 +620,13 @@
     </div>
 
     <script>
-        const APP_VERSION = "3.0.0";
+        const APP_VERSION = "3.1.0";
         window.addEventListener('DOMContentLoaded', () => {
             const lastVersion = localStorage.getItem('dho_app_global_version');
             if (!lastVersion || lastVersion !== APP_VERSION) {
                 localStorage.setItem('dho_app_global_version', APP_VERSION);
                 document.getElementById('update-banner').classList.remove('hidden');
             }
-            // Inisialisasi default group jika belum ada
             if(!localStorage.getItem('dho_block_groups')) {
                 let defaultGroups = [{
                     name: "dhoo group",
@@ -671,7 +666,7 @@
         let tempRegisterData = { name: "", password: "", gender: "Laki-laki", age: 17, avatar: "🦊" };
         let userData = null;
         let activeChatTarget = "";
-        let activeChatType = "user"; // 'user' atau 'group'
+        let activeChatType = "user"; 
         let notifState = true;
         let groupPhotoData = "";
         const cartoonAvatars = ["🦊", "🐼", "🐨", "🦁", "🐯", "🐰", "🐱", "🐶", "🐵", "🦄", "🚀", "⭐", "🔥", "⚡", "💎", "👑", "🎨", "🎧", "🎮", "⚽", "🧸", "🐥", "🐧", "🐸", "🐙"];
@@ -874,7 +869,6 @@
             }
         }
 
-        /* LIVE SEARCH: KONTAK & GRUP DI-HIDE SAMPAI DICARI */
         function filterChatList(input) {
             const query = input.value.toLowerCase().trim();
             const contactList = document.getElementById('chat-contact-list');
@@ -887,7 +881,6 @@
             let usersList = JSON.parse(localStorage.getItem('dho_block_all_users') || "[]");
             let groupsList = JSON.parse(localStorage.getItem('dho_block_groups') || "[]");
             
-            // Hardcode kontak Budi & Siti
             let defaultContacts = [
                 { name: "Budi Santoso", avatar: "🎮", type: "user" },
                 { name: "Siti Rahma", avatar: "🌸", type: "user" }
@@ -983,22 +976,33 @@
             }
         }
 
+        function getChatRoomKey(targetName) {
+            if (!userData) return targetName;
+            if (activeChatType === 'group') {
+                return `group_${targetName}`;
+            } else {
+                let sortedNames = [userData.name.toLowerCase(), targetName.toLowerCase()].sort();
+                return `private_${sortedNames[0]}_${sortedNames[1]}`;
+            }
+        }
+
         function loadMessagesForChat(targetName) {
             const container = document.getElementById('chat-messages-container');
             let allChats = JSON.parse(localStorage.getItem('dho_block_chat_history') || "{}");
-            let messages = allChats[targetName] || [];
+            let roomKey = getChatRoomKey(targetName);
+            let messages = allChats[roomKey] || [];
             container.innerHTML = messages.join('');
             container.scrollTop = container.scrollHeight;
         }
 
         function saveMessageToDB(targetName, htmlMsg) {
             let allChats = JSON.parse(localStorage.getItem('dho_block_chat_history') || "{}");
-            if(!allChats[targetName]) allChats[targetName] = [];
-            allChats[targetName].push(htmlMsg);
+            let roomKey = getChatRoomKey(targetName);
+            if(!allChats[roomKey]) allChats[roomKey] = [];
+            allChats[roomKey].push(htmlMsg);
             localStorage.setItem('dho_block_chat_history', JSON.stringify(allChats));
         }
 
-        /* POSISI CHAT BEDA: SENDIRI RATA KANAN (DENGAN NAMA DI ATAS), ORANG LAIN RATA KIRI */
         function sendTextMessage() {
             const input = document.getElementById('chat-input-msg');
             const text = input.value.trim();
@@ -1040,7 +1044,6 @@
             }
         }
 
-        /* FITUR PROFIL GRUP, JOIN, KELUAR, HAPUS GROUP, & @USERNAME */
         function openGroupProfileScreen(groupName) {
             let groupsList = JSON.parse(localStorage.getItem('dho_block_groups') || "[]");
             let g = groupsList.find(gr => gr.name === groupName);
@@ -1052,7 +1055,6 @@
             
             if(!g.joinedUsers) g.joinedUsers = [];
             const isMember = userData && g.joinedUsers.includes(userData.name);
-            const isCreator = userData && g.creator === userData.name;
 
             document.getElementById('gp-member-count').innerText = g.joinedUsers.length;
 
@@ -1063,13 +1065,12 @@
             let actionHTML = "";
 
             if (!isMember) {
-                actionHTML = `<button onclick="playSoundEffect(this); joinGroup('${g.name}')" class="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-black py-3 rounded-xl shadow-md text-xs">Join Group 🤝</button>`;
+                actionHTML = `<button onclick="playSoundEffect(this); joinGroup('${g.name}')" class="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-black py-3 rounded-xl shadow-md text-xs cursor-pointer">Join Group 🤝</button>`;
             } else {
-                actionHTML = `<button onclick="playSoundEffect(this); leaveGroup('${g.name}')" class="w-full bg-orange-500 text-white font-black py-3 rounded-xl shadow-md text-xs">Keluar Group 🚪</button>`;
+                actionHTML = `<button onclick="playSoundEffect(this); leaveGroup('${g.name}')" class="w-full bg-orange-500 text-white font-black py-3 rounded-xl shadow-md text-xs cursor-pointer">Keluar Group 🚪</button>`;
             }
 
-            // Jika pembuat grup, bisa hapus group
-            actionHTML += `<button onclick="playSoundEffect(this); deleteGroup('${g.name}')" class="w-full bg-red-500 text-white font-black py-3 rounded-xl shadow-md text-xs mt-2">Hapus Group 🗑️</button>`;
+            actionHTML += `<button onclick="playSoundEffect(this); deleteGroup('${g.name}')" class="w-full bg-red-500 text-white font-black py-3 rounded-xl shadow-md text-xs mt-2 cursor-pointer">Hapus Group 🗑️</button>`;
 
             actionContainer.innerHTML = actionHTML;
             goToScreen('group-profile-screen');
@@ -1136,7 +1137,6 @@
             }
         }
 
-        /* PEMBUATAN GRUP BARU */
         function openCreateGroupScreen() {
             document.getElementById('chat-settings-dropdown').classList.add('hidden');
             document.getElementById('group-name-input').value = "";
