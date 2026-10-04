@@ -145,22 +145,36 @@
 
     <!-- NOTIFIKASI UPDATE -->
     <div id="update-banner" class="fixed top-3 left-4 right-4 max-w-md mx-auto bg-gradient-to-r from-pink-500 to-indigo-600 text-white px-4 py-2.5 rounded-2xl shadow-2xl z-50 flex items-center justify-between text-xs font-black hidden border border-white/30 backdrop-blur-md">
-        <span id="update-info-text">✨ Update Sinkronisasi Chat Multi-Akun & Desain Tombol Kirim Diterapkan!</span>
+        <span id="update-info-text">✨ Fitur "Tanya Beruang" & Akun Owner Ditambahkan!</span>
         <button onclick="dismissUpdateBanner()" class="bg-white/20 px-2.5 py-1 rounded-xl text-[10px]">✕ OK</button>
     </div>
 
     <!-- HAMBURGER MENU (TITIK TIGA DI KIRI ATAS) -->
-    <div class="fixed top-4 left-4 z-40">
+    <div id="hamburger-container" class="fixed top-4 left-4 z-40">
         <button onclick="playSoundEffect(this); toggleHamburgerMenu()" class="w-11 h-11 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl flex items-center justify-center text-xl font-black text-slate-800 border-2 border-pink-100 active:scale-95 transition cursor-pointer">
             ⋮
         </button>
-        <div id="hamburger-dropdown" class="hidden absolute left-0 mt-2 w-52 bg-white rounded-2xl shadow-2xl border-2 border-pink-100 p-2.5 z-50 text-left space-y-1.5 dropdown-animate">
-            <button onclick="playSoundEffect(this); openThemeModal(); toggleHamburgerMenu();" class="w-full text-left px-3 py-2.5 rounded-xl font-black text-xs text-slate-800 bg-slate-50 hover:bg-pink-50 hover:text-pink-600 transition flex items-center gap-2.5 shadow-sm">
+        <div id="hamburger-dropdown" class="hidden absolute left-0 mt-2 w-56 bg-white rounded-2xl shadow-2xl border-2 border-pink-100 p-2.5 z-50 text-left space-y-1.5 dropdown-animate">
+            <button onclick="playSoundEffect(this); openThemeModal(); toggleHamburgerMenu();" class="w-full text-left px-3 py-2 rounded-xl font-black text-xs text-slate-800 bg-slate-50 hover:bg-pink-50 hover:text-pink-600 transition flex items-center gap-2.5 shadow-sm">
                 <span>🎨</span> <span>Atur Tema</span>
             </button>
-            <button onclick="playSoundEffect(this); openLangModal(); toggleHamburgerMenu();" class="w-full text-left px-3 py-2.5 rounded-xl font-black text-xs text-slate-800 bg-slate-50 hover:bg-pink-50 hover:text-pink-600 transition flex items-center gap-2.5 shadow-sm">
+            <button onclick="playSoundEffect(this); openLangModal(); toggleHamburgerMenu();" class="w-full text-left px-3 py-2 rounded-xl font-black text-xs text-slate-800 bg-slate-50 hover:bg-pink-50 hover:text-pink-600 transition flex items-center gap-2.5 shadow-sm">
                 <span>🌐</span> <span>Pilih Bahasa</span>
             </button>
+            <button onclick="playSoundEffect(this); openBearChatScreen(); toggleHamburgerMenu();" class="w-full text-left px-3 py-2 rounded-xl font-black text-xs text-slate-800 bg-pink-50 hover:bg-pink-100 hover:text-pink-600 transition flex items-center gap-2.5 shadow-sm border border-pink-200">
+                <span>🧸</span> <span>Tanya Beruang</span>
+            </button>
+
+            <!-- PANEL OWNER (Hanya Muncul jika Akun Owner) -->
+            <div id="owner-menu-section" class="hidden border-t border-slate-200 pt-1.5 mt-1.5 space-y-1.5">
+                <div class="px-3 py-1 text-[10px] font-black text-purple-600 uppercase tracking-wider">🔒 Panel Owner</div>
+                <button onclick="playSoundEffect(this); openOwnerInbox(); toggleHamburgerMenu();" class="w-full text-left px-3 py-2 rounded-xl font-black text-xs text-purple-900 bg-purple-50 hover:bg-purple-100 transition flex items-center gap-2.5 shadow-sm">
+                    <span>📥</span> <span>Kotak Masuk</span>
+                </button>
+                <button onclick="playSoundEffect(this); openOwnerInbox(); toggleHamburgerMenu();" class="w-full text-left px-3 py-2 rounded-xl font-black text-xs text-purple-900 bg-purple-50 hover:bg-purple-100 transition flex items-center gap-2.5 shadow-sm">
+                    <span>💬</span> <span>Jawab user beruang</span>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -387,12 +401,12 @@
                 <div class="w-14 h-14 bg-pink-100 rounded-2xl flex items-center justify-center text-3xl shadow-inner" id="home-avatar">🦊</div>
                 <div>
                     <h3 id="home-username" class="text-lg font-black text-slate-900">User Dhoo</h3>
-                    <p class="text-xs font-bold text-pink-500">Status: Akun Aktif Permanen</p>
+                    <p class="text-xs font-bold text-pink-500" id="home-user-status">Status: Akun Aktif Permanen</p>
                 </div>
             </div>
             <div class="bg-gradient-to-r from-pink-50 to-blue-50 p-4 rounded-2xl border border-pink-100 text-left">
-                <p class="text-xs font-extrabold text-slate-800 mb-1">🚀 Chat & Grup Tersembunyi!</p>
-                <p class="text-[11px] font-medium text-slate-600">Gunakan kolom pencarian di menu Chat untuk menemukan teman dan grup.</p>
+                <p class="text-xs font-extrabold text-slate-800 mb-1">🚀 Fitur Tanya Beruang Tersedia!</p>
+                <p class="text-[11px] font-medium text-slate-600">Buka menu titik tiga di kiri atas lalu pilih "Tanya Beruang" untuk mulai bertanya.</p>
             </div>
         </div>
     </div>
@@ -528,6 +542,91 @@
         </div>
     </div>
 
+    <!-- HALAMAN KHUSUS: TANYA BERUANG (FULL SCREEN ALA GEMINI) -->
+    <div id="bear-chat-screen" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-md hidden flex flex-col items-center justify-end sm:justify-center p-0 sm:p-4">
+        <div class="bg-white w-full h-full sm:max-w-md sm:h-[88vh] sm:rounded-[36px] shadow-2xl flex flex-col overflow-hidden relative border-0 sm:border-2 border-pink-200">
+            
+            <!-- Header Tanya Beruang -->
+            <div class="bg-gradient-to-r from-pink-500 to-rose-500 p-4 flex items-center justify-between text-white shadow-md relative z-10">
+                <div class="flex items-center gap-3">
+                    <button onclick="playSoundEffect(this); closeBearChatScreen()" class="w-9 h-9 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center font-black text-sm transition cursor-pointer">❮</button>
+                    <div class="flex items-center gap-2">
+                        <span class="text-2xl animate-bounce">🧸</span>
+                        <h2 class="text-base font-black tracking-wide animate-pulse gradient-text-1 bg-white px-3 py-1 rounded-full shadow-sm">Tanya Beruang Yuk!</h2>
+                    </div>
+                </div>
+                <!-- Reset Cache / Hapus Semua Pesan -->
+                <button onclick="playSoundEffect(this); resetBearCache()" class="bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-xl text-xs font-black transition cursor-pointer flex items-center gap-1 shadow-sm" title="Hapus semua pesan bersih">
+                    🗑️ Reset Cache
+                </button>
+            </div>
+
+            <!-- Area Gelembung Pesan -->
+            <div id="bear-messages-container" class="flex-1 p-4 overflow-y-auto space-y-4 bg-slate-50 text-xs">
+                <div class="flex flex-col items-start">
+                    <span class="text-[10px] font-black text-pink-600 mb-0.5">Beruang</span>
+                    <div class="bg-white text-slate-800 p-3 rounded-2xl shadow-sm max-w-[85%] font-extrabold border border-pink-100">
+                        Halo! Tanyakan apa saja padaku atau owner di sini. Pesanmu akan langsung dijawab oleh Beruang! 🧸✨
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Pesan Melayang (Gaya Gemini) -->
+            <div class="p-3 bg-white border-t border-slate-100 relative z-10 shadow-lg">
+                <div class="bg-slate-50 border-2 border-pink-200 rounded-3xl p-2 flex items-center gap-2 shadow-inner">
+                    <input type="text" id="bear-input-msg" placeholder="Ketik pertanyaan untuk Beruang..." class="flex-1 bg-transparent border-none focus:outline-none py-2 px-3 text-xs font-extrabold text-slate-800 placeholder-slate-400">
+                    <button onclick="playSoundEffect(this); sendBearMessage()" class="w-10 h-10 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-full flex items-center justify-center font-black text-sm shadow-md active:scale-95 transition cursor-pointer">
+                        📤
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- HALAMAN KHUSUS: PANEL OWNER KOTAK MASUK & JAWAB USER -->
+    <div id="owner-inbox-screen" class="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-md hidden flex flex-col items-center justify-end sm:justify-center p-0 sm:p-4">
+        <div class="bg-white w-full h-full sm:max-w-md sm:h-[88vh] sm:rounded-[36px] shadow-2xl flex flex-col overflow-hidden relative border-0 sm:border-2 border-purple-200">
+            
+            <!-- Header Owner Inbox -->
+            <div class="bg-gradient-to-r from-purple-600 to-indigo-600 p-4 flex items-center justify-between text-white shadow-md relative z-10">
+                <div class="flex items-center gap-3">
+                    <button onclick="playSoundEffect(this); closeOwnerInbox()" class="w-9 h-9 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center font-black text-sm transition cursor-pointer">❮</button>
+                    <div>
+                        <h2 class="text-sm font-black tracking-wide">Kotak Masuk & Jawab User Beruang 👑</h2>
+                        <p class="text-[10px] text-purple-200 font-bold">List chat user yang masuk ke Beruang</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daftar List User Chat -->
+            <div id="owner-user-list" class="flex-1 p-4 overflow-y-auto space-y-3 bg-slate-50 text-xs">
+                <p class="text-center text-slate-400 font-bold mt-8">Memuat daftar chat user...</p>
+            </div>
+
+            <!-- Ruang Chat Balas User (Sub-Modal dalam Owner) -->
+            <div id="owner-reply-room" class="absolute inset-0 bg-white flex flex-col hidden z-20">
+                <div class="bg-gradient-to-r from-purple-600 to-indigo-600 p-3.5 flex items-center justify-between text-white shadow-md">
+                    <div class="flex items-center gap-3">
+                        <button onclick="playSoundEffect(this); closeOwnerReplyRoom()" class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center font-black text-sm">❮</button>
+                        <div>
+                            <h3 id="owner-reply-username" class="font-black text-xs">Nama User</h3>
+                            <p class="text-[9px] text-purple-200">Balas sebagai Beruang 🧸</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="owner-reply-messages" class="flex-1 p-3 overflow-y-auto space-y-3 bg-slate-50 text-xs"></div>
+
+                <div class="p-3 bg-white border-t border-slate-200 flex items-center gap-2">
+                    <input type="text" id="owner-reply-input" placeholder="Balas sebagai Beruang..." class="flex-1 bg-slate-100 border border-slate-200 focus:outline-none focus:border-purple-400 rounded-2xl py-2.5 px-3 text-xs font-bold text-slate-800">
+                    <button onclick="playSoundEffect(this); sendOwnerReplyMessage()" class="w-10 h-10 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-full flex items-center justify-center font-black text-xs shadow-md active:scale-95 transition cursor-pointer">📤</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <!-- TAB: KERTAS REQUEST -->
     <div id="menu-request-screen" class="screen text-center pt-8 relative z-10">
         <div class="relative mb-4 w-full bg-white/90 backdrop-blur-md pt-4 pb-3 rounded-[28px] shadow-xl border border-white">
@@ -620,7 +719,7 @@
     </div>
 
     <script>
-        const APP_VERSION = "3.1.0";
+        const APP_VERSION = "3.4.0";
         window.addEventListener('DOMContentLoaded', () => {
             const lastVersion = localStorage.getItem('dho_app_global_version');
             if (!lastVersion || lastVersion !== APP_VERSION) {
@@ -638,6 +737,20 @@
                 }];
                 localStorage.setItem('dho_block_groups', JSON.stringify(defaultGroups));
             }
+            
+            // Auto-refresh chat pesan beranda / tanya beruang / owner inbox
+            setInterval(() => {
+                if (userData && !document.getElementById('bear-chat-screen').classList.contains('hidden')) {
+                    loadBearMessages();
+                }
+                if (userData && userData.name.toLowerCase() === 'owner' && !document.getElementById('owner-inbox-screen').classList.contains('hidden')) {
+                    if (activeOwnerTargetUser) {
+                        loadOwnerReplyMessages(activeOwnerTargetUser);
+                    } else {
+                        loadOwnerUserList();
+                    }
+                }
+            }, 1000);
         });
 
         function dismissUpdateBanner() { document.getElementById('update-banner').classList.add('hidden'); }
@@ -669,9 +782,17 @@
         let activeChatType = "user"; 
         let notifState = true;
         let groupPhotoData = "";
+        let activeOwnerTargetUser = "";
         const cartoonAvatars = ["🦊", "🐼", "🐨", "🦁", "🐯", "🐰", "🐱", "🐶", "🐵", "🦄", "🚀", "⭐", "🔥", "⚡", "💎", "👑", "🎨", "🎧", "🎮", "⚽", "🧸", "🐥", "🐧", "🐸", "🐙"];
 
         window.addEventListener('DOMContentLoaded', () => {
+            // Pastikan akun owner default terdaftar di local storage
+            let usersList = JSON.parse(localStorage.getItem('dho_block_all_users') || "[]");
+            if (!usersList.some(u => u.name.toLowerCase() === 'owner')) {
+                usersList.push({ name: "owner", password: "owner12345", gender: "Laki-laki", age: 20, avatar: "👑" });
+                localStorage.setItem('dho_block_all_users', JSON.stringify(usersList));
+            }
+
             const savedAccount = localStorage.getItem('dho_block_active_user');
             if (savedAccount) {
                 userData = JSON.parse(savedAccount);
@@ -679,6 +800,7 @@
                 setTimeout(() => {
                     document.getElementById('loading-screen').classList.add('fade-out');
                     document.getElementById('bottom-navbar').classList.remove('hidden');
+                    checkOwnerUIAccess();
                     goToScreen('menu-beranda-screen');
                     setTimeout(() => { document.getElementById('loading-screen').style.display = 'none'; }, 800);
                 }, 1200);
@@ -704,6 +826,15 @@
                 grid.innerHTML += `<button onclick="playSoundEffect(this); selectAvatar('${av}')" class="text-2xl p-2 bg-white rounded-xl shadow hover:bg-pink-50 active:scale-95 transition flex items-center justify-center">${av}</button>`;
             });
         });
+
+        function checkOwnerUIAccess() {
+            if (userData && userData.name.toLowerCase() === 'owner') {
+                document.getElementById('owner-menu-section').classList.remove('hidden');
+                document.getElementById('home-user-status').innerText = "Status: Akun Administrator / Owner 👑";
+            } else {
+                document.getElementById('owner-menu-section').classList.add('hidden');
+            }
+        }
 
         function triggerTransition(targetScreenId, loadingText) {
             const transOverlay = document.getElementById('transition-loading');
@@ -778,6 +909,7 @@
             localStorage.setItem('dho_block_active_user', JSON.stringify(tempRegisterData));
             userData = tempRegisterData;
             applyUserDataToMenu();
+            checkOwnerUIAccess();
             document.getElementById('bottom-navbar').classList.remove('hidden');
             goToScreen('menu-beranda-screen');
         }
@@ -790,7 +922,11 @@
                 localStorage.setItem('dho_block_active_user', JSON.stringify(found));
                 userData = found;
                 triggerTransition('menu-beranda-screen', 'Login Berhasil...');
-                setTimeout(() => { applyUserDataToMenu(); document.getElementById('bottom-navbar').classList.remove('hidden'); }, 1000);
+                setTimeout(() => { 
+                    applyUserDataToMenu(); 
+                    checkOwnerUIAccess();
+                    document.getElementById('bottom-navbar').classList.remove('hidden'); 
+                }, 1000);
             } else {
                 alert('Nama atau Password salah!');
             }
@@ -848,6 +984,212 @@
         function closeThemeModal() { document.getElementById('theme-modal').classList.add('hidden'); }
         function openLangModal() { document.getElementById('lang-modal').classList.remove('hidden'); }
         function closeLangModal() { document.getElementById('lang-modal').classList.add('hidden'); }
+
+        // --- FITUR BARU: TANYA BERUANG ---
+        function openBearChatScreen() {
+            // Efek transisi masuk & goyang
+            const bearScreen = document.getElementById('bear-chat-screen');
+            bearScreen.classList.remove('hidden');
+            bearScreen.classList.add('animate-shake-shadow');
+            
+            // Sembunyikan navigasi bawah dan hamburger utama agar full screen
+            document.getElementById('bottom-navbar').classList.add('hidden');
+            document.getElementById('hamburger-container').classList.add('hidden');
+
+            loadBearMessages();
+            setTimeout(() => bearScreen.classList.remove('animate-shake-shadow'), 700);
+        }
+
+        function closeBearChatScreen() {
+            document.getElementById('bear-chat-screen').classList.add('hidden');
+            document.getElementById('bottom-navbar').classList.remove('hidden');
+            document.getElementById('hamburger-container').classList.remove('hidden');
+        }
+
+        function getBearStorageKey() {
+            if (!userData) return "bear_chat_guest";
+            return `bear_chat_${userData.name.toLowerCase()}`;
+        }
+
+        function loadBearMessages() {
+            const container = document.getElementById('bear-messages-container');
+            let allBearChats = JSON.parse(localStorage.getItem('dho_bear_chats_db') || "{}");
+            let key = getBearStorageKey();
+            let messages = allBearChats[key] || [];
+
+            let html = `
+                <div class="flex flex-col items-start mb-3">
+                    <span class="text-[10px] font-black text-pink-600 mb-0.5">Beruang</span>
+                    <div class="bg-white text-slate-800 p-3 rounded-2xl shadow-sm max-w-[85%] font-extrabold border border-pink-100">
+                        Halo! Tanyakan apa saja padaku atau owner di sini. Pesanmu akan langsung dijawab oleh Beruang! 🧸✨
+                    </div>
+                </div>
+            `;
+
+            messages.forEach((msg, index) => {
+                let isMe = msg.sender === (userData ? userData.name : "Guest");
+                let senderLabel = isMe ? (userData ? userData.name : "Guest") : "Beruang";
+                let alignment = isMe ? "items-end" : "items-start";
+                let bubbleStyle = isMe ? "bg-pink-500 text-white font-black" : "bg-white text-slate-800 font-extrabold border border-pink-100";
+                
+                html += `
+                    <div class="flex flex-col ${alignment} mb-3 cursor-pointer" onclick="promptDeleteBearMessage('${key}', ${index}, ${isMe})">
+                        <span class="text-[10px] font-black text-slate-500 mb-0.5">${senderLabel}</span>
+                        <div class="${bubbleStyle} p-3 rounded-2xl shadow-sm max-w-[85%] text-xs">
+                            ${msg.text}
+                        </div>
+                        <span class="text-[9px] text-slate-400 mt-0.5 italic">Ketuk pesan untuk batal/hapus</span>
+                    </div>
+                `;
+            });
+
+            if (container.innerHTML !== html) {
+                container.innerHTML = html;
+                container.scrollTop = container.scrollHeight;
+            }
+        }
+
+        function sendBearMessage() {
+            const input = document.getElementById('bear-input-msg');
+            const text = input.value.trim();
+            if(!text) return;
+
+            let allBearChats = JSON.parse(localStorage.getItem('dho_bear_chats_db') || "{}");
+            let key = getBearStorageKey();
+            if(!allBearChats[key]) allBearChats[key] = [];
+
+            let senderName = userData ? userData.name : "Guest";
+            allBearChats[key].push({ sender: senderName, text: text, time: Date.now() });
+            localStorage.setItem('dho_bear_chats_db', JSON.stringify(allBearChats));
+
+            input.value = "";
+            loadBearMessages();
+        }
+
+        function promptDeleteBearMessage(key, index, isMe) {
+            if (confirm("Inginkan batalkan/hapus pesan ini?")) {
+                let allBearChats = JSON.parse(localStorage.getItem('dho_bear_chats_db') || "{}");
+                if (allBearChats[key]) {
+                    allBearChats[key].splice(index, 1);
+                    localStorage.setItem('dho_bear_chats_db', JSON.stringify(allBearChats));
+                    loadBearMessages();
+                }
+            }
+        }
+
+        function resetBearCache() {
+            if (confirm("Reset cache akan menghapus seluruh riwayat chat Beruang secara bersih. Lanjutkan?")) {
+                let allBearChats = JSON.parse(localStorage.getItem('dho_bear_chats_db') || "{}");
+                let key = getBearStorageKey();
+                delete allBearChats[key];
+                localStorage.setItem('dho_bear_chats_db', JSON.stringify(allBearChats));
+                loadBearMessages();
+                alert("Cache Beruang berhasil dibersihkan!");
+            }
+        }
+
+        // --- PANEL OWNER & JAWAB USER BERUANG ---
+        function openOwnerInbox() {
+            const inboxScreen = document.getElementById('owner-inbox-screen');
+            inboxScreen.classList.remove('hidden');
+            document.getElementById('bottom-navbar').classList.add('hidden');
+            document.getElementById('hamburger-container').classList.add('hidden');
+            loadOwnerUserList();
+        }
+
+        function closeOwnerInbox() {
+            document.getElementById('owner-inbox-screen').classList.add('hidden');
+            document.getElementById('bottom-navbar').classList.remove('hidden');
+            document.getElementById('hamburger-container').classList.remove('hidden');
+        }
+
+        function loadOwnerUserList() {
+            const container = document.getElementById('owner-user-list');
+            let allBearChats = JSON.parse(localStorage.getItem('dho_bear_chats_db') || "{}");
+            let html = "";
+            let keys = Object.keys(allBearChats);
+
+            if (keys.length === 0) {
+                container.innerHTML = `<p class="text-center text-slate-400 font-bold mt-8">Belum ada user yang bertanya ke Beruang.</p>`;
+                return;
+            }
+
+            keys.forEach(k => {
+                let userName = k.replace("bear_chat_", "");
+                let lastMsgObj = allBearChats[k][allBearChats[k].length - 1] || { text: "Belum ada pesan" };
+                
+                html += `
+                    <div onclick="openOwnerReplyRoom('${userName}')" class="p-3 bg-white hover:bg-purple-50 rounded-2xl shadow-sm border border-purple-100 flex items-center justify-between cursor-pointer transition">
+                        <div>
+                            <h4 class="font-black text-xs text-purple-900 capitalize">👤 User: ${userName}</h4>
+                            <p class="text-[11px] text-slate-500 truncate max-w-[200px] mt-0.5">${lastMsgObj.text}</p>
+                        </div>
+                        <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-xl text-[10px] font-black">Balas 💬</span>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function openOwnerReplyRoom(userName) {
+            activeOwnerTargetUser = userName;
+            document.getElementById('owner-reply-username').innerText = `User: ${userName}`;
+            document.getElementById('owner-reply-room').classList.remove('hidden');
+            loadOwnerReplyMessages(userName);
+        }
+
+        function closeOwnerReplyRoom() {
+            document.getElementById('owner-reply-room').classList.add('hidden');
+            activeOwnerTargetUser = "";
+            loadOwnerUserList();
+        }
+
+        function loadOwnerReplyMessages(userName) {
+            const container = document.getElementById('owner-reply-messages');
+            let allBearChats = JSON.parse(localStorage.getItem('dho_bear_chats_db') || "{}");
+            let key = `bear_chat_${userName}`;
+            let messages = allBearChats[key] || [];
+
+            let html = "";
+            messages.forEach((msg, index) => {
+                let isBeruang = msg.sender === "Beruang";
+                let senderLabel = isBeruang ? "Beruang" : userName;
+                let alignment = isBeruang ? "items-start" : "items-end";
+                let bubbleStyle = isBeruang ? "bg-purple-600 text-white font-black" : "bg-white text-slate-800 font-extrabold border border-slate-200";
+
+                html += `
+                    <div class="flex flex-col ${alignment} mb-3">
+                        <span class="text-[10px] font-black text-slate-500 mb-0.5">${senderLabel}</span>
+                        <div class="${bubbleStyle} p-3 rounded-2xl shadow-sm max-w-[85%] text-xs">
+                            ${msg.text}
+                        </div>
+                    </div>
+                `;
+            });
+
+            if (container.innerHTML !== html) {
+                container.innerHTML = html;
+                container.scrollTop = container.scrollHeight;
+            }
+        }
+
+        function sendOwnerReplyMessage() {
+            const input = document.getElementById('owner-reply-input');
+            const text = input.value.trim();
+            if(!text || !activeOwnerTargetUser) return;
+
+            let allBearChats = JSON.parse(localStorage.getItem('dho_bear_chats_db') || "{}");
+            let key = `bear_chat_${activeOwnerTargetUser}`;
+            if(!allBearChats[key]) allBearChats[key] = [];
+
+            // Diset sender-nya adalah "Beruang" agar tampil sebagai Beruang di sisi user
+            allBearChats[key].push({ sender: "Beruang", text: text, time: Date.now() });
+            localStorage.setItem('dho_bear_chats_db', JSON.stringify(allBearChats));
+
+            input.value = "";
+            loadOwnerReplyMessages(activeOwnerTargetUser);
+        }
 
         function toggleChatSettings(btn) {
             btn.classList.add('animate-spin-gear');
@@ -966,6 +1308,7 @@
 
         function closeActiveChat() {
             document.getElementById('active-chat-room').classList.add('hidden');
+            activeChatTarget = "";
         }
 
         function clickChatHeaderTarget() {
@@ -990,16 +1333,45 @@
             const container = document.getElementById('chat-messages-container');
             let allChats = JSON.parse(localStorage.getItem('dho_block_chat_history') || "{}");
             let roomKey = getChatRoomKey(targetName);
-            let messages = allChats[roomKey] || [];
-            container.innerHTML = messages.join('');
-            container.scrollTop = container.scrollHeight;
+            let rawMessages = allChats[roomKey] || [];
+            
+            let formattedHTML = "";
+            rawMessages.forEach(msg => {
+                if (typeof msg === 'string') {
+                    formattedHTML += msg;
+                } else {
+                    let isMe = userData && msg.sender === userData.name;
+                    let alignmentClass = isMe ? "items-end" : "items-start";
+                    let bubbleColor = isMe ? "bg-blue-500 text-white text-right" : "bg-white text-slate-800 text-left border border-slate-200";
+                    
+                    formattedHTML += `
+                        <div class="flex flex-col ${alignmentClass} mb-2">
+                            <span class="text-[10px] font-bold text-slate-400 mb-0.5">${msg.sender}${isMe ? ' (Anda)' : ''}</span>
+                            <div class="${bubbleColor} p-2.5 rounded-2xl shadow-sm max-w-[80%] font-bold text-xs">
+                                ${msg.type === 'photo' ? `<img src="${msg.content}" class="rounded-xl w-32 h-32 object-cover">` : msg.content}
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+
+            if (container.innerHTML !== formattedHTML) {
+                container.innerHTML = formattedHTML;
+                container.scrollTop = container.scrollHeight;
+            }
         }
 
-        function saveMessageToDB(targetName, htmlMsg) {
+        function saveMessageToDB(targetName, senderName, content, type = 'text') {
             let allChats = JSON.parse(localStorage.getItem('dho_block_chat_history') || "{}");
             let roomKey = getChatRoomKey(targetName);
             if(!allChats[roomKey]) allChats[roomKey] = [];
-            allChats[roomKey].push(htmlMsg);
+            
+            allChats[roomKey].push({
+                sender: senderName,
+                content: content,
+                type: type,
+                timestamp: Date.now()
+            });
             localStorage.setItem('dho_block_chat_history', JSON.stringify(allChats));
         }
 
@@ -1007,38 +1379,20 @@
             const input = document.getElementById('chat-input-msg');
             const text = input.value.trim();
             if(!text) return;
-            const container = document.getElementById('chat-messages-container');
             const myName = userData ? userData.name : "Aku";
             
-            const msgHTML = `
-                <div class="flex flex-col items-end mb-2">
-                    <span class="text-[10px] font-bold text-slate-400 mb-0.5">${myName} (Anda)</span>
-                    <div class="bg-blue-500 text-white p-2.5 rounded-2xl shadow-sm max-w-[80%] font-bold text-xs text-right">${text}</div>
-                </div>
-            `;
-            container.innerHTML += msgHTML;
-            saveMessageToDB(activeChatTarget, msgHTML);
+            saveMessageToDB(activeChatTarget, myName, text, 'text');
             input.value = '';
-            container.scrollTop = container.scrollHeight;
+            loadMessagesForChat(activeChatTarget);
         }
 
         function sendPhotoMessage(input) {
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    const container = document.getElementById('chat-messages-container');
                     const myName = userData ? userData.name : "Aku";
-                    const msgHTML = `
-                        <div class="flex flex-col items-end mb-2">
-                            <span class="text-[10px] font-bold text-slate-400 mb-0.5">${myName} (Anda)</span>
-                            <div class="bg-blue-500 p-2 rounded-2xl shadow-sm max-w-[80%]">
-                                <img src="${e.target.result}" class="rounded-xl w-32 h-32 object-cover">
-                            </div>
-                        </div>
-                    `;
-                    container.innerHTML += msgHTML;
-                    saveMessageToDB(activeChatTarget, msgHTML);
-                    container.scrollTop = container.scrollHeight;
+                    saveMessageToDB(activeChatTarget, myName, e.target.result, 'photo');
+                    loadMessagesForChat(activeChatTarget);
                 }
                 reader.readAsDataURL(input.files[0]);
             }
@@ -1070,7 +1424,7 @@
                 actionHTML = `<button onclick="playSoundEffect(this); leaveGroup('${g.name}')" class="w-full bg-orange-500 text-white font-black py-3 rounded-xl shadow-md text-xs cursor-pointer">Keluar Group 🚪</button>`;
             }
 
-            actionHTML += `<button onclick="playSoundEffect(this); deleteGroup('${g.name}')" class="w-full bg-red-500 text-white font-black py-3 rounded-xl shadow-md text-xs mt-2 cursor-pointer">Hapus Group 🗑️</button>`;
+            actionHTML += `<button onclick="playSoundEffect(this); deleteGroup('${g.name}')" class="w-full bg-red-500 text-white font-black py-3 rounded-xl shadow-md text-xs mt-2 cursor-pointer">Hapus Group 🗑️️</button>`;
 
             actionContainer.innerHTML = actionHTML;
             goToScreen('group-profile-screen');
