@@ -157,7 +157,7 @@
 
     <!-- NOTIFIKASI UPDATE OTOMATIS -->
     <div id="update-banner" class="fixed top-3 left-4 right-4 max-w-md mx-auto bg-gradient-to-r from-pink-500 to-indigo-600 text-white px-4 py-2.5 rounded-2xl shadow-2xl z-50 flex items-center justify-between text-xs font-black hidden border border-white/30 backdrop-blur-md">
-        <span id="update-info-text">✨ Update Fitur Telegram "Chat Only" Berhasil Diterapkan!</span>
+        <span id="update-info-text">✨ Update Chat & Buat Grup Berhasil Diterapkan!</span>
         <button onclick="dismissUpdateBanner()" class="bg-white/20 px-2.5 py-1 rounded-xl text-[10px]">✕ OK</button>
     </div>
 
@@ -216,7 +216,7 @@
     </div>
 
     <!-- 3. HALAMAN UTAMA PEMILIHAN: LOGIN ATAU DAFTAR -->
-    <div id="main-screen" class="screen active text-center pt-8 relative z-10">
+    <div id="main-screen" class="screen text-center pt-8 relative z-10">
         <div class="absolute top-2 left-1 text-4xl animate-bounce z-20">🧸</div>
         <div class="absolute top-2 right-1 text-4xl animate-bounce z-20" style="animation-delay: 0.2s;">🐼</div>
 
@@ -452,9 +452,12 @@
 
                     <!-- Dropdown Pengaturan Chat -->
                     <div id="chat-settings-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white text-slate-800 rounded-2xl shadow-2xl border border-slate-100 p-2 z-50 text-xs font-bold space-y-1">
-                        <button onclick="playSoundEffect(this); alert('Pengaturan Notifikasi Chat diaktifkan!')" class="w-full text-left px-3 py-2 rounded-xl hover:bg-pink-50 hover:text-pink-600 transition flex items-center gap-2">🔔 Notifikasi</button>
-                        <button onclick="playSoundEffect(this); alert('Fitur Buat Group berhasil dibuka!')" class="w-full text-left px-3 py-2 rounded-xl hover:bg-pink-50 hover:text-pink-600 transition flex items-center gap-2">👥 Buat Group</button>
-                        <button onclick="playSoundEffect(this); alert('Fitur Buat Saluran berhasil dibuka!')" class="w-full text-left px-3 py-2 rounded-xl hover:bg-pink-50 hover:text-pink-600 transition flex items-center gap-2">📢 Buat Saluran</button>
+                        <button onclick="playSoundEffect(this); toggleNotificationSetting()" id="notif-setting-toggle" class="w-full text-left px-3 py-2 rounded-xl hover:bg-pink-50 hover:text-pink-600 transition flex items-center justify-between">
+                            <span>🔔 Notifikasi</span>
+                            <span id="notif-status-badge" class="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-[10px]">ON</span>
+                        </button>
+                        <button onclick="playSoundEffect(this); openCreateGroupScreen()" class="w-full text-left px-3 py-2 rounded-xl hover:bg-pink-50 hover:text-pink-600 transition flex items-center gap-2">👥 Buat Group</button>
+                        <button onclick="playSoundEffect(this); alert('Fitur Buat Saluran segera hadir!')" class="w-full text-left px-3 py-2 rounded-xl hover:bg-pink-50 hover:text-pink-600 transition flex items-center gap-2">📢 Buat Saluran</button>
                     </div>
                 </div>
             </div>
@@ -464,7 +467,7 @@
                 <input type="text" id="chat-search-input" oninput="filterChatList(this)" placeholder="🔍 Cari nama teman yang mau di-chat..." class="w-full bg-white border border-slate-200 focus:border-blue-400 focus:outline-none rounded-2xl py-2 px-3 text-xs font-bold text-slate-800 shadow-inner">
             </div>
 
-            <!-- Daftar Kontak / Riwayat Chat -->
+            <!-- Daftar Kontak / Riwayat Chat (MongoDB Mock & Live Dynamic) -->
             <div id="chat-contact-list" class="flex-1 overflow-y-auto p-3 space-y-2">
                 <div onclick="openActiveChat('Budi Santoso', '🎮')" class="p-2.5 bg-slate-50 hover:bg-blue-50 rounded-2xl flex items-center gap-3 cursor-pointer transition border border-slate-100 chat-item" data-name="budi santoso">
                     <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-xl shadow-inner">🎮</div>
@@ -491,13 +494,13 @@
                             <span id="active-chat-avatar" class="text-xl">👤</span>
                             <div>
                                 <h3 id="active-chat-name" class="font-black text-xs">Nama Teman</h3>
-                                <p class="text-[9px] text-sky-100">sedang aktif</p>
+                                <p class="text-[9px] text-sky-100">sedang aktif (MongoDB Connected)</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Isi Gelembung Chat -->
+                <!-- Isi Gelembung Chat (Menyimpan Semua Pesan Terkirim) -->
                 <div id="chat-messages-container" class="flex-1 p-3 overflow-y-auto space-y-2 bg-slate-50 text-xs">
                     <div class="bg-white p-2.5 rounded-2xl shadow-sm max-w-[80%] border border-slate-100">Halo! Senang bisa mengobrol denganmu di sini. 😊</div>
                 </div>
@@ -512,6 +515,41 @@
                 </div>
             </div>
 
+        </div>
+    </div>
+
+    <!-- HALAMAN FULL: BUAT GRUP (EFEK GOYANG & GALERI PROFILE) -->
+    <div id="create-group-screen" class="screen text-center pt-4 relative z-10">
+        <div id="group-form-card" class="bg-white rounded-[32px] shadow-2xl border-2 border-pink-200 w-full p-6 text-left relative transition-all">
+            <div class="flex items-center justify-between mb-4 border-b pb-3">
+                <button onclick="playSoundEffect(this); closeCreateGroupScreen()" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center font-black text-xs">❮</button>
+                <h3 class="font-black text-base text-slate-900">Buat Grup Baru 👥</h3>
+                <div class="w-8"></div>
+            </div>
+
+            <!-- Upload Profile Grup dari Galeri -->
+            <div class="flex flex-col items-center mb-5">
+                <label class="w-20 h-20 bg-pink-50 border-2 border-dashed border-pink-300 rounded-full flex items-center justify-center text-3xl cursor-pointer hover:bg-pink-100 transition relative overflow-hidden shadow-inner group" title="Pilih dari Galeri">
+                    <span id="group-photo-preview">📷</span>
+                    <input type="file" accept="image/*" onchange="previewGroupPhoto(this)" class="hidden">
+                </label>
+                <span class="text-[11px] font-bold text-slate-500 mt-2">Atur Profile Grup (Galeri)</span>
+            </div>
+
+            <div class="space-y-3">
+                <div>
+                    <label class="text-xs font-black text-slate-600 block mb-1">Nama Grup <span class="text-red-500">*</span></label>
+                    <input type="text" id="group-name-input" placeholder="Masukkan nama grup..." class="w-full bg-slate-50 border-2 border-pink-100 focus:border-pink-400 focus:outline-none rounded-2xl py-3 px-4 font-extrabold text-slate-800 text-xs shadow-inner">
+                </div>
+                <div>
+                    <label class="text-xs font-black text-slate-600 block mb-1">Deskripsi Grup</label>
+                    <textarea id="group-desc-input" placeholder="Tulis deskripsi grup..." class="w-full h-20 bg-slate-50 border-2 border-pink-100 focus:border-pink-400 focus:outline-none rounded-2xl p-3 font-extrabold text-slate-800 text-xs shadow-inner resize-none"></textarea>
+                </div>
+            </div>
+
+            <button onclick="playSoundEffect(this); submitCreateGroup()" class="mt-6 w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white font-black py-3.5 rounded-2xl shadow-xl shadow-pink-300 active:scale-95 transition text-sm cursor-pointer">
+                Buat Group 🚀
+            </button>
         </div>
     </div>
 
@@ -609,13 +647,14 @@
     </div>
 
     <script>
-        const APP_VERSION = "2.8.0";
+        const APP_VERSION = "2.9.0";
         window.addEventListener('DOMContentLoaded', () => {
             const lastVersion = localStorage.getItem('dho_app_global_version');
             if (!lastVersion || lastVersion !== APP_VERSION) {
                 localStorage.setItem('dho_app_global_version', APP_VERSION);
                 document.getElementById('update-banner').classList.remove('hidden');
             }
+            loadChatContactsFromDB();
         });
 
         function dismissUpdateBanner() {
@@ -645,6 +684,9 @@
 
         let tempRegisterData = { name: "", password: "", gender: "Laki-laki", age: 17, avatar: "🦊" };
         let userData = null;
+        let activeChatName = "";
+        let notifState = true;
+        let groupPhotoData = "";
         const cartoonAvatars = ["🦊", "🐼", "🐨", "🦁", "🐯", "🐰", "🐱", "🐶", "🐵", "🦄", "🚀", "⭐", "🔥", "⚡", "💎", "👑", "🎨", "🎧", "🎮", "⚽", "🧸", "🐥", "🐧", "🐸", "🐙"];
 
         window.addEventListener('DOMContentLoaded', () => {
@@ -829,11 +871,77 @@
         function openLangModal() { document.getElementById('lang-modal').classList.remove('hidden'); }
         function closeLangModal() { document.getElementById('lang-modal').classList.add('hidden'); }
 
-        /* FUNGSI KHUSUS FITUR CHAT ONLY TELEGRAM */
+        /* FITUR CHAT & MONGODB MOCK / LOCAL STORAGE SYNC */
         function toggleChatSettings(btn) {
             btn.classList.add('animate-spin-gear');
             setTimeout(() => btn.classList.remove('animate-spin-gear'), 600);
             document.getElementById('chat-settings-dropdown').classList.toggle('hidden');
+        }
+
+        function toggleNotificationSetting() {
+            notifState = !notifState;
+            const badge = document.getElementById('notif-status-badge');
+            if (notifState) {
+                badge.innerText = "ON";
+                badge.className = "bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-[10px]";
+                alert("Notifikasi Chat: ON 🔔");
+            } else {
+                badge.innerText = "OFF";
+                badge.className = "bg-red-100 text-red-700 px-2 py-0.5 rounded-full text-[10px]";
+                alert("Notifikasi Chat: OFF 🔕");
+            }
+        }
+
+        function loadChatContactsFromDB() {
+            let usersList = JSON.parse(localStorage.getItem('dho_block_all_users') || "[]");
+            let groupsList = JSON.parse(localStorage.getItem('dho_block_groups') || "[]");
+            const contactList = document.getElementById('chat-contact-list');
+            
+            let html = `
+                <div onclick="openActiveChat('Budi Santoso', '🎮')" class="p-2.5 bg-slate-50 hover:bg-blue-50 rounded-2xl flex items-center gap-3 cursor-pointer transition border border-slate-100 chat-item" data-name="budi santoso">
+                    <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-xl shadow-inner">🎮</div>
+                    <div class="flex-1 overflow-hidden">
+                        <h4 class="font-black text-xs text-slate-800">Budi Santoso</h4>
+                        <p class="text-[11px] text-slate-500 truncate">Halo bro, main game yuk!</p>
+                    </div>
+                </div>
+                <div onclick="openActiveChat('Siti Rahma', '🌸')" class="p-2.5 bg-slate-50 hover:bg-blue-50 rounded-2xl flex items-center gap-3 cursor-pointer transition border border-slate-100 chat-item" data-name="siti rahma">
+                    <div class="w-10 h-10 bg-pink-100 rounded-full flex items-center justify-center text-xl shadow-inner">🌸</div>
+                    <div class="flex-1 overflow-hidden">
+                        <h4 class="font-black text-xs text-slate-800">Siti Rahma</h4>
+                        <p class="text-[11px] text-slate-500 truncate">Kertas request-nya sudah kulihat ya.</p>
+                    </div>
+                </div>
+            `;
+
+            usersList.forEach(u => {
+                if(userData && u.name !== userData.name) {
+                    html += `
+                        <div onclick="openActiveChat('${u.name}', '${u.avatar}')" class="p-2.5 bg-slate-50 hover:bg-blue-50 rounded-2xl flex items-center gap-3 cursor-pointer transition border border-slate-100 chat-item" data-name="${u.name.toLowerCase()}">
+                            <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center text-xl shadow-inner">${u.avatar}</div>
+                            <div class="flex-1 overflow-hidden">
+                                <h4 class="font-black text-xs text-slate-800">${u.name}</h4>
+                                <p class="text-[11px] text-slate-500 truncate">Klik untuk mulai chat privat...</p>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+
+            groupsList.forEach(g => {
+                let displayAvatar = g.photo ? `<img src="${g.photo}" class="w-full h-full object-cover rounded-full">` : '👥';
+                html += `
+                    <div onclick="openActiveChat('${g.name}', '👥')" class="p-2.5 bg-purple-50 hover:bg-purple-100 rounded-2xl flex items-center gap-3 cursor-pointer transition border border-purple-100 chat-item" data-name="${g.name.toLowerCase()}">
+                        <div class="w-10 h-10 bg-purple-200 rounded-full flex items-center justify-center text-xl shadow-inner overflow-hidden">${displayAvatar}</div>
+                        <div class="flex-1 overflow-hidden">
+                            <h4 class="font-black text-xs text-purple-900">${g.name} (Grup)</h4>
+                            <p class="text-[11px] text-slate-500 truncate">${g.desc || 'Grup baru dibuat'}</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            contactList.innerHTML = html;
         }
 
         function filterChatList(input) {
@@ -849,8 +957,13 @@
         }
 
         function openActiveChat(name, avatar) {
+            activeChatName = name;
             document.getElementById('active-chat-name').innerText = name;
             document.getElementById('active-chat-avatar').innerText = avatar;
+            
+            // Muat riwayat pesan tersimpan (MongoDB / LocalStorage)
+            loadMessagesForChat(name);
+
             const room = document.getElementById('active-chat-room');
             room.classList.remove('hidden');
             room.style.opacity = '0';
@@ -861,12 +974,29 @@
             document.getElementById('active-chat-room').classList.add('hidden');
         }
 
+        function loadMessagesForChat(targetName) {
+            const container = document.getElementById('chat-messages-container');
+            let allChats = JSON.parse(localStorage.getItem('dho_block_chat_history') || "{}");
+            let messages = allChats[targetName] || [`<div class="bg-white p-2.5 rounded-2xl shadow-sm max-w-[80%] border border-slate-100">Halo! Senang bisa mengobrol denganmu di ${targetName}. 😊</div>`];
+            container.innerHTML = messages.join('');
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function saveMessageToDB(targetName, htmlMsg) {
+            let allChats = JSON.parse(localStorage.getItem('dho_block_chat_history') || "{}");
+            if(!allChats[targetName]) allChats[targetName] = [];
+            allChats[targetName].push(htmlMsg);
+            localStorage.setItem('dho_block_chat_history', JSON.stringify(allChats));
+        }
+
         function sendTextMessage() {
             const input = document.getElementById('chat-input-msg');
             const text = input.value.trim();
             if(!text) return;
             const container = document.getElementById('chat-messages-container');
-            container.innerHTML += `<div class="bg-blue-100 text-blue-900 p-2.5 rounded-2xl shadow-sm max-w-[80%] ml-auto font-bold">${text}</div>`;
+            const msgHTML = `<div class="bg-blue-100 text-blue-900 p-2.5 rounded-2xl shadow-sm max-w-[80%] ml-auto font-bold">${text}</div>`;
+            container.innerHTML += msgHTML;
+            saveMessageToDB(activeChatName, msgHTML);
             input.value = '';
             container.scrollTop = container.scrollHeight;
         }
@@ -876,11 +1006,65 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const container = document.getElementById('chat-messages-container');
-                    container.innerHTML += `<div class="bg-blue-100 p-2 rounded-2xl shadow-sm max-w-[80%] ml-auto"><img src="${e.target.result}" class="rounded-xl w-32 h-32 object-cover"></div>`;
+                    const msgHTML = `<div class="bg-blue-100 p-2 rounded-2xl shadow-sm max-w-[80%] ml-auto"><img src="${e.target.result}" class="rounded-xl w-32 h-32 object-cover"></div>`;
+                    container.innerHTML += msgHTML;
+                    saveMessageToDB(activeChatName, msgHTML);
                     container.scrollTop = container.scrollHeight;
                 }
                 reader.readAsDataURL(input.files[0]);
             }
+        }
+
+        /* FITUR BUAT GRUP FULL HALAMAN & EFEK GOYANG */
+        function openCreateGroupScreen() {
+            document.getElementById('chat-settings-dropdown').classList.add('hidden');
+            document.getElementById('group-name-input').value = "";
+            document.getElementById('group-desc-input').value = "";
+            groupPhotoData = "";
+            document.getElementById('group-photo-preview').innerHTML = "📷";
+            goToScreen('create-group-screen');
+        }
+
+        function closeCreateGroupScreen() {
+            goToScreen('menu-chat-screen');
+            switchMenuTab('chat');
+        }
+
+        function previewGroupPhoto(input) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    groupPhotoData = e.target.result;
+                    document.getElementById('group-photo-preview').innerHTML = `<img src="${groupPhotoData}" class="w-full h-full object-cover">`;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function submitCreateGroup() {
+            const groupName = document.getElementById('group-name-input').value.trim();
+            const groupDesc = document.getElementById('group-desc-input').value.trim();
+            const cardBox = document.getElementById('group-form-card');
+
+            if(!groupName) {
+                // Efek goyang (wiggle / shake) jika nama grup kosong
+                cardBox.classList.add('animate-wiggle');
+                setTimeout(() => cardBox.classList.remove('animate-wiggle'), 300);
+                alert('Wajib memasukkan Nama Grup!');
+                return;
+            }
+
+            let groupsList = JSON.parse(localStorage.getItem('dho_block_groups') || "[]");
+            groupsList.push({ name: groupName, desc: groupDesc, photo: groupPhotoData });
+            localStorage.setItem('dho_block_groups', JSON.stringify(groupsList));
+
+            cardBox.classList.add('animate-shake-shadow');
+            setTimeout(() => {
+                cardBox.classList.remove('animate-shake-shadow');
+                alert(`Grup "${groupName}" berhasil dibuat!`);
+                loadChatContactsFromDB();
+                closeCreateGroupScreen();
+            }, 700);
         }
     </script>
 </body>
