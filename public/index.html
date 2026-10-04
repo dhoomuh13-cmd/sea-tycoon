@@ -145,37 +145,36 @@
 
     <!-- NOTIFIKASI UPDATE -->
     <div id="update-banner" class="fixed top-3 left-4 right-4 max-w-md mx-auto bg-gradient-to-r from-pink-500 to-indigo-600 text-white px-4 py-2.5 rounded-2xl shadow-2xl z-50 flex items-center justify-between text-xs font-black hidden border border-white/30 backdrop-blur-md">
-        <span id="update-info-text">✨ Fitur Baru: Spin Harian, Leaderboard & Saldo Otomatis Ditambahkan!</span>
-        <button onclick="dismissUpdateBanner()" class="bg-white/20 px-2.5 py-1 rounded-xl text-[10px]">✕ OK</button>
+        <span id="update-info-text">✨ Fitur Baru: Spin Harian, Leaderboard & Saldo Otomatis Ditambahkan[span_3](start_span)[span_3](end_span)!</span>
+        <button onclick="dismissUpdateBanner()" class="bg-white/20 px-2.5 py-1 rounded-xl text-[10px]">✕ OK[span_4](start_span)[span_4](end_span)</button>
     </div>
 
     <!-- WIDGET SALDO DI POJOK KANAN ATAS -->
     <div id="top-saldo-widget" class="fixed top-4 right-4 z-45 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-2xl shadow-xl border-2 border-pink-200 flex items-center gap-2 font-black text-xs text-slate-800 hidden">
-        <span>💰</span>
+        <span>💰[span_5](start_span)[span_5](end_span)</span>
         <div>
-            <p class="text-[9px] text-slate-400 uppercase tracking-wider">Saldo Anda</p>
-            <p id="user-saldo-display" class="text-pink-600">Rp 0</p>
+            <p class="text-[9px] text-slate-400 uppercase tracking-wider">Saldo Anda[span_6](start_span)[span_6](end_span)</p>
+            <p id="user-saldo-display" class="text-pink-600">Rp 0[span_7](start_span)[span_7](end_span)</p>
         </div>
     </div>
 
     <!-- HAMBURGER MENU (TITIK TIGA DI KIRI ATAS) -->
     <div class="fixed top-4 left-4 z-40">
         <button onclick="playSoundEffect(this); toggleHamburgerMenu()" class="w-11 h-11 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl flex items-center justify-center text-xl font-black text-slate-800 border-2 border-pink-100 active:scale-95 transition cursor-pointer">
-            ⋮
+            ⋮[span_8](start_span)[span_8](end_span)
         </button>
         <div id="hamburger-dropdown" class="hidden absolute left-0 mt-2 w-56 bg-white rounded-2xl shadow-2xl border-2 border-pink-100 p-2.5 z-50 text-left space-y-1.5 dropdown-animate">
             <button onclick="playSoundEffect(this); openThemeModal(); toggleHamburgerMenu();" class="w-full text-left px-3 py-2.5 rounded-xl font-black text-xs text-slate-800 bg-slate-50 hover:bg-pink-50 hover:text-pink-600 transition flex items-center gap-2.5 shadow-sm">
-                <span>🎨</span> <span>Atur Tema</span>
+                <span>🎨[span_9](start_span)[span_9](end_span)</span> <span>Atur Tema[span_10](start_span)[span_10](end_span)</span>
             </button>
             <button onclick="playSoundEffect(this); openLangModal(); toggleHamburgerMenu();" class="w-full text-left px-3 py-2.5 rounded-xl font-black text-xs text-slate-800 bg-slate-50 hover:bg-pink-50 hover:text-pink-600 transition flex items-center gap-2.5 shadow-sm">
-                <span>🌐</span> <span>Pilih Bahasa</span>
+                <span>🌐[span_11](start_span)[span_11](end_span)</span> <span>Pilih Bahasa[span_12](start_span)[span_12](end_span)</span>
             </button>
-            <!-- FITUR BARU SESUAI PERMINTAAN -->
             <button onclick="playSoundEffect(this); openSpinScreen(); toggleHamburgerMenu();" class="w-full text-left px-3 py-2.5 rounded-xl font-black text-xs text-slate-800 bg-gradient-to-r from-pink-50 to-purple-50 hover:from-pink-100 hover:to-purple-100 text-pink-600 transition flex items-center gap-2.5 shadow-sm border border-pink-200">
-                <span>🎡</span> <span class="font-black">Spin Harian</span>
+                <span>🎡[span_13](start_span)[span_13](end_span)</span> <span class="font-black">Spin Harian[span_14](start_span)[span_14](end_span)</span>
             </button>
             <button onclick="playSoundEffect(this); openLeaderboardScreen(); toggleHamburgerMenu();" class="w-full text-left px-3 py-2.5 rounded-xl font-black text-xs text-slate-800 bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 text-blue-600 transition flex items-center gap-2.5 shadow-sm border border-blue-200">
-                <span>🏆</span> <span class="font-black">Leaderboard Harian</span>
+                <span>🏆[span_15](start_span)[span_15](end_span)</span> <span class="font-black">Leaderboard Harian[span_16](start_span)[span_16](end_span)</span>
             </button>
         </div>
     </div>
@@ -184,18 +183,18 @@
     <div id="loading-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-gradient-to-b from-[#4ea8de] to-[#90e0ef] transition-opacity duration-800">
         <div class="relative mb-6 text-center z-10">
             <div class="flex justify-center gap-12 mb-[-12px] relative z-10">
-                <span class="text-3xl animate-bounce">🧸</span>
-                <span class="text-3xl animate-bounce" style="animation-delay: 0.2s;">🐼</span>
+                <span class="text-3xl animate-bounce">🧸[span_17](start_span)[span_17](end_span)</span>
+                <span class="text-3xl animate-bounce" style="animation-delay: 0.2s;">🐼[span_18](start_span)[span_18](end_span)</span>
             </div>
             <div class="bg-white/90 backdrop-blur-md px-6 py-2.5 rounded-3xl shadow-xl border-2 border-white">
                 <h1 class="text-3xl font-black tracking-wide">
-                    <span class="gradient-text-1">Don't</span> <span class="gradient-text-2">Block</span> <span class="gradient-text-1">Me</span>
+                    <span class="gradient-text-1">Don't[span_19](start_span)[span_19](end_span)</span> <span class="gradient-text-2">Block[span_20](start_span)[span_20](end_span)</span> <span class="gradient-text-1">Me[span_21](start_span)[span_21](end_span)</span>
                 </h1>
             </div>
         </div>
         <div class="w-full max-w-xs paper-bg rounded-[28px] p-8 shadow-2xl relative border-2 border-slate-100 transform rotate-1 z-10 animate-shake-shadow">
             <div class="text-center my-6">
-                <p class="text-2xl font-black text-slate-800 tracking-wide">Memuat Sistem...</p>
+                <p class="text-2xl font-black text-slate-800 tracking-wide">Memuat Sistem...[span_22](start_span)[span_22](end_span)</p>
                 <div class="flex justify-center items-center gap-2.5 mt-5">
                     <span class="w-3.5 h-3.5 bg-blue-500 rounded-full animate-bounce shadow-sm"></span>
                     <span class="w-3.5 h-3.5 bg-pink-500 rounded-full animate-bounce shadow-sm" style="animation-delay: 0.2s;"></span>
@@ -208,8 +207,8 @@
     <!-- 2. TRANSISI LOADING -->
     <div id="transition-loading" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-black/40 backdrop-blur-md hidden opacity-0 transition-opacity duration-500">
         <div class="bg-white px-8 py-8 rounded-[32px] shadow-2xl border-4 border-pink-200 flex flex-col items-center animate-shake-shadow">
-            <span class="text-6xl animate-bounce mb-4">🚀</span>
-            <p id="transition-text" class="text-xl font-black text-slate-800 mb-3 tracking-wide">Memproses...</p>
+            <span class="text-6xl animate-bounce mb-4">🚀[span_23](start_span)[span_23](end_span)</span>
+            <p id="transition-text" class="text-xl font-black text-slate-800 mb-3 tracking-wide">Memproses...[span_24](start_span)[span_24](end_span)</p>
             <div class="w-36 h-2 bg-slate-100 rounded-full overflow-hidden">
                 <div class="h-full bg-gradient-to-r from-pink-500 to-blue-500 animate-pulse w-full"></div>
             </div>
@@ -218,149 +217,149 @@
 
     <!-- 3. HALAMAN UTAMA -->
     <div id="main-screen" class="screen text-center pt-8 relative z-10">
-        <div class="absolute top-2 left-1 text-4xl animate-bounce z-20">🧸</div>
-        <div class="absolute top-2 right-1 text-4xl animate-bounce z-20" style="animation-delay: 0.2s;">🐼</div>
+        <div class="absolute top-2 left-1 text-4xl animate-bounce z-20">🧸[span_25](start_span)[span_25](end_span)</div>
+        <div class="absolute top-2 right-1 text-4xl animate-bounce z-20" style="animation-delay: 0.2s;">🐼[span_26](start_span)[span_26](end_span)</div>
         <div class="relative mb-5 w-full bg-white/90 backdrop-blur-md pt-5 pb-4 rounded-[32px] shadow-2xl border-2 border-white">
             <h1 class="text-4xl sm:text-5xl font-black tracking-wide leading-tight drop-shadow-sm">
-                <span class="gradient-text-1">Don't</span> <br>
-                <span class="gradient-text-2">Block</span> <span class="gradient-text-1">Me</span>
+                <span class="gradient-text-1">Don't[span_27](start_span)[span_27](end_span)</span> <br>
+                <span class="gradient-text-2">Block[span_28](start_span)[span_28](end_span)</span> <span class="gradient-text-1">Me[span_29](start_span)[span_29](end_span)</span>
             </h1>
             <div class="inline-block mt-3 bg-white px-5 py-1.5 rounded-full shadow-md border border-pink-100">
-                <p class="text-xs sm:text-sm font-extrabold text-slate-600 tracking-wider">Silakan Pilih Akses Akunmu</p>
+                <p class="text-xs sm:text-sm font-extrabold text-slate-600 tracking-wider">Silakan Pilih Akses Akunmu[span_30](start_span)[span_30](end_span)</p>
             </div>
         </div>
         <div class="bg-white rounded-[32px] p-6 shadow-2xl border-[3px] border-dashed border-pink-200 relative w-full space-y-4">
             <button onclick="playSoundEffect(this); triggerTransition('login-screen', 'Memuat Halaman Login...')" class="w-full bg-gradient-to-r from-cyan-400 to-blue-500 text-white font-black py-4 px-6 rounded-2xl shadow-xl shadow-blue-200 transition-all transform active:scale-95 text-base tracking-wide cursor-pointer flex items-center justify-center gap-2">
-                <span>🔑</span> <span>Login (Sudah Punya Akun)</span>
+                <span>🔑[span_31](start_span)[span_31](end_span)</span> <span>Login (Sudah Punya Akun)[span_32](start_span)[span_32](end_span)</span>
             </button>
             <button onclick="playSoundEffect(this); triggerTransition('name-screen', 'Memuat Halaman Pendaftaran...')" class="w-full bg-gradient-to-r from-[#ff4f8b] to-[#ff2a6d] text-white font-black py-4 px-6 rounded-2xl shadow-xl shadow-pink-300 transition-all transform active:scale-95 text-base tracking-wide cursor-pointer flex items-center justify-center gap-2">
-                <span>✨</span> <span>Daftar (Belum Punya Akun)</span>
+                <span>✨[span_33](start_span)[span_33](end_span)</span> <span>Daftar (Belum Punya Akun)[span_34](start_span)[span_34](end_span)</span>
             </button>
         </div>
     </div>
 
     <!-- 4. HALAMAN LOGIN -->
     <div id="login-screen" class="screen text-center pt-8 relative z-10">
-        <button onclick="playSoundEffect(this); goToScreen('main-screen')" class="absolute -top-3 left-0 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center font-black text-slate-700 border-2 border-pink-100 active:scale-95 transition z-30 cursor-pointer">❮</button>
+        <button onclick="playSoundEffect(this); goToScreen('main-screen')" class="absolute -top-3 left-0 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center font-black text-slate-700 border-2 border-pink-100 active:scale-95 transition z-30 cursor-pointer">❮[span_35](start_span)[span_35](end_span)</button>
         <div class="relative mb-4 w-full bg-white/90 backdrop-blur-md pt-3 pb-3 rounded-[28px] shadow-xl border border-white">
             <h1 class="text-2xl font-black">
-                <span class="gradient-text-1">Login</span> <span class="gradient-text-2">Akun</span>
+                <span class="gradient-text-1">Login[span_36](start_span)[span_36](end_span)</span> <span class="gradient-text-2">Akun[span_37](start_span)[span_37](end_span)</span>
             </h1>
         </div>
         <div class="bg-white rounded-[28px] p-6 shadow-2xl border-2 border-pink-100 w-full relative space-y-4 text-left">
             <div>
-                <label class="text-xs font-black text-slate-600 block mb-1">Masukan Nama:</label>
+                <label class="text-xs font-black text-slate-600 block mb-1">Masukan Nama:[span_38](start_span)[span_38](end_span)</label>
                 <input type="text" id="login-username" placeholder="Nama akunmu..." class="w-full bg-slate-50 border-2 border-pink-100 focus:border-pink-400 focus:outline-none rounded-2xl py-3.5 px-4 font-extrabold text-slate-800 placeholder-slate-400 text-sm shadow-inner">
             </div>
             <div>
-                <label class="text-xs font-black text-slate-600 block mb-1">Masukan Password:</label>
+                <label class="text-xs font-black text-slate-600 block mb-1">Masukan Password:[span_39](start_span)[span_39](end_span)</label>
                 <input type="password" id="login-password" placeholder="Password akun..." class="w-full bg-slate-50 border-2 border-pink-100 focus:border-pink-400 focus:outline-none rounded-2xl py-3.5 px-4 font-extrabold text-slate-800 placeholder-slate-400 text-sm shadow-inner">
             </div>
             <button onclick="playSoundEffect(this); handleLogin()" class="w-full bg-gradient-to-r from-cyan-400 to-blue-500 text-white font-black py-4 px-6 rounded-2xl shadow-xl shadow-blue-200 transition-all transform active:scale-95 text-base tracking-wide flex items-center justify-center gap-2 cursor-pointer mt-2">
-                <span>Login Akun</span> <span class="text-lg">➔</span>
+                <span>Login Akun[span_40](start_span)[span_40](end_span)</span> <span class="text-lg">➔[span_41](start_span)[span_41](end_span)</span>
             </button>
         </div>
     </div>
 
     <!-- 5. HALAMAN DAFTAR: NAMA -->
     <div id="name-screen" class="screen text-center pt-8 relative z-10">
-        <button onclick="playSoundEffect(this); goToScreen('main-screen')" class="absolute -top-3 left-0 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center font-black text-slate-700 border-2 border-pink-100 active:scale-95 transition z-30 cursor-pointer">❮</button>
+        <button onclick="playSoundEffect(this); goToScreen('main-screen')" class="absolute -top-3 left-0 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center font-black text-slate-700 border-2 border-pink-100 active:scale-95 transition z-30 cursor-pointer">❮[span_42](start_span)[span_42](end_span)</button>
         <div class="relative mb-4 w-full bg-white/90 backdrop-blur-md pt-3 pb-3 rounded-[28px] shadow-xl border border-white">
             <h1 class="text-2xl font-black">
-                <span class="gradient-text-1">Daftar</span> <span class="gradient-text-2">Akun Baru</span>
+                <span class="gradient-text-1">Daftar[span_43](start_span)[span_43](end_span)</span> <span class="gradient-text-2">Akun Baru[span_44](start_span)[span_44](end_span)</span>
             </h1>
         </div>
         <div class="relative w-full my-3 flex justify-center items-center">
             <div class="bg-pink-100/95 border-2 border-pink-200 px-6 py-3 rounded-[28px] shadow-lg relative transform -rotate-2 max-w-[240px]">
-                <p class="text-xs font-extrabold text-slate-600 tracking-wider">langkah 1/4</p>
-                <p class="text-xl font-black text-[#ff4f8b] tracking-wide">Siapa Namamu?</p>
+                <p class="text-xs font-extrabold text-slate-600 tracking-wider">langkah 1/4[span_45](start_span)[span_45](end_span)</p>
+                <p class="text-xl font-black text-[#ff4f8b] tracking-wide">Siapa Namamu?[span_46](start_span)[span_46](end_span)</p>
             </div>
         </div>
         <div class="bg-white rounded-[28px] p-5 shadow-2xl border-2 border-pink-100 w-full relative mt-2">
             <div class="relative flex items-center">
                 <input type="text" id="username-input" maxlength="15" oninput="updateCharCount(this)" placeholder="nama..." class="w-full bg-slate-50 border-2 border-pink-100 focus:border-pink-400 focus:outline-none rounded-2xl py-4 px-4 font-extrabold text-slate-800 placeholder-slate-400 text-base shadow-inner">
-                <span id="char-count" class="absolute right-4 text-xs font-bold text-slate-400">0/15</span>
+                <span id="char-count" class="absolute right-4 text-xs font-bold text-slate-400">0/15[span_47](start_span)[span_47](end_span)</span>
             </div>
             <button onclick="playSoundEffect(this); submitName()" class="mt-4 w-full bg-gradient-to-r from-cyan-400 to-blue-500 text-white font-black py-4 px-6 rounded-2xl shadow-xl shadow-blue-200 transition-all transform active:scale-95 text-base tracking-wide flex items-center justify-center gap-2 cursor-pointer">
-                <span>Lanjut (Buat Password)</span> <span class="text-lg">➔</span>
+                <span>Lanjut (Buat Password)[span_48](start_span)[span_48](end_span)</span> <span class="text-lg">➔[span_49](start_span)[span_49](end_span)</span>
             </button>
         </div>
     </div>
 
     <!-- 5.1. PASSWORD -->
     <div id="password-screen" class="screen text-center pt-8 relative z-10">
-        <button onclick="playSoundEffect(this); goToScreen('name-screen')" class="absolute -top-3 left-0 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center font-black text-slate-700 border-2 border-pink-100 active:scale-95 transition z-30 cursor-pointer">❮</button>
+        <button onclick="playSoundEffect(this); goToScreen('name-screen')" class="absolute -top-3 left-0 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center font-black text-slate-700 border-2 border-pink-100 active:scale-95 transition z-30 cursor-pointer">❮[span_50](start_span)[span_50](end_span)</button>
         <div class="relative mb-4 w-full bg-white/90 backdrop-blur-md pt-3 pb-3 rounded-[28px] shadow-xl border border-white">
             <h1 class="text-2xl font-black">
-                <span class="gradient-text-1">Daftar</span> <span class="gradient-text-2">Akun Baru</span>
+                <span class="gradient-text-1">Daftar[span_51](start_span)[span_51](end_span)</span> <span class="gradient-text-2">Akun Baru[span_52](start_span)[span_52](end_span)</span>
             </h1>
         </div>
         <div class="relative w-full my-3 flex justify-center items-center">
             <div class="bg-sky-100/95 border-2 border-sky-200 px-6 py-3 rounded-[28px] shadow-lg relative transform rotate-1 max-w-[260px]">
-                <p class="text-xs font-extrabold text-slate-600 tracking-wider">langkah 2/4</p>
-                <p class="text-xl font-black text-[#00b4d8] tracking-wide">Buat Password Aman</p>
+                <p class="text-xs font-extrabold text-slate-600 tracking-wider">langkah 2/4[span_53](start_span)[span_53](end_span)</p>
+                <p class="text-xl font-black text-[#00b4d8] tracking-wide">Buat Password Aman[span_54](start_span)[span_54](end_span)</p>
             </div>
         </div>
         <div class="bg-white rounded-[28px] p-5 shadow-2xl border-2 border-pink-100 w-full relative mt-2 space-y-3 text-left">
             <div>
-                <label class="text-xs font-black text-slate-600 block mb-1">Password Baru:</label>
+                <label class="text-xs font-black text-slate-600 block mb-1">Password Baru:[span_55](start_span)[span_55](end_span)</label>
                 <input type="password" id="reg-password" placeholder="Minimal 4 karakter..." class="w-full bg-slate-50 border-2 border-pink-100 focus:border-pink-400 focus:outline-none rounded-2xl py-3.5 px-4 font-extrabold text-slate-800 placeholder-slate-400 text-sm shadow-inner">
             </div>
             <button onclick="playSoundEffect(this); submitPassword()" class="mt-4 w-full bg-gradient-to-r from-cyan-400 to-blue-500 text-white font-black py-4 px-6 rounded-2xl shadow-xl shadow-blue-200 transition-all transform active:scale-95 text-base tracking-wide flex items-center justify-center gap-2 cursor-pointer">
-                <span>Lanjut (Pilih Gender)</span> <span class="text-lg">➔</span>
+                <span>Lanjut (Pilih Gender)[span_56](start_span)[span_56](end_span)</span> <span class="text-lg">➔[span_57](start_span)[span_57](end_span)</span>
             </button>
         </div>
     </div>
 
     <!-- 6. GENDER -->
     <div id="gender-screen" class="screen text-center pt-8 relative z-10">
-        <button onclick="playSoundEffect(this); goToScreen('password-screen')" class="absolute -top-3 left-0 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center font-black text-slate-700 border-2 border-pink-100 active:scale-95 transition z-30 cursor-pointer">❮</button>
+        <button onclick="playSoundEffect(this); goToScreen('password-screen')" class="absolute -top-3 left-0 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center font-black text-slate-700 border-2 border-pink-100 active:scale-95 transition z-30 cursor-pointer">❮[span_58](start_span)[span_58](end_span)</button>
         <div class="relative mb-3 w-full bg-white/90 backdrop-blur-md pt-3 pb-3 rounded-[28px] shadow-xl border border-white">
             <h1 class="text-2xl font-black">
-                <span class="gradient-text-1">Daftar</span> <span class="gradient-text-2">Akun Baru</span>
+                <span class="gradient-text-1">Daftar[span_59](start_span)[span_59](end_span)</span> <span class="gradient-text-2">Akun Baru[span_60](start_span)[span_60](end_span)</span>
             </h1>
         </div>
         <div class="my-2">
-            <p class="text-base font-black text-slate-800 drop-shadow-md">langkah 3/4 👋</p>
+            <p class="text-base font-black text-slate-800 drop-shadow-md">langkah 3/4 👋[span_61](start_span)[span_61](end_span)</p>
         </div>
         <div class="bg-white rounded-[24px] py-3.5 px-6 shadow-lg border-2 border-white mb-4 inline-block mx-auto">
-            <p class="text-xl font-black text-slate-900 tracking-tight">pilih jenis kelaminmu</p>
+            <p class="text-xl font-black text-slate-900 tracking-tight">pilih jenis kelaminmu[span_62](start_span)[span_62](end_span)</p>
         </div>
         <div class="grid grid-cols-2 gap-4 w-full">
             <div onclick="playSoundEffect(this); selectGender('Laki-laki')" class="bg-white rounded-[28px] p-4 shadow-xl border-2 border-pink-100 flex flex-col items-center cursor-pointer transition transform active:scale-95 hover:border-pink-300">
-                <div class="w-full h-28 flex items-center justify-center bg-amber-50/60 rounded-2xl mb-2 text-4xl">👦</div>
-                <span class="font-black text-slate-800 text-sm">Laki-laki</span>
+                <div class="w-full h-28 flex items-center justify-center bg-amber-50/60 rounded-2xl mb-2 text-4xl">👦[span_63](start_span)[span_63](end_span)</div>
+                <span class="font-black text-slate-800 text-sm">Laki-laki[span_64](start_span)[span_64](end_span)</span>
             </div>
             <div onclick="playSoundEffect(this); selectGender('Perempuan')" class="bg-white rounded-[28px] p-4 shadow-xl border-2 border-pink-100 flex flex-col items-center cursor-pointer transition transform active:scale-95 hover:border-pink-300">
-                <div class="w-full h-28 flex items-center justify-center bg-pink-50/60 rounded-2xl mb-2 text-4xl">👧</div>
-                <span class="font-black text-slate-800 text-sm">Perempuan</span>
+                <div class="w-full h-28 flex items-center justify-center bg-pink-50/60 rounded-2xl mb-2 text-4xl">👧[span_65](start_span)[span_65](end_span)</div>
+                <span class="font-black text-slate-800 text-sm">Perempuan[span_66](start_span)[span_66](end_span)</span>
             </div>
         </div>
     </div>
 
     <!-- 7. UMUR -->
     <div id="age-screen" class="screen text-center pt-8 relative z-10">
-        <button onclick="playSoundEffect(this); goToScreen('gender-screen')" class="absolute -top-3 left-0 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center font-black text-slate-700 border-2 border-pink-100 active:scale-95 transition z-30 cursor-pointer">❮</button>
+        <button onclick="playSoundEffect(this); goToScreen('gender-screen')" class="absolute -top-3 left-0 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center font-black text-slate-700 border-2 border-pink-100 active:scale-95 transition z-30 cursor-pointer">❮[span_67](start_span)[span_67](end_span)</button>
         <div class="relative mb-3 w-full bg-white/90 backdrop-blur-md pt-3 pb-3 rounded-[28px] shadow-xl border border-white">
             <h1 class="text-2xl font-black">
-                <span class="gradient-text-1">Daftar</span> <span class="gradient-text-2">Akun Baru</span>
+                <span class="gradient-text-1">Daftar[span_68](start_span)[span_68](end_span)</span> <span class="gradient-text-2">Akun Baru[span_69](start_span)[span_69](end_span)</span>
             </h1>
         </div>
         <div class="bg-white rounded-[24px] py-3.5 px-6 shadow-lg border-2 border-white mb-3 inline-block mx-auto">
-            <p class="text-lg font-black text-slate-900">langkah 4/4 - berapa umurmu?</p>
+            <p class="text-lg font-black text-slate-900">langkah 4/4 - berapa umurmu?[span_70](start_span)[span_70](end_span)</p>
         </div>
         <div id="age-card-box" class="bg-white rounded-[32px] p-5 shadow-2xl border-2 border-pink-100 w-full relative transition-all">
-            <p class="text-xs font-bold text-slate-400 mb-2">Geser angka di bawah ini 👇</p>
+            <p class="text-xs font-bold text-slate-400 mb-2">Geser angka di bawah ini 👇[span_71](start_span)[span_71](end_span)</p>
             <div class="relative flex items-center justify-center my-4">
                 <div class="absolute w-24 h-14 bg-gradient-to-r from-pink-100 to-cyan-100 border-2 border-pink-300 rounded-2xl shadow-inner pointer-events-none z-10"></div>
                 <div id="age-scroller" class="age-picker-container w-full h-36 overflow-y-scroll flex flex-col items-center py-12 snap-y snap-mandatory relative z-20" onscroll="detectScrolledAge()"></div>
             </div>
             <div class="bg-slate-50 rounded-2xl py-2 mb-4 border border-slate-100">
-                <p class="text-xs font-bold text-slate-500">Umur Terpilih:</p>
-                <p id="selected-age-display" class="text-2xl font-black text-[#ff4f8b]">17 Tahun</p>
+                <p class="text-xs font-bold text-slate-500">Umur Terpilih:[span_72](start_span)[span_72](end_span)</p>
+                <p id="selected-age-display" class="text-2xl font-black text-[#ff4f8b]">17 Tahun[span_73](start_span)[span_73](end_span)</p>
             </div>
             <button onclick="playSoundEffect(this); triggerAgeSubmitEffect()" class="w-full bg-gradient-to-r from-cyan-400 to-blue-500 text-white font-black py-4 px-6 rounded-2xl shadow-xl shadow-blue-200 transition-all transform active:scale-95 text-base tracking-wide flex items-center justify-center gap-2 cursor-pointer">
-                <span>Lanjut Buat Profil ➔</span>
+                <span>Lanjut Buat Profil ➔[span_74](start_span)[span_74](end_span)</span>
             </button>
         </div>
     </div>
@@ -369,23 +368,23 @@
     <div id="profile-preview-screen" class="screen text-center pt-8 relative z-10">
         <div class="relative mb-3 w-full bg-white/90 backdrop-blur-md pt-3 pb-3 rounded-[28px] shadow-xl border border-white">
             <h1 class="text-2xl font-black">
-                <span class="gradient-text-1">Profil</span> <span class="gradient-text-2">Akun Kamu</span>
+                <span class="gradient-text-1">Profil[span_75](start_span)[span_75](end_span)</span> <span class="gradient-text-2">Akun Kamu[span_76](start_span)[span_76](end_span)</span>
             </h1>
         </div>
         <div class="bg-white rounded-[32px] p-6 shadow-2xl border-2 border-pink-200 w-full relative">
             <div class="w-24 h-24 mx-auto bg-pink-100 rounded-full flex items-center justify-center text-5xl border-4 border-white shadow-md mb-3 relative">
-                <span id="preview-avatar-icon">🦊</span>
+                <span id="preview-avatar-icon">🦊[span_77](start_span)[span_77](end_span)</span>
             </div>
             <button onclick="playSoundEffect(this); openAvatarModal()" class="mb-4 bg-gradient-to-r from-yellow-400 to-orange-400 text-slate-900 font-black text-xs py-2 px-4 rounded-xl shadow-md active:scale-95 transition cursor-pointer inline-flex items-center gap-1.5">
-                <span>✨ Ubah Profile (Pilih Karakter)</span>
+                <span>✨ Ubah Profile (Pilih Karakter)[span_78](start_span)[span_78](end_span)</span>
             </button>
             <div class="bg-slate-50 rounded-2xl p-4 text-left border border-slate-200 space-y-2 mb-5">
-                <div class="flex justify-between border-b pb-1.5"><span class="text-xs font-bold text-slate-500">Nama :</span><span id="res-name" class="text-xs font-black text-slate-800">Dhoo</span></div>
-                <div class="flex justify-between border-b pb-1.5"><span class="text-xs font-bold text-slate-500">Umur :</span><span id="res-age" class="text-xs font-black text-slate-800">17 Tahun</span></div>
-                <div class="flex justify-between"><span class="text-xs font-bold text-slate-500">Gender :</span><span id="res-gender" class="text-xs font-black text-slate-800">Laki-laki</span></div>
+                <div class="flex justify-between border-b pb-1.5"><span class="text-xs font-bold text-slate-500">Nama :[span_79](start_span)[span_79](end_span)</span><span id="res-name" class="text-xs font-black text-slate-800">Dhoo[span_80](start_span)[span_80](end_span)</span></div>
+                <div class="flex justify-between border-b pb-1.5"><span class="text-xs font-bold text-slate-500">Umur :[span_81](start_span)[span_81](end_span)</span><span id="res-age" class="text-xs font-black text-slate-800">17 Tahun[span_82](start_span)[span_82](end_span)</span></div>
+                <div class="flex justify-between"><span class="text-xs font-bold text-slate-500">Gender :[span_83](start_span)[span_83](end_span)</span><span id="res-gender" class="text-xs font-black text-slate-800">Laki-laki[span_84](start_span)[span_84](end_span)</span></div>
             </div>
             <button onclick="playSoundEffect(this); triggerFinalAccountCreation()" class="w-full bg-gradient-to-r from-[#ff4f8b] to-[#ff2a6d] text-white font-black py-4 px-6 rounded-2xl shadow-xl shadow-pink-300 transition-all transform active:scale-95 text-base tracking-wide cursor-pointer">
-                <span>Simpan Akun Permanen 🔒</span>
+                <span>Simpan Akun Permanen 🔒[span_85](start_span)[span_85](end_span)</span>
             </button>
         </div>
     </div>
@@ -394,26 +393,26 @@
     <div id="menu-beranda-screen" class="screen text-center pt-8 relative z-10">
         <div class="relative mb-4 w-full bg-white/90 backdrop-blur-md pt-4 pb-3 rounded-[28px] shadow-xl border border-white">
             <h1 class="text-3xl font-black">
-                <span class="gradient-text-1">Game</span> <span class="gradient-text-2">Dashboard</span>
+                <span class="gradient-text-1">Game[span_86](start_span)[span_86](end_span)</span> <span class="gradient-text-2">Dashboard[span_87](start_span)[span_87](end_span)</span>
             </h1>
-            <p class="text-xs font-bold text-slate-500 mt-1">Selamat datang kembali!</p>
+            <p class="text-xs font-bold text-slate-500 mt-1">Selamat datang kembali[span_88](start_span)[span_88](end_span)!</p>
         </div>
         <div class="bg-white rounded-[32px] p-6 shadow-2xl border-2 border-pink-100 w-full mb-4">
             <div class="flex items-center gap-4 mb-4 text-left">
                 <div class="w-14 h-14 bg-pink-100 rounded-2xl flex items-center justify-center text-3xl shadow-inner relative" id="home-avatar">
-                    🦊
+                    🦊[span_89](start_span)[span_89](end_span)
                 </div>
                 <div>
                     <div class="flex items-center gap-2 flex-wrap">
-                        <h3 id="home-username" class="text-lg font-black text-slate-900">User Dhoo</h3>
-                        <span id="home-premium-badge" class="hidden bg-gradient-to-r from-amber-400 to-orange-500 text-white text-[9px] font-black px-2 py-0.5 rounded-full shadow-sm animate-pulse">👑 PREMIUM</span>
+                        <h3 id="home-username" class="text-lg font-black text-slate-900">User Dhoo[span_90](start_span)[span_90](end_span)</h3>
+                        <span id="home-premium-badge" class="hidden bg-gradient-to-r from-amber-400 to-orange-500 text-white text-[9px] font-black px-2 py-0.5 rounded-full shadow-sm animate-pulse">👑 PREMIUM[span_91](start_span)[span_91](end_span)</span>
                     </div>
-                    <p class="text-xs font-bold text-pink-500">Status: Akun Aktif Permanen</p>
+                    <p class="text-xs font-bold text-pink-500">Status: Akun Aktif Permanen[span_92](start_span)[span_92](end_span)</p>
                 </div>
             </div>
             <div class="bg-gradient-to-r from-pink-50 to-blue-50 p-4 rounded-2xl border border-pink-100 text-left">
-                <p class="text-xs font-extrabold text-slate-800 mb-1">🚀 Chat & Grup Tersembunyi!</p>
-                <p class="text-[11px] font-medium text-slate-600">Gunakan kolom pencarian di menu Chat untuk menemukan teman dan grup.</p>
+                <p class="text-xs font-extrabold text-slate-800 mb-1">🚀 Chat & Grup Tersembunyi[span_93](start_span)[span_93](end_span)!</p>
+                <p class="text-[11px] font-medium text-slate-600">Gunakan kolom pencarian di menu Chat untuk menemukan teman dan grup.[span_94](start_span)[span_94](end_span)</p>
             </div>
         </div>
     </div>
@@ -421,23 +420,23 @@
     <!-- FITUR BARU: HALAMAN SPIN HARIAN -->
     <div id="spin-screen" class="screen text-center pt-8 relative z-10">
         <div class="relative mb-4 w-full bg-white/90 backdrop-blur-md pt-4 pb-3 rounded-[28px] shadow-xl border border-white flex items-center justify-between px-4">
-            <button onclick="playSoundEffect(this); switchMenuTab('beranda')" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center font-black text-xs cursor-pointer">❮</button>
-            <h1 class="text-2xl font-black gradient-text-1">Spin Harian</h1>
+            <button onclick="playSoundEffect(this); switchMenuTab('beranda')" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center font-black text-xs cursor-pointer">❮[span_95](start_span)[span_95](end_span)</button>
+            <h1 class="text-2xl font-black gradient-text-1">Spin Harian[span_96](start_span)[span_96](end_span)</h1>
             <div class="w-8"></div>
         </div>
         <div class="bg-white rounded-[32px] p-6 shadow-2xl border-2 border-pink-200 w-full relative text-center">
-            <p class="text-xs font-bold text-slate-500 mb-4">Putar roda keberuntungan setiap hari untuk dapatkan saldo & akun premium!</p>
+            <p class="text-xs font-bold text-slate-500 mb-4">Putar roda keberuntungan setiap hari untuk dapatkan saldo & akun premium[span_97](start_span)[span_97](end_span)!</p>
             
             <!-- RODA PUTAR VISUAL -->
             <div class="relative w-48 h-48 mx-auto my-6 flex items-center justify-center">
                 <div id="wheel-box" class="w-full h-full rounded-full border-8 border-pink-400 bg-gradient-to-tr from-pink-500 via-purple-500 to-blue-500 shadow-2xl flex items-center justify-center transition-all duration-[3000ms] ease-out relative overflow-hidden">
-                    <span class="text-4xl animate-bounce">🎡</span>
+                    <span class="text-4xl animate-bounce">🎡[span_98](start_span)[span_98](end_span)</span>
                 </div>
                 <div class="absolute -top-3 w-6 h-6 bg-red-500 rotate-45 border-2 border-white shadow-md z-20"></div>
             </div>
 
             <button id="spin-btn" onclick="playSoundEffect(this); startDailySpin()" class="w-full bg-gradient-to-r from-pink-500 to-rose-600 text-white font-black py-4 rounded-2xl shadow-xl shadow-pink-300 text-base active:scale-95 transition cursor-pointer">
-                SPIN SEKARANG 🎯
+                SPIN SEKARANG 🎯[span_99](start_span)[span_99](end_span)
             </button>
         </div>
     </div>
@@ -445,17 +444,17 @@
     <!-- FITUR BARU: HALAMAN LEADERBOARD HARIAN -->
     <div id="leaderboard-screen" class="screen text-center pt-8 relative z-10">
         <div class="relative mb-4 w-full bg-white/90 backdrop-blur-md pt-4 pb-3 rounded-[28px] shadow-xl border border-white flex items-center justify-between px-4">
-            <button onclick="playSoundEffect(this); switchMenuTab('beranda')" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center font-black text-xs cursor-pointer">❮</button>
-            <h1 class="text-xl font-black gradient-text-2">Leaderboard Harian</h1>
+            <button onclick="playSoundEffect(this); switchMenuTab('beranda')" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center font-black text-xs cursor-pointer">❮[span_100](start_span)[span_100](end_span)</button>
+            <h1 class="text-xl font-black gradient-text-2">Leaderboard Harian[span_101](start_span)[span_101](end_span)</h1>
             <div class="w-8"></div>
         </div>
         <div class="bg-white rounded-[32px] p-5 shadow-2xl border-2 border-blue-200 w-full relative text-left">
             <div class="flex justify-between items-center mb-3 px-1">
-                <p class="text-xs font-extrabold text-slate-500">🏆 Papan Peringkat Teratas</p>
-                <span id="lb-timer" class="text-[10px] font-black bg-pink-100 text-pink-600 px-2.5 py-1 rounded-full">Reset: 03:00:00</span>
+                <p class="text-xs font-extrabold text-slate-500">🏆 Papan Peringkat Teratas[span_102](start_span)[span_102](end_span)</p>
+                <span id="lb-timer" class="text-[10px] font-black bg-pink-100 text-pink-600 px-2.5 py-1 rounded-full">Reset: 03:00:00[span_103](start_span)[span_103](end_span)</span>
             </div>
             <div id="leaderboard-list" class="space-y-2.5 max-h-[60vh] overflow-y-auto pr-1">
-                <!-- Daftar Leaderboard diisi via JS -->
+                <!-- Daftar Leaderboard diisi via JS[span_104](start_span)[span_104](end_span) -->
             </div>
         </div>
     </div>
@@ -463,12 +462,12 @@
     <!-- MODAL POPUP HADIAH SPIN FULL SCREEN -->
     <div id="spin-result-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-md hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-[32px] p-8 w-full max-w-xs shadow-2xl border-4 border-pink-300 text-center animate-shake-shadow">
-            <span class="text-6xl animate-bounce mb-3 block">🎁</span>
-            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Selamat, Kamu Mendapatkan!</h3>
-            <h2 id="spin-prize-name" class="text-2xl font-black text-pink-600 my-3">Saldo Rp 150</h2>
-            <p id="spin-prize-desc" class="text-xs font-medium text-slate-600 mb-6">Hadiah telah dimasukkan ke akunmu.</p>
+            <span class="text-6xl animate-bounce mb-3 block">🎁[span_105](start_span)[span_105](end_span)</span>
+            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Selamat, Kamu Mendapatkan[span_106](start_span)[span_106](end_span)!</h3>
+            <h2 id="spin-prize-name" class="text-2xl font-black text-pink-600 my-3">Saldo Rp 150[span_107](start_span)[span_107](end_span)</h2>
+            <p id="spin-prize-desc" class="text-xs font-medium text-slate-600 mb-6">Hadiah telah dimasukkan ke akunmu.[span_108](start_span)[span_108](end_span)</p>
             <button onclick="playSoundEffect(this); claimSpinPrize()" class="w-full bg-gradient-to-r from-cyan-400 to-blue-500 text-white font-black py-3.5 rounded-2xl shadow-xl text-sm cursor-pointer active:scale-95 transition">
-                Claim Hadiah ✨
+                Claim Hadiah ✨[span_109](start_span)[span_109](end_span)
             </button>
         </div>
     </div>
@@ -480,22 +479,22 @@
             <!-- Header Chat -->
             <div class="bg-gradient-to-r from-sky-400 to-blue-500 p-3.5 flex items-center justify-between text-white shadow-md relative">
                 <div class="flex items-center gap-3">
-                    <button onclick="playSoundEffect(this); switchMenuTab('beranda')" class="w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center font-black text-sm transition">❮</button>
+                    <button onclick="playSoundEffect(this); switchMenuTab('beranda')" class="w-8 h-8 bg-white/25 hover:bg-white/35 rounded-full flex items-center justify-center font-black text-sm transition">❮[span_110](start_span)[span_110](end_span)</button>
                     <div>
-                        <h3 class="font-black text-sm tracking-wide">Chat Only (Telegram Style)</h3>
-                        <p class="text-[10px] text-sky-100 font-semibold">Cari nama teman atau grup di bawah</p>
+                        <h3 class="font-black text-sm tracking-wide">Chat Only (Telegram Style)[span_111](start_span)[span_111](end_span)</h3>
+                        <p class="text-[10px] text-sky-100 font-semibold">Cari nama teman atau grup di bawah[span_112](start_span)[span_112](end_span)</p>
                     </div>
                 </div>
                 <div class="relative">
-                    <button onclick="playSoundEffect(this); toggleChatSettings(this)" id="chat-settings-btn" class="w-9 h-9 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-lg font-black transition cursor-pointer">
-                        ⚙️
+                    <button onclick="playSoundEffect(this); toggleChatSettings(this)" id="chat-settings-btn" class="w-9 h-9 bg-white/25 hover:bg-white/35 rounded-full flex items-center justify-center text-lg font-black transition cursor-pointer">
+                        ⚙️[span_113](start_span)[span_113](end_span)
                     </button>
                     <div id="chat-settings-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white text-slate-800 rounded-2xl shadow-2xl border border-slate-100 p-2 z-50 text-xs font-bold space-y-1">
                         <button onclick="playSoundEffect(this); toggleNotificationSetting()" id="notif-setting-toggle" class="w-full text-left px-3 py-2 rounded-xl hover:bg-pink-50 hover:text-pink-600 transition flex items-center justify-between">
-                            <span>🔔 Notifikasi</span>
-                            <span id="notif-status-badge" class="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-[10px]">ON</span>
+                            <span>🔔 Notifikasi[span_114](start_span)[span_114](end_span)</span>
+                            <span id="notif-status-badge" class="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-[10px]">ON[span_115](start_span)[span_115](end_span)</span>
                         </button>
-                        <button onclick="playSoundEffect(this); openCreateGroupScreen()" class="w-full text-left px-3 py-2 rounded-xl hover:bg-pink-50 hover:text-pink-600 transition flex items-center gap-2">👥 Buat Group</button>
+                        <button onclick="playSoundEffect(this); openCreateGroupScreen()" class="w-full text-left px-3 py-2 rounded-xl hover:bg-pink-50 hover:text-pink-600 transition flex items-center gap-2">👥 ButAux Buat Group[span_116](start_span)[span_116](end_span)</button>
                     </div>
                 </div>
             </div>
@@ -507,19 +506,19 @@
 
             <!-- Daftar Kontak / Grup -->
             <div id="chat-contact-list" class="flex-1 overflow-y-auto p-3 space-y-2">
-                <p class="text-center text-xs font-bold text-slate-400 mt-6">Ketik nama teman atau grup di kolom pencarian di atas untuk memulai chat.</p>
+                <p class="text-center text-xs font-bold text-slate-400 mt-6">Ketik nama teman atau grup di kolom pencarian di atas untuk memulai chat.[span_117](start_span)[span_117](end_span)</p>
             </div>
 
             <!-- Ruang Pesan Personal / Grup -->
             <div id="active-chat-room" class="absolute inset-0 bg-white flex flex-col hidden z-20">
                 <div class="bg-gradient-to-r from-sky-400 to-blue-500 p-3.5 flex items-center justify-between text-white shadow-md">
                     <div class="flex items-center gap-3">
-                        <button onclick="playSoundEffect(this); closeActiveChat()" class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center font-black text-sm">❮</button>
+                        <button onclick="playSoundEffect(this); closeActiveChat()" class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center font-black text-sm">❮[span_118](start_span)[span_118](end_span)</button>
                         <div class="flex items-center gap-2 cursor-pointer" onclick="clickChatHeaderTarget()">
-                            <span id="active-chat-avatar" class="text-xl">👤</span>
+                            <span id="active-chat-avatar" class="text-xl">👤[span_119](start_span)[span_119](end_span)</span>
                             <div>
-                                <h3 id="active-chat-name" class="font-black text-xs hover:underline">Nama Teman/Grup</h3>
-                                <p id="active-chat-sub" class="text-[9px] text-sky-100">Klik untuk lihat profil / @username</p>
+                                <h3 id="active-chat-name" class="font-black text-xs hover:underline">Nama Teman/Grup[span_120](start_span)[span_120](end_span)</h3>
+                                <p id="active-chat-sub" class="text-[9px] text-sky-100">Klik untuk lihat profil / @username[span_121](start_span)[span_121](end_span)</p>
                             </div>
                         </div>
                     </div>
@@ -534,7 +533,7 @@
                         📷 <input type="file" accept="image/*" onchange="sendPhotoMessage(this)" class="hidden">
                     </label>
                     <input type="text" id="chat-input-msg" placeholder="Tulis pesan..." class="flex-1 bg-slate-100 border border-slate-200 focus:outline-none focus:border-blue-400 rounded-2xl py-2 px-3 text-xs font-bold text-slate-800">
-                    <button onclick="playSoundEffect(this); sendTextMessage()" class="w-9 h-9 bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-full flex items-center justify-center font-black text-xs shadow-md active:scale-95 transition cursor-pointer" title="Kirim Pesan">📤</button>
+                    <button onclick="playSoundEffect(this); sendTextMessage()" class="w-9 h-9 bg-gradient-to-r from-cyan-400 to-blue-500 text-white rounded-full flex items-center justify-center font-black text-xs shadow-md active:scale-95 transition cursor-pointer" title="Kirim Pesan">📤[span_122](start_span)[span_122](end_span)</button>
                 </div>
             </div>
 
@@ -545,24 +544,24 @@
     <div id="group-profile-screen" class="screen text-center pt-4 relative z-10">
         <div class="bg-white rounded-[32px] shadow-2xl border-2 border-pink-200 w-full p-6 text-left relative transition-all">
             <div class="flex items-center justify-between mb-4 border-b pb-3">
-                <button onclick="playSoundEffect(this); closeGroupProfileScreen()" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center font-black text-xs">❮</button>
-                <h3 class="font-black text-base text-slate-900">Profil Grup 👥</h3>
+                <button onclick="playSoundEffect(this); closeGroupProfileScreen()" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center font-black text-xs">❮[span_123](start_span)[span_123](end_span)</button>
+                <h3 class="font-black text-base text-slate-900">Profil Grup 👥[span_124](start_span)[span_124](end_span)</h3>
                 <div class="w-8"></div>
             </div>
 
             <div class="flex flex-col items-center mb-4">
                 <label class="w-24 h-24 bg-pink-50 border-2 border-dashed border-pink-300 rounded-full flex items-center justify-center text-3xl cursor-pointer hover:bg-pink-100 transition relative overflow-hidden shadow-inner group" title="Ubah foto dari galeri">
-                    <span id="gp-photo-display">👥</span>
+                    <span id="gp-photo-display">👥[span_125](start_span)[span_125](end_span)</span>
                     <input type="file" accept="image/*" onchange="updateGroupPhotoFromGallery(this)" class="hidden">
                 </label>
-                <span class="text-[10px] font-bold text-slate-400 mt-1">Ketuk foto untuk ganti dari galeri</span>
+                <span class="text-[10px] font-bold text-slate-400 mt-1">Ketuk foto untuk ganti dari galeri[span_126](start_span)[span_126](end_span)</span>
             </div>
 
             <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200 space-y-2 mb-4 text-xs">
-                <div class="flex justify-between border-b pb-1.5"><span class="font-bold text-slate-500">Nama Grup :</span><span id="gp-name" class="font-black text-slate-800">-</span></div>
-                <div class="flex justify-between border-b pb-1.5"><span class="font-bold text-slate-500">@Username :</span><span id="gp-username" class="font-black text-blue-600">-</span></div>
-                <div class="flex justify-between border-b pb-1.5"><span class="font-bold text-slate-500">Deskripsi :</span><span id="gp-desc" class="font-black text-slate-800">-</span></div>
-                <div class="flex justify-between"><span class="font-bold text-slate-500">Jumlah Member :</span><span id="gp-member-count" class="font-black text-pink-600">0</span></div>
+                <div class="flex justify-between border-b pb-1.5"><span class="font-bold text-slate-500">Nama Grup :[span_127](start_span)[span_127](end_span)</span><span id="gp-name" class="font-black text-slate-800">-[span_128](start_span)[span_128](end_span)</span></div>
+                <div class="flex justify-between border-b pb-1.5"><span class="font-bold text-slate-500">@Username :[span_129](start_span)[span_129](end_span)</span><span id="gp-username" class="font-black text-blue-600">-[span_130](start_span)[span_130](end_span)</span></div>
+                <div class="flex justify-between border-b pb-1.5"><span class="font-bold text-slate-500">Deskripsi :[span_131](start_span)[span_131](end_span)</span><span id="gp-desc" class="font-black text-slate-800">-[span_132](start_span)[span_132](end_span)</span></div>
+                <div class="flex justify-between"><span class="font-bold text-slate-500">Jumlah Member :[span_133](start_span)[span_133](end_span)</span><span id="gp-member-count" class="font-black text-pink-600">0[span_134](start_span)[span_134](end_span)</span></div>
             </div>
 
             <div id="gp-action-buttons" class="space-y-2"></div>
@@ -573,33 +572,33 @@
     <div id="create-group-screen" class="screen text-center pt-4 relative z-10">
         <div id="group-form-card" class="bg-white rounded-[32px] shadow-2xl border-2 border-pink-200 w-full p-6 text-left relative transition-all">
             <div class="flex items-center justify-between mb-4 border-b pb-3">
-                <button onclick="playSoundEffect(this); closeCreateGroupScreen()" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center font-black text-xs">❮</button>
-                <h3 class="font-black text-base text-slate-900">Buat Grup Baru 👥</h3>
+                <button onclick="playSoundEffect(this); closeCreateGroupScreen()" class="w-8 h-8 bg-slate-100 rounded-full flex items-center justify-center font-black text-xs">❮[span_135](start_span)[span_135](end_span)</button>
+                <h3 class="font-black text-base text-slate-900">Buat Grup Baru 👥[span_136](start_span)[span_136](end_span)</h3>
                 <div class="w-8"></div>
             </div>
             <div class="flex flex-col items-center mb-4">
                 <label class="w-20 h-20 bg-pink-50 border-2 border-dashed border-pink-300 rounded-full flex items-center justify-center text-3xl cursor-pointer hover:bg-pink-100 transition relative overflow-hidden shadow-inner group" title="Pilih dari Galeri">
-                    <span id="group-photo-preview">📷</span>
+                    <span id="group-photo-preview">📷[span_137](start_span)[span_137](end_span)</span>
                     <input type="file" accept="image/*" onchange="previewGroupPhoto(this)" class="hidden">
                 </label>
-                <span class="text-[11px] font-bold text-slate-500 mt-2">Atur Profile Grup (Galeri)</span>
+                <span class="text-[11px] font-bold text-slate-500 mt-2">Atur Profile Grup (Galeri)[span_138](start_span)[span_138](end_span)</span>
             </div>
             <div class="space-y-3">
                 <div>
-                    <label class="text-xs font-black text-slate-600 block mb-1">Nama Grup <span class="text-red-500">*</span></label>
+                    <label class="text-xs font-black text-slate-600 block mb-1">Nama Grup <span class="text-red-500">*</span>[span_139](start_span)[span_139](end_span)</label>
                     <input type="text" id="group-name-input" placeholder="Masukkan nama grup..." class="w-full bg-slate-50 border-2 border-pink-100 focus:border-pink-400 focus:outline-none rounded-2xl py-3 px-4 font-extrabold text-slate-800 text-xs shadow-inner">
                 </div>
                 <div>
-                    <label class="text-xs font-black text-slate-600 block mb-1">@Username Grup (Contoh: @dhoogroup) <span class="text-red-500">*</span></label>
+                    <label class="text-xs font-black text-slate-600 block mb-1">@Username Grup (Contoh: @dhoogroup) <span class="text-red-500">*</span>[span_140](start_span)[span_140](end_span)</label>
                     <input type="text" id="group-username-input" placeholder="@namagrup..." class="w-full bg-slate-50 border-2 border-pink-100 focus:border-pink-400 focus:outline-none rounded-2xl py-3 px-4 font-extrabold text-slate-800 text-xs shadow-inner">
                 </div>
                 <div>
-                    <label class="text-xs font-black text-slate-600 block mb-1">Deskripsi Grup</label>
+                    <label class="text-xs font-black text-slate-600 block mb-1">Deskripsi Grup[span_141](start_span)[span_141](end_span)</label>
                     <textarea id="group-desc-input" placeholder="Tulis deskripsi grup..." class="w-full h-16 bg-slate-50 border-2 border-pink-100 focus:border-pink-400 focus:outline-none rounded-2xl p-3 font-extrabold text-slate-800 text-xs shadow-inner resize-none"></textarea>
                 </div>
             </div>
             <button onclick="playSoundEffect(this); submitCreateGroup()" class="mt-5 w-full bg-gradient-to-r from-pink-500 to-rose-500 text-white font-black py-3.5 rounded-2xl shadow-xl shadow-pink-300 active:scale-95 transition text-sm cursor-pointer">
-                Buat Group 🚀
+                Buat Group 🚀[span_142](start_span)[span_142](end_span)
             </button>
         </div>
     </div>
@@ -608,13 +607,13 @@
     <div id="menu-request-screen" class="screen text-center pt-8 relative z-10">
         <div class="relative mb-4 w-full bg-white/90 backdrop-blur-md pt-4 pb-3 rounded-[28px] shadow-xl border border-white">
             <h1 class="text-3xl font-black">
-                <span class="gradient-text-1">Kertas</span> <span class="gradient-text-2">Request</span>
+                <span class="gradient-text-1">Kertas[span_143](start_span)[span_143](end_span)</span> <span class="gradient-text-2">Request[span_144](start_span)[span_144](end_span)</span>
             </h1>
         </div>
         <div class="paper-bg rounded-[32px] p-6 shadow-2xl border-2 border-slate-200 w-full text-left space-y-3">
-            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tulis Pesan Baru:</p>
+            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tulis Pesan Baru:[span_145](start_span)[span_145](end_span)</p>
             <textarea placeholder="Tulis request atau pesan rahasia di sini..." class="w-full h-32 bg-transparent border-2 border-pink-200 focus:border-pink-400 focus:outline-none rounded-2xl p-3 font-extrabold text-slate-800 text-sm shadow-inner"></textarea>
-            <button onclick="playSoundEffect(this); alert('Kertas request berhasil dikirim!')" class="w-full bg-slate-900 text-white font-black py-3 rounded-xl text-sm shadow-md cursor-pointer">Kirim Kertas Request ✉️</button>
+            <button onclick="playSoundEffect(this); alert('Kertas request berhasil dikirim!')" class="w-full bg-slate-900 text-white font-black py-3 rounded-xl text-sm shadow-md cursor-pointer">Kirim Kertas Request ✉️[span_146](start_span)[span_146](end_span)</button>
         </div>
     </div>
 
@@ -622,76 +621,76 @@
     <div id="menu-profile-screen" class="screen text-center pt-8 relative z-10">
         <div class="relative mb-4 w-full bg-white/90 backdrop-blur-md pt-4 pb-3 rounded-[28px] shadow-xl border border-white">
             <h1 class="text-3xl font-black">
-                <span class="gradient-text-1">Pengaturan</span> <span class="gradient-text-2">Profile</span>
+                <span class="gradient-text-1">Pengaturan[span_147](start_span)[span_147](end_span)</span> <span class="gradient-text-2">Profile[span_148](start_span)[span_148](end_span)</span>
             </h1>
         </div>
         <div class="bg-white rounded-[32px] p-6 shadow-2xl border-2 border-pink-200 w-full relative">
             <div class="w-24 h-24 mx-auto bg-pink-100 rounded-full flex items-center justify-center text-5xl border-4 border-white shadow-md mb-3 relative">
-                <span id="menu-profile-avatar">🦊</span>
+                <span id="menu-profile-avatar">🦊[span_149](start_span)[span_149](end_span)</span>
             </div>
             <button onclick="playSoundEffect(this); openAvatarModal()" class="mb-4 bg-gradient-to-r from-yellow-400 to-orange-400 text-slate-900 font-black text-xs py-2 px-4 rounded-xl shadow-md active:scale-95 transition cursor-pointer">
-                <span>✨ Ubah Profile (Pilih Karakter)</span>
+                <span>✨ Ubah Profile (Pilih Karakter)[span_150](start_span)[span_150](end_span)</span>
             </button>
             <div class="bg-slate-50 rounded-2xl p-4 text-left border border-slate-200 space-y-2 mb-4">
-                <div class="flex justify-between border-b pb-1.5"><span class="text-xs font-bold text-slate-500">Nama :</span><span id="menu-res-name" class="text-xs font-black text-slate-800">-</span></div>
-                <div class="flex justify-between border-b pb-1.5"><span class="text-xs font-bold text-slate-500">Umur :</span><span id="menu-res-age" class="text-xs font-black text-slate-800">-</span></div>
-                <div class="flex justify-between"><span class="text-xs font-bold text-slate-500">Gender :</span><span id="menu-res-gender" class="text-xs font-black text-slate-800">-</span></div>
+                <div class="flex justify-between border-b pb-1.5"><span class="text-xs font-bold text-slate-500">Nama :[span_151](start_span)[span_151](end_span)</span><span id="menu-res-name" class="text-xs font-black text-slate-800">-[span_152](start_span)[span_152](end_span)</span></div>
+                <div class="flex justify-between border-b pb-1.5"><span class="text-xs font-bold text-slate-500">Umur :[span_153](start_span)[span_153](end_span)</span><span id="menu-res-age" class="text-xs font-black text-slate-800">-[span_154](start_span)[span_154](end_span)</span></div>
+                <div class="flex justify-between"><span class="text-xs font-bold text-slate-500">Gender :[span_155](start_span)[span_155](end_span)</span><span id="menu-res-gender" class="text-xs font-black text-slate-800">-[span_156](start_span)[span_156](end_span)</span></div>
             </div>
-            <button onclick="playSoundEffect(this); resetAccount()" class="w-full bg-red-500 hover:bg-red-600 text-white font-black py-3 rounded-xl text-xs shadow-md cursor-pointer">⚠️ Logout / Hapus Sesi Akun</button>
+            <button onclick="playSoundEffect(this); resetAccount()" class="w-full bg-red-500 hover:bg-red-600 text-white font-black py-3 rounded-xl text-xs shadow-md cursor-pointer">⚠️ Logout / Hapus Sesi Akun[span_157](start_span)[span_157](end_span)</button>
         </div>
     </div>
 
     <!-- NAVBAR BAWAH -->
     <nav id="bottom-navbar" class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white/95 backdrop-blur-md border-t-2 border-pink-100 p-2 px-4 hidden z-40 flex justify-around items-center shadow-2xl rounded-t-3xl">
         <button onclick="playSoundEffect(this); switchMenuTab('beranda')" id="nav-btn-beranda" class="flex flex-col items-center text-pink-500 transition active:scale-95 cursor-pointer">
-            <span class="text-lg">🏠</span>
-            <span class="text-[9px] font-black tracking-wide">Beranda</span>
+            <span class="text-lg">🏠[span_158](start_span)[span_158](end_span)</span>
+            <span class="text-[9px] font-black tracking-wide">Beranda[span_159](start_span)[span_159](end_span)</span>
         </button>
         <button onclick="playSoundEffect(this); switchMenuTab('chat')" id="nav-btn-chat" class="flex flex-col items-center text-slate-400 transition active:scale-95 cursor-pointer">
-            <span class="text-lg">💬</span>
-            <span class="text-[9px] font-black tracking-wide">Chat Only</span>
+            <span class="text-lg">💬[span_160](start_span)[span_160](end_span)</span>
+            <span class="text-[9px] font-black tracking-wide">Chat Only[span_161](start_span)[span_161](end_span)</span>
         </button>
         <button onclick="playSoundEffect(this); switchMenuTab('request')" id="nav-btn-request" class="flex flex-col items-center text-slate-400 transition active:scale-95 cursor-pointer">
-            <span class="text-lg">📄</span>
-            <span class="text-[9px] font-black tracking-wide">Request</span>
+            <span class="text-lg">📄[span_162](start_span)[span_162](end_span)</span>
+            <span class="text-[9px] font-black tracking-wide">Request[span_163](start_span)[span_163](end_span)</span>
         </button>
         <button onclick="playSoundEffect(this); switchMenuTab('profile')" id="nav-btn-profile" class="flex flex-col items-center text-slate-400 transition active:scale-95 cursor-pointer">
-            <span class="text-lg">👤</span>
-            <span class="text-[9px] font-black tracking-wide">Profile</span>
+            <span class="text-lg">👤[span_164](start_span)[span_164](end_span)</span>
+            <span class="text-[9px] font-black tracking-wide">Profile[span_165](start_span)[span_165](end_span)</span>
         </button>
     </nav>
 
     <!-- MODALS -->
     <div id="theme-modal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-[32px] p-6 w-full max-w-xs shadow-2xl border-2 border-pink-200 text-center">
-            <h3 class="font-black text-slate-900 text-lg mb-2">🎨 Atur Tema</h3>
+            <h3 class="font-black text-slate-900 text-lg mb-2">🎨 Atur Tema[span_166](start_span)[span_166](end_span)</h3>
             <div class="space-y-2.5 mt-4">
-                <button onclick="playSoundEffect(this); setTheme('default'); closeThemeModal();" class="w-full bg-sky-100 text-sky-900 font-black py-3 rounded-2xl active:scale-95 text-sm">Default (Biru Langit)</button>
-                <button onclick="playSoundEffect(this); setTheme('light'); closeThemeModal();" class="w-full bg-slate-100 text-slate-900 font-black py-3 rounded-2xl active:scale-95 text-sm">Putih (Light Mode)</button>
-                <button onclick="playSoundEffect(this); setTheme('dark'); closeThemeModal();" class="w-full bg-slate-900 text-white font-black py-3 rounded-2xl active:scale-95 text-sm">Hitam (Dark Mode)</button>
+                <button onclick="playSoundEffect(this); setTheme('default'); closeThemeModal();" class="w-full bg-sky-100 text-sky-900 font-black py-3 rounded-2xl active:scale-95 text-sm">Default (Biru Langit)[span_167](start_span)[span_167](end_span)</button>
+                <button onclick="playSoundEffect(this); setTheme('light'); closeThemeModal();" class="w-full bg-slate-100 text-slate-900 font-black py-3 rounded-2xl active:scale-95 text-sm">Putih (Light Mode)[span_168](start_span)[span_168](end_span)</button>
+                <button onclick="playSoundEffect(this); setTheme('dark'); closeThemeModal();" class="w-full bg-slate-900 text-white font-black py-3 rounded-2xl active:scale-95 text-sm">Hitam (Dark Mode)[span_169](start_span)[span_169](end_span)</button>
             </div>
-            <button onclick="playSoundEffect(this); closeThemeModal();" class="mt-4 text-xs font-bold text-slate-400">Tutup</button>
+            <button onclick="playSoundEffect(this); closeThemeModal();" class="mt-4 text-xs font-bold text-slate-400">Tutup[span_170](start_span)[span_170](end_span)</button>
         </div>
     </div>
 
     <div id="lang-modal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-[32px] p-6 w-full max-w-xs shadow-2xl border-2 border-pink-200 text-center">
-            <h3 class="font-black text-slate-900 text-lg mb-2">🌐 Pilih Bahasa</h3>
+            <h3 class="font-black text-slate-900 text-lg mb-2">🌐 Pilih Bahasa[span_171](start_span)[span_171](end_span)</h3>
             <div class="space-y-2.5 mt-4">
-                <button onclick="playSoundEffect(this); closeLangModal();" class="w-full bg-slate-50 text-slate-900 font-black py-3 rounded-2xl border active:scale-95 text-sm">🇮🇩 Bahasa Indonesia</button>
+                <button onclick="playSoundEffect(this); closeLangModal();" class="w-full bg-slate-50 text-slate-900 font-black py-3 rounded-2xl border active:scale-95 text-sm">🇮🇩 Bahasa Indonesia[span_172](start_span)[span_172](end_span)</button>
             </div>
-            <button onclick="playSoundEffect(this); closeLangModal();" class="mt-4 text-xs font-bold text-slate-400">Tutup</button>
+            <button onclick="playSoundEffect(this); closeLangModal();" class="mt-4 text-xs font-bold text-slate-400">Tutup[span_173](start_span)[span_173](end_span)</button>
         </div>
     </div>
 
     <div id="avatar-modal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-[32px] p-5 w-full max-w-sm max-h-[85vh] flex flex-col shadow-2xl border-2 border-pink-200">
             <div class="flex justify-between items-center mb-3">
-                <h3 class="font-black text-slate-900 text-base">Pilih Avatar Karaktermu</h3>
-                <button onclick="playSoundEffect(this); closeAvatarModal()" class="w-8 h-8 rounded-full bg-slate-100 font-black text-slate-600">✕</button>
+                <h3 class="font-black text-slate-900 text-base">Pilih Avatar Karaktermu[span_174](start_span)[span_174](end_span)</h3>
+                <button onclick="playSoundEffect(this); closeAvatarModal()" class="w-8 h-8 rounded-full bg-slate-100 font-black text-slate-600">✕[span_175](start_span)[span_175](end_span)</button>
             </div>
             <div id="avatar-grid" class="grid grid-cols-5 gap-2 overflow-y-auto p-2 max-h-64 bg-slate-50 rounded-2xl border border-slate-100"></div>
-            <button onclick="playSoundEffect(this); closeAvatarModal()" class="mt-4 w-full bg-slate-900 text-white font-black py-3 rounded-xl text-sm">Simpan Pilihan</button>
+            <button onclick="playSoundEffect(this); closeAvatarModal()" class="mt-4 w-full bg-slate-900 text-white font-black py-3 rounded-xl text-sm">Simpan Pilihan[span_176](start_span)[span_176](end_span)</button>
         </div>
     </div>
 
@@ -715,7 +714,6 @@
                 localStorage.setItem('dho_block_groups', JSON.stringify(defaultGroups));
             }
             
-            // Cek Sesi Timer Leaderboard 3 Jam
             checkLeaderboardResetTimer();
         });
 
@@ -936,7 +934,6 @@
             }
         }
 
-        /* --- FITUR SPIN HARIAN --- */
         function openSpinScreen() {
             goToScreen('spin-screen');
         }
@@ -946,10 +943,8 @@
             const spinBtn = document.getElementById('spin-btn');
             spinBtn.disabled = true;
 
-            // Efek goyang / shake pada halaman/roda
             wheel.classList.add('animate-shake-shadow');
             
-            // Random putaran acak untuk semua user
             const prizes = [
                 { name: "Premium 2 Hari", type: "premium", desc: "Akun anda diaktifkan mode premium selama 2 hari!" },
                 { name: "Saldo Rp 150", type: "saldo", amount: 150, desc: "Saldo Rp 150 telah ditambahkan ke akun anda." },
@@ -966,10 +961,8 @@
                 wheel.classList.remove('animate-shake-shadow');
                 spinBtn.disabled = false;
                 
-                // Pilih hadiah secara acak
                 currentWonPrize = prizes[Math.floor(Math.random() * prizes.length)];
                 
-                // Munculkan popup efek bergerak full screen
                 document.getElementById('spin-prize-name').innerText = currentWonPrize.name;
                 document.getElementById('spin-prize-desc').innerText = currentWonPrize.desc;
                 document.getElementById('spin-result-modal').classList.remove('hidden');
@@ -997,7 +990,6 @@
             switchMenuTab('beranda');
         }
 
-        /* --- FITUR LEADERBOARD HARIAN (RESTART 3 JAM) --- */
         function openLeaderboardScreen() {
             renderLeaderboardList();
             goToScreen('leaderboard-screen');
@@ -1005,7 +997,6 @@
 
         function renderLeaderboardList() {
             let usersList = JSON.parse(localStorage.getItem('dho_block_all_users') || "[]");
-            // Pastikan user aktif saat ini ada di list database untuk leaderboard
             if(userData) {
                 let existIdx = usersList.findIndex(u => u.name.toLowerCase() === userData.name.toLowerCase());
                 if(existIdx !== -1) {
@@ -1015,7 +1006,6 @@
                 }
             }
 
-            // Dummy user tambahan agar papan leaderboard ramai dan dinamis
             let dummyPool = [
                 { name: "Budi Gamer", saldo: 2500, onlineHours: 4.5, avatar: "🎮" },
                 { name: "Siti Rahma", saldo: 1800, onlineHours: 3.2, avatar: "🌸" },
@@ -1031,7 +1021,6 @@
                 avatar: u.avatar || "🦊"
             })), ...dummyPool];
 
-            // Urutkan berdasarkan saldo terbanyak
             combinedList.sort((a, b) => b.saldo - a.saldo);
 
             let lbContainer = document.getElementById('leaderboard-list');
@@ -1059,7 +1048,6 @@
             lbContainer.innerHTML = html;
         }
 
-        // Sistem Timer Restart Leaderboard setiap 3 Jam
         function checkLeaderboardResetTimer() {
             let lastResetTime = localStorage.getItem('dho_lb_last_reset');
             let threeHoursMs = 3 * 60 * 60 * 1000;
@@ -1067,7 +1055,6 @@
 
             if(!lastResetTime || (now - parseInt(lastResetTime)) > threeHoursMs) {
                 localStorage.setItem('dho_lb_last_reset', now.toString());
-                // Acak ulang sedikit saldo/data agar berubah saat restart 3 jam
                 let usersList = JSON.parse(localStorage.getItem('dho_block_all_users') || "[]");
                 usersList.forEach(u => {
                     if(u.saldo && Math.random() > 0.5) u.saldo += Math.floor(Math.random() * 100);
