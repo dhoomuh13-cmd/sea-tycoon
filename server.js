@@ -1,11 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const cors = require('cors'); // <--- WAJIB DITAMBAHKAN AGAR AMAN LINTAS DEVICE
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
+app.use(cors()); // <--- Mengizinkan akses API dari berbagai device/browser berbeda
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public'))); // Menyajikan file frontend (HTML, CSS, JS)
@@ -131,7 +133,7 @@ app.post('/api/bear-chats', async (req, res) => {
 app.get('/api/owner/inbox', async (req, res) => {
     try {
         const inbox = await BearChat.aggregate([
-            { $sort: { timestamp: -1 } },             {$group: {
+            { $sort: { timestamp: -1 } },              {$group: {
                     _id: "$roomKey",
                     lastMessage: { $first: "$text" },
                     lastTime: { $first: "$timestamp" },
