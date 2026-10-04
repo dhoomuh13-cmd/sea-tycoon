@@ -227,7 +227,7 @@
 
     <!-- 4. HALAMAN LOGIN (MASUKKAN NAMA & PASSWORD) -->
     <div id="login-screen" class="screen text-center pt-8 relative z-10">
-        <button onclick="playSoundEffect(this); goToScreen('main-screen')" class="absolute top-2 left-0 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center font-black text-slate-700 border-2 border-pink-100 active:scale-95 transition z-30 cursor-pointer">❮</button>
+        <button onclick="playSoundEffect(this); goToScreen('main-screen')" class="absolute -top-3 left-0 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center font-black text-slate-700 border-2 border-pink-100 active:scale-95 transition z-30 cursor-pointer">❮</button>
 
         <div class="relative mb-4 w-full bg-white/90 backdrop-blur-md pt-3 pb-3 rounded-[28px] shadow-xl border border-white">
             <h1 class="text-2xl font-black">
@@ -254,7 +254,7 @@
 
     <!-- 5. HALAMAN DAFTAR: MASUKKAN NAMA -->
     <div id="name-screen" class="screen text-center pt-8 relative z-10">
-        <button onclick="playSoundEffect(this); goToScreen('main-screen')" class="absolute top-2 left-0 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center font-black text-slate-700 border-2 border-pink-100 active:scale-95 transition z-30 cursor-pointer">❮</button>
+        <button onclick="playSoundEffect(this); goToScreen('main-screen')" class="absolute -top-3 left-0 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center font-black text-slate-700 border-2 border-pink-100 active:scale-95 transition z-30 cursor-pointer">❮</button>
 
         <div class="relative mb-4 w-full bg-white/90 backdrop-blur-md pt-3 pb-3 rounded-[28px] shadow-xl border border-white">
             <h1 class="text-2xl font-black">
@@ -283,7 +283,7 @@
 
     <!-- 5.1. HALAMAN DAFTAR: BUAT PASSWORD -->
     <div id="password-screen" class="screen text-center pt-8 relative z-10">
-        <button onclick="playSoundEffect(this); goToScreen('name-screen')" class="absolute top-2 left-0 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center font-black text-slate-700 border-2 border-pink-100 active:scale-95 transition z-30 cursor-pointer">❮</button>
+        <button onclick="playSoundEffect(this); goToScreen('name-screen')" class="absolute -top-3 left-0 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center font-black text-slate-700 border-2 border-pink-100 active:scale-95 transition z-30 cursor-pointer">❮</button>
 
         <div class="relative mb-4 w-full bg-white/90 backdrop-blur-md pt-3 pb-3 rounded-[28px] shadow-xl border border-white">
             <h1 class="text-2xl font-black">
@@ -312,7 +312,7 @@
 
     <!-- 6. HALAMAN PILIH GENDER -->
     <div id="gender-screen" class="screen text-center pt-8 relative z-10">
-        <button onclick="playSoundEffect(this); goToScreen('password-screen')" class="absolute top-2 left-0 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center font-black text-slate-700 border-2 border-pink-100 active:scale-95 transition z-30 cursor-pointer">❮</button>
+        <button onclick="playSoundEffect(this); goToScreen('password-screen')" class="absolute -top-3 left-0 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center font-black text-slate-700 border-2 border-pink-100 active:scale-95 transition z-30 cursor-pointer">❮</button>
 
         <div class="relative mb-3 w-full bg-white/90 backdrop-blur-md pt-3 pb-3 rounded-[28px] shadow-xl border border-white">
             <h1 class="text-2xl font-black">
@@ -344,7 +344,7 @@
 
     <!-- 7. HALAMAN PILIH UMUR -->
     <div id="age-screen" class="screen text-center pt-8 relative z-10">
-        <button onclick="playSoundEffect(this); goToScreen('gender-screen')" class="absolute top-2 left-0 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center font-black text-slate-700 border-2 border-pink-100 active:scale-95 transition z-30 cursor-pointer">❮</button>
+        <button onclick="playSoundEffect(this); goToScreen('gender-screen')" class="absolute -top-3 left-0 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center font-black text-slate-700 border-2 border-pink-100 active:scale-95 transition z-30 cursor-pointer">❮</button>
 
         <div class="relative mb-3 w-full bg-white/90 backdrop-blur-md pt-3 pb-3 rounded-[28px] shadow-xl border border-white">
             <h1 class="text-2xl font-black">
@@ -717,12 +717,10 @@
             setTimeout(() => { transOverlay.style.opacity = '1'; }, 10);
 
             setTimeout(() => {
-                // Simpan database user lokal
                 let usersList = JSON.parse(localStorage.getItem('dho_block_all_users') || "[]");
                 usersList.push(tempRegisterData);
                 localStorage.setItem('dho_block_all_users', JSON.stringify(usersList));
                 
-                // Set active user
                 localStorage.setItem('dho_block_active_user', JSON.stringify(tempRegisterData));
                 userData = tempRegisterData;
 
@@ -746,10 +744,8 @@
             }
 
             let usersList = JSON.parse(localStorage.getItem('dho_block_all_users') || "[]");
-            // Cari user yang cocok
             let found = usersList.find(u => u.name.toLowerCase() === nameVal.toLowerCase() && u.password === passVal);
 
-            // Fallback jika belum pernah daftar sama sekali tapi langsung login
             if(!found && usersList.length === 0) {
                 found = { name: nameVal, password: passVal, gender: "Laki-laki", age: 17, avatar: "🦊" };
                 usersList.push(found);
