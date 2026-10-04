@@ -16,25 +16,26 @@
             transition: background 0.4s ease;
         }
 
-        /* Tema Hitam (Dark) */
+        /* TEMA HITAM (Dark Mode ala iPhone) */
         body.theme-dark {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0f172a 100%) !important;
+            background: linear-gradient(135deg, #090d16 0%, #111827 60%, #090d16 100%) !important;
             color: #f8fafc;
         }
-        body.theme-dark .bg-white, body.theme-dark .bg-white\/90 {
-            background-color: #1e293b !important;
+        body.theme-dark .bg-white, body.theme-dark .bg-white\/90, body.theme-dark .bg-white\/95 {
+            background-color: #1f2937 !important;
             color: #f8fafc !important;
-            border-color: #334155 !important;
+            border-color: #374151 !important;
         }
         body.theme-dark .text-slate-800, body.theme-dark .text-slate-900, body.theme-dark .text-slate-700 {
             color: #f8fafc !important;
         }
-        body.theme-dark .bg-slate-50 {
-            background-color: #0f172a !important;
-            border-color: #334155 !important;
+        body.theme-dark .bg-slate-50, body.theme-dark .bg-slate-100 {
+            background-color: #111827 !important;
+            border-color: #374151 !important;
+            color: #f8fafc !important;
         }
 
-        /* Tema Putih (Light) */
+        /* TEMA PUTIH (Light Mode ala iPhone) */
         body.theme-light {
             background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 60%, #cbd5e1 100%) !important;
             color: #0f172a;
@@ -67,24 +68,23 @@
         }
 
         @keyframes wiggle {
-            0%, 100% { transform: rotate(0deg) scale(1.04); }
-            25% { transform: rotate(-3deg) scale(1.04); }
-            75% { transform: rotate(3deg) scale(1.04); }
+            0%, 100% { transform: rotate(0deg) scale(1.02); }
+            25% { transform: rotate(-2.5deg) scale(1.02); }
+            75% { transform: rotate(2.5deg) scale(1.02); }
         }
         .animate-wiggle {
-            animation: wiggle 0.3s ease-in-out infinite;
+            animation: wiggle 0.25s ease-in-out infinite;
         }
 
         @keyframes shakeShadow {
-            0% { transform: translate(0, 0) rotate(0deg); box-shadow: 0 10px 25px rgba(255, 79, 139, 0.3); }
-            20% { transform: translate(-6px, 3px) rotate(-2deg); box-shadow: 0 20px 45px rgba(59, 130, 246, 0.7); }
-            40% { transform: translate(6px, -3px) rotate(2deg); box-shadow: 0 5px 20px rgba(234, 179, 8, 0.7); }
-            60% { transform: translate(-4px, -2px) rotate(0deg); box-shadow: 0 25px 50px rgba(255, 79, 139, 0.6); }
-            80% { transform: translate(4px, 3px) rotate(-1deg); box-shadow: 0 15px 30px rgba(6, 182, 212, 0.7); }
-            100% { transform: translate(0, 0) rotate(0deg); box-shadow: 0 10px 25px rgba(255, 79, 139, 0.3); }
+            0% { transform: translate(0, 0); box-shadow: 0 10px 25px rgba(255, 79, 139, 0.3); }
+            20% { transform: translate(-5px, 2px); box-shadow: 0 18px 40px rgba(59, 130, 246, 0.6); }
+            40% { transform: translate(5px, -2px); box-shadow: 0 5px 15px rgba(234, 179, 8, 0.6); }
+            60% { transform: translate(-3px, -1px); box-shadow: 0 20px 40px rgba(255, 79, 139, 0.5); }
+            100% { transform: translate(0, 0); box-shadow: 0 10px 25px rgba(255, 79, 139, 0.3); }
         }
         .animate-shake-shadow {
-            animation: shakeShadow 0.8s ease-in-out;
+            animation: shakeShadow 0.7s ease-in-out;
         }
 
         .btn-clicked {
@@ -115,7 +115,7 @@
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             opacity: 0;
             transform: translateY(20px);
-            padding-bottom: 80px; /* Ruang untuk navbar bawah */
+            padding-bottom: 90px;
         }
 
         .screen.active {
@@ -137,38 +137,30 @@
 
     <div class="fixed inset-0 clouds-bg pointer-events-none z-0"></div>
 
-    <!-- HAMBURGER MENU (TITIK TIGA DI KIRI ATAS) -->
+    <!-- NOTIFIKASI UPDATE OTOMATIS UNTUK SEMUA USER -->
+    <div id="update-banner" class="fixed top-3 left-4 right-4 max-w-md mx-auto bg-gradient-to-r from-pink-500 to-indigo-600 text-white px-4 py-2.5 rounded-2xl shadow-2xl z-50 flex items-center justify-between text-xs font-black hidden border border-white/30 backdrop-blur-md">
+        <span id="update-info-text">✨ Update Versi Terbaru Diterapkan untuk Semua User!</span>
+        <button onclick="dismissUpdateBanner()" class="bg-white/20 px-2.5 py-1 rounded-xl text-[10px]">✕ OK</button>
+    </div>
+
+    <!-- HAMBURGER MENU (TITIK TIGA DI KIRI ATAS - FITUR BERJEJER) -->
     <div class="fixed top-4 left-4 z-40">
         <button onclick="playSoundEffect(this); toggleHamburgerMenu()" class="w-11 h-11 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl flex items-center justify-center text-xl font-black text-slate-800 border-2 border-pink-100 active:scale-95 transition cursor-pointer">
             ⋮
         </button>
 
-        <!-- Dropdown Hamburger -->
-        <div id="hamburger-dropdown" class="hidden absolute left-0 mt-2 w-56 bg-white rounded-2xl shadow-2xl border-2 border-pink-100 p-3 z-50 text-left">
-            <p class="text-xs font-black text-slate-400 mb-2 uppercase tracking-wider" data-i18n="settings">Pengaturan</p>
-            
-            <!-- Pilihan Bahasa -->
-            <div class="mb-3 border-b pb-2">
-                <label class="text-xs font-extrabold text-slate-700 block mb-1" data-i18n="lang_label">Bahasa / Language:</label>
-                <select id="lang-select" onchange="changeLanguage(this.value)" class="w-full bg-slate-100 border border-slate-200 text-xs font-black text-slate-800 rounded-xl p-2 focus:outline-none">
-                    <option value="id">🇮🇩 Bahasa Indonesia</option>
-                    <option value="en">🇬🇧 English</option>
-                </select>
-            </div>
-
-            <!-- Pilihan Tema -->
-            <div>
-                <label class="text-xs font-extrabold text-slate-700 block mb-1" data-i18n="theme_label">Tema / Theme:</label>
-                <div class="grid grid-cols-3 gap-1">
-                    <button onclick="playSoundEffect(this); setTheme('default')" class="text-[10px] font-black bg-sky-100 text-sky-800 py-1.5 rounded-lg border border-sky-200">Default</button>
-                    <button onclick="playSoundEffect(this); setTheme('light')" class="text-[10px] font-black bg-slate-100 text-slate-800 py-1.5 rounded-lg border border-slate-200" data-i18n="theme_light">Putih</button>
-                    <button onclick="playSoundEffect(this); setTheme('dark')" class="text-[10px] font-black bg-slate-800 text-white py-1.5 rounded-lg" data-i18n="theme_dark">Hitam</button>
-                </div>
-            </div>
+        <!-- Dropdown List Fitur Berjejer -->
+        <div id="hamburger-dropdown" class="hidden absolute left-0 mt-2 w-52 bg-white rounded-2xl shadow-2xl border-2 border-pink-100 p-2.5 z-50 text-left space-y-1.5">
+            <button onclick="playSoundEffect(this); openThemeModal(); toggleHamburgerMenu();" class="w-full text-left px-3 py-2.5 rounded-xl font-black text-xs text-slate-800 bg-slate-50 hover:bg-pink-50 hover:text-pink-600 transition flex items-center gap-2.5 shadow-sm">
+                <span>🎨</span> <span data-i18n="menu_theme">Atur Tema</span>
+            </button>
+            <button onclick="playSoundEffect(this); openLangModal(); toggleHamburgerMenu();" class="w-full text-left px-3 py-2.5 rounded-xl font-black text-xs text-slate-800 bg-slate-50 hover:bg-pink-50 hover:text-pink-600 transition flex items-center gap-2.5 shadow-sm">
+                <span>🌐</span> <span data-i18n="menu_lang">Pilih Bahasa</span>
+            </button>
         </div>
     </div>
 
-    <!-- 1. LOADING AWAL (Dibuat agak lama & real) -->
+    <!-- 1. LOADING AWAL -->
     <div id="loading-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-gradient-to-b from-[#4ea8de] to-[#90e0ef] transition-opacity duration-800">
         <div class="relative mb-6 text-center z-10">
             <div class="flex justify-center gap-12 mb-[-12px] relative z-10">
@@ -194,7 +186,7 @@
         </div>
     </div>
 
-    <!-- 2. TRANSISI LOADING REAL (Durasi lebih lama & efek shadow bergerak) -->
+    <!-- 2. TRANSISI LOADING REAL -->
     <div id="transition-loading" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-black/40 backdrop-blur-md hidden opacity-0 transition-opacity duration-500">
         <div class="bg-white px-8 py-8 rounded-[32px] shadow-2xl border-4 border-pink-200 flex flex-col items-center animate-shake-shadow">
             <span class="text-6xl animate-bounce mb-4">🚀</span>
@@ -367,7 +359,6 @@
                 </div>
             </div>
 
-            <!-- Tombol Final: Efek Getar Shadow & Masuk Menu Utama -->
             <button onclick="playSoundEffect(this); triggerFinalAccountCreation()" class="w-full bg-gradient-to-r from-[#ff4f8b] to-[#ff2a6d] text-white font-black py-4 px-6 rounded-2xl shadow-xl shadow-pink-300 transition-all transform active:scale-95 text-base tracking-wide cursor-pointer">
                 <span data-i18n="btn_finalize_account">Lanjut Buat Akun 🔒</span>
             </button>
@@ -375,8 +366,7 @@
         </div>
     </div>
 
-    <!-- 8. MENU UTAMA (SETELAH AKUN DIBUAT) DENGAN 3 TAB NAVBAR DI BAWAH -->
-    <!-- TAB 1: BERANDA -->
+    <!-- 8. MENU UTAMA -->
     <div id="menu-beranda-screen" class="screen text-center pt-8 relative z-10">
         <div class="relative mb-4 w-full bg-white/90 backdrop-blur-md pt-4 pb-3 rounded-[28px] shadow-xl border border-white">
             <h1 class="text-3xl font-black">
@@ -412,11 +402,11 @@
         <div class="paper-bg rounded-[32px] p-6 shadow-2xl border-2 border-slate-200 w-full text-left space-y-3">
             <p class="text-xs font-bold text-slate-400 uppercase tracking-wider" data-i18n="new_note">Tulis Pesan Baru:</p>
             <textarea placeholder="Tulis request atau pesan rahasia di sini..." class="w-full h-32 bg-transparent border-2 border-pink-200 focus:border-pink-400 focus:outline-none rounded-2xl p-3 font-extrabold text-slate-800 text-sm shadow-inner"></textarea>
-            <button onclick="playSoundEffect(this); alert(getI18nText('alert_sent'))" class="w-full bg-slate-900 text-white font-black py-3 rounded-xl text-sm shadow-md" data-i18n="btn_send_request">Kirim Kertas Request ✉️</button>
+            <button onclick="playSoundEffect(this); alert(getI18nText('alert_sent'))" class="w-full bg-slate-900 text-white font-black py-3 rounded-xl text-sm shadow-md cursor-pointer" data-i18n="btn_send_request">Kirim Kertas Request ✉️</button>
         </div>
     </div>
 
-    <!-- TAB 3: PROFILE NAVBAR -->
+    <!-- TAB 3: PROFILE -->
     <div id="menu-profile-screen" class="screen text-center pt-8 relative z-10">
         <div class="relative mb-4 w-full bg-white/90 backdrop-blur-md pt-4 pb-3 rounded-[28px] shadow-xl border border-white">
             <h1 class="text-3xl font-black">
@@ -436,7 +426,7 @@
                 <div class="flex justify-between border-b pb-1.5"><span class="text-xs font-bold text-slate-500" data-i18n="label_age">Umur :</span><span id="menu-res-age" class="text-xs font-black text-slate-800">-</span></div>
                 <div class="flex justify-between"><span class="text-xs font-bold text-slate-500" data-i18n="label_gender">Gender :</span><span id="menu-res-gender" class="text-xs font-black text-slate-800">-</span></div>
             </div>
-            <button onclick="playSoundEffect(this); resetAccount()" class="w-full bg-red-500 hover:bg-red-600 text-white font-black py-3 rounded-xl text-xs shadow-md" data-i18n="btn_reset_account">⚠️ Reset Akun (Hapus Data)</button>
+            <button onclick="playSoundEffect(this); resetAccount()" class="w-full bg-red-500 hover:bg-red-600 text-white font-black py-3 rounded-xl text-xs shadow-md cursor-pointer" data-i18n="btn_reset_account">⚠️ Reset Akun (Hapus Data)</button>
         </div>
     </div>
 
@@ -456,7 +446,34 @@
         </button>
     </nav>
 
-    <!-- 9. MODAL PILIH 50 KARAKTER AVATAR -->
+    <!-- MODAL ATUR TEMA -->
+    <div id="theme-modal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-[32px] p-6 w-full max-w-xs shadow-2xl border-2 border-pink-200 text-center">
+            <h3 class="font-black text-slate-900 text-lg mb-2" data-i18n="modal_theme_title">🎨 Atur Tema</h3>
+            <p class="text-xs text-slate-400 mb-5" data-i18n="modal_theme_desc">Pilih gaya tampilan warna aplikasi:</p>
+            <div class="space-y-2.5">
+                <button onclick="playSoundEffect(this); setTheme('default'); closeThemeModal();" class="w-full bg-sky-100 text-sky-900 font-black py-3 rounded-2xl border border-sky-200 active:scale-95 shadow-sm text-sm" data-i18n="theme_default">Default (Biru Langit)</button>
+                <button onclick="playSoundEffect(this); setTheme('light'); closeThemeModal();" class="w-full bg-slate-100 text-slate-900 font-black py-3 rounded-2xl border border-slate-200 active:scale-95 shadow-sm text-sm" data-i18n="theme_light">Putih (Light Mode)</button>
+                <button onclick="playSoundEffect(this); setTheme('dark'); closeThemeModal();" class="w-full bg-slate-900 text-white font-black py-3 rounded-2xl active:scale-95 shadow-sm text-sm" data-i18n="theme_dark">Hitam (Dark Mode)</button>
+            </div>
+            <button onclick="playSoundEffect(this); closeThemeModal();" class="mt-4 text-xs font-bold text-slate-400" data-i18n="btn_close">Tutup</button>
+        </div>
+    </div>
+
+    <!-- MODAL PILIH BAHASA -->
+    <div id="lang-modal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-[32px] p-6 w-full max-w-xs shadow-2xl border-2 border-pink-200 text-center">
+            <h3 class="font-black text-slate-900 text-lg mb-2" data-i18n="modal_lang_title">🌐 Pilih Bahasa</h3>
+            <p class="text-xs text-slate-400 mb-5" data-i18n="modal_lang_desc">Ganti bahasa seluruh aplikasi:</p>
+            <div class="space-y-2.5">
+                <button onclick="playSoundEffect(this); changeLanguage('id'); closeLangModal();" class="w-full bg-slate-50 hover:bg-pink-50 text-slate-900 font-black py-3 rounded-2xl border border-slate-200 active:scale-95 shadow-sm text-sm flex items-center justify-center gap-2">🇮🇩 Bahasa Indonesia</button>
+                <button onclick="playSoundEffect(this); changeLanguage('en'); closeLangModal();" class="w-full bg-slate-50 hover:bg-pink-50 text-slate-900 font-black py-3 rounded-2xl border border-slate-200 active:scale-95 shadow-sm text-sm flex items-center justify-center gap-2">🇬🇧 English</button>
+            </div>
+            <button onclick="playSoundEffect(this); closeLangModal();" class="mt-4 text-xs font-bold text-slate-400" data-i18n="btn_close">Tutup</button>
+        </div>
+    </div>
+
+    <!-- MODAL PILIH 50 KARAKTER AVATAR -->
     <div id="avatar-modal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden flex items-center justify-center p-4">
         <div class="bg-white rounded-[32px] p-5 w-full max-w-sm max-h-[85vh] flex flex-col shadow-2xl border-2 border-pink-200">
             <div class="flex justify-between items-center mb-3">
@@ -472,7 +489,21 @@
     </div>
 
     <script>
-        // Web Audio API Sound Effect Otomatis dengan Efek Goyang Tombol
+        // SISTEM SINKRONISASI VERSI GLOBAL UNTUK SEMUA USER
+        const APP_VERSION = "2.6.0";
+        window.addEventListener('DOMContentLoaded', () => {
+            const lastVersion = localStorage.getItem('dho_app_global_version');
+            if (!lastVersion || lastVersion !== APP_VERSION) {
+                localStorage.setItem('dho_app_global_version', APP_VERSION);
+                document.getElementById('update-banner').classList.remove('hidden');
+            }
+        });
+
+        function dismissUpdateBanner() {
+            document.getElementById('update-banner').classList.add('hidden');
+        }
+
+        // Web Audio API Sound Effect & Efek Goyang Konsisten ala iPhone
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         function playSoundEffect(element) {
             if (audioCtx.state === 'suspended') { audioCtx.resume(); }
@@ -488,7 +519,6 @@
             osc.start();
             osc.stop(audioCtx.currentTime + 0.08);
 
-            // Efek Goyang Tombol secara konsisten
             if(element) {
                 element.classList.add('btn-clicked');
                 setTimeout(() => element.classList.remove('btn-clicked'), 300);
@@ -506,7 +536,7 @@
 
         const i18n = {
             id: {
-                loading_sys: "Memrut Sistem...",
+                loading_sys: "Memuat Sistem...",
                 subtitle_sub: "Cari Teman Palsumu",
                 btn_start_account: "Mulai Buat Akun",
                 load_name: "Memuat Halaman Nama...",
@@ -537,18 +567,23 @@
                 new_note: "Tulis Pesan Baru:",
                 btn_send_request: "Kirim Kertas Request ✉️",
                 alert_sent: "Kertas request berhasil dikirim!",
-                btn_reset_account: "⚠️ Reset Akun (Hapus Data)",
+                btn_reset_account: "⚠️️ Reset Akun (Hapus Data)",
                 nav_beranda: "Beranda",
                 nav_request: "Kertas Request",
                 nav_profile: "Profile",
+                menu_theme: "Atur Tema",
+                menu_lang: "Pilih Bahasa",
+                modal_theme_title: "🎨 Atur Tema",
+                modal_theme_desc: "Pilih gaya tampilan warna aplikasi:",
+                theme_default: "Default (Biru Langit)",
+                theme_light: "Putih (Light Mode)",
+                theme_dark: "Hitam (Dark Mode)",
+                modal_lang_title: "🌐 Pilih Bahasa",
+                modal_lang_desc: "Ganti bahasa seluruh aplikasi:",
                 modal_avatar_title: "Pilih Avatar Karaktermu",
                 modal_avatar_desc: "Pilih salah satu dari 50 karakter kartun/emoji di bawah:",
                 btn_save_choice: "Simpan Pilihan",
-                settings: "Pengaturan",
-                lang_label: "Bahasa / Language:",
-                theme_label: "Tema / Theme:",
-                theme_light: "Putih",
-                theme_dark: "Hitam"
+                btn_close: "Tutup"
             },
             en: {
                 loading_sys: "Loading System...",
@@ -586,14 +621,19 @@
                 nav_beranda: "Home",
                 nav_request: "Requests",
                 nav_profile: "Profile",
+                menu_theme: "Theme Settings",
+                menu_lang: "Language Selection",
+                modal_theme_title: "🎨 Theme Settings",
+                modal_theme_desc: "Choose application appearance style:",
+                theme_default: "Default (Sky Blue)",
+                theme_light: "White (Light Mode)",
+                theme_dark: "Black (Dark Mode)",
+                modal_lang_title: "🌐 Language Selection",
+                modal_lang_desc: "Change application language:",
                 modal_avatar_title: "Choose Your Avatar Character",
                 modal_avatar_desc: "Pick one from 50 cartoon/emoji characters below:",
                 btn_save_choice: "Save Choice",
-                settings: "Settings",
-                lang_label: "Language:",
-                theme_label: "Theme:",
-                theme_light: "Light",
-                theme_dark: "Dark"
+                btn_close: "Close"
             }
         };
 
@@ -622,9 +662,14 @@
             menu.classList.toggle('hidden');
         }
 
+        function openThemeModal() { document.getElementById('theme-modal').classList.remove('hidden'); }
+        function closeThemeModal() { document.getElementById('theme-modal').classList.add('hidden'); }
+        function openLangModal() { document.getElementById('lang-modal').classList.remove('hidden'); }
+        function closeLangModal() { document.getElementById('lang-modal').classList.add('hidden'); }
+
         const cartoonAvatars = [
             "🦊", "🐼", "🐨", "🦁", "🐯", "🐰", "🐱", "🐶", "🐵", "🦄",
-            "🧝‍♂️", "🦸‍♂️", "🧙‍♂️", "🧛‍♂️", "🧜‍♂️", "🧚‍♂️", "🧞‍♂️", "🤖", "👽", "👻",
+            "🧝‍♂️", "🦸‍♂️", "🧙‍♂️", "🧛‍♂️", "🧜‍♂️", "🧚‍♂️", "🧞‍♂️️", "🤖", "👽", "👻",
             "🚀", "⭐", "🔥", "⚡", "💎", "👑", "🎨", "🎧", "🎮", "⚽",
             "🧸", "🐥", "🐧", "🐸", "🐙", "🐳", "🦋", "🌻", "🍎", "🍕",
             "🍩", "🍪", "🍭", "🍫", "🍿", "🏀", "🛹", "🎯", "🧩", "🔮"
@@ -665,7 +710,6 @@
             });
         });
 
-        // Transisi dengan durasi agak lama & efek real
         function triggerTransition(targetScreenId, loadingText) {
             const transOverlay = document.getElementById('transition-loading');
             document.getElementById('transition-text').innerText = loadingText;
@@ -678,7 +722,7 @@
                     transOverlay.classList.add('hidden');
                     goToScreen(targetScreenId);
                 }, 400);
-            }, 1200); // Durasi diperlama agar lebih real
+            }, 1200);
         }
 
         function goToScreen(screenId) {
@@ -743,13 +787,8 @@
             }, 800);
         }
 
-        function openAvatarModal() {
-            document.getElementById('avatar-modal').classList.remove('hidden');
-        }
-
-        function closeAvatarModal() {
-            document.getElementById('avatar-modal').classList.add('hidden');
-        }
+        function openAvatarModal() { document.getElementById('avatar-modal').classList.remove('hidden'); }
+        function closeAvatarModal() { document.getElementById('avatar-modal').classList.add('hidden'); }
 
         function selectAvatar(av) {
             userData.avatar = av;
@@ -759,7 +798,6 @@
             closeAvatarModal();
         }
 
-        // Ketika klik Lanjut Buat Akun di preview profile
         function triggerFinalAccountCreation() {
             const transOverlay = document.getElementById('transition-loading');
             document.getElementById('transition-text').innerText = "Membuat Akun Permanen di Device...";
