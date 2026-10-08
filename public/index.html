@@ -3,82 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Don't Block Me - Lexus Edition</title>
+    <title>LEXUS BACK ERA</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&display=swap');
         
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            /* Menggunakan gambar thumbnail Anda sebagai background full layar */
-            background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('file_0000000090a88211a683eb1fe52aeca8.png') no-repeat center center fixed;
+            /* Overlay dibuat sangat tipis (0.2) agar background gambar aslinya terlihat terang dan jelas */
+            background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('file_0000000090a88211a683eb1fe52aeca8.png') no-repeat center center fixed;
             background-size: cover;
             overflow-x: hidden;
             min-height: 100vh;
             color: #f8fafc;
-            transition: background 0.4s ease;
-        }
-
-        body.theme-light {
-            background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('1000193448.png') no-repeat center center fixed !important;
-            background-size: cover !important;
-            color: #0f172a;
-        }
-
-        .bg-white, .bg-white\/90, .bg-white\/95 {
-            background-color: rgba(17, 24, 39, 0.85) !important;
-            color: #f8fafc !important;
-            border-color: #ef4444 !important;
-            backdrop-filter: blur(8px);
-        }
-
-        .paper-bg {
-            background-color: rgba(17, 24, 39, 0.9);
-            background-image: linear-gradient(#374151 1px, transparent 1px);
-            background-size: 100% 26px;
-        }
-
-        @keyframes wiggle {
-            0%, 100% { transform: rotate(0deg) scale(1.02); }
-            25% { transform: rotate(-2.5deg) scale(1.02); }
-            75% { transform: rotate(2.5deg) scale(1.02); }
-        }
-        .animate-wiggle {
-            animation: wiggle 0.25s ease-in-out infinite;
-        }
-
-        @keyframes shakeShadow {
-            0% { transform: translate(0, 0); box-shadow: 0 10px 25px rgba(239, 68, 68, 0.5); }
-            20% { transform: translate(-5px, 2px); box-shadow: 0 18px 40px rgba(239, 68, 68, 0.8); }
-            40% { transform: translate(5px, -2px); box-shadow: 0 5px 15px rgba(234, 179, 8, 0.6); }
-            60% { transform: translate(-3px, -1px); box-shadow: 0 20px 40px rgba(239, 68, 68, 0.7); }
-            100% { transform: translate(0, 0); box-shadow: 0 10px 25px rgba(239, 68, 68, 0.5); }
-        }
-        .animate-shake-shadow {
-            animation: shakeShadow 0.7s ease-in-out;
-        }
-
-        @keyframes smoothOpen {
-            0% { opacity: 0; transform: scale(0.9) translateY(-10px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); }
-        }
-        .dropdown-animate {
-            animation: smoothOpen 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .btn-clicked {
-            animation: wiggle 0.3s ease-in-out;
-        }
-
-        .gradient-text-1 {
-            background: linear-gradient(135deg, #ef4444 0%, #fca5a5 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .gradient-text-2 {
-            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
         .fade-out {
@@ -86,137 +23,25 @@
             pointer-events: none;
             transition: opacity 0.8s ease-in-out;
         }
-
-        .screen {
-            display: none;
-            width: 100%;
-            max-width: 24rem;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            opacity: 0;
-            transform: translateY(20px);
-            padding-bottom: 90px;
-        }
-
-        .screen.active {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-4 relative">
 
-    <!-- HAMBURGER MENU -->
-    <div id="hamburger-container" class="fixed top-4 left-4 z-40">
-        <button onclick="playSoundEffect(this); toggleHamburgerMenu()" class="w-11 h-11 bg-slate-900/90 backdrop-blur-md rounded-2xl shadow-xl flex items-center justify-center text-xl font-black text-white border-2 border-red-500/50 active:scale-95 transition cursor-pointer">
-            ⋮
-        </button>
-        <div id="hamburger-dropdown" class="hidden absolute left-0 mt-2 w-48 bg-slate-900 text-white rounded-2xl shadow-2xl border-2 border-red-500/50 p-2.5 z-50 text-left space-y-1.5 dropdown-animate">
-            <button onclick="playSoundEffect(this); openThemeModal(); toggleHamburgerMenu();" class="w-full text-left px-3 py-2 rounded-xl font-black text-xs text-slate-200 bg-slate-800 hover:bg-red-950 hover:text-red-400 transition flex items-center gap-2.5 shadow-sm">
-                <span>🎨</span> <span>Atur Tema</span>
-            </button>
-            <button onclick="playSoundEffect(this); openLangModal(); toggleHamburgerMenu();" class="w-full text-left px-3 py-2 rounded-xl font-black text-xs text-slate-200 bg-slate-800 hover:bg-red-950 hover:text-red-400 transition flex items-center gap-2.5 shadow-sm">
-                <span>🌐</span> <span>Pilih Bahasa</span>
-            </button>
-        </div>
-    </div>
-
-    <!-- 1. LOADING AWAL -->
+    <!-- LOADING AWAL -->
     <div id="loading-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-slate-950 transition-opacity duration-800">
-        <div class="relative mb-6 text-center z-10">
-            <div class="flex justify-center gap-12 mb-[-12px] relative z-10">
-                <span class="text-3xl animate-bounce">👑</span>
-                <span class="text-3xl animate-bounce" style="animation-delay: 0.2s;">🔥</span>
-            </div>
-            <div class="bg-slate-900/90 backdrop-blur-md px-6 py-2.5 rounded-3xl shadow-xl border-2 border-red-500">
-                <h1 class="text-3xl font-black tracking-wide">
-                    <span class="gradient-text-1">LEXUS</span> <span class="gradient-text-2">BACK ERA</span>
+        <div class="text-center z-10 mb-4">
+            <span class="text-5xl animate-bounce">👑</span>
+            <div class="bg-slate-900/90 backdrop-blur-md px-6 py-2.5 rounded-3xl shadow-xl border-2 border-red-500 mt-3">
+                <h1 class="text-2xl font-black tracking-wide text-white">
+                    LEXUS BACK ERA
                 </h1>
             </div>
         </div>
-        <div class="w-full max-w-xs paper-bg rounded-[28px] p-8 shadow-2xl relative border-2 border-red-500/30 transform rotate-1 z-10 animate-shake-shadow">
-            <div class="text-center my-6">
-                <p class="text-2xl font-black text-white tracking-wide">Memuat Sistem...</p>
-                <div class="flex justify-center items-center gap-2.5 mt-5">
-                    <span class="w-3.5 h-3.5 bg-red-500 rounded-full animate-bounce shadow-sm"></span>
-                    <span class="w-3.5 h-3.5 bg-yellow-500 rounded-full animate-bounce shadow-sm" style="animation-delay: 0.2s;"></span>
-                    <span class="w-3.5 h-3.5 bg-orange-500 rounded-full animate-bounce shadow-sm" style="animation-delay: 0.4s;"></span>
-                </div>
-            </div>
-        </div>
     </div>
 
-    <!-- 2. DASHBOARD UTAMA -->
-    <div id="menu-beranda-screen" class="screen text-center pt-8 relative z-10 active">
-        <div class="absolute top-2 left-1 text-4xl animate-bounce z-20">👑</div>
-        <div class="absolute top-2 right-1 text-4xl animate-bounce z-20" style="animation-delay: 0.2s;">🔥</div>
-        <div class="relative mb-4 w-full bg-slate-900/85 backdrop-blur-md pt-4 pb-3 rounded-[28px] shadow-xl border border-red-500/40">
-            <h1 class="text-3xl font-black">
-                <span class="gradient-text-1">LEXUS</span> <span class="gradient-text-2">DASHBOARD</span>
-            </h1>
-            <p class="text-xs font-bold text-red-300 mt-1">Satu Marga • Satu Tujuan</p>
-        </div>
-        <div class="bg-slate-900/85 rounded-[32px] p-6 shadow-2xl border-2 border-red-500/50 w-full mb-4 text-left">
-            <div class="flex items-center gap-4 mb-4">
-                <div class="w-14 h-14 bg-red-950 rounded-2xl flex items-center justify-center text-3xl shadow-inner border border-red-500">🛡️</div>
-                <div>
-                    <h3 class="text-lg font-black text-white">Lexus Back Era</h3>
-                    <p class="text-xs font-bold text-red-400">Status: Siap Tempur</p>
-                </div>
-            </div>
-            <div class="bg-gradient-to-r from-red-950/60 to-slate-900/60 p-4 rounded-2xl border border-red-500/30">
-                <p class="text-xs font-extrabold text-white mb-1">🔥 Informasi Marga!</p>
-                <p class="text-[11px] font-medium text-slate-300">Nikmati permainan dengan nuansa dan background eksklusif khas Lexus.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- TAB: KERTAS REQUEST -->
-    <div id="menu-request-screen" class="screen text-center pt-8 relative z-10">
-        <div class="relative mb-4 w-full bg-slate-900/85 backdrop-blur-md pt-4 pb-3 rounded-[28px] shadow-xl border border-red-500/40">
-            <h1 class="text-3xl font-black">
-                <span class="gradient-text-1">Kertas</span> <span class="gradient-text-2">Request</span>
-            </h1>
-        </div>
-        <div class="paper-bg rounded-[32px] p-6 shadow-2xl border-2 border-red-500/40 w-full text-left space-y-3">
-            <p class="text-xs font-bold text-red-300 uppercase tracking-wider">Tulis Pesan Baru:</p>
-            <textarea placeholder="Tulis request atau pesan rahasia di sini..." class="w-full h-32 bg-slate-900/8otha border-2 border-red-500/40 focus:border-red-500 focus:outline-none rounded-2xl p-3 font-extrabold text-white text-sm shadow-inner"></textarea>
-            <button onclick="playSoundEffect(this); alert('Kertas request berhasil dikirim!')" class="w-full bg-gradient-to-r from-red-600 to-rose-700 text-white font-black py-3 rounded-xl text-sm shadow-md cursor-pointer">Kirim Kertas Request ✉️</button>
-        </div>
-    </div>
-
-    <!-- NAVBAR BAWAH -->
-    <nav id="bottom-navbar" class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-slate-900/90 backdrop-blur-md border-t-2 border-red-500/40 p-2 px-4 z-40 flex justify-around items-center shadow-2xl rounded-t-3xl">
-        <button onclick="playSoundEffect(this); switchMenuTab('beranda')" id="nav-btn-beranda" class="flex flex-col items-center text-red-500 transition active:scale-95 cursor-pointer">
-            <span class="text-lg">🏠</span>
-            <span class="text-[9px] font-black tracking-wide">Beranda</span>
-        </button>
-        <button onclick="playSoundEffect(this); switchMenuTab('request')" id="nav-btn-request" class="flex flex-col items-center text-slate-400 transition active:scale-95 cursor-pointer">
-            <span class="text-lg">📄</span>
-            <span class="text-[9px] font-black tracking-wide">Request</span>
-        </button>
-    </nav>
-
-    <!-- MODALS -->
-    <div id="theme-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 rounded-[32px] p-6 w-full max-w-xs shadow-2xl border-2 border-red-500 text-center">
-            <h3 class="font-black text-white text-lg mb-2">🎨 Atur Tema</h3>
-            <div class="space-y-2.5 mt-4">
-                <button onclick="playSoundEffect(this); setTheme('default'); closeThemeModal();" class="w-full bg-red-950 text-red-300 border border-red-500/50 font-black py-3 rounded-2xl active:scale-95 text-sm">Tema Lexus (Gelap)</button>
-                <button onclick="playSoundEffect(this); setTheme('light'); closeThemeModal();" class="w-full bg-slate-100 text-slate-900 font-black py-3 rounded-2xl active:scale-95 text-sm">Mode Terang</button>
-            </div>
-            <button onclick="playSoundEffect(this); closeThemeModal();" class="mt-4 text-xs font-bold text-slate-400">Tutup</button>
-        </div>
-    </div>
-
-    <div id="lang-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-slate-900 rounded-[32px] p-6 w-full max-w-xs shadow-2xl border-2 border-red-500 text-center">
-            <h3 class="font-black text-white text-lg mb-2">🌐 Pilih Bahasa</h3>
-            <div class="space-y-2.5 mt-4">
-                <button onclick="playSoundEffect(this); closeLangModal();" class="w-full bg-slate-800 text-white font-black py-3 rounded-2xl border border-red-500/50 active:scale-95 text-sm">🇮🇩 Bahasa Indonesia</button>
-            </div>
-            <button onclick="playSoundEffect(this); closeLangModal();" class="mt-4 text-xs font-bold text-slate-400">Tutup</button>
-        </div>
+    <!-- KONTEN UTAMA (KOSONG / SIAP DIGANTI) -->
+    <div class="text-center relative z-10">
+        <!-- Area ini bersih, background poster akan tampil full dan terang tanpa terhalang kotak dashboard -->
     </div>
 
     <script>
@@ -224,57 +49,9 @@
             setTimeout(() => {
                 const loadingScreen = document.getElementById('loading-screen');
                 loadingScreen.classList.add('fade-out');
-                setTimeout(() => { 
-                    loadingScreen.style.display = 'none'; 
-                }, 800);
-            }, 1500);
+                setTimeout(() => { loadingScreen.style.display = 'none'; }, 800);
+            }, 1000);
         });
-
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        function playSoundEffect(element) {
-            if (audioCtx.state === 'suspended') { audioCtx.resume(); }
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(550, audioCtx.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.08);
-            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            osc.start();
-            osc.stop(audioCtx.currentTime + 0.08);
-
-            if(element) {
-                element.classList.add('btn-clicked');
-                setTimeout(() => element.classList.remove('btn-clicked'), 300);
-            }
-        }
-
-        function switchMenuTab(tab) {
-            ['beranda', 'request'].forEach(t => {
-                const screen = document.getElementById(`menu-${t}-screen`);
-                const btn = document.getElementById(`nav-btn-${t}`);
-                if(screen) screen.classList.remove('active');
-                if(btn) { btn.classList.remove('text-red-500'); btn.classList.add('text-slate-400'); }
-            });
-            const targetScreen = document.getElementById(`menu-${tab}-screen`);
-            const targetBtn = document.getElementById(`nav-btn-${tab}`);
-            if(targetScreen) targetScreen.classList.add('active');
-            if(targetBtn) { targetBtn.classList.remove('text-slate-400'); targetBtn.classList.add('text-red-500'); }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function setTheme(theme) {
-            document.body.classList.remove('theme-light');
-            if (theme === 'light') document.body.classList.add('theme-light');
-        }
-
-        function toggleHamburgerMenu() { document.getElementById('hamburger-dropdown').classList.toggle('hidden'); }
-        function openThemeModal() { document.getElementById('theme-modal').classList.remove('hidden'); }
-        function closeThemeModal() { document.getElementById('theme-modal').classList.add('hidden'); }
-        function openLangModal() { document.getElementById('lang-modal').classList.remove('hidden'); }
-        function closeLangModal() { document.getElementById('lang-modal').classList.add('hidden'); }
     </script>
 </body>
 </html>
