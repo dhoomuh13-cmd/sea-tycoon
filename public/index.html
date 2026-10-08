@@ -10,20 +10,18 @@
         
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('file_0000000090a88211a683eb1fe52aeca8.png') no-repeat center center fixed;
-            background-size: cover;
+            /* Mengganti background dengan gradasi warna merah gelap & hitam elegan agar aman dan tidak stuck */
+            background: radial-gradient(circle at center, #1e1b4b 0%, #09090b 100%);
             overflow-x: hidden;
             min-height: 100vh;
             color: #f8fafc;
         }
 
         body.theme-blue {
-            background: linear-gradient(rgba(0, 50, 100, 0.4), rgba(0, 50, 100, 0.4)), url('file_0000000090a88211a683eb1fe52aeca8.png') no-repeat center center fixed !important;
-            background-size: cover !important;
+            background: radial-gradient(circle at center, #0f172a 0%, #020617 100%) !important;
         }
         body.theme-white {
-            background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('file_0000000090a88211a683eb1fe52aeca8.png') no-repeat center center fixed !important;
-            background-size: cover !important;
+            background: #f8fafc !important;
             color: #0f172a !important;
         }
 
@@ -54,28 +52,28 @@
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-4 relative">
 
-    <!-- TOMBOL HAMBURGER MOBILE FRIENDLY -->
-    <div style="position: fixed; top: 16px; left: 16px; z-index: 999999; pointer-events: auto;">
-        <button id="hamburger-btn" style="width: 50px; height: 50px; background: #0f172a; border: 3px solid #ef4444; border-radius: 16px; color: white; font-size: 26px; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0,0,0,0.8); -webkit-tap-highlight-color: transparent;">
+    <!-- TOMBOL HAMBURGER DIJAMIN 100% KLIKABLE -->
+    <div style="position: fixed; top: 20px; left: 20px; z-index: 2147483647;">
+        <button id="hamburger-btn" onclick="toggleMenu()" style="width: 52px; height: 52px; background: #111827; border: 3px solid #ef4444; border-radius: 16px; color: white; font-size: 28px; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(239,68,68,0.4); -webkit-tap-highlight-color: transparent;">
             ⋮
         </button>
         
         <!-- DROPDOWN MENU -->
         <div id="hamburger-dropdown" class="hidden absolute left-0 mt-2 w-52 bg-slate-900 text-white rounded-2xl shadow-2xl border-2 border-red-500/50 p-2.5 text-left space-y-2 dropdown-animate">
-            <button onclick="showPage('page-rules'); closeMenu();" class="w-full text-left px-3.5 py-2.5 rounded-xl font-black text-xs text-slate-200 bg-slate-800 hover:bg-red-950 hover:text-red-400 transition flex items-center gap-2.5 border border-red-500/20 cursor-pointer">
+            <button onclick="showPage('page-rules'); toggleMenu();" class="w-full text-left px-3.5 py-2.5 rounded-xl font-black text-xs text-slate-200 bg-slate-800 hover:bg-red-950 hover:text-red-400 transition flex items-center gap-2.5 border border-red-500/20 cursor-pointer">
                 <span>📜</span> <span id="txt-menu-rules">Rules Lexus</span>
             </button>
-            <button onclick="alert('Link Group belum tersedia!'); closeMenu();" class="w-full text-left px-3.5 py-2.5 rounded-xl font-black text-xs text-slate-200 bg-slate-800 hover:bg-red-950 hover:text-red-400 transition flex items-center gap-2.5 border border-red-500/20 cursor-pointer">
+            <button onclick="alert('Link Group belum tersedia!'); toggleMenu();" class="w-full text-left px-3.5 py-2.5 rounded-xl font-black text-xs text-slate-200 bg-slate-800 hover:bg-red-950 hover:text-red-400 transition flex items-center gap-2.5 border border-red-500/20 cursor-pointer">
                 <span>👥</span> <span id="txt-menu-group">Link Group</span>
             </button>
-            <button onclick="alert('Link Channel belum tersedia!'); closeMenu();" class="w-full text-left px-3.5 py-2.5 rounded-xl font-black text-xs text-slate-200 bg-slate-800 hover:bg-red-950 hover:text-red-400 transition flex items-center gap-2.5 border border-red-500/20 cursor-pointer">
+            <button onclick="alert('Link Channel belum tersedia!'); toggleMenu();" class="w-full text-left px-3.5 py-2.5 rounded-xl font-black text-xs text-slate-200 bg-slate-800 hover:bg-red-950 hover:text-red-400 transition flex items-center gap-2.5 border border-red-500/20 cursor-pointer">
                 <span>📢</span> <span id="txt-menu-channel">Link Channel</span>
             </button>
             <div class="border-t border-slate-700 pt-1.5 mt-1 space-y-1.5">
-                <button onclick="openThemeModal(); closeMenu();" class="w-full text-left px-3 py-2 rounded-xl font-black text-xs text-slate-300 bg-slate-800/60 hover:bg-slate-700 transition flex items-center gap-2.5 cursor-pointer">
+                <button onclick="openThemeModal(); toggleMenu();" class="w-full text-left px-3 py-2 rounded-xl font-black text-xs text-slate-300 bg-slate-800/60 hover:bg-slate-700 transition flex items-center gap-2.5 cursor-pointer">
                     <span>🎨</span> <span id="txt-menu-theme">Atur Tema</span>
                 </button>
-                <button onclick="openLangModal(); closeMenu();" class="w-full text-left px-3 py-2 rounded-xl font-black text-xs text-slate-300 bg-slate-800/60 hover:bg-slate-700 transition flex items-center gap-2.5 cursor-pointer">
+                <button onclick="openLangModal(); toggleMenu();" class="w-full text-left px-3 py-2 rounded-xl font-black text-xs text-slate-300 bg-slate-800/60 hover:bg-slate-700 transition flex items-center gap-2.5 cursor-pointer">
                     <span>🌐</span> <span id="txt-menu-lang">Pilih Bahasa</span>
                 </button>
             </div>
@@ -83,7 +81,10 @@
     </div>
 
     <!-- HALAMAN UTAMA -->
-    <div id="page-home" class="page-content w-full max-w-2xl text-center relative z-10"></div>
+    <div id="page-home" class="page-content w-full max-w-2xl text-center relative z-10">
+        <h1 class="text-3xl font-black text-white tracking-wider mb-2">LEXUS BACK ERA</h1>
+        <p class="text-xs font-bold text-red-400">Satu Marga • Satu Tujuan</p>
+    </div>
 
     <!-- HALAMAN RULES -->
     <div id="page-rules" class="page-content hidden w-full max-w-md text-center relative z-10 py-8">
@@ -123,7 +124,7 @@
     </div>
 
     <!-- MODAL TEMA -->
-    <div id="theme-modal" class="hidden fixed inset-0 z-[999999] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+    <div id="theme-modal" class="hidden fixed inset-0 z-[2147483647] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-slate-900 rounded-[32px] p-6 w-full max-w-xs shadow-2xl border-2 border-red-500 text-center dropdown-animate">
             <h3 class="font-black text-white text-base mb-3">🎨 Atur Tema Warna</h3>
             <div class="relative flex items-center justify-center my-3">
@@ -141,7 +142,7 @@
     </div>
 
     <!-- MODAL BAHASA -->
-    <div id="lang-modal" class="hidden fixed inset-0 z-[999999] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+    <div id="lang-modal" class="hidden fixed inset-0 z-[2147483647] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-slate-900 rounded-[32px] p-6 w-full max-w-xs shadow-2xl border-2 border-red-500 text-center dropdown-animate">
             <h3 class="font-black text-white text-base mb-3">🌐 Pilih Bahasa / Translate</h3>
             <div class="relative flex items-center justify-center my-3">
@@ -162,37 +163,10 @@
     </div>
 
     <script>
-        const btn = document.getElementById('hamburger-btn');
-        const dropdown = document.getElementById('hamburger-dropdown');
-
-        // Menggunakan touchstart & click agar responsif di semua HP
-        function toggleMenu(e) {
-            if(e) e.stopPropagation();
+        function toggleMenu() {
+            const dropdown = document.getElementById('hamburger-dropdown');
             dropdown.classList.toggle('hidden');
         }
-
-        btn.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            toggleMenu(e);
-        });
-
-        btn.addEventListener('click', (e) => {
-            toggleMenu(e);
-        });
-
-        function closeMenu() {
-            dropdown.classList.add('hidden');
-        }
-
-        window.addEventListener('click', () => {
-            if (!dropdown.classList.contains('hidden')) {
-                dropdown.classList.add('hidden');
-            }
-        });
-
-        dropdown.addEventListener('click', (e) => {
-            e.stopPropagation();
-        });
 
         function showPage(pageId) {
             document.querySelectorAll('.page-content').forEach(p => p.classList.add('hidden'));
