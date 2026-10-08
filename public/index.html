@@ -10,12 +10,31 @@
         
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            /* Background poster dengan overlay tipis agar terlihat terang dan jelas */
             background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('file_0000000090a88211a683eb1fe52aeca8.png') no-repeat center center fixed;
             background-size: cover;
             overflow-x: hidden;
             min-height: 100vh;
             color: #f8fafc;
+            transition: background 0.4s ease;
+        }
+
+        /* Tema Warna Background Overlay */
+        body.theme-blue {
+            background: linear-gradient(rgba(0, 50, 100, 0.4), rgba(0, 50, 100, 0.4)), url('file_0000000090a88211a683eb1fe52aeca8.png') no-repeat center center fixed !important;
+            background-size: cover !important;
+        }
+        body.theme-white {
+            background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('file_0000000090a88211a683eb1fe52aeca8.png') no-repeat center center fixed !important;
+            background-size: cover !important;
+            color: #0f172a !important;
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg) scale(1.02); box-shadow: 0 0 25px rgba(239, 68, 68, 0.8); }
+            50% { transform: rotate(-1deg) scale(1.02); box-shadow: 0 0 35px rgba(239, 68, 68, 1); }
+        }
+        .btn-clicked {
+            animation: wiggle 0.3s ease-in-out;
         }
 
         @keyframes smoothOpen {
@@ -31,6 +50,28 @@
             pointer-events: none;
             transition: opacity 0.8s ease-in-out;
         }
+
+        .screen {
+            display: none;
+            width: 100%;
+            max-width: 26rem;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .screen.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .picker-container {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .picker-container::-webkit-scrollbar {
+            display: none;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-4 relative">
@@ -40,13 +81,24 @@
         <button onclick="playSoundEffect(this); toggleHamburgerMenu()" class="w-11 h-11 bg-slate-900/90 backdrop-blur-md rounded-2xl shadow-xl flex items-center justify-center text-xl font-black text-white border-2 border-red-500/50 active:scale-95 transition cursor-pointer">
             ⋮
         </button>
-        <div id="hamburger-dropdown" class="hidden absolute left-0 mt-2 w-48 bg-slate-900 text-white rounded-2xl shadow-2xl border-2 border-red-500/50 p-2.5 z-50 text-left space-y-1.5 dropdown-animate">
-            <button onclick="playSoundEffect(this); alert('Menu Tema'); toggleHamburgerMenu();" class="w-full text-left px-3 py-2 rounded-xl font-black text-xs text-slate-200 bg-slate-800 hover:bg-red-950 hover:text-red-400 transition flex items-center gap-2.5 shadow-sm">
-                <span>🎨</span> <span>Atur Tema</span>
+        <div id="hamburger-dropdown" class="hidden absolute left-0 mt-2 w-52 bg-slate-900 text-white rounded-2xl shadow-2xl border-2 border-red-500/50 p-2.5 z-50 text-left space-y-2 dropdown-animate">
+            <button onclick="playSoundEffect(this); triggerPageTransition('screen-rules'); toggleHamburgerMenu();" class="w-full text-left px-3.5 py-2.5 rounded-xl font-black text-xs text-slate-200 bg-slate-800 hover:bg-red-950 hover:text-red-400 transition flex items-center gap-2.5 shadow-sm border border-red-500/20">
+                <span>📜</span> <span id="txt-menu-rules">Rules Lexus</span>
             </button>
-            <button onclick="playSoundEffect(this); alert('Menu Bahasa'); toggleHamburgerMenu();" class="w-full text-left px-3 py-2 rounded-xl font-black text-xs text-slate-200 bg-slate-800 hover:bg-red-950 hover:text-red-400 transition flex items-center gap-2.5 shadow-sm">
-                <span>🌐</span> <span>Pilih Bahasa</span>
+            <button onclick="playSoundEffect(this); alert('Link Group belum tersedia!'); toggleHamburgerMenu();" class="w-full text-left px-3.5 py-2.5 rounded-xl font-black text-xs text-slate-200 bg-slate-800 hover:bg-red-950 hover:text-red-400 transition flex items-center gap-2.5 shadow-sm border border-red-500/20">
+                <span>👥</span> <span id="txt-menu-group">Link Group</span>
             </button>
+            <button onclick="playSoundEffect(this); alert('Link Channel belum tersedia!'); toggleHamburgerMenu();" class="w-full text-left px-3.5 py-2.5 rounded-xl font-black text-xs text-slate-200 bg-slate-800 hover:bg-red-950 hover:text-red-400 transition flex items-center gap-2.5 shadow-sm border border-red-500/20">
+                <span>📢</span> <span id="txt-menu-channel">Link Channel</span>
+            </button>
+            <div class="border-t border-slate-700 pt-1.5 mt-1 space-y-1.5">
+                <button onclick="playSoundEffect(this); openThemeModal(); toggleHamburgerMenu();" class="w-full text-left px-3 py-2 rounded-xl font-black text-xs text-slate-300 bg-slate-800/60 hover:bg-slate-700 transition flex items-center gap-2.5">
+                    <span>🎨</span> <span id="txt-menu-theme">Atur Tema</span>
+                </button>
+                <button onclick="playSoundEffect(this); openLangModal(); toggleHamburgerMenu();" class="w-full text-left px-3 py-2 rounded-xl font-black text-xs text-slate-300 bg-slate-800/60 hover:bg-slate-700 transition flex items-center gap-2.5">
+                    <span>🌐</span> <span id="txt-menu-lang">Pilih Bahasa</span>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -58,14 +110,12 @@
                 <span class="text-3xl animate-bounce" style="animation-delay: 0.2s;">🔥</span>
             </div>
             <div class="bg-slate-900/90 backdrop-blur-md px-6 py-2.5 rounded-3xl shadow-xl border-2 border-red-500">
-                <h1 class="text-3xl font-black tracking-wide text-white">
-                    LEXUS BACK ERA
-                </h1>
+                <h1 class="text-3xl font-black tracking-wide text-white">LEXUS BACK ERA</h1>
             </div>
         </div>
         <div class="w-full max-w-xs bg-slate-900/80 rounded-[28px] p-8 shadow-2xl relative border-2 border-red-500/30 transform rotate-1 z-10">
             <div class="text-center my-6">
-                <p class="text-xl font-black text-white tracking-wide">Memuat Sistem...</p>
+                <p class="text-xl font-black text-white tracking-wide" id="txt-loading">Memuat Sistem...</p>
                 <div class="flex justify-center items-center gap-2.5 mt-5">
                     <span class="w-3.5 h-3.5 bg-red-500 rounded-full animate-bounce shadow-sm"></span>
                     <span class="w-3.5 h-3.5 bg-yellow-500 rounded-full animate-bounce shadow-sm" style="animation-delay: 0.2s;"></span>
@@ -75,8 +125,84 @@
         </div>
     </div>
 
-    <!-- AREA UTAMA (BERSIH, SIAP DIISI KONTEN BARU) -->
-    <div class="text-center relative z-10">
+    <!-- 2. HALAMAN UTAMA / BERANDA -->
+    <div id="screen-home" class="screen active text-center relative z-10">
+    </div>
+
+    <!-- 3. HALAMAN RULES LEXUS -->
+    <div id="screen-rules" class="screen text-center relative z-10 py-6">
+        <button onclick="playSoundEffect(this); triggerPageTransition('screen-home')" class="mb-4 w-10 h-10 bg-slate-900/90 text-white rounded-full shadow-lg flex items-center justify-center font-black border-2 border-red-500 active:scale-95 transition cursor-pointer">❮</button>
+        <div class="bg-slate-900/90 backdrop-blur-md p-6 rounded-[32px] shadow-2xl border-2 border-red-500 text-left space-y-4">
+            <div class="border-b border-red-500/40 pb-3 flex items-center justify-between">
+                <h2 class="text-lg font-black text-white" id="txt-rules-title">📜 SYARAT & RULES LEXUS</h2>
+                <span class="text-xl">👑</span>
+            </div>
+            <div class="space-y-3 text-xs font-bold text-slate-300 max-h-[60vh] overflow-y-auto pr-2">
+                <div class="bg-slate-800/80 p-3 rounded-2xl border border-red-500/20">
+                    <p class="text-white font-black mb-0.5">1. Open Member Marga Lexus</p>
+                    <p class="text-[11px] text-slate-400" id="txt-rule-1">Bebas umur (max), siapa saja bisa bergabung asal memiliki niat dan solidaritas tinggi.</p>
+                </div>
+                <div class="bg-slate-800/80 p-3 rounded-2xl border border-red-500/20">
+                    <p class="text-white font-black mb-0.5">2. Open Editor Logo Lexus</p>
+                    <p class="text-[11px] text-slate-400" id="txt-rule-2">Bebas menggunakan gaya apapun (AM / JJ / Preset), kreativitas editor sangat dihargai di sini.</p>
+                </div>
+                <div class="bg-slate-800/80 p-3 rounded-2xl border border-red-500/20">
+                    <p class="text-white font-black mb-0.5">3. Pria & Wanita Bebas</p>
+                    <p class="text-[11px] text-slate-400" id="txt-rule-3">Semua gender dipersilakan bergabung, tidak ada diskriminasi, yang penting ada keaktifan.</p>
+                </div>
+                <div class="bg-slate-800/80 p-3 rounded-2xl border border-red-500/20">
+                    <p class="text-white font-black mb-0.5">4. Tidak Ada Syarat Berat</p>
+                    <p class="text-[11px] text-slate-400" id="txt-rule-4">Sistem gabung sangat mudah dan santai, tidak ada aturan yang memberatkan anggota baru.</p>
+                </div>
+                <div class="bg-slate-800/80 p-3 rounded-2xl border border-red-500/20">
+                    <p class="text-white font-black mb-0.5">5. Aktif & Respect</p>
+                    <p class="text-[11px] text-slate-400" id="txt-rule-5">Wajib saling menghargai sesama member, dilarang keras membuat keributan atau bersikap toxic.</p>
+                </div>
+                <div class="bg-slate-800/80 p-3 rounded-2xl border border-red-500/20">
+                    <p class="text-white font-black mb-0.5">6. Loyalitas Marga</p>
+                    <p class="text-[11px] text-slate-400" id="txt-rule-6">Menjaga nama baik marga Lexus di luar maupun di dalam grup utama. Lexus Back? Yoi blayyy!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL PILIH TEMA (SCROLL PICKER) -->
+    <div id="theme-modal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-slate-900 rounded-[32px] p-6 w-full max-w-xs shadow-2xl border-2 border-red-500 text-center dropdown-animate">
+            <h3 class="font-black text-white text-base mb-3">🎨 Atur Tema Warna</h3>
+            <div class="relative flex items-center justify-center my-3">
+                <div class="absolute w-full h-12 bg-red-500/20 border border-red-500 rounded-2xl pointer-events-none"></div>
+                <div id="theme-scroller" class="picker-container w-full h-36 overflow-y-scroll flex flex-col items-center py-12 snap-y snap-mandatory relative z-10">
+                    <div class="h-10 shrink-0"></div>
+                    <div class="h-12 shrink-0 snap-center flex items-center justify-center text-sm font-black text-red-400 cursor-pointer" onclick="setTheme('default')">🔴 Merah Default</div>
+                    <div class="h-12 shrink-0 snap-center flex items-center justify-center text-sm font-black text-blue-400 cursor-pointer" onclick="setTheme('blue')">🔵 Biru Elegan</div>
+                    <div class="h-12 shrink-0 snap-center flex items-center justify-center text-sm font-black text-slate-200 cursor-pointer" onclick="setTheme('white')">⚪ Putih Terang</div>
+                    <div class="h-10 shrink-0"></div>
+                </div>
+            </div>
+            <button onclick="playSoundEffect(this); closeThemeModal()" class="mt-2 w-full bg-red-600 text-white font-black py-2.5 rounded-xl text-xs">Simpan Tema</button>
+        </div>
+    </div>
+
+    <!-- MODAL PILIH BAHASA (SCROLL PICKER) -->
+    <div id="lang-modal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-slate-900 rounded-[32px] p-6 w-full max-w-xs shadow-2xl border-2 border-red-500 text-center dropdown-animate">
+            <h3 class="font-black text-white text-base mb-3">🌐 Pilih Bahasa / Translate</h3>
+            <div class="relative flex items-center justify-center my-3">
+                <div class="absolute w-full h-12 bg-red-500/20 border border-red-500 rounded-2xl pointer-events-none"></div>
+                <div id="lang-scroller" class="picker-container w-full h-36 overflow-y-scroll flex flex-col items-center py-12 snap-y snap-mandatory relative z-10">
+                    <div class="h-10 shrink-0"></div>
+                    <div class="h-12 shrink-0 snap-center flex items-center justify-center text-sm font-black text-white cursor-pointer" onclick="setLanguage('id')">🇮🇩 Indonesia</div>
+                    <div class="h-12 shrink-0 snap-center flex items-center justify-center text-sm font-black text-white cursor-pointer" onclick="setLanguage('ms')">🇲🇾 Malaysia</div>
+                    <div class="h-12 shrink-0 snap-center flex items-center justify-center text-sm font-black text-white cursor-pointer" onclick="setLanguage('en')">🇬🇧 English</div>
+                    <div class="h-12 shrink-0 snap-center flex items-center justify-center text-sm font-black text-white cursor-pointer" onclick="setLanguage('jp')">🇯🇵 日本語</div>
+                    <div class="h-12 shrink-0 snap-center flex items-center justify-center text-sm font-black text-white cursor-pointer" onclick="setLanguage('cn')">🇨🇳 中文</div>
+                    <div class="h-12 shrink-0 snap-center flex items-center justify-center text-sm font-black text-white cursor-pointer" onclick="setLanguage('th')">🇹🇭 ไทย</div>
+                    <div class="h-10 shrink-0"></div>
+                </div>
+            </div>
+            <button onclick="playSoundEffect(this); closeLangModal()" class="mt-2 w-full bg-red-600 text-white font-black py-2.5 rounded-xl text-xs">Simpan Bahasa</button>
+        </div>
     </div>
 
     <script>
@@ -85,7 +211,7 @@
                 const loadingScreen = document.getElementById('loading-screen');
                 loadingScreen.classList.add('fade-out');
                 setTimeout(() => { loadingScreen.style.display = 'none'; }, 800);
-            }, 1500);
+            }, 1200);
         });
 
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -102,10 +228,74 @@
             gain.connect(audioCtx.destination);
             osc.start();
             osc.stop(audioCtx.currentTime + 0.08);
+
+            if(element) {
+                element.classList.add('btn-clicked');
+                setTimeout(() => element.classList.remove('btn-clicked'), 300);
+            }
         }
 
         function toggleHamburgerMenu() { 
             document.getElementById('hamburger-dropdown').classList.toggle('hidden'); 
+        }
+
+        // Efek Delay & Transisi Masuk Halaman dengan Shadow/Animasi Merah
+        function triggerPageTransition(targetScreenId) {
+            const currentActive = document.querySelector('.screen.active');
+            if(currentActive) {
+                currentActive.style.transform = 'scale(0.95)';
+                currentActive.style.opacity = '0';
+            }
+            setTimeout(() => {
+                document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+                const target = document.getElementById(targetScreenId);
+                target.classList.add('active');
+                target.style.transform = 'scale(1)';
+                target.style.opacity = '1';
+            }, 250); // Delay transisi mulus
+        }
+
+        function openThemeModal() { document.getElementById('theme-modal').classList.remove('hidden'); }
+        function closeThemeModal() { document.getElementById('theme-modal').classList.add('hidden'); }
+        
+        function openLangModal() { document.getElementById('lang-modal').classList.remove('hidden'); }
+        function closeLangModal() { document.getElementById('lang-modal').classList.add('hidden'); }
+
+        function setTheme(themeName) {
+            document.body.classList.remove('theme-blue', 'theme-white');
+            if(themeName === 'blue') document.body.classList.add('theme-blue');
+            if(themeName === 'white') document.body.classList.add('theme-white');
+            closeThemeModal();
+        }
+
+        // Kamus Terjemahan Sederhana untuk Fitur Bahasa
+        const translations = {
+            id: { rules: "Rules Lexus", group: "Link Group", channel: "Link Channel", theme: "Atur Tema", lang: "Pilih Bahasa", loading: "Memuat Sistem...", rt: "📜 SYARAT & RULES LEXUS", r1: "Bebas umur (max), siapa saja bisa bergabung asal memiliki niat dan solidaritas tinggi.", r2: "Bebas menggunakan gaya apapun (AM / JJ / Preset), kreativitas editor sangat dihargai di sini.", r3: "Semua gender dipersilakan bergabung, tidak ada diskriminasi, yang penting ada keaktifan.", r4: "Sistem gabung sangat mudah dan santai, tidak ada aturan yang memberatkan anggota baru.", r5: "Wajib saling menghargai sesama member, dilarang keras membuat keributan atau bersikap toxic.", r6: "Menjaga nama baik marga Lexus di luar maupun di dalam grup utama. Lexus Back? Yoi blayyy!" },
+            ms: { rules: "Peraturan Lexus", group: "Pautan Kumpulan", channel: "Pautan Saluran", theme: "Tetapkan Tema", lang: "Pilih Bahasa", loading: "Memuatkan Sistem...", rt: "📜 SYARAT & PERATURAN LEXUS", r1: "Umur bebas (maks), sesiapa sahaja boleh menyertai asal ada niat dan semangat setiakawan.", r2: "Bebas menggunakan apa jua gaya (AM / JJ / Preset), kreativiti editor sangat dihargai.", r3: "Semua jantina dialu-alukan menyertai, tiada diskriminasi asalkan aktif.", r4: "Sistem penyertaan sangat mudah dan santai, tiada peraturan yang membebankan.", r5: "Wajib saling menghormati sesama ahli, dilarang sama sekali membuat kacau atau toksik.", r6: "Menjaga nama baik marga Lexus. Lexus Back? Yoi blayyy!" },
+            en: { rules: "Lexus Rules", group: "Group Link", channel: "Channel Link", theme: "Set Theme", lang: "Select Language", loading: "Loading System...", rt: "📜 LEXUS RULES & TERMS", r1: "Any age (max), anyone can join as long as they have good intentions and high solidarity.", r2: "Free to use any style (AM / JJ / Preset), editors' creativity is highly valued here.", r3: "All genders are welcome to join, no discrimination, activity is key.", r4: "Joining system is very easy and relaxed, no burdensome rules for new members.", r5: "Must respect each other, strict no-toxic or drama policy inside the group.", r6: "Maintain the good name of Lexus clan inside and outside. Lexus Back? Yoi blayyy!" },
+            jp: { rules: "レクサスルール", group: "グループリンク", channel: "チャンネルリンク", theme: "テーマ設定", lang: "言語選択", loading: "システム読み込み中...", rt: "📜 レクサス規約・ルール", r1: "年齢制限なし（最大）、意志と団結力があれば誰でも参加可能です。", r2: "スタイル自由（AM / JJ / プリセット）、エディターの創造性を尊重します。", r3: "性別問わず大歓迎、アクティブに活動できる方。", r4: "参加システムはとても簡単で気軽に参加できます。", r5: "お互いを尊重し、荒らしやトキシック行為は厳禁です。", r6: "レクサスの名誉を守りましょう。レクサスバック！" },
+            cn: { rules: "凌志规则", group: "群组链接", channel: "频道链接", theme: "设置主题", lang: "选择语言", loading: "系统加载中...", rt: "📜 凌志条款与规则", r1: "年龄不限（最高），只要有心和团结，任何人都可以加入。", r2: "自由使用任何风格（AM / JJ / 预设），这里非常重视剪辑师的创意。", r3: "欢迎所有性别加入，没有歧视，活跃最重要。", r4: "加入机制非常轻松简单，没有繁重的规矩。", r5: "必须互相尊重，严禁在群内搞事或恶劣行为。", r6: "维护凌志家族的好名声。Lexus Back? Yoi blayyy!" },
+            th: { rules: "กฎของ Lexus", group: "ลิงก์กลุ่ม", channel: "ลิงก์แชนแนล", theme: "ตั้งค่าธีม", lang: "เลือกภาษา", loading: "กำลังโหลดระบบ...", rt: "📜 กฎและเงื่อนไข LEXUS", r1: "ไม่จำกัดอายุ (สูงสุด) ใครๆ ก็เข้าร่วมได้ขอแค่มีใจและความสามัคคี", r2: "อิสระในการใช้สไตล์ใดก็ได้ (AM / JJ / Preset) ชื่นชมความคิดสร้างสรรค์", r3: "ยินดีต้อนรับทุกเพศ ไม่มี 
+การแบ่งแยก ขอแค่มีความแอคทีฟ", r4: "ระบบเข้าร่วมง่ายและสบายๆ ไม่มีกฎที่ยุ่งยากสำหรับสมาชิกใหม่", r5: "ต้องเคารพซึ่งกันและกัน ห้ามสร้างความวุ่นวายหรือทำตัวเป็นพิษเด็ดขาด", r6: "รักษาชื่อเสียงของตระกูล Lexus ทั้งในและนอกกลุ่ม Lexus Back? Yoi blayyy!" }
+        };
+
+        function setLanguage(langCode) {
+            const t = translations[langCode];
+            if(!t) return;
+            document.getElementById('txt-menu-rules').innerText = t.rules;
+            document.getElementById('txt-menu-group').innerText = t.group;
+            document.getElementById('txt-menu-channel').innerText = t.channel;
+            document.getElementById('txt-menu-theme').innerText = t.theme;
+            document.getElementById('txt-menu-lang').innerText = t.lang;
+            document.getElementById('txt-loading').innerText = t.loading;
+            document.getElementById('txt-rules-title').innerText = t.rt;
+            document.getElementById('txt-rule-1').innerText = t.r1;
+            document.getElementById('txt-rule-2').innerText = t.r2;
+            document.getElementById('txt-rule-3').innerText = t.r3;
+            document.getElementById('txt-rule-4').innerText = t.r4;
+            document.getElementById('txt-rule-5').innerText = t.r5;
+            document.getElementById('txt-rule-6').innerText = t.r6;
+            closeLangModal();
         }
     </script>
 </body>
