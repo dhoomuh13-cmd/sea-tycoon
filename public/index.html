@@ -3,31 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEXUS BACK ERA</title>
+    <title>LEXUS BACK ERA - Marga Official</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&display=swap');
         
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            /* Mengganti background dengan gradasi warna merah gelap & hitam elegan agar aman dan tidak stuck */
-            background: radial-gradient(circle at center, #1e1b4b 0%, #09090b 100%);
+            background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('file_0000000090a88211a683eb1fe52aeca8.png') no-repeat center center fixed;
+            background-size: cover;
             overflow-x: hidden;
             min-height: 100vh;
             color: #f8fafc;
+            transition: background 0.4s ease;
         }
 
+        /* Tema Warna Background Overlay */
         body.theme-blue {
-            background: radial-gradient(circle at center, #0f172a 0%, #020617 100%) !important;
+            background: linear-gradient(rgba(0, 50, 100, 0.4), rgba(0, 50, 100, 0.4)), url('file_0000000090a88211a683eb1fe52aeca8.png') no-repeat center center fixed !important;
+            background-size: cover !important;
         }
         body.theme-white {
-            background: #f8fafc !important;
+            background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('file_0000000090a88211a683eb1fe52aeca8.png') no-repeat center center fixed !important;
+            background-size: cover !important;
             color: #0f172a !important;
         }
 
         @keyframes wiggle {
-            0%, 100% { transform: rotate(0deg) scale(1.02); box-shadow: 0 0 25px rgba(239, 68, 68, 0.8); }
-            50% { transform: rotate(-1deg) scale(1.02); box-shadow: 0 0 35px rgba(239, 68, 68, 1); }
+            0%, 100% { transform: rotate(0deg) scale(1.02); }
+            25% { transform: rotate(-2.5deg) scale(1.02); }
+            75% { transform: rotate(2.5deg) scale(1.02); }
         }
         .btn-clicked {
             animation: wiggle 0.3s ease-in-out;
@@ -41,6 +46,21 @@
             animation: smoothOpen 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
+        .screen {
+            display: none;
+            width: 100%;
+            max-width: 26rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            margin: 0 auto;
+        }
+        .screen.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .picker-container {
             scrollbar-width: none;
             -ms-overflow-style: none;
@@ -52,43 +72,39 @@
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-4 relative">
 
-    <!-- TOMBOL HAMBURGER DIJAMIN 100% KLIKABLE -->
-    <div style="position: fixed; top: 20px; left: 20px; z-index: 2147483647;">
-        <button id="hamburger-btn" onclick="toggleMenu()" style="width: 52px; height: 52px; background: #111827; border: 3px solid #ef4444; border-radius: 16px; color: white; font-size: 28px; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(239,68,68,0.4); -webkit-tap-highlight-color: transparent;">
+    <!-- HAMBURGER MENU (GAYA KODE LAMA: AMAN, RESPONSIF & ADA EFEK KLIK) -->
+    <div id="hamburger-container" class="fixed top-4 left-4 z-40">
+        <button onclick="playSoundEffect(this); toggleHamburgerMenu()" class="w-11 h-11 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl flex items-center justify-center text-xl font-black text-slate-800 border-2 border-red-500/30 active:scale-95 transition cursor-pointer">
             ⋮
         </button>
-        
-        <!-- DROPDOWN MENU -->
-        <div id="hamburger-dropdown" class="hidden absolute left-0 mt-2 w-52 bg-slate-900 text-white rounded-2xl shadow-2xl border-2 border-red-500/50 p-2.5 text-left space-y-2 dropdown-animate">
-            <button onclick="showPage('page-rules'); toggleMenu();" class="w-full text-left px-3.5 py-2.5 rounded-xl font-black text-xs text-slate-200 bg-slate-800 hover:bg-red-950 hover:text-red-400 transition flex items-center gap-2.5 border border-red-500/20 cursor-pointer">
+        <div id="hamburger-dropdown" class="hidden absolute left-0 mt-2 w-52 bg-slate-900 text-white rounded-2xl shadow-2xl border-2 border-red-500/50 p-2.5 z-50 text-left space-y-1.5 dropdown-animate">
+            <button onclick="playSoundEffect(this); triggerPageTransition('screen-rules'); toggleHamburgerMenu();" class="w-full text-left px-3.5 py-2.5 rounded-xl font-black text-xs text-slate-200 bg-slate-800 hover:bg-red-950 hover:text-red-400 transition flex items-center gap-2.5 shadow-sm border border-red-500/20 cursor-pointer">
                 <span>📜</span> <span id="txt-menu-rules">Rules Lexus</span>
             </button>
-            <button onclick="alert('Link Group belum tersedia!'); toggleMenu();" class="w-full text-left px-3.5 py-2.5 rounded-xl font-black text-xs text-slate-200 bg-slate-800 hover:bg-red-950 hover:text-red-400 transition flex items-center gap-2.5 border border-red-500/20 cursor-pointer">
+            <button onclick="playSoundEffect(this); alert('Link Group belum tersedia!'); toggleHamburgerMenu();" class="w-full text-left px-3.5 py-2.5 rounded-xl font-black text-xs text-slate-200 bg-slate-800 hover:bg-red-950 hover:text-red-400 transition flex items-center gap-2.5 shadow-sm border border-red-500/20 cursor-pointer">
                 <span>👥</span> <span id="txt-menu-group">Link Group</span>
             </button>
-            <button onclick="alert('Link Channel belum tersedia!'); toggleMenu();" class="w-full text-left px-3.5 py-2.5 rounded-xl font-black text-xs text-slate-200 bg-slate-800 hover:bg-red-950 hover:text-red-400 transition flex items-center gap-2.5 border border-red-500/20 cursor-pointer">
+            <button onclick="playSoundEffect(this); alert('Link Channel belum tersedia!'); toggleHamburgerMenu();" class="w-full text-left px-3.5 py-2.5 rounded-xl font-black text-xs text-slate-200 bg-slate-800 hover:bg-red-950 hover:text-red-400 transition flex items-center gap-2.5 shadow-sm border border-red-500/20 cursor-pointer">
                 <span>📢</span> <span id="txt-menu-channel">Link Channel</span>
             </button>
-            <div class="border-t border-slate-700 pt-1.5 mt-1 space-y-1.5">
-                <button onclick="openThemeModal(); toggleMenu();" class="w-full text-left px-3 py-2 rounded-xl font-black text-xs text-slate-300 bg-slate-800/60 hover:bg-slate-700 transition flex items-center gap-2.5 cursor-pointer">
+            <div class="border-t border-slate-700 pt-1.5 mt-1.5 space-y-1.5">
+                <button onclick="playSoundEffect(this); openThemeModal(); toggleHamburgerMenu();" class="w-full text-left px-3 py-2 rounded-xl font-black text-xs text-slate-300 bg-slate-800/60 hover:bg-slate-700 transition flex items-center gap-2.5 cursor-pointer">
                     <span>🎨</span> <span id="txt-menu-theme">Atur Tema</span>
                 </button>
-                <button onclick="openLangModal(); toggleMenu();" class="w-full text-left px-3 py-2 rounded-xl font-black text-xs text-slate-300 bg-slate-800/60 hover:bg-slate-700 transition flex items-center gap-2.5 cursor-pointer">
+                <button onclick="playSoundEffect(this); openLangModal(); toggleHamburgerMenu();" class="w-full text-left px-3 py-2 rounded-xl font-black text-xs text-slate-300 bg-slate-800/60 hover:bg-slate-700 transition flex items-center gap-2.5 cursor-pointer">
                     <span>🌐</span> <span id="txt-menu-lang">Pilih Bahasa</span>
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- HALAMAN UTAMA -->
-    <div id="page-home" class="page-content w-full max-w-2xl text-center relative z-10">
-        <h1 class="text-3xl font-black text-white tracking-wider mb-2">LEXUS BACK ERA</h1>
-        <p class="text-xs font-bold text-red-400">Satu Marga • Satu Tujuan</p>
+    <!-- 1. HALAMAN UTAMA / BERANDA (BERSIH, BACKGROUND POSTER TERLIHAT JELAS) -->
+    <div id="screen-home" class="screen active text-center relative z-10">
     </div>
 
-    <!-- HALAMAN RULES -->
-    <div id="page-rules" class="page-content hidden w-full max-w-md text-center relative z-10 py-8">
-        <button onclick="showPage('page-home')" class="mb-4 w-10 h-10 bg-slate-900/90 text-white rounded-full shadow-lg flex items-center justify-center font-black border-2 border-red-500 active:scale-95 transition cursor-pointer">❮</button>
+    <!-- 2. HALAMAN RULES LEXUS -->
+    <div id="screen-rules" class="screen text-center relative z-10 py-6">
+        <button onclick="playSoundEffect(this); triggerPageTransition('screen-home')" class="mb-4 w-10 h-10 bg-slate-900/90 text-white rounded-full shadow-lg flex items-center justify-center font-black border-2 border-red-500 active:scale-95 transition cursor-pointer">❮</button>
         <div class="bg-slate-900/90 backdrop-blur-md p-6 rounded-[32px] shadow-2xl border-2 border-red-500 text-left space-y-4">
             <div class="border-b border-red-500/40 pb-3 flex items-center justify-between">
                 <h2 class="text-lg font-black text-white" id="txt-rules-title">📜 SYARAT & RULES LEXUS</h2>
@@ -123,13 +139,13 @@
         </div>
     </div>
 
-    <!-- MODAL TEMA -->
-    <div id="theme-modal" class="hidden fixed inset-0 z-[2147483647] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+    <!-- MODAL PILIH TEMA (SCROLL PICKER) -->
+    <div id="theme-modal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-slate-900 rounded-[32px] p-6 w-full max-w-xs shadow-2xl border-2 border-red-500 text-center dropdown-animate">
             <h3 class="font-black text-white text-base mb-3">🎨 Atur Tema Warna</h3>
             <div class="relative flex items-center justify-center my-3">
                 <div class="absolute w-full h-12 bg-red-500/20 border border-red-500 rounded-2xl pointer-events-none"></div>
-                <div class="picker-container w-full h-36 overflow-y-scroll flex flex-col items-center py-12 snap-y snap-mandatory relative z-10">
+                <div id="theme-scroller" class="picker-container w-full h-36 overflow-y-scroll flex flex-col items-center py-12 snap-y snap-mandatory relative z-10">
                     <div class="h-10 shrink-0"></div>
                     <div class="h-12 shrink-0 snap-center flex items-center justify-center text-sm font-black text-red-400 cursor-pointer" onclick="setTheme('default')">🔴 Merah Default</div>
                     <div class="h-12 shrink-0 snap-center flex items-center justify-center text-sm font-black text-blue-400 cursor-pointer" onclick="setTheme('blue')">🔵 Biru Elegan</div>
@@ -137,17 +153,17 @@
                     <div class="h-10 shrink-0"></div>
                 </div>
             </div>
-            <button onclick="closeThemeModal()" class="mt-2 w-full bg-red-600 text-white font-black py-2.5 rounded-xl text-xs cursor-pointer">Simpan Tema</button>
+            <button onclick="playSoundEffect(this); closeThemeModal()" class="mt-2 w-full bg-red-600 text-white font-black py-2.5 rounded-xl text-xs cursor-pointer">Simpan Tema</button>
         </div>
     </div>
 
-    <!-- MODAL BAHASA -->
-    <div id="lang-modal" class="hidden fixed inset-0 z-[2147483647] bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+    <!-- MODAL PILIH BAHASA (SCROLL PICKER) -->
+    <div id="lang-modal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-slate-900 rounded-[32px] p-6 w-full max-w-xs shadow-2xl border-2 border-red-500 text-center dropdown-animate">
             <h3 class="font-black text-white text-base mb-3">🌐 Pilih Bahasa / Translate</h3>
             <div class="relative flex items-center justify-center my-3">
                 <div class="absolute w-full h-12 bg-red-500/20 border border-red-500 rounded-2xl pointer-events-none"></div>
-                <div class="picker-container w-full h-36 overflow-y-scroll flex flex-col items-center py-12 snap-y snap-mandatory relative z-10">
+                <div id="lang-scroller" class="picker-container w-full h-36 overflow-y-scroll flex flex-col items-center py-12 snap-y snap-mandatory relative z-10">
                     <div class="h-10 shrink-0"></div>
                     <div class="h-12 shrink-0 snap-center flex items-center justify-center text-sm font-black text-white cursor-pointer" onclick="setLanguage('id')">🇮🇩 Indonesia</div>
                     <div class="h-12 shrink-0 snap-center flex items-center justify-center text-sm font-black text-white cursor-pointer" onclick="setLanguage('ms')">🇲🇾 Malaysia</div>
@@ -158,19 +174,49 @@
                     <div class="h-10 shrink-0"></div>
                 </div>
             </div>
-            <button onclick="closeLangModal()" class="mt-2 w-full bg-red-600 text-white font-black py-2.5 rounded-xl text-xs cursor-pointer">Simpan Bahasa</button>
+            <button onclick="playSoundEffect(this); closeLangModal()" class="mt-2 w-full bg-red-600 text-white font-black py-2.5 rounded-xl text-xs cursor-pointer">Simpan Bahasa</button>
         </div>
     </div>
 
     <script>
-        function toggleMenu() {
-            const dropdown = document.getElementById('hamburger-dropdown');
-            dropdown.classList.toggle('hidden');
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playSoundEffect(element) {
+            if (audioCtx.state === 'suspended') { audioCtx.resume(); }
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(550, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.08);
+            gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.08);
+
+            if(element) {
+                element.classList.add('btn-clicked');
+                setTimeout(() => element.classList.remove('btn-clicked'), 300);
+            }
         }
 
-        function showPage(pageId) {
-            document.querySelectorAll('.page-content').forEach(p => p.classList.add('hidden'));
-            document.getElementById(pageId).classList.remove('hidden');
+        function toggleHamburgerMenu() { 
+            document.getElementById('hamburger-dropdown').classList.toggle('hidden'); 
+        }
+
+        function triggerPageTransition(targetScreenId) {
+            const currentActive = document.querySelector('.screen.active');
+            if(currentActive) {
+                currentActive.style.transform = 'scale(0.95)';
+                currentActive.style.opacity = '0';
+            }
+            setTimeout(() => {
+                document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+                const target = document.getElementById(targetScreenId);
+                target.classList.add('active');
+                target.style.transform = 'scale(1)';
+                target.style.opacity = '1';
+            }, 250);
         }
 
         function openThemeModal() { document.getElementById('theme-modal').classList.remove('hidden'); }
