@@ -3,57 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Don't Block Me - Game Block And Dho</title>
+    <title>Don't Block Me - Lexus Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800;900&display=swap');
         
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background: linear-gradient(135deg, #4ea8de 0%, #90e0ef 60%, #caf0f8 100%);
+            /* Menggunakan gambar thumbnail Anda sebagai background full layar */
+            background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('1000193448.png') no-repeat center center fixed;
+            background-size: cover;
             overflow-x: hidden;
             min-height: 100vh;
+            color: #f8fafc;
             transition: background 0.4s ease;
         }
 
-        body.theme-dark {
-            background: linear-gradient(135deg, #090d16 0%, #111827 60%, #090d16 100%) !important;
-            color: #f8fafc;
-        }
-        body.theme-dark .bg-white, body.theme-dark .bg-white\/90, body.theme-dark .bg-white\/95 {
-            background-color: #1f2937 !important;
-            color: #f8fafc !important;
-            border-color: #374151 !important;
-        }
-        body.theme-dark .text-slate-800, body.theme-dark .text-slate-900, body.theme-dark .text-slate-700 {
-            color: #f8fafc !important;
-        }
-        body.theme-dark .bg-slate-50, body.theme-dark .bg-slate-100 {
-            background-color: #111827 !important;
-            border-color: #374151 !important;
-            color: #f8fafc !important;
-        }
-
         body.theme-light {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 60%, #cbd5e1 100%) !important;
+            background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('1000193448.png') no-repeat center center fixed !important;
+            background-size: cover !important;
             color: #0f172a;
         }
 
-        @keyframes moveClouds {
-            0% { background-position: 0 0; }
-            100% { background-position: 1000px 0; }
+        .bg-white, .bg-white\/90, .bg-white\/95 {
+            background-color: rgba(17, 24, 39, 0.85) !important;
+            color: #f8fafc !important;
+            border-color: #ef4444 !important;
+            backdrop-filter: blur(8px);
         }
-        .clouds-bg {
-            background-image: radial-gradient(white 15%, transparent 16%), radial-gradient(white 15%, transparent 16%);
-            background-size: 60px 60px;
-            background-position: 0 0, 30px 30px;
-            animation: moveClouds 25s linear infinite;
-            opacity: 0.3;
-        }
-        
+
         .paper-bg {
-            background-color: #ffffff;
-            background-image: linear-gradient(#e5e7eb 1px, transparent 1px);
+            background-color: rgba(17, 24, 39, 0.9);
+            background-image: linear-gradient(#374151 1px, transparent 1px);
             background-size: 100% 26px;
         }
 
@@ -67,11 +48,11 @@
         }
 
         @keyframes shakeShadow {
-            0% { transform: translate(0, 0); box-shadow: 0 10px 25px rgba(255, 79, 139, 0.3); }
-            20% { transform: translate(-5px, 2px); box-shadow: 0 18px 40px rgba(59, 130, 246, 0.6); }
+            0% { transform: translate(0, 0); box-shadow: 0 10px 25px rgba(239, 68, 68, 0.5); }
+            20% { transform: translate(-5px, 2px); box-shadow: 0 18px 40px rgba(239, 68, 68, 0.8); }
             40% { transform: translate(5px, -2px); box-shadow: 0 5px 15px rgba(234, 179, 8, 0.6); }
-            60% { transform: translate(-3px, -1px); box-shadow: 0 20px 40px rgba(255, 79, 139, 0.5); }
-            100% { transform: translate(0, 0); box-shadow: 0 10px 25px rgba(255, 79, 139, 0.3); }
+            60% { transform: translate(-3px, -1px); box-shadow: 0 20px 40px rgba(239, 68, 68, 0.7); }
+            100% { transform: translate(0, 0); box-shadow: 0 10px 25px rgba(239, 68, 68, 0.5); }
         }
         .animate-shake-shadow {
             animation: shakeShadow 0.7s ease-in-out;
@@ -90,12 +71,12 @@
         }
 
         .gradient-text-1 {
-            background: linear-gradient(135deg, #ff4f8b 0%, #ff70a6 100%);
+            background: linear-gradient(135deg, #ef4444 0%, #fca5a5 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .gradient-text-2 {
-            background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -125,90 +106,88 @@
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-4 relative">
 
-    <div class="fixed inset-0 clouds-bg pointer-events-none z-0"></div>
-
-    <!-- HAMBURGER MENU (TITIK TIGA DI KIRI ATAS - HANYA ATUR TEMA & BAHASA) -->
+    <!-- HAMBURGER MENU -->
     <div id="hamburger-container" class="fixed top-4 left-4 z-40">
-        <button onclick="playSoundEffect(this); toggleHamburgerMenu()" class="w-11 h-11 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl flex items-center justify-center text-xl font-black text-slate-800 border-2 border-pink-100 active:scale-95 transition cursor-pointer">
+        <button onclick="playSoundEffect(this); toggleHamburgerMenu()" class="w-11 h-11 bg-slate-900/90 backdrop-blur-md rounded-2xl shadow-xl flex items-center justify-center text-xl font-black text-white border-2 border-red-500/50 active:scale-95 transition cursor-pointer">
             ⋮
         </button>
-        <div id="hamburger-dropdown" class="hidden absolute left-0 mt-2 w-48 bg-white rounded-2xl shadow-2xl border-2 border-pink-100 p-2.5 z-50 text-left space-y-1.5 dropdown-animate">
-            <button onclick="playSoundEffect(this); openThemeModal(); toggleHamburgerMenu();" class="w-full text-left px-3 py-2 rounded-xl font-black text-xs text-slate-800 bg-slate-50 hover:bg-pink-50 hover:text-pink-600 transition flex items-center gap-2.5 shadow-sm">
+        <div id="hamburger-dropdown" class="hidden absolute left-0 mt-2 w-48 bg-slate-900 text-white rounded-2xl shadow-2xl border-2 border-red-500/50 p-2.5 z-50 text-left space-y-1.5 dropdown-animate">
+            <button onclick="playSoundEffect(this); openThemeModal(); toggleHamburgerMenu();" class="w-full text-left px-3 py-2 rounded-xl font-black text-xs text-slate-200 bg-slate-800 hover:bg-red-950 hover:text-red-400 transition flex items-center gap-2.5 shadow-sm">
                 <span>🎨</span> <span>Atur Tema</span>
             </button>
-            <button onclick="playSoundEffect(this); openLangModal(); toggleHamburgerMenu();" class="w-full text-left px-3 py-2 rounded-xl font-black text-xs text-slate-800 bg-slate-50 hover:bg-pink-50 hover:text-pink-600 transition flex items-center gap-2.5 shadow-sm">
+            <button onclick="playSoundEffect(this); openLangModal(); toggleHamburgerMenu();" class="w-full text-left px-3 py-2 rounded-xl font-black text-xs text-slate-200 bg-slate-800 hover:bg-red-950 hover:text-red-400 transition flex items-center gap-2.5 shadow-sm">
                 <span>🌐</span> <span>Pilih Bahasa</span>
             </button>
         </div>
     </div>
 
     <!-- 1. LOADING AWAL -->
-    <div id="loading-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-gradient-to-b from-[#4ea8de] to-[#90e0ef] transition-opacity duration-800">
+    <div id="loading-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-slate-950 transition-opacity duration-800">
         <div class="relative mb-6 text-center z-10">
             <div class="flex justify-center gap-12 mb-[-12px] relative z-10">
-                <span class="text-3xl animate-bounce">🧸</span>
-                <span class="text-3xl animate-bounce" style="animation-delay: 0.2s;">🐼</span>
+                <span class="text-3xl animate-bounce">👑</span>
+                <span class="text-3xl animate-bounce" style="animation-delay: 0.2s;">🔥</span>
             </div>
-            <div class="bg-white/90 backdrop-blur-md px-6 py-2.5 rounded-3xl shadow-xl border-2 border-white">
+            <div class="bg-slate-900/90 backdrop-blur-md px-6 py-2.5 rounded-3xl shadow-xl border-2 border-red-500">
                 <h1 class="text-3xl font-black tracking-wide">
-                    <span class="gradient-text-1">Don't</span> <span class="gradient-text-2">Block</span> <span class="gradient-text-1">Me</span>
+                    <span class="gradient-text-1">LEXUS</span> <span class="gradient-text-2">BACK ERA</span>
                 </h1>
             </div>
         </div>
-        <div class="w-full max-w-xs paper-bg rounded-[28px] p-8 shadow-2xl relative border-2 border-slate-100 transform rotate-1 z-10 animate-shake-shadow">
+        <div class="w-full max-w-xs paper-bg rounded-[28px] p-8 shadow-2xl relative border-2 border-red-500/30 transform rotate-1 z-10 animate-shake-shadow">
             <div class="text-center my-6">
-                <p class="text-2xl font-black text-slate-800 tracking-wide">Memuat Sistem...</p>
+                <p class="text-2xl font-black text-white tracking-wide">Memuat Sistem...</p>
                 <div class="flex justify-center items-center gap-2.5 mt-5">
-                    <span class="w-3.5 h-3.5 bg-blue-500 rounded-full animate-bounce shadow-sm"></span>
-                    <span class="w-3.5 h-3.5 bg-pink-500 rounded-full animate-bounce shadow-sm" style="animation-delay: 0.2s;"></span>
-                    <span class="w-3.5 h-3.5 bg-yellow-400 rounded-full animate-bounce shadow-sm" style="animation-delay: 0.4s;"></span>
+                    <span class="w-3.5 h-3.5 bg-red-500 rounded-full animate-bounce shadow-sm"></span>
+                    <span class="w-3.5 h-3.5 bg-yellow-500 rounded-full animate-bounce shadow-sm" style="animation-delay: 0.2s;"></span>
+                    <span class="w-3.5 h-3.5 bg-orange-500 rounded-full animate-bounce shadow-sm" style="animation-delay: 0.4s;"></span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 2. DASHBOARD UTAMA (LANGSUNG MUNCUL SETELAH LOADING) -->
+    <!-- 2. DASHBOARD UTAMA -->
     <div id="menu-beranda-screen" class="screen text-center pt-8 relative z-10 active">
-        <div class="absolute top-2 left-1 text-4xl animate-bounce z-20">🧸</div>
-        <div class="absolute top-2 right-1 text-4xl animate-bounce z-20" style="animation-delay: 0.2s;">🐼</div>
-        <div class="relative mb-4 w-full bg-white/90 backdrop-blur-md pt-4 pb-3 rounded-[28px] shadow-xl border border-white">
+        <div class="absolute top-2 left-1 text-4xl animate-bounce z-20">👑</div>
+        <div class="absolute top-2 right-1 text-4xl animate-bounce z-20" style="animation-delay: 0.2s;">🔥</div>
+        <div class="relative mb-4 w-full bg-slate-900/85 backdrop-blur-md pt-4 pb-3 rounded-[28px] shadow-xl border border-red-500/40">
             <h1 class="text-3xl font-black">
-                <span class="gradient-text-1">Game</span> <span class="gradient-text-2">Dashboard</span>
+                <span class="gradient-text-1">LEXUS</span> <span class="gradient-text-2">DASHBOARD</span>
             </h1>
-            <p class="text-xs font-bold text-slate-500 mt-1">Selamat datang di Don't Block Me!</p>
+            <p class="text-xs font-bold text-red-300 mt-1">Satu Marga • Satu Tujuan</p>
         </div>
-        <div class="bg-white rounded-[32px] p-6 shadow-2xl border-2 border-pink-100 w-full mb-4 text-left">
+        <div class="bg-slate-900/85 rounded-[32px] p-6 shadow-2xl border-2 border-red-500/50 w-full mb-4 text-left">
             <div class="flex items-center gap-4 mb-4">
-                <div class="w-14 h-14 bg-pink-100 rounded-2xl flex items-center justify-center text-3xl shadow-inner">🎮</div>
+                <div class="w-14 h-14 bg-red-950 rounded-2xl flex items-center justify-center text-3xl shadow-inner border border-red-500">🛡️</div>
                 <div>
-                    <h3 class="text-lg font-black text-slate-900">Selamat Bermain</h3>
-                    <p class="text-xs font-bold text-pink-500">Sistem Berjalan Normal</p>
+                    <h3 class="text-lg font-black text-white">Lexus Back Era</h3>
+                    <p class="text-xs font-bold text-red-400">Status: Siap Tempur</p>
                 </div>
             </div>
-            <div class="bg-gradient-to-r from-pink-50 to-blue-50 p-4 rounded-2xl border border-pink-100">
-                <p class="text-xs font-extrabold text-slate-800 mb-1">🚀 Game Siap Dimainkan!</p>
-                <p class="text-[11px] font-medium text-slate-600">Nikmati permainan puzzle balok seru langsung dari perangkatmu tanpa perlu login.</p>
+            <div class="bg-gradient-to-r from-red-950/60 to-slate-900/60 p-4 rounded-2xl border border-red-500/30">
+                <p class="text-xs font-extrabold text-white mb-1">🔥 Informasi Marga!</p>
+                <p class="text-[11px] font-medium text-slate-300">Nikmati permainan dengan nuansa dan background eksklusif khas Lexus.</p>
             </div>
         </div>
     </div>
 
     <!-- TAB: KERTAS REQUEST -->
     <div id="menu-request-screen" class="screen text-center pt-8 relative z-10">
-        <div class="relative mb-4 w-full bg-white/90 backdrop-blur-md pt-4 pb-3 rounded-[28px] shadow-xl border border-white">
+        <div class="relative mb-4 w-full bg-slate-900/85 backdrop-blur-md pt-4 pb-3 rounded-[28px] shadow-xl border border-red-500/40">
             <h1 class="text-3xl font-black">
                 <span class="gradient-text-1">Kertas</span> <span class="gradient-text-2">Request</span>
             </h1>
         </div>
-        <div class="paper-bg rounded-[32px] p-6 shadow-2xl border-2 border-slate-200 w-full text-left space-y-3">
-            <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Tulis Pesan Baru:</p>
-            <textarea placeholder="Tulis request atau pesan rahasia di sini..." class="w-full h-32 bg-transparent border-2 border-pink-200 focus:border-pink-400 focus:outline-none rounded-2xl p-3 font-extrabold text-slate-800 text-sm shadow-inner"></textarea>
-            <button onclick="playSoundEffect(this); alert('Kertas request berhasil dikirim!')" class="w-full bg-slate-900 text-white font-black py-3 rounded-xl text-sm shadow-md cursor-pointer">Kirim Kertas Request ✉️</button>
+        <div class="paper-bg rounded-[32px] p-6 shadow-2xl border-2 border-red-500/40 w-full text-left space-y-3">
+            <p class="text-xs font-bold text-red-300 uppercase tracking-wider">Tulis Pesan Baru:</p>
+            <textarea placeholder="Tulis request atau pesan rahasia di sini..." class="w-full h-32 bg-slate-900/8otha border-2 border-red-500/40 focus:border-red-500 focus:outline-none rounded-2xl p-3 font-extrabold text-white text-sm shadow-inner"></textarea>
+            <button onclick="playSoundEffect(this); alert('Kertas request berhasil dikirim!')" class="w-full bg-gradient-to-r from-red-600 to-rose-700 text-white font-black py-3 rounded-xl text-sm shadow-md cursor-pointer">Kirim Kertas Request ✉️</button>
         </div>
     </div>
 
-    <!-- NAVBAR BAWAH (HANYA BERANDA & REQUEST) -->
-    <nav id="bottom-navbar" class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white/95 backdrop-blur-md border-t-2 border-pink-100 p-2 px-4 z-40 flex justify-around items-center shadow-2xl rounded-t-3xl">
-        <button onclick="playSoundEffect(this); switchMenuTab('beranda')" id="nav-btn-beranda" class="flex flex-col items-center text-pink-500 transition active:scale-95 cursor-pointer">
+    <!-- NAVBAR BAWAH -->
+    <nav id="bottom-navbar" class="fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-slate-900/90 backdrop-blur-md border-t-2 border-red-500/40 p-2 px-4 z-40 flex justify-around items-center shadow-2xl rounded-t-3xl">
+        <button onclick="playSoundEffect(this); switchMenuTab('beranda')" id="nav-btn-beranda" class="flex flex-col items-center text-red-500 transition active:scale-95 cursor-pointer">
             <span class="text-lg">🏠</span>
             <span class="text-[9px] font-black tracking-wide">Beranda</span>
         </button>
@@ -219,23 +198,22 @@
     </nav>
 
     <!-- MODALS -->
-    <div id="theme-modal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-[32px] p-6 w-full max-w-xs shadow-2xl border-2 border-pink-200 text-center">
-            <h3 class="font-black text-slate-900 text-lg mb-2">🎨 Atur Tema</h3>
+    <div id="theme-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 rounded-[32px] p-6 w-full max-w-xs shadow-2xl border-2 border-red-500 text-center">
+            <h3 class="font-black text-white text-lg mb-2">🎨 Atur Tema</h3>
             <div class="space-y-2.5 mt-4">
-                <button onclick="playSoundEffect(this); setTheme('default'); closeThemeModal();" class="w-full bg-sky-100 text-sky-900 font-black py-3 rounded-2xl active:scale-95 text-sm">Default (Biru Langit)</button>
-                <button onclick="playSoundEffect(this); setTheme('light'); closeThemeModal();" class="w-full bg-slate-100 text-slate-900 font-black py-3 rounded-2xl active:scale-95 text-sm">Putih (Light Mode)</button>
-                <button onclick="playSoundEffect(this); setTheme('dark'); closeThemeModal();" class="w-full bg-slate-900 text-white font-black py-3 rounded-2xl active:scale-95 text-sm">Hitam (Dark Mode)</button>
+                <button onclick="playSoundEffect(this); setTheme('default'); closeThemeModal();" class="w-full bg-red-950 text-red-300 border border-red-500/50 font-black py-3 rounded-2xl active:scale-95 text-sm">Tema Lexus (Gelap)</button>
+                <button onclick="playSoundEffect(this); setTheme('light'); closeThemeModal();" class="w-full bg-slate-100 text-slate-900 font-black py-3 rounded-2xl active:scale-95 text-sm">Mode Terang</button>
             </div>
             <button onclick="playSoundEffect(this); closeThemeModal();" class="mt-4 text-xs font-bold text-slate-400">Tutup</button>
         </div>
     </div>
 
-    <div id="lang-modal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-[32px] p-6 w-full max-w-xs shadow-2xl border-2 border-pink-200 text-center">
-            <h3 class="font-black text-slate-900 text-lg mb-2">🌐 Pilih Bahasa</h3>
+    <div id="lang-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-slate-900 rounded-[32px] p-6 w-full max-w-xs shadow-2xl border-2 border-red-500 text-center">
+            <h3 class="font-black text-white text-lg mb-2">🌐 Pilih Bahasa</h3>
             <div class="space-y-2.5 mt-4">
-                <button onclick="playSoundEffect(this); closeLangModal();" class="w-full bg-slate-50 text-slate-900 font-black py-3 rounded-2xl border active:scale-95 text-sm">🇮🇩 Bahasa Indonesia</button>
+                <button onclick="playSoundEffect(this); closeLangModal();" class="w-full bg-slate-800 text-white font-black py-3 rounded-2xl border border-red-500/50 active:scale-95 text-sm">🇮🇩 Bahasa Indonesia</button>
             </div>
             <button onclick="playSoundEffect(this); closeLangModal();" class="mt-4 text-xs font-bold text-slate-400">Tutup</button>
         </div>
@@ -243,7 +221,6 @@
 
     <script>
         window.addEventListener('DOMContentLoaded', () => {
-            // Langsung hilangkan layar loading dan tampilkan dashboard utama setelah 1.5 detik
             setTimeout(() => {
                 const loadingScreen = document.getElementById('loading-screen');
                 loadingScreen.classList.add('fade-out');
@@ -279,18 +256,17 @@
                 const screen = document.getElementById(`menu-${t}-screen`);
                 const btn = document.getElementById(`nav-btn-${t}`);
                 if(screen) screen.classList.remove('active');
-                if(btn) { btn.classList.remove('text-pink-500'); btn.classList.add('text-slate-400'); }
+                if(btn) { btn.classList.remove('text-red-500'); btn.classList.add('text-slate-400'); }
             });
             const targetScreen = document.getElementById(`menu-${tab}-screen`);
             const targetBtn = document.getElementById(`nav-btn-${tab}`);
             if(targetScreen) targetScreen.classList.add('active');
-            if(targetBtn) { targetBtn.classList.remove('text-slate-400'); targetBtn.classList.add('text-pink-500'); }
+            if(targetBtn) { targetBtn.classList.remove('text-slate-400'); targetBtn.classList.add('text-red-500'); }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function setTheme(theme) {
-            document.body.classList.remove('theme-dark', 'theme-light');
-            if (theme === 'dark') document.body.classList.add('theme-dark');
+            document.body.classList.remove('theme-light');
             if (theme === 'light') document.body.classList.add('theme-light');
         }
 
