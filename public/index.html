@@ -48,7 +48,7 @@
         .fade-out {
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.8s ease-in-out;
+            transition: opacity 0.6s ease-in-out;
         }
 
         .screen {
@@ -77,32 +77,31 @@
 </head>
 <body class="min-h-screen flex flex-col items-center justify-center p-4 relative">
 
-    <!-- 1. LOADING AWAL (MENGATASI BACKGROUND LAMBAT & MENCEGAH STUCK) -->
-    <div id="loading-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-slate-950 transition-opacity duration-800">
+    <!-- LOADING AMAN & ANTI-STUCK (DENGAN TOMBOL LEWATI OTOMATIS) -->
+    <div id="loading-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-4 bg-slate-950 transition-opacity duration-600">
         <div class="relative mb-6 text-center z-10">
             <div class="flex justify-center gap-12 mb-[-12px] relative z-10">
                 <span class="text-3xl animate-bounce">👑</span>
                 <span class="text-3xl animate-bounce" style="animation-delay: 0.2s;">🔥</span>
             </div>
             <div class="bg-slate-900/90 backdrop-blur-md px-6 py-2.5 rounded-3xl shadow-xl border-2 border-red-500">
-                <h1 class="text-3xl font-black tracking-wide text-white">
-                    LEXUS BACK ERA
-                </h1>
+                <h1 class="text-3xl font-black tracking-wide text-white">LEXUS BACK ERA</h1>
             </div>
         </div>
-        <div class="w-full max-w-xs bg-slate-900/80 rounded-[28px] p-8 shadow-2xl relative border-2 border-red-500/30 transform rotate-1 z-10">
-            <div class="text-center my-6">
-                <p class="text-xl font-black text-white tracking-wide" id="txt-loading">Memuat Sistem...</p>
-                <div class="flex justify-center items-center gap-2.5 mt-5">
-                    <span class="w-3.5 h-3.5 bg-red-500 rounded-full animate-bounce shadow-sm"></span>
-                    <span class="w-3.5 h-3.5 bg-yellow-500 rounded-full animate-bounce shadow-sm" style="animation-delay: 0.2s;"></span>
-                    <span class="w-3.5 h-3.5 bg-orange-500 rounded-full animate-bounce shadow-sm" style="animation-delay: 0.4s;"></span>
-                </div>
+        <div class="w-full max-w-xs bg-slate-900/80 rounded-[28px] p-8 shadow-2xl relative border-2 border-red-500/30 text-center z-10 space-y-4">
+            <p class="text-lg font-black text-white tracking-wide" id="txt-loading">Memuat Sistem...</p>
+            <div class="flex justify-center items-center gap-2.5">
+                <span class="w-3.5 h-3.5 bg-red-500 rounded-full animate-bounce"></span>
+                <span class="w-3.5 h-3.5 bg-yellow-500 rounded-full animate-bounce" style="animation-delay: 0.2s;"></span>
+                <span class="w-3.5 h-3.5 bg-orange-500 rounded-full animate-bounce" style="animation-delay: 0.4s;"></span>
             </div>
+            <button onclick="dismissLoading()" class="w-full mt-2 bg-red-600 hover:bg-red-700 text-white font-black py-2 rounded-xl text-xs shadow-md cursor-pointer">
+                Masuk Sekarang ➔
+            </button>
         </div>
     </div>
 
-    <!-- HAMBURGER MENU (GAYA KODE LAMA, Z-INDEX TINGGI, AMAN DIKLIK) -->
+    <!-- HAMBURGER MENU (DIJAMIN LANGSUNG BISA DIKLIK) -->
     <div id="hamburger-container" class="fixed top-4 left-4 z-40">
         <button onclick="playSoundEffect(this); toggleHamburgerMenu()" class="w-11 h-11 bg-slate-900/95 backdrop-blur-md rounded-2xl shadow-2xl flex items-center justify-center text-xl font-black text-white border-2 border-red-500 active:scale-95 transition cursor-pointer">
             ⋮
@@ -128,11 +127,11 @@
         </div>
     </div>
 
-    <!-- 2. HALAMAN UTAMA / BERANDA -->
+    <!-- HALAMAN UTAMA / BERANDA -->
     <div id="screen-home" class="screen active text-center relative z-10">
     </div>
 
-    <!-- 3. HALAMAN RULES LEXUS -->
+    <!-- HALAMAN RULES LEXUS -->
     <div id="screen-rules" class="screen text-center relative z-10 py-6">
         <button onclick="playSoundEffect(this); triggerPageTransition('screen-home')" class="mb-4 w-10 h-10 bg-slate-900/90 text-white rounded-full shadow-lg flex items-center justify-center font-black border-2 border-red-500 active:scale-95 transition cursor-pointer">❮</button>
         <div class="bg-slate-900/90 backdrop-blur-md p-6 rounded-[32px] shadow-2xl border-2 border-red-500 text-left space-y-4">
@@ -169,7 +168,7 @@
         </div>
     </div>
 
-    <!-- MODAL PILIH TEMA (SCROLL PICKER) -->
+    <!-- MODAL PILIH TEMA -->
     <div id="theme-modal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-slate-900 rounded-[32px] p-6 w-full max-w-xs shadow-2xl border-2 border-red-500 text-center dropdown-animate">
             <h3 class="font-black text-white text-base mb-3">🎨 Atur Tema Warna</h3>
@@ -187,7 +186,7 @@
         </div>
     </div>
 
-    <!-- MODAL PILIH BAHASA (SCROLL PICKER) -->
+    <!-- MODAL PILIH BAHASA -->
     <div id="lang-modal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-slate-900 rounded-[32px] p-6 w-full max-w-xs shadow-2xl border-2 border-red-500 text-center dropdown-animate">
             <h3 class="font-black text-white text-base mb-3">🌐 Pilih Bahasa / Translate</h3>
@@ -209,14 +208,18 @@
     </div>
 
     <script>
-        // Sembunyikan loading setelah halaman dan background siap
+        // Auto-dismiss loading setelah 800ms dijamin tidak pernah stuck
         window.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                const loadingScreen = document.getElementById('loading-screen');
-                loadingScreen.classList.add('fade-out');
-                setTimeout(() => { loadingScreen.style.display = 'none'; }, 800);
-            }, 1200);
+            setTimeout(dismissLoading, 800);
         });
+
+        function dismissLoading() {
+            const ls = document.getElementById('loading-screen');
+            if(ls && ls.style.display !== 'none') {
+                ls.classList.add('fade-out');
+                setTimeout(() => { ls.style.display = 'none'; }, 600);
+            }
+        }
 
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         function playSoundEffect(element) {
